@@ -5,7 +5,7 @@
 Five ideal case histories (Schizophrenia, Bipolar Affective Disorder, Persistent Delusional
 Disorder, Alcohol Dependence, Severe Depression) with History, MSE, Physical Exam & DDx,
 Summary & Problem List, Management, and Drug Side Effects — annotated with guidance from the
-Shorter Oxford Textbook of Psychiatry.
+Shorter Oxford Textbook of Psychiatry. 
 
 ## View locally
 Open `index.html` in any browser.
