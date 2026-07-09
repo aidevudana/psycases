@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ICD-10 Diagnostic Criteria — Psychiatry Kuppiya</title>
+<style>
+  :root{
+    --navy:#0b2545;
+    --navy2:#13315c;
+    --teal:#0f6e56;
+    --teal-light:#e6f5f1;
+    --amber:#d98e04;
+    --amber-light:#fdf1da;
+    --paper:#f7f5ef;
+    --ink:#1c2430;
+    --line:#dfe3e8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Arial, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  header{
+    background:linear-gradient(120deg,var(--navy) 0%,var(--navy2) 100%);
+    color:#fff;
+    padding:22px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  header h1{
+    margin:0;
+    font-size:1.4rem;
+    letter-spacing:.5px;
+  }
+  header .sub{
+    font-size:.85rem;
+    color:#bcd4ea;
+  }
+  header .credit{
+    font-size:.8rem;
+    color:var(--amber-light);
+    background:rgba(217,142,4,.25);
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid var(--amber);
+  }
+  .tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    padding:14px 20px;
+    background:#fff;
+    border-bottom:2px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .tab-btn{
+    border:1px solid var(--line);
+    background:var(--teal-light);
+    color:var(--navy2);
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:.82rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.15s;
+    white-space:nowrap;
+  }
+  .tab-btn:hover{
+    background:#d3ece4;
+  }
+  .tab-btn.active{
+    background:var(--teal);
+    color:#fff;
+    border-color:var(--teal);
+  }
+  main{
+    max-width:960px;
+    margin:0 auto;
+    padding:20px 18px 60px;
+  }
+  .panel{
+    display:none;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:22px 26px;
+    box-shadow:0 2px 10px rgba(11,37,69,.06);
+  }
+  .panel.active{display:block;}
+  .panel h2{
+    color:var(--navy);
+    border-bottom:3px solid var(--amber);
+    padding-bottom:8px;
+    margin-top:0;
+    font-size:1.25rem;
+  }
+  .panel h3{
+    color:var(--teal);
+    margin-top:22px;
+    margin-bottom:8px;
+    font-size:1.02rem;
+  }
+  .tag{
+    display:inline-block;
+    background:var(--amber-light);
+    color:#8a5a02;
+    border:1px solid var(--amber);
+    border-radius:20px;
+    padding:2px 10px;
+    font-size:.72rem;
+    margin-left:8px;
+    font-weight:600;
+  }
+  ol, ul{
+    padding-left:22px;
+    margin:8px 0 14px;
+  }
+  li{
+    margin-bottom:7px;
+    line-height:1.45;
+  }
+  .note{
+    background:var(--teal-light);
+    border-left:4px solid var(--teal);
+    padding:10px 14px;
+    border-radius:6px;
+    font-size:.92rem;
+    margin:12px 0;
+  }
+  .strike{
+    background:var(--amber-light);
+    border-left:4px solid var(--amber);
+    padding:10px 14px;
+    border-radius:6px;
+    font-size:.92rem;
+    margin:12px 0;
+    text-decoration:line-through;
+    color:#7a5205;
+  }
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  @media (max-width:640px){
+    .grid2{grid-template-columns:1fr;}
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:10px 0 18px;
+    font-size:.88rem;
+  }
+  th, td{
+    border:1px solid var(--line);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--navy);
+    color:#fff;
+  }
+  .severity-flow{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:10px;
+  }
+  @media (max-width:640px){
+    .severity-flow{grid-template-columns:1fr;}
+  }
+  .sev-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+    background:var(--paper);
+  }
+  .sev-card h4{
+    margin:0 0 6px;
+    color:var(--navy2);
+  }
+  .arrow-branch{
+    padding-left:16px;
+    border-left:2px dashed var(--teal);
+    margin:6px 0 6px 6px;
+  }
+  footer{
+    text-align:center;
+    padding:20px;
+    font-size:.78rem;
+    color:#7a8798;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>ICD-10 Diagnostic Criteria</h1>
+    <div class="sub">Psychiatry Viva — Medicine Kuppiya</div>
+  </div>
+  <div class="credit">W.H. Amasha Lowe — 2024</div>
+</header>
+
+<div class="tabs" id="tabs">
+  <button class="tab-btn active" data-tab="pdd">01 PDD</button>
+  <button class="tab-btn" data-tab="bad">03 BAD</button>
+  <button class="tab-btn" data-tab="schizo">04 Schizophrenia</button>
+  <button class="tab-btn" data-tab="schizoaffective">03 Schizoaffective</button>
+  <button class="tab-btn" data-tab="depression">06 Depression</button>
+  <button class="tab-btn" data-tab="dementia">07 Dementia</button>
+  <button class="tab-btn" data-tab="alcohol">08 Dependence (Alcohol)</button>
+  <button class="tab-btn" data-tab="ocd">09 OCD</button>
+  <button class="tab-btn" data-tab="agoraphobia">10 Agoraphobia</button>
+  <button class="tab-btn" data-tab="socialphobia">11 Social / Specific Phobia</button>
+  <button class="tab-btn" data-tab="panic">12 Panic Dx</button>
+  <button class="tab-btn" data-tab="somatoform">13 Somatoform Dx</button>
+  <button class="tab-btn" data-tab="gad">14 Generalized Anxiety Dx</button>
+  <button class="tab-btn" data-tab="adjustment">15 Adjustment Dx</button>
+  <button class="tab-btn" data-tab="ptsd">03 PTSD</button>
+</div>
+
+<main>
+
+  <!-- PDD -->
+  <section class="panel active" id="pdd">
+    <h2>PDD <span class="tag">01</span></h2>
+    <ol>
+      <li>Must be present for at least 3 months / single or set of related delusions.</li>
+      <li>Clearly personal rather than sub cultural.</li>
+      <li class="strike">Depressive episodes may present intermittently, but delusion persist at times when there is no mood disturbance.</li>
+      <li>No evidence of brain dx / No hx of schizophrenia symptoms / No or only occasional auditory hallucinations.</li>
+      <li>Absence of depressive (manic or mixed episode.</li>
+      <li>persistent?</li>
+      <li>symptoms are not a manifestation of other medical condition</li>
+    </ol>
+  </section>
+
+  <!-- BAD -->
+  <section class="panel" id="bad">
+    <h2>BAD <span class="tag">03</span></h2>
+    <p>At least 2 mood episodes — at least 1 mania or hypomania with one episode of major depression.</p>
+
+    <h3>★ BAD; current episode manic w/o psychotic symptoms.</h3>
+    <ol>
+      <li>Should last for at least 1 week.</li>
+      <li>Severe enough to disrupt ordinary work &amp; social activities.</li>
+      <li>Elated mood</li>
+      <li>Increased energy.</li>
+      <li>Pressure of speech / decreased need for sleep / grandiosity / excessive optimism.</li>
+    </ol>
+
+    <h3>★ BAD; current episode mania with psychotic symptoms.</h3>
+    <ol>
+      <li>Inflated self esteem and grandiose ideas → develop into delusions</li>
+      <li>Irritability &amp; suspiciousness.</li>
+      <li>Persecutory delusions.</li>
+      <li>Grandiose or religious delusions of identity</li>
+      <li>Speech is incomprehensible due to flight of ideas &amp; pressure of speech.</li>
+      <li>Aggression or violence.</li>
+      <li>Neglect of eating, drinking &amp; personal hygiene. → dehydration &amp; self neglect.</li>
+    </ol>
+  </section>
+
+  <!-- Schizophrenia -->
+  <section class="panel" id="schizo">
+    <h2>Schizophrenia <span class="tag">04</span></h2>
+    <ol>
+      <li>Any one of (a) to (d) or</li>
+      <li>Any two of (e) to (h)</li>
+      <li>Present for 1 month.</li>
+    </ol>
+
+    <div class="note">Commonest subtypes: ★ Paranoid schizophrenia &nbsp;·&nbsp; ★ Hebephrenic &nbsp;·&nbsp; ★ Catatonic &nbsp;·&nbsp; ★ Undifferentiated</div>
+
+    <ol type="a">
+      <li>Thought echo, thought insertion, withdrawal, thought broadcasting.</li>
+      <li>Delusion of control, Delusional perception</li>
+      <li>Hallucinatory voices giving running commentary. Discussing the pt. among themselves (3rd person)</li>
+      <li>Persistent delusion of other kinds that are culturally inappropriate and completely impossible. (Religious or political identity or superman powers)</li>
+      <li>Persistent hallucination in any modality persistent, overvalued ideas</li>
+      <li>Incoherent or irrelevant speech; Neologism</li>
+      <li>Catatonic behavior — excitement, posturing, waxy flexibility, negativism, mutism, stupor.</li>
+      <li>Negative symptoms — apathy, paucity of speech, incongruent emotional response, social withdrawal.</li>
+      <li>Significant change in overall quality of life.</li>
+    </ol>
+
+    <p class="note">Side notes on figure: Anhedonia · (drive) · Alogia (poverty of speech) · Avolition (impaired motivation &amp; drive) · Affective flattening · Attective Platterning · Modality</p>
+  </section>
+
+  <!-- Schizoaffective -->
+  <section class="panel" id="schizoaffective">
+    <h2>Schizoaffective disorder <span class="tag">03</span></h2>
+
+    <h3>★ Schizoaffective dx; Manic type. (↑ energy (overactivity / impaired concentration))</h3>
+    <ol>
+      <li>Prominent elevation of mood / Less obvious elevation of mood,</li>
+      <li>Combined with increased irritability or excitement.</li>
+      <li>At least one or preferably two, typically schizophrenic symptoms (a-d)</li>
+    </ol>
+
+    <h3>★ Schizoaffective dx; Depressive type.</h3>
+    <ol>
+      <li>Prominent depression — with 2 characteristic depressive symptoms or associated behavioral abnormalities.</li>
+      <li>Within some episode, at least one, preferrably two typical schizophrenic symptoms (a-d).</li>
+    </ol>
+  </section>
+
+  <!-- Depression -->
+  <section class="panel" id="depression">
+    <h2>Depression <span class="tag">06</span> <span class="tag">2 weeks ⊕</span></h2>
+    <ol>
+      <li>Depressed mood</li>
+      <li>Loss of interest &amp; enjoyment.</li>
+      <li>Reduced energy, ↑ fatiguability.</li>
+    </ol>
+
+    <h3>Other</h3>
+    <ol>
+      <li>Reduced concentration &amp; attention.</li>
+      <li>Reduced self esteem &amp; self confidence.</li>
+      <li>Ideas of guilt &amp; unworthiness.</li>
+      <li>(Bleak) &amp; pessimistic views of the future</li>
+      <li>Ideas or acts of self harm or suicide.</li>
+      <li>Disturbed sleep</li>
+      <li>Diminished appetite</li>
+    </ol>
+
+    <div class="note">Somatic features: Psychomotor retard · LOA · Low · Sleep disturbance</div>
+
+    <h3>Severity grades</h3>
+    <div class="severity-flow">
+      <div class="sev-card">
+        <h4>Mild</h4>
+        <div class="arrow-branch">with somatic Xn → 2 typical ⊕ 2 other</div>
+        <div class="arrow-branch">w/o somatic Xn → 2 typical ⊕ 2 other</div>
+      </div>
+      <div class="sev-card">
+        <h4>Moderate</h4>
+        <div class="arrow-branch">with somatic Xn → 2 typical ⊕ 3/4 other, 4≤ somatic symptoms ⊕</div>
+        <div class="arrow-branch">w/o somatic Xn → 2 typical ⊕ 3/4 other</div>
+      </div>
+      <div class="sev-card">
+        <h4>Severe with psychotic symptoms</h4>
+        <div class="arrow-branch">3 typical ⊕ 4 other ⊕ delusion, hallucination, depressive stupor.</div>
+      </div>
+      <div class="sev-card">
+        <h4>Severe w/o psychotic symptoms</h4>
+        <div class="arrow-branch">3 typical ⊕ 4 other. Auditory or olfactory hallucinations.</div>
+      </div>
+    </div>
+
+    <div class="note">
+      Recurrent depression — 2 or more episodes, lasts for 2 wks, b/w 3-12 months interval, w/o significant mood disturbances.
+    </div>
+  </section>
+
+  <!-- Dementia -->
+  <section class="panel" id="dementia">
+    <h2>Dementia <span class="tag">07</span></h2>
+    <p class="note">cognitive domains · praxis / visuoperception</p>
+    <ol>
+      <li>Decline in both memory &amp; thinking. (Washing / dressing / eating / personal hygiene / excretory or toilet activities).</li>
+      <li>Impair personal activities of daily living.</li>
+      <li>Memory impairment typically affect registration, storage &amp; retrieval of new information.</li>
+      <li>Impairment of thinking &amp; reasoning capacity.</li>
+      <li>Reduction in the flow of ideas.</li>
+      <li>Processing of incoming information impaired.</li>
+      <li>Difficult to attend to more than one stimulus at a time.</li>
+      <li>Consciousness intact.</li>
+      <li>Symptoms should be there for at least 6 months</li>
+      <li>2 of 6 cognitive domains should be affected*.</li>
+    </ol>
+
+    <h3>★ Alzheimer's dementia (AD) — Dementia in Alzheimer's dx.</h3>
+    <ol>
+      <li>Presence of dementia.</li>
+      <li>Insidious onset with slow deterioration</li>
+      <li>No evidence to suggest other systemic or brain disease which can induce dementia (Hypothyroidism / Hypercalcemia / B12 deficiency)</li>
+      <li>Absence of sudden focal neurological features — Hemiparesis, sensory loss, visual field defects.</li>
+    </ol>
+    <div class="note">Dementia in AD with early onset. · Dementia in AD with late onset.</div>
+  </section>
+
+  <!-- Alcohol Dependence -->
+  <section class="panel" id="alcohol">
+    <h2>Dependence (Alcohol) <span class="tag">08</span></h2>
+    <p><strong>Dependence:</strong></p>
+    <ol>
+      <li>Strong desire to take the substance.</li>
+      <li>Difficulty in controlling substance taking behavior.</li>
+      <li>Physiological withdrawal state when substance use has stopped / reduced.</li>
+      <li>Evidence of tolerance — increased dose of the substance is required.</li>
+      <li>Progressive neglect of alternative pleasure because of the substance use.</li>
+      <li>Persistent with substance use despite clear evidence of harmful consequences.</li>
+    </ol>
+    <div class="note">★ Should have 3 or more present together at some time during the previous year.</div>
+
+    <h3>Alcohol dependence</h3>
+    <ul>
+      <li>↳ Currently abstinent</li>
+      <li>↳ Currently abstinent, but in a protected environment.</li>
+      <li>↳ Currently on a clinically supervised maintenance or replacement regimen.</li>
+      <li>↳ Currently abstinent but receiving treatment with aversive or blocking agents.</li>
+      <li>↳ Comorbid with</li>
+    </ul>
+    <p><strong>Withdrawal state</strong> ↳ Uncomplicated &nbsp;·&nbsp; ↳ Complicated.</p>
+  </section>
+
+  <!-- OCD -->
+  <section class="panel" id="ocd">
+    <h2>OCD <span class="tag">09</span></h2>
+    <p class="note">Must present on most days for at least 2 wks &amp; interfere with activities (Distress cause affect to ADLs)</p>
+    <ol>
+      <li>They are individual's own thoughts or impulses.</li>
+      <li>There must be at least one thought or act that is still resisted unsuccessfully.</li>
+      <li>Thought of carrying out act must not itself be pleasurable.</li>
+      <li>Thoughts, images or impulses must be unpleasantly repetitive.</li>
+    </ol>
+  </section>
+
+  <!-- Agoraphobia -->
+  <section class="panel" id="agoraphobia">
+    <h2>Agoraphobia <span class="tag">10</span></h2>
+    <p>↳ without panic dx. &nbsp;&nbsp; ↳ with panic dx.</p>
+    <div class="note">
+      ① Primary anxiety symptoms.<br>
+      ② Restricted to particular situation (at least 2).<br>
+      ③ Avoidance behavior.
+    </div>
+    <p><strong>All 3 needed:</strong></p>
+    <ol>
+      <li>Symptoms must be 1° manifestation of anxiety, not 2° to other symptoms such as delusions or obsessional thoughts.</li>
+      <li>Anxiety must be restricted to at least 2 of the following situations — crowds / public places / travelling away from home / travelling alone. → significant distress caused by avoidance.</li>
+      <li>Avoidance of phobic situation.</li>
+      <li>At least one symptom of autonomic arousal plus one other anxiety symptom in the feared situation.</li>
+    </ol>
+  </section>
+
+  <!-- Social phobia -->
+  <section class="panel" id="socialphobia">
+    <h2>Social phobia / Specific phobia <span class="tag">11</span></h2>
+    <ol>
+      <li>Symptoms must be primary manifestations of anxiety &amp; not 2° to other symptoms such as delusions or obsessional thoughts.</li>
+      <li>Anxiety must be restricted to / predominate in particular social situations / objects.</li>
+      <li>Phobic situation / object is avoided — due to marked fear of being the focus of attention.</li>
+      <li>2 symptoms of anxiety ⊕ one of → shaking / fear of vomiting / fear or urgency of micturition or defecation.</li>
+      <li>Significant emotional distress.</li>
+    </ol>
+    <div class="note">DSM-5: 6 months</div>
+  </section>
+
+  <!-- Panic disorder -->
+  <section class="panel" id="panic">
+    <h2>Panic dx <span class="tag">12</span></h2>
+    <ol type="a">
+      <li>Several severe attacks of autonomic anxiety should have occurred within a period of 1 month.</li>
+      <li>Occurred in circumstances where there is no objective danger.</li>
+      <li>Occur without being confined to known or predictable situations. (unpredictable)</li>
+      <li>Comparative freedom from anxiety symptoms between attacks.</li>
+    </ol>
+    <div class="note">Note: see criteria above ★</div>
+  </section>
+
+  <!-- Somatoform -->
+  <section class="panel" id="somatoform">
+    <h2>Somatoform dx / Somatisation disorder <span class="tag">13</span></h2>
+    <p>Should present all,</p>
+    <ol type="a">
+      <li>At least 2 years of multiple &amp; variable physical symptoms without adequate physical explanation.</li>
+      <li>Persistent refusal to accept the advice or reassurance of several doctors, that there is no physical explanation for the symptoms.</li>
+      <li>Some degree of impairment of social &amp; family functioning</li>
+    </ol>
+  </section>
+
+  <!-- GAD -->
+  <section class="panel" id="gad">
+    <h2>Generalized anxiety dx <span class="tag">14</span></h2>
+    <ul>
+      <li>Symptoms of anxiety must be present for most day for at least several weeks at a time &amp; usually for several months</li>
+      <li>Worries about future misfortune, difficulty in concentration (Apprehension).</li>
+      <li>Motor tension (Restless fidgeting / tension headache / trembling / inability to relax).</li>
+      <li>Autonomic overactivity (lightheadedness, sweating, tachycardia &amp; tachypnea / epigastric discomfort / dizziness / dry mouth).</li>
+      <li>Primary symptoms of anxiety. Should not fulfil the criteria for mood disorder or other anxiety disorder.</li>
+    </ul>
+  </section>
+
+  <!-- Adjustment -->
+  <section class="panel" id="adjustment">
+    <h2>Adjustment dx <span class="tag">15</span></h2>
+    <ul>
+      <li>Onset usually within 1 month of the occurrence of stressful event.</li>
+      <li>Duration of symptoms does not usually exceed 6 months</li>
+      <li>Interfere with social functioning &amp; performance.</li>
+      <li>Pc: depression, anxiety, worry, feeling of inability to cope, disability in performing daily routine.</li>
+    </ul>
+  </section>
+
+  <!-- PTSD -->
+  <section class="panel" id="ptsd">
+    <h2>PTSD <span class="tag">03</span></h2>
+    <ol>
+      <li>Occur within 6 months of a traumatic event of exceptional severity.</li>
+      <li>Repetitive, intrusive recollection of memory, dreams.</li>
+      <li>Avoidance of reminders.</li>
+      <li>Emotional detachment &amp; numbness of feeling.</li>
+      <li>Autonomic disturbances, mood disorder, behavioral abnormalities.</li>
+    </ol>
+
+    <h3>PTSD — cont. Diagnostic criteria — Lec Note</h3>
+    <ol>
+      <li>Exposure to a traumatic event.</li>
+      <li>Persistence of intrusion symptoms following a traumatic event.</li>
+      <li>Persistence avoidance.</li>
+      <li>Negative alteration of cognition &amp; mood at traumatic event.</li>
+      <li>Marked alteration of arousal &amp; reactivity at traumatic event.</li>
+      <li>Duration of disturbance &gt; 1 month.</li>
+      <li>Significant distress &amp; impairment.</li>
+      <li>Disturbance not attributable to physiological effect of substance.</li>
+    </ol>
+
+    <h3>New lec note:</h3>
+    <p><strong>Criteria A</strong> — Post traumatic event. (PTE).</p>
+    <p><strong>Criteria B</strong> — Recurrent memories of PTE.</p>
+    <ul>
+      <li>Involuntary, intrusive, distressing memories.</li>
+      <li>Distressing dreams of PTE.</li>
+      <li>Flashbacks</li>
+      <li>Dissociative symptoms — Altered sense of reality</li>
+      <li>Intense &amp; prolonged psychological distress</li>
+      <li>Psychological reaction.</li>
+    </ul>
+    <p><strong>Criteria C</strong> → Active avoidance.</p>
+    <p><strong>Criteria D</strong> — Negative alteration of cognition &amp; mood.</p>
+    <ul>
+      <li>Inability to recall important aspects of PTE</li>
+      <li>Negative belief &amp; expectation about the world.</li>
+      <li>Distorted cognition of cause &amp; consequences</li>
+      <li>Diminished interest.</li>
+      <li>Feeling detached from other people.</li>
+      <li>Inability to experience ⊕ emotions</li>
+    </ul>
+    <p><strong>Criteria E</strong> — Irritable &amp; anger outburst. Reckless self destructive behavior.</p>
+  </section>
+
+</main>
+
+<footer>ICD-10 Diagnostic Criteria — digitized from handwritten notes, W.H. Amasha Lowe — 2024</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      buttons.forEach(b=>b.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
