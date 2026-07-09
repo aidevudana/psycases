@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICD-10 Criteria Dashboard | Psychiatry Viva Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ef;
+    --paper:#fffdf9;
+    --ink:#2b2620;
+    --ink-soft:#5c554b;
+    --line:#e4dccb;
+    --terracotta:#b3562f;
+    --oxford:#2f5d62;
+    --oxford-bg:#e4eeee;
+    --hanwella:#8a5a1f;
+    --hanwella-bg:#f3e8d4;
+    --bnf:#6b3f6b;
+    --bnf-bg:#efe3f0;
+    --accent:#b3562f;
+    --sidebar-w:280px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0 0 .4em 0;
+  }
+  a{color:var(--terracotta);}
+
+  /* Layout */
+  .app{display:flex;min-height:100vh;}
+  .sidebar{
+    width:var(--sidebar-w);
+    flex-shrink:0;
+    background:var(--paper);
+    border-right:1px solid var(--line);
+    padding:28px 20px 40px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .sidebar-brand{
+    font-family:'Source Serif 4',serif;
+    font-size:1.15rem;
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .sidebar-sub{
+    font-size:.75rem;
+    color:var(--ink-soft);
+    margin-bottom:24px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+  }
+  .nav-group-label{
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--ink-soft);
+    margin:18px 0 8px;
+    font-weight:600;
+  }
+  .nav-link{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    padding:7px 10px;
+    border-radius:6px;
+    color:var(--ink);
+    text-decoration:none;
+    font-size:.92rem;
+    transition:background .15s ease;
+  }
+  .nav-link:hover{background:var(--oxford-bg);}
+  .nav-link .code{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    color:var(--terracotta);
+    font-size:.82rem;
+    min-width:38px;
+  }
+  .main{
+    flex:1;
+    padding:44px 56px 80px;
+    max-width:920px;
+  }
+  header.page-head{
+    margin-bottom:40px;
+    padding-bottom:24px;
+    border-bottom:2px solid var(--ink);
+  }
+  header.page-head h1{font-size:2.1rem;}
+  header.page-head p{color:var(--ink-soft);margin:6px 0 0;font-size:1rem;}
+
+  section.disease{
+    margin-bottom:56px;
+    padding-bottom:8px;
+    scroll-margin-top:24px;
+  }
+  .disease-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+    margin-bottom:18px;
+  }
+  .disease-head h2{font-size:1.5rem;margin:0;}
+  .icd-code{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    color:#fff;
+    background:var(--ink);
+    padding:3px 10px;
+    border-radius:5px;
+    font-size:.85rem;
+    letter-spacing:.02em;
+  }
+
+  .badge{
+    display:inline-block;
+    font-size:.72rem;
+    font-weight:600;
+    padding:2px 9px;
+    border-radius:999px;
+    letter-spacing:.02em;
+    margin-right:6px;
+  }
+  .badge-oxford{background:var(--oxford-bg);color:var(--oxford);}
+  .badge-hanwella{background:var(--hanwella-bg);color:var(--hanwella);}
+  .badge-bnf{background:var(--bnf-bg);color:var(--bnf);}
+
+  .criteria-box{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:4px solid var(--oxford);
+    border-radius:8px;
+    padding:18px 20px;
+    margin-bottom:16px;
+  }
+  .criteria-box.hanwella-box{border-left-color:var(--hanwella);}
+  .criteria-box h4{
+    font-size:.95rem;
+    margin-bottom:10px;
+    color:var(--ink);
+  }
+  .criteria-box ol,.criteria-box ul{
+    margin:0;
+    padding-left:22px;
+  }
+  .criteria-box li{margin-bottom:6px;}
+  .criteria-box p{margin:0 0 10px;}
+
+  details{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-bottom:12px;
+    padding:0;
+    overflow:hidden;
+  }
+  summary{
+    cursor:pointer;
+    padding:12px 18px;
+    font-weight:600;
+    font-family:'Source Serif 4',serif;
+    font-size:1rem;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#f5efe2;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:"+";
+    font-size:1.2rem;
+    color:var(--terracotta);
+    font-weight:700;
+  }
+  details[open] summary::after{content:"–";}
+  .details-body{padding:16px 20px 4px;}
+
+  table.duration-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:10px 0 16px;
+    font-size:.9rem;
+  }
+  table.duration-table th,table.duration-table td{
+    border:1px solid var(--line);
+    padding:7px 10px;
+    text-align:left;
+  }
+  table.duration-table th{background:#f0e9d8;}
+
+  .note{
+    background:var(--oxford-bg);
+    border-left:4px solid var(--oxford);
+    padding:12px 16px;
+    border-radius:6px;
+    font-size:.92rem;
+    margin:14px 0;
+  }
+  .note.warn{background:#f5e2da;border-left-color:var(--terracotta);}
+
+  .differential{
+    font-size:.9rem;
+    color:var(--ink-soft);
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px;
+    color:var(--ink-soft);
+    font-size:.8rem;
+    border-top:1px solid var(--line);
+    margin-top:40px;
+  }
+
+  /* Mobile off-canvas */
+  .menu-toggle{
+    display:none;
+    position:fixed;
+    top:14px;
+    left:14px;
+    z-index:200;
+    background:var(--ink);
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    width:42px;height:42px;
+    font-size:1.2rem;
+    cursor:pointer;
+  }
+  .overlay{display:none;}
+
+  @media (max-width: 860px){
+    .sidebar{
+      position:fixed;
+      left:-300px;
+      top:0;
+      z-index:150;
+      transition:left .25s ease;
+      box-shadow:2px 0 18px rgba(0,0,0,.15);
+    }
+    .sidebar.open{left:0;}
+    .main{padding:70px 20px 60px;}
+    .menu-toggle{display:block;}
+    .overlay.show{
+      display:block;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      z-index:140;
+    }
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+<div class="overlay" id="overlay"></div>
+
+<div class="app">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">ICD-10 Dashboard</div>
+    <div class="sidebar-sub">Psychiatry Viva Reference</div>
+
+    <div class="nav-group-label">Psychotic Disorders</div>
+    <a class="nav-link" href="#schizophrenia"><span class="code">F20</span> Schizophrenia</a>
+    <a class="nav-link" href="#atpd"><span class="code">F23</span> Acute &amp; Transient Psychotic D/O</a>
+    <a class="nav-link" href="#schizoaffective"><span class="code">F25</span> Schizoaffective Disorder</a>
+
+    <div class="nav-group-label">Mood (Affective) Disorders</div>
+    <a class="nav-link" href="#hypomania"><span class="code">F30.0</span> Hypomania</a>
+    <a class="nav-link" href="#mania"><span class="code">F30</span> Manic Episode</a>
+    <a class="nav-link" href="#bpad"><span class="code">F31</span> Bipolar Affective Disorder</a>
+    <a class="nav-link" href="#depressive-episode"><span class="code">F32</span> Depressive Episode</a>
+    <a class="nav-link" href="#recurrent-depression"><span class="code">F33</span> Recurrent Depressive D/O</a>
+
+    <div class="nav-group-label">Substance Use Disorders</div>
+    <a class="nav-link" href="#harmful-use"><span class="code">F1x.1</span> Harmful Use</a>
+    <a class="nav-link" href="#dependence"><span class="code">F1x.2</span> Dependence Syndrome</a>
+
+    <div class="nav-group-label">Perinatal</div>
+    <a class="nav-link" href="#postpartum"><span class="code">—</span> Postpartum Psychosis</a>
+
+    <div class="nav-group-label">Legend</div>
+    <div style="font-size:.82rem; padding:0 10px;">
+      <span class="badge badge-oxford">Oxford</span> Shorter Oxford Textbook<br><br>
+      <span class="badge badge-hanwella">Hanwella</span> Handbook of Clinical Psychiatry
+    </div>
+  </nav>
+
+  <main class="main">
+    <header class="page-head">
+      <h1>ICD-10 Diagnostic Criteria Dashboard</h1>
+      <p>Quick-reference criteria for final MBBS psychiatry long case viva — every disorder cross-referenced against the Shorter Oxford Textbook of Psychiatry and Hanwella's Handbook of Clinical Psychiatry.</p>
+    </header>
+
+    <!-- SCHIZOPHRENIA -->
+    <section class="disease" id="schizophrenia">
+      <div class="disease-head">
+        <h2>Schizophrenia</h2>
+        <span class="icd-code">F20</span>
+        <span class="badge badge-oxford">Oxford</span>
+      </div>
+      <div class="criteria-box">
+        <h4>Diagnostic requirement</h4>
+        <p>At least <strong>one very clear symptom</strong> (usually two or more if less clear-cut) from groups <strong>(a)–(d)</strong>, OR symptoms from at least <strong>two</strong> of the groups <strong>(e)–(h)</strong>, clearly present for most of the time during a period of <strong>1 month or more</strong>.</p>
+      </div>
+      <details open>
+        <summary>Groups (a)–(d) — First-rank type symptoms</summary>
+        <div class="details-body">
+          <ol type="a">
+            <li>Thought echo, thought insertion or withdrawal, and thought broadcasting</li>
+            <li>Delusions of control, influence, or passivity, clearly referred to body/limb movements or specific thoughts, actions, or sensations; delusional perception</li>
+            <li>Hallucinatory voices giving a running commentary on the patient's behaviour, or discussing the patient among themselves, or other hallucinatory voices from some part of the body</li>
+            <li>Persistent delusions of other kinds that are culturally inappropriate and completely impossible</li>
+          </ol>
+        </div>
+      </details>
+      <details>
+        <summary>Groups (e)–(h) — Need ≥2 present</summary>
+        <div class="details-body">
+          <ol start="5" type="a" style="list-style-type:lower-alpha;">
+            <li value="5">Persistent hallucinations in any modality, when accompanied either by fleeting/half-formed delusions without clear affective content, or persistent overvalued ideas, or occurring every day for weeks/months</li>
+            <li>Breaks or interpolations in the train of thought, resulting in incoherence or irrelevant speech, or neologisms</li>
+            <li>Catatonic behaviour — excitement, posturing, waxy flexibility, negativism, mutism, stupor</li>
+            <li>'Negative' symptoms — marked apathy, paucity of speech, blunting/incongruity of emotion, usually causing social withdrawal and lowered social performance (must not be due to depression or neuroleptics)</li>
+          </ol>
+          <p style="margin-top:10px;">(i) A significant and consistent change in overall quality of personal behaviour — loss of interest, aimlessness, idleness, self-absorbed attitude, social withdrawal.</p>
+        </div>
+      </details>
+      <div class="note">ICD-10 places weight on Schneider's first-rank symptoms and allows diagnosis after just <strong>1 month</strong> (excludes prodrome) — unlike DSM-5, which requires 6 months and does not use subtypes. ICD-10 still recognises subtypes: paranoid, hebephrenic, catatonic, undifferentiated, residual, simple.</div>
+      <p class="differential"><strong>Differentials:</strong> brief psychotic disorder, delusional disorder, schizotypal disorder, schizoaffective disorder, psychotic depression, bipolar disorder, substance-induced psychosis, organic schizophrenia-like disorder (e.g. temporal lobe epilepsy).</p>
+    </section>
+
+    <!-- ATPD -->
+    <section class="disease" id="atpd">
+      <div class="disease-head">
+        <h2>Acute and Transient Psychotic Disorder</h2>
+        <span class="icd-code">F23</span>
+        <span class="badge badge-oxford">Oxford</span>
+      </div>
+      <div class="criteria-box">
+        <p>Acute onset psychosis with <strong>complete recovery within 2–3 months</strong> as the rule. May or may not be precipitated by a stressful life event.</p>
+        <ul>
+          <li><strong>Acute polymorphic psychotic disorder</strong> (with/without schizophrenia symptoms) — hallucinations, delusions, perceptual disturbance that are obvious but change rapidly in nature and extent, often with mood/motor changes (synonyms: bouffée délirante, cycloid psychosis)</li>
+          <li><strong>Acute schizophrenia-like psychotic episode</strong> — meets symptom criteria for schizophrenia but lasts &lt;1 month</li>
+          <li><strong>Other acute psychotic episodes</strong> — residual cases not fitting the above</li>
+        </ul>
+      </div>
+      <p class="differential">Corresponds loosely to DSM-5's brief psychotic disorder / schizophreniform disorder, though ICD-10 does not use "schizophreniform disorder" as a discrete category.</p>
+    </section>
+
+    <!-- SCHIZOAFFECTIVE -->
+    <section class="disease" id="schizoaffective">
+      <div class="disease-head">
+        <h2>Schizoaffective Disorder</h2>
+        <span class="icd-code">F25</span>
+        <span class="badge badge-oxford">Oxford</span>
+      </div>
+      <div class="criteria-box">
+        <p>Diagnosis requires that <strong>definite schizophrenic and definite affective symptoms are both prominent and present simultaneously, or within a few days of each other.</strong> Should not be applied for an isolated symptom or two, or when assessment has been insufficiently detailed to identify a primary diagnosis.</p>
+      </div>
+      <div class="note">Subclassified by the type of mood disturbance: <strong>depressive</strong>, <strong>manic</strong>, or <strong>mixed</strong> type.</div>
+      <details>
+        <summary>Related: Postschizophrenic depression</summary>
+        <div class="details-body">
+          <p>Prominent depressive symptoms present for at least <strong>2 weeks</strong> while some symptoms of schizophrenia (positive or negative) still remain — recognised in ICD-10 as a separate residual category from schizoaffective disorder.</p>
+        </div>
+      </details>
+      <p class="differential"><strong>Outcome:</strong> generally better than schizophrenia; negative symptoms rarely develop.</p>
+    </section>
+
+    <!-- HYPOMANIA -->
+    <section class="disease" id="hypomania">
+      <div class="disease-head">
+        <h2>Hypomania</h2>
+        <span class="icd-code">F30.0</span>
+        <span class="badge badge-oxford">Oxford</span>
+        <span class="badge badge-hanwella">Hanwella</span>
+      </div>
+      <div class="criteria-box">
+        <ul>
+          <li>Persistent <strong>mild</strong> elevation of mood for at least <strong>several days</strong>, with increased energy/activity and feelings of wellbeing</li>
+          <li>Increased sociability, talkativeness, overfamiliarity, increased sexual energy, decreased need for sleep</li>
+          <li>Mood disturbance is observable to others but <strong>not severe enough</strong> to cause marked impairment in social/occupational function, or to need hospital admission</li>
+          <li><strong>No psychotic features</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MANIA -->
+    <section class="disease" id="mania">
+      <div class="disease-head">
+        <h2>Manic Episode</h2>
+        <span class="icd-code">F30</span>
+        <span class="badge badge-oxford">Oxford</span>
+        <span class="badge badge-hanwella">Hanwella</span>
+      </div>
+      <div class="criteria-box">
+        <ul>
+          <li>Mood elevated out of keeping with the individual's circumstances — from carefree joviality to almost uncontrollable excitement</li>
+          <li>Elation accompanied by increased energy → overactivity, pressure of speech, decreased need for sleep</li>
+          <li>Normal social inhibitions lost; attention cannot be sustained; marked distractibility</li>
+          <li>Self-esteem inflated; grandiose or over-optimistic ideas freely expressed (mood may instead be irritable)</li>
+          <li><strong>Duration:</strong> episode should last at least <strong>1 week</strong>, and be severe enough to disrupt ordinary work and social activities</li>
+        </ul>
+      </div>
+      <details>
+        <summary>Mania with psychotic symptoms</summary>
+        <div class="details-body">
+          <p>Grandiose ideas may develop into grandiose delusions; irritability/suspiciousness may cause persecutory delusions. Auditory hallucinations may occur. Sustained overactivity can lead to aggression/violence; neglect of eating, drinking, and hygiene can cause dangerous dehydration and self-neglect.</p>
+        </div>
+      </details>
+      <p class="differential"><strong>Differentials:</strong> schizophrenia (esp. if mixed features → schizoaffective), organic brain disease of the frontal lobes (tumour, HIV), amphetamine-induced excitement states.</p>
+    </section>
+
+    <!-- BPAD -->
+    <section class="disease" id="bpad">
+      <div class="disease-head">
+        <h2>Bipolar Affective Disorder</h2>
+        <span class="icd-code">F31</span>
+        <span class="badge badge-oxford">Oxford</span>
+        <span class="badge badge-hanwella">Hanwella</span>
+      </div>
+      <div class="criteria-box">
+        <p>Diagnosed only if the patient has had <strong>at least 2 episodes</strong> of mood disorder, of which <strong>at least one</strong> is hypomania, mania, or a mixed episode.</p>
+        <p style="margin-top:10px;">A single episode of mania/hypomania alone is classified as a <strong>manic episode</strong> — not bipolar disorder — under ICD-10 (contrast with DSM-5, where one manic episode suffices for Bipolar I).</p>
+      </div>
+      <table class="duration-table">
+        <tr><th>Course specifier</th><th>Description</th></tr>
+        <tr><td>Currently hypomanic / manic / depressed / mixed</td><td>Based on current episode</td></tr>
+        <tr><td>In remission</td><td>No current episode</td></tr>
+      </table>
+      <div class="note">A <strong>mixed episode</strong> = criteria met for both a manic and a major depressive episode concurrently. <strong>Rapid cycling</strong> = 4 or more mood episodes within 12 months.</div>
+    </section>
+
+    <!-- DEPRESSIVE EPISODE -->
+    <section class="disease" id="depressive-episode">
+      <div class="disease-head">
+        <h2>Depressive Episode</h2>
+        <span class="icd-code">F32</span>
+        <span class="badge badge-oxford">Oxford</span>
+        <span class="badge badge-hanwella">Hanwella</span>
+      </div>
+      <div class="criteria-box hanwella-box">
+        <h4>Core (typical) symptoms — need for ≥2 weeks</h4>
+        <ul>
+          <li>Depressed mood</li>
+          <li>Loss of interest and enjoyment</li>
+          <li>Reduced energy → increased fatiguability and diminished activity</li>
+        </ul>
+        <h4 style="margin-top:14px;">Other common symptoms</h4>
+        <ol type="a">
+          <li>Reduced concentration and attention</li>
+          <li>Reduced self-esteem and self-confidence</li>
+          <li>Ideas of guilt and unworthiness (even in mild episodes)</li>
+          <li>Bleak, pessimistic view of the future</li>
+          <li>Ideas or acts of self-harm or suicide</li>
+          <li>Disturbed sleep</li>
+          <li>Diminished appetite</li>
+        </ol>
+      </div>
+      <table class="duration-table">
+        <tr><th>Severity</th><th>Typical symptoms</th><th>Other symptoms</th><th>Functional impact</th></tr>
+        <tr><td><strong>Mild (F32.0)</strong></td><td>≥2</td><td>≥2 (none intense)</td><td>Distressed; some difficulty continuing ordinary activities but does not cease function completely</td></tr>
+        <tr><td><strong>Moderate (F32.1)</strong></td><td>≥2</td><td>≥3 (preferably 4), several marked</td><td>Considerable difficulty continuing social, work, domestic activities</td></tr>
+        <tr><td><strong>Severe (F32.2 / F32.3)</strong></td><td>All 3</td><td>≥4, some severe</td><td>Very unlikely to continue social/work/domestic activities except to a limited extent</td></tr>
+      </table>
+      <div class="note">If symptoms are particularly severe and of rapid onset, the diagnosis of severe depressive episode may be justified even if duration is &lt;2 weeks.</div>
+      <details>
+        <summary>Severe depression with psychotic features (F32.3)</summary>
+        <div class="details-body">
+          <p>Severe depressive criteria met, plus <strong>delusions, hallucinations, or depressive stupor</strong>.</p>
+          <ul>
+            <li><strong>Delusions of guilt:</strong> ideas of sin, poverty, or imminent disaster, responsibility assumed by the patient</li>
+            <li><strong>Nihilistic delusions:</strong> internal organs destroyed, patient is dead, or has lost all possessions</li>
+            <li><strong>Auditory hallucinations:</strong> usually defamatory/accusatory voices</li>
+            <li><strong>Olfactory hallucinations:</strong> rotting filth or decomposing flesh</li>
+            <li>Severe psychomotor retardation may progress to <strong>depressive stupor</strong></li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>With somatic/melancholic features</summary>
+        <div class="details-body">
+          <p>At least 4 of: loss of interest/pleasure in usual activities; lack of emotional reactivity to normally pleasurable events; early-morning waking (≥2 hrs before usual time); depression worse in the morning; psychomotor agitation/retardation; marked loss of appetite; weight loss (≥5% body weight in the last month); marked loss of libido.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- RECURRENT DEPRESSIVE DISORDER -->
+    <section class="disease" id="recurrent-depression">
+      <div class="disease-head">
+        <h2>Recurrent Depressive Disorder</h2>
+        <span class="icd-code">F33</span>
+        <span class="badge badge-hanwella">Hanwella</span>
+      </div>
+      <div class="criteria-box hanwella-box">
+        <p>Repeated episodes of mild, moderate, or severe depression occurring <strong>without episodes of mania</strong>. Recovery is usually complete between episodes.</p>
+      </div>
+      <table class="duration-table">
+        <tr><th>Feature</th><th>Detail</th></tr>
+        <tr><td>Episode duration</td><td>1–6 months untreated</td></tr>
+        <tr><td>Chronicity</td><td>10–20% become chronic (&gt;2 years)</td></tr>
+        <tr><td>Recurrence</td><td>~85% experience more than one episode</td></tr>
+      </table>
+      <p class="differential"><strong>Contrast with bipolar depression:</strong> bipolar depressive episodes tend to be longer and respond less well to treatment than unipolar (recurrent) depression.</p>
+    </section>
+
+    <!-- HARMFUL USE -->
+    <section class="disease" id="harmful-use">
+      <div class="disease-head">
+        <h2>Harmful Use</h2>
+        <span class="icd-code">F1x.1</span>
+        <span class="badge badge-oxford">Oxford</span>
+      </div>
+      <div class="criteria-box">
+        <p>A pattern of psychoactive substance use that is <strong>causing damage to health</strong> — the damage may be physical or mental.</p>
+      </div>
+      <div class="note">It is possible to meet criteria for harmful use <strong>without</strong> meeting criteria for dependence — but the presence of dependence always implies harmful use.</div>
+    </section>
+
+    <!-- DEPENDENCE -->
+    <section class="disease" id="dependence">
+      <div class="disease-head">
+        <h2>Dependence Syndrome</h2>
+        <span class="icd-code">F1x.2</span>
+        <span class="badge badge-oxford">Oxford</span>
+        <span class="badge badge-hanwella">Hanwella</span>
+      </div>
+      <div class="criteria-box">
+        <h4>Need ≥3 of the following, present together at some time during the previous year</h4>
+        <ol type="a">
+          <li>A strong desire or sense of compulsion to take the substance</li>
+          <li>Difficulties in controlling substance-taking behaviour — in terms of onset, termination, or level of use</li>
+          <li>A physiological withdrawal state when substance use has ceased/reduced — evidenced by the characteristic withdrawal syndrome, or use of the same/related substance to relieve or avoid withdrawal</li>
+          <li>Evidence of tolerance — increased doses required to achieve effects originally produced by lower doses</li>
+          <li>Progressive neglect of alternative pleasures/interests because of substance use, and increased time spent obtaining, using, or recovering from it</li>
+          <li>Persisting with use despite clear evidence of overtly harmful consequences (physical or mental) — the person must be aware, or expected to be aware, of the harm</li>
+        </ol>
+      </div>
+      <div class="note warn"><strong>DSM-5 contrast:</strong> no separate "dependence" category — a single "substance use disorder" is graded mild (2–3 symptoms), moderate (4–5), or severe (≥6) out of 11 criteria.</div>
+    </section>
+
+    <!-- POSTPARTUM PSYCHOSIS -->
+    <section class="disease" id="postpartum">
+      <div class="disease-head">
+        <h2>Postpartum (Puerperal) Psychosis</h2>
+        <span class="icd-code">No distinct code</span>
+        <span class="badge badge-oxford">Oxford</span>
+        <span class="badge badge-hanwella">Hanwella</span>
+      </div>
+      <div class="note warn"><strong>Important viva point:</strong> Neither ICD-10 nor DSM-5 has a specific diagnostic category for puerperal psychosis. It is coded under whichever underlying disorder best fits the clinical picture — most often <strong>bipolar affective disorder (F31)</strong> with mania/mixed features, a <strong>depressive episode (F32)</strong> with psychosis, or occasionally a <strong>schizophreniform/acute psychotic disorder (F23)</strong>.</div>
+      <div class="criteria-box hanwella-box">
+        <h4>Clinical features supporting the label</h4>
+        <ul>
+          <li>Onset within the first 2–3 days of delivery, usually within 1–2 weeks; sudden onset, rapid deterioration</li>
+          <li>Three clinical pictures: <strong>delirium</strong> (now rarer, due to antibiotics reducing puerperal sepsis), <strong>mood disorder</strong> (mania, mixed, or depressive psychosis — now the commonest), or <strong>schizophreniform disorder</strong> (rare)</li>
+          <li>Poor sleep, restlessness, irritability, neglect of the baby, perplexity/fear</li>
+          <li>Delusions regarding the baby (deformed, dead, abnormal), delusions of guilt, persecutory delusions, auditory hallucinations</li>
+          <li>Thoughts of harming the baby driven by delusional beliefs — must be distinguished from the ego-dystonic intrusive thoughts of postnatal depression/OCD</li>
+        </ul>
+      </div>
+      <p class="differential"><strong>Epidemiology:</strong> incidence 1–2 per 1000 births; up to 20% risk of puerperal relapse in women with pre-existing bipolar disorder; &gt;75% good outcome; ≥35% risk of relapse after next delivery.</p>
+    </section>
+
+    <footer>
+      © Udana Anjana. All rights reserved. Compiled for personal exam revision from the Shorter Oxford Textbook of Psychiatry and Hanwella's Handbook of Clinical Psychiatry.
+    </footer>
+  </main>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const toggle = document.getElementById('menuToggle');
+  function closeMenu(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+  toggle.addEventListener('click', ()=>{
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  });
+  overlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.nav-link').forEach(link=>{
+    link.addEventListener('click', closeMenu);
+  });
+</script>
+
+</body>
+</html>
