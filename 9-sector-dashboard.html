@@ -106,6 +106,9 @@
     display: block;
     height: 6px;
   }
+  .blue { color: #2255cc; }
+  .red { color: #cc2222; }
+  u { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -118,6 +121,9 @@
 <div class="tabs">
   <button class="tab-btn active" onclick="showTab('alcohol')">Alcohol Dependency</button>
   <button class="tab-btn" onclick="showTab('depression')">Depressive Episode (Recurrent DD)</button>
+  <button class="tab-btn" onclick="showTab('ocd')">OCD</button>
+  <button class="tab-btn" onclick="showTab('bipolar')">Bipolar Affective Disorder</button>
+  <button class="tab-btn" onclick="showTab('schizophrenia')">Schizophrenia</button>
 </div>
 
 <main>
@@ -317,7 +323,7 @@
       <tr>
         <td class="rowlabel">SOCIAL</td>
         <td>
-          Collateral Hx from family/friends<br>
+          Collateral HX from family/friends<br>
           <span class="blank-line"></span>
           (Arrange for Medical leave if needed)<br>
           <span class="blank-line"></span>
@@ -333,9 +339,348 @@
           SW and CPN to do HV
         </td>
         <td>
-          CPN and SW to do home visit and check up.<br>
+          CPN and SW to do home visit and checkup.<br>
           <span class="blank-line"></span>
           Rehabilitation - OT centre or Co-therapist<br>
+          <span class="blank-line"></span>
+          Help secure employment
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- OCD PANEL -->
+  <section id="ocd" class="panel">
+    <h2 class="table-title">OCD</h2>
+    <table>
+      <tr>
+        <th class="corner"></th>
+        <th>ACUTE</th>
+        <th>INTERMEDIATE</th>
+        <th>LONG TERM</th>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">BIO</td>
+        <td>
+          Risk Assessment<br>
+          <span class="blank-line"></span>
+          Decide on treatment setting<br>
+          <span class="blank-line"></span>
+          Following admission<br>
+          Restraint (if aggressive)<br>
+          Review any past drug records<br>
+          <span class="blank-line"></span>
+          SSRI (higher dose than Depression)<br>
+          Short term Benzo<br>
+          <span class="blank-line"></span>
+          <span class="blue">Comorbid depression</span><br>
+          <span class="blank-line"></span>
+          Ix/tests - Baseline
+        </td>
+        <td>
+          Assess MSE, Drug S/E, Sleep, appetite, self care and behaviour daily<br>
+          <span class="blank-line"></span>
+          Step Benzos<br>
+          <span class="blank-line"></span>
+          Send for referrals as needed (eg VP)<br>
+          <span class="blank-line"></span>
+          Change drug if not improved after 10-12 weeks<br>
+          <span class="blank-line"></span>
+          2nd line - Clomipramine, Venlafaxine<br>
+          <span class="blank-line"></span>
+          Augment SSRI with atypical antipsychotic
+        </td>
+        <td>
+          On discharge - Assess insight and compliance<br>
+          <span class="blank-line"></span>
+          Follow up clinic at LH initially weekly then once every 2 weeks and later once a month<br>
+          <span class="blank-line"></span>
+          Treatment is continued for 1-2 years and tailed off over several months. Many patients relapse in the first few weeks after stopping the drugs.
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">PSYCHO</td>
+        <td>
+          Family education about condition and need for admission<br>
+          <span class="blank-line"></span>
+          Counselling<br>
+          <span class="blue">CBT<br>
+          Supportive psychotherapy and Problem solving therapy</span>
+        </td>
+        <td>
+          Psychoeducation of Patient and family about the disease/ treatment options/compliance<br>
+          <span class="blank-line"></span>
+          Thought habituation and stopping<br>
+          <span class="blank-line"></span>
+          Exposure and Response Prevention<br>
+          <span class="blank-line"></span>
+          <span class="blue">CBT<br>
+          Supportive psychotherapy and Problem solving therapy</span>
+        </td>
+        <td>
+          Thought habituation and stopping<br>
+          <span class="blank-line"></span>
+          Exposure and Response Prevention<br>
+          <span class="blank-line"></span>
+          Co-therapist
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">SOCIAL</td>
+        <td>
+          Collateral HX from family/friends<br>
+          <span class="blank-line"></span>
+          (Arrange for Medical leave if needed)<br>
+          <span class="blank-line"></span>
+          Nurses instructions for monitoring (risk)
+        </td>
+        <td>
+          OT - Functional assessment and Activity scheduling<br>
+          <span class="blank-line"></span>
+          Improve functionality through a multidiaciplinary approach and family meetings<br>
+          <span class="blank-line"></span>
+          SW and CPN to do HV
+        </td>
+        <td>
+          CPN and SW to do home visit and checkup.<br>
+          <span class="blank-line"></span>
+          Rehabilitation - Day centres or Co-therapist<br>
+          <span class="blank-line"></span>
+          Help secure employment
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- BIPOLAR PANEL -->
+  <section id="bipolar" class="panel">
+    <h2 class="table-title">Bipolar affective disorder</h2>
+    <table>
+      <tr>
+        <th class="corner"></th>
+        <th>ACUTE</th>
+        <th>INTERMEDIATE</th>
+        <th>LONG TERM</th>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">BIO</td>
+        <td>
+          Risk Assessment<br>
+          Decide on treatment setting<br>
+          Following admission<br>
+          Restraint (if aggressive)<br>
+          Review any past drug records<br>
+          <span class="blank-line"></span>
+          <span class="blue"><u>Depressive episode</u><br>
+          Mood stabilizer +/-<br>
+          Antidepressants</span><br>
+          <span class="blank-line"></span>
+          <span class="red"><u>Manic episode</u><br>
+          Stop antidepressants<br>
+          Optimize/add on Mood stabilizer</span><br>
+          <span class="blank-line"></span>
+          +/-Antipsychotics if psychosis<br>
+          <span class="blank-line"></span>
+          Benzodiazepines for insomnia<br>
+          <span class="blank-line"></span>
+          Ix/tests - Baseline, Li levels if pt was on it, B.HCG if RAG female
+        </td>
+        <td>
+          Assess MSE, Risks, Drug S/E, Sleep, appetite, self-care and behaviour daily<br>
+          <span class="blank-line"></span>
+          Send for referrals as needed (eg.VP)<br>
+          <span class="blank-line"></span>
+          Change drug if not improved after 4 weeks<br>
+          <span class="blank-line"></span>
+          ECT (suicide risk/ no response to drugs/ catatonia)<br>
+          <span class="blank-line"></span>
+          Li levels if needed (weekly till therapeutic level)<br>
+          <span class="blank-line"></span>
+          Monitor BP, PR
+        </td>
+        <td>
+          On discharge - Assess insight and compliance<br>
+          <span class="blank-line"></span>
+          Follow up clinic at LH initially weekly then once every 2 weeks and later once a month<br>
+          <span class="blank-line"></span>
+          <span class="blue">Antidepressants must be tailed off sooner than in Unipolar depression</span><br>
+          <span class="blank-line"></span>
+          Tail off antipsychotics within 2 months of symptom resolution<br>
+          <span class="blank-line"></span>
+          <span class="red"><u>Current manic episode</u><br>
+          Continue mood stabilizer for 2 years and tail off once the patient is asymptomatic for about 8 weeks.</span><br>
+          <span class="blank-line"></span>
+          Long term prophylaxis with Mood stabilizer - if 2 episodes in the last 5 years
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">PSYCHO</td>
+        <td>
+          Patient and family education about condition and need for admission<br>
+          <span class="blank-line"></span>
+          Delay making important decisions<br>
+          <span class="blank-line"></span>
+          Emotional ventilation<br>
+          <span class="blank-line"></span>
+          Reassurance
+        </td>
+        <td>
+          Psychoeducation of Patient and family about the disease/ treatment options/compliance<br>
+          <span class="blank-line"></span>
+          <span class="blue"><b>Supportive psychotherapy with problem solving</b><br>
+          CBT(Correct cognitive errors)<br>
+          Behavioural - Activation therapy<br>
+          Interpersonal therapy<br>
+          Couple/marital therapy<br>
+          Dynamic psychotherapy</span>
+        </td>
+        <td>
+          Psychoeducation - Lithium, identifying early signs of relapse<br>
+          <span class="blank-line"></span>
+          Maintain Mood Diary to identify triggers<br>
+          <span class="blank-line"></span>
+          Interpersonal therapy
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">SOCIAL</td>
+        <td>
+          Collateral HX from family/friends<br>
+          <span class="blank-line"></span>
+          (Arrange for Medical leave if needed)<br>
+          <span class="blank-line"></span>
+          Nurses instructions for monitoring (suicide risk/absconding)
+        </td>
+        <td>
+          OT - Functional assessment and Activity scheduling<br>
+          <span class="blank-line"></span>
+          Rehabilitation - Cognitive, Social skills training, Set goals for Short (ADL) and Long term (Employment/Education)<br>
+          <span class="blank-line"></span>
+          Improve functionality through a multidisciplinary holistic approach and family meetings<br>
+          <span class="blank-line"></span>
+          SW and CPN to do HV
+        </td>
+        <td>
+          CPN and SW to do home visit and checkup.<br>
+          <span class="blank-line"></span>
+          Rehabilitation - Day centres or Co-therapist<br>
+          <span class="blank-line"></span>
+          Help secure employment
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- SCHIZOPHRENIA PANEL -->
+  <section id="schizophrenia" class="panel">
+    <h2 class="table-title">Schizophrenia</h2>
+    <table>
+      <tr>
+        <th class="corner"></th>
+        <th>ACUTE</th>
+        <th>INTERMEDIATE</th>
+        <th>LONG TERM</th>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">BIO</td>
+        <td>
+          Risk Assessment<br>
+          <span class="blank-line"></span>
+          Decide on treatment setting<br>
+          <span class="blank-line"></span>
+          Following admission<br>
+          Restraint (if aggressive)<br>
+          Review any past drug records<br>
+          <span class="blank-line"></span>
+          Antipsychotics &ndash; SGA&gt;FGA<br>
+          <span class="blank-line"></span>
+          Benzodiazepines<br>
+          <span class="blank-line"></span>
+          Ix/tests - Baseline
+        </td>
+        <td>
+          Assess MSE, Drug S/E, ADL- Sleep, appetite, self-care and behaviour daily<br>
+          Monitor BP, PR<br>
+          <span class="blank-line"></span>
+          Add anticholinergics if A.Dystonia or Parkinsonism<br>
+          <span class="blank-line"></span>
+          Send for referrals as needed (eg.VP)<br>
+          <span class="blank-line"></span>
+          Change drug if not improved after 6 weeks of Max dose<br>
+          <span class="blank-line"></span>
+          ECT<br>
+          (catatonia/no response to drugs/ puerperal psychosis/ suicidal)
+        </td>
+        <td>
+          On discharge - Assess insight and compliance<br>
+          <span class="blank-line"></span>
+          IM depot if poor compliance<br>
+          <span class="blank-line"></span>
+          Follow up clinic at LH initially weekly then once every 2 weeks and later once a month<br>
+          <span class="blank-line"></span>
+          1st episode- Rx for 2 years after symptoms resolve<br>
+          <span class="blank-line"></span>
+          2nd episode for 5 years<br>
+          <span class="blank-line"></span>
+          More than 2 episodes - lifelong
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">PSYCHO</td>
+        <td>
+          Family education about condition and need for admission
+        </td>
+        <td>
+          Psychoeducation of Patient and family about the disease/ treatment options/compliance<br>
+          <span class="blank-line"></span>
+          Recovery model approach<br>
+          (get patient involved and taking responsibility for his management)<br>
+          <span class="blank-line"></span>
+          CBT - Challenge psychoses<br>
+          <span class="blank-line"></span>
+          Supportive psychotherapy and Problem solving therapy
+        </td>
+        <td>
+          CBT<br>
+          <span class="blank-line"></span>
+          Avoid stressful events that may trigger releases
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rowlabel">SOCIAL</td>
+        <td>
+          Nurses instructions for monitoring (risk)<br>
+          <span class="blank-line"></span>
+          Collateral HX from family/friends<br>
+          <span class="blank-line"></span>
+          (Arrange for Medical leave if needed)
+        </td>
+        <td>
+          Address Cognitive and Functional impairment<br>
+          <span class="blank-line"></span>
+          OT - Functional assessment and Activity scheduling<br>
+          <span class="blank-line"></span>
+          Rehabilitation - Cognitive, Social skills training, Set goals for Short (ADL) and Long term (Employment/Education)<br>
+          <span class="blank-line"></span>
+          Improve functionality through a multidisciplinary holistic approach and family meetings<br>
+          <span class="blank-line"></span>
+          SW and CPN to do Home visit
+        </td>
+        <td>
+          Family education - Reduce High Expressed Emotions<br>
+          <span class="blank-line"></span>
+          CPN and SW to do home visit and checkup.<br>
+          <span class="blank-line"></span>
+          Rehabilitation - Day centers or Co-therapist<br>
           <span class="blank-line"></span>
           Help secure employment
         </td>
