@@ -627,9 +627,40 @@ ${card("Disulfiram", "navy", `
 
 // ---------------- Thiamine ----------------
 main.innerHTML += `<section class="panel" id="panel-thiamine">
-${card("Thiamine", "red", `
-  <div class="note">The Thiamine monograph in the original notes contains only the printed headings (MOA, Route, Indications, Contraindications, Side Effects, Dosage, How to Monitor) with no content filled in.</div>
-  ${fieldTable([["MOA",null],["Route",null],["Indications",null],["Contraindications",null],["Side Effects",null],["Dosage",null],["How to Monitor",null]])}
+${card("Thiamine (Vitamin B1)", "red", `
+  ${fieldTable([
+    ["MOA","Essential cofactor for carbohydrate metabolism (pyruvate dehydrogenase, transketolase). Depleted stores in alcohol dependence — poor dietary intake, reduced GI absorption, and impaired hepatic storage — leave the brain vulnerable to Wernicke's encephalopathy, especially if glucose is given before thiamine is replaced."],
+    ["Route","Oral (tablets) or parenteral — IM/IV as a vitamin B &amp; C complex (e.g. Pabrinex)."]
+  ])}
+  <h3 class="sub">Indications</h3>
+  <ul>
+    <li>Prophylaxis &amp; treatment of Wernicke–Korsakoff syndrome in alcohol dependence / withdrawal.</li>
+    <li>Nutritional deficiency states (malnutrition, malabsorption, prolonged vomiting).</li>
+  </ul>
+  <h3 class="sub">Dosage — Oxford (Shorter Oxford Textbook of Psychiatry)</h3>
+  <ul>
+    <li><b>Prophylaxis (low risk, no signs of Wernicke's):</b> Oral thiamine 100 mg tds.</li>
+    <li><b>Prophylaxis (high risk — malnourished, decompensated liver disease, or in acute withdrawal):</b> Parenteral thiamine (IM/IV) preferred, as oral absorption is unreliable in dependent drinkers.</li>
+    <li><b>Suspected or confirmed Wernicke's encephalopathy:</b> Parenteral thiamine urgently, followed by long-term oral thiamine once the acute presentation has been covered.</li>
+    <li><span class="key" style="color:var(--red);font-weight:600;">Never give glucose before thiamine</span> in a suspected thiamine-deficient patient — glucose ↑ metabolic demand for thiamine and can precipitate or worsen Wernicke's encephalopathy.</li>
+  </ul>
+  <h3 class="sub">Dosage — BNF (British National Formulary)</h3>
+  <ul>
+    <li><b>Prophylaxis in low-risk patients:</b> Thiamine 100 mg orally 3 times daily.</li>
+    <li><b>Prophylaxis in high-risk patients</b> (e.g. those presenting acutely unwell, malnourished, or with decompensated liver disease): Pabrinex IV High Potency — 1 pair of ampoules by IV infusion once daily for 3–5 days, then convert to oral thiamine.</li>
+    <li><b>Treatment of Wernicke's encephalopathy:</b> Pabrinex IV High Potency — 2 pairs of ampoules 3 times daily for 3 days, then 1 pair once daily for a further 3–5 days (or longer if still improving), followed by long-term oral thiamine 100 mg tds.</li>
+  </ul>
+  <div class="warn">Parenteral thiamine (particularly IV Pabrinex) carries a small risk of anaphylaxis — give slowly, and ensure resuscitation facilities are available during administration.</div>
+  <h3 class="sub">Side Effects</h3>
+  ${seTable(
+    ["Generally well tolerated orally","Mild GI upset (oral route)"],
+    ["Anaphylaxis / hypersensitivity reaction (IV/IM route)"]
+  )}
+  <h3 class="sub">How to Monitor</h3>
+  <ul>
+    <li>Clinical response — resolution of confusion, ataxia, and ophthalmoplegia in Wernicke's encephalopathy.</li>
+    <li>Observe closely for hypersensitivity reactions during and after parenteral administration.</li>
+  </ul>
 `)}
 </section>`;
 
