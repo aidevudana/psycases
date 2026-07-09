@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final MBBS Psychiatry &mdash; Case Dashboard</title>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+
+:root{
+  --navy: #0c2438;
+  --navy-2: #123049;
+  --teal: #0f6e56;
+  --teal-light: #12876b;
+  --amber: #d9a441;
+  --paper: #f6f4ee;
+  --paper-2: #ffffff;
+  --ink: #1c2b34;
+  --ink-soft: #51626c;
+  --line: #e2ddd0;
+  --radius: 10px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family: 'Iowan Old Style','Palatino Linotype', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+.app{display:flex; min-height:100vh;}
+
+/* ---------------- Sidebar ---------------- */
+.sidebar{
+  width: 280px; flex-shrink:0;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  color:#e9edf0; display:flex; flex-direction:column;
+  position: sticky; top:0; height:100vh;
+}
+.brand{ display:flex; align-items:center; gap:12px; padding:22px 20px 16px; border-bottom:1px solid rgba(255,255,255,0.08);}
+.brand-mark{
+  width:40px;height:40px;border-radius:8px; background: var(--amber); color:var(--navy);
+  display:flex;align-items:center;justify-content:center; font-weight:700; font-family: Georgia, serif; font-size:15px;
+}
+.brand-title{ font-size:15px; font-weight:700; letter-spacing:.2px;}
+.brand-sub{ font-size:11px; color:#9fb3c2; font-family: -apple-system, sans-serif; letter-spacing:.4px; text-transform:uppercase; margin-top:2px;}
+.nav-scroll{ flex:1; overflow-y:auto; padding: 10px 10px 10px;}
+.nav-item{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+  background:transparent; border:none; color:#c9d5dc; padding:10px 12px; margin:2px 0;
+  border-radius:8px; cursor:pointer; font-family:inherit; font-size:13.5px;
+  border-left:3px solid transparent; transition: background .15s ease, color .15s ease;
+}
+.nav-item:hover{ background: rgba(255,255,255,0.06); color:#fff;}
+.nav-item.active{ background: rgba(255,255,255,0.09); color:#fff; border-left-color: var(--accent, var(--amber)); }
+.nav-tag{
+  font-family: 'Courier New', monospace; font-size:10.5px; font-weight:700; letter-spacing:.5px;
+  color: var(--accent, var(--amber)); background: rgba(255,255,255,0.08); padding:2px 6px; border-radius:5px; min-width:38px; text-align:center;
+}
+.nav-name{ font-weight:600; }
+.sidebar-footer{ padding:12px 20px 18px; font-size:10.5px; color:#8199a9; font-family:-apple-system,sans-serif; letter-spacing:.3px; border-top:1px solid rgba(255,255,255,.08);}
+
+/* ---------------- Content ---------------- */
+.content{ flex:1; min-width:0; }
+.topbar{
+  position: sticky; top:0; z-index:5; background: var(--paper);
+  display:flex; align-items:center; gap:14px; padding:16px 30px; border-bottom:1px solid var(--line);
+}
+.menu-btn{ display:none; background:none; border:none; font-size:18px; color:var(--navy); cursor:pointer;}
+.search-wrap{ flex:1; display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line);
+  border-radius:24px; padding:9px 16px; max-width:560px; font-family:-apple-system,sans-serif; color:var(--ink-soft);}
+.search-wrap i{ color: var(--teal); }
+#searchBox{ border:none; outline:none; flex:1; font-size:13.5px; font-family:-apple-system,sans-serif; background:transparent; color:var(--ink);}
+
+.search-results{ margin: 0 30px; padding: 14px 18px; background:#fff; border:1px solid var(--line); border-radius:var(--radius); }
+.search-results.hidden{ display:none; }
+.search-results h4{ margin:0 0 8px; font-family:-apple-system,sans-serif; font-size:11.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-soft);}
+.sr-item{ padding:8px 0; border-bottom:1px dashed var(--line); font-size:13.5px; cursor:pointer; }
+.sr-item:last-child{ border-bottom:none; }
+.sr-case{ font-family:'Courier New',monospace; font-size:10px; font-weight:700; color:#fff; padding:1px 6px; border-radius:4px; margin-right:8px;}
+.sr-empty{ font-family:-apple-system,sans-serif; color:var(--ink-soft); font-size:13px;}
+
+.panels{ padding: 26px 34px 60px; max-width: 1180px; }
+.panel{ display:none; animation: fade .25s ease; }
+.panel.active{ display:block; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+.panel-hero{
+  background: var(--accent); color:#fff; border-radius: var(--radius);
+  padding: 26px 30px; margin-bottom: 22px; position:relative; overflow:hidden;
+}
+.panel-hero::after{
+  content:""; position:absolute; right:-40px; top:-40px; width:160px; height:160px; border-radius:50%;
+  background: rgba(255,255,255,0.08);
+}
+.hero-tag{
+  font-family:'Courier New',monospace; font-size:11px; letter-spacing:2px; background:rgba(255,255,255,.18);
+  display:inline-block; padding:3px 10px; border-radius:5px; margin-bottom:10px;
+}
+.panel-hero h1{ margin:0 0 6px; font-size: 27px; font-weight:700; }
+.hero-sub{ margin:0; font-family:-apple-system,sans-serif; font-size:13.5px; opacity:.9; }
+
+.card{
+  background: var(--paper-2); border:1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 22px 20px; margin-bottom:18px;
+}
+.card.wide{ }
+.two-col{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:4px; }
+.special-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+@media (max-width: 860px){ .two-col, .special-grid{ grid-template-columns: 1fr; } }
+
+.card h2{
+  margin:0 0 10px; font-size:15.5px; color:var(--navy); display:flex; align-items:center; gap:8px;
+  font-family: Georgia, serif;
+}
+.card h3{ margin:0 0 8px; font-size:14px; color:var(--navy); font-family:Georgia,serif; }
+.dot{ width:8px; height:8px; border-radius:50%; background: var(--teal); display:inline-block; }
+
+ul.bl{ margin:0; padding-left:19px; font-family:-apple-system,sans-serif; font-size:13.3px; line-height:1.62; color: var(--ink); }
+ul.bl li{ margin-bottom:6px; }
+ul.bl li::marker{ color: var(--teal); }
+p.empty{ font-family:-apple-system,sans-serif; color:#a9b2b7; font-size:12.5px; margin:0; font-style:italic; }
+
+.mx-stage{ margin-bottom:16px; }
+.mx-stage:last-child{ margin-bottom:0; }
+.mx-stage-label{
+  font-family:'Courier New',monospace; font-size:11px; letter-spacing:1.2px; text-transform:uppercase;
+  color:#fff; background: var(--navy); display:inline-block; padding:3px 10px; border-radius:5px 5px 0 0;
+}
+.mx-grid{ display:grid; grid-template-columns: 1fr 1fr 1fr; border:1px solid var(--line); border-top:3px solid var(--navy); border-radius:0 6px 6px 6px; overflow:hidden;}
+.mx-col{ padding:12px 14px; border-right:1px solid var(--line); }
+.mx-col:last-child{ border-right:none; }
+.mx-col h4{
+  margin:0 0 8px; font-size:10.5px; text-transform:uppercase; letter-spacing:.6px; font-family:-apple-system,sans-serif;
+  color: var(--teal); font-weight:700;
+}
+.mx-bio{ background: #fbfaf6; }
+.mx-psycho{ background: #f9faf8; }
+.mx-social{ background: #fbfaf6; }
+.mx-col ul.bl{ font-size:12.6px; }
+@media (max-width: 860px){ .mx-grid{ grid-template-columns:1fr; } .mx-col{ border-right:none; border-bottom:1px solid var(--line);} }
+
+mark{ background: var(--amber); color:#1c2b34; padding:0 2px; border-radius:2px; }
+
+@media (max-width: 900px){
+  .sidebar{ position:fixed; left:-280px; z-index:20; transition: left .2s ease; box-shadow: 4px 0 24px rgba(0,0,0,.2);}
+  .sidebar.open{ left:0; }
+  .menu-btn{ display:block; }
+  .panels{ padding: 20px 16px 50px; }
+  .topbar{ padding:14px 16px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">Psy</div>
+      <div class="brand-text">
+        <div class="brand-title">Medicine Kuppiya</div>
+        <div class="brand-sub">Psychiatry &middot; Final MBBS</div>
+      </div>
+    </div>
+    <div class="nav-scroll">
+      <button class="nav-item active" data-target="panel-pd" style="--accent:#7a1f3d">
+      <span class="nav-tag">PDD</span>
+      <span class="nav-name">Delusional Disorder</span>
+    </button>
+<button class="nav-item" data-target="panel-dementia" style="--accent:#1f5c7a">
+      <span class="nav-tag">DEM</span>
+      <span class="nav-name">Dementia</span>
+    </button>
+<button class="nav-item" data-target="panel-schizo" style="--accent:#3d1f7a">
+      <span class="nav-tag">SCZ</span>
+      <span class="nav-name">Schizophrenia</span>
+    </button>
+<button class="nav-item" data-target="panel-depression" style="--accent:#1f7a4f">
+      <span class="nav-tag">DEP</span>
+      <span class="nav-name">Depression &amp; Post Partum</span>
+    </button>
+<button class="nav-item" data-target="panel-heroin" style="--accent:#7a4f1f">
+      <span class="nav-tag">SUD</span>
+      <span class="nav-name">Heroin / Substance Use</span>
+    </button>
+<button class="nav-item" data-target="panel-ocd" style="--accent:#1f4f7a">
+      <span class="nav-tag">OCD</span>
+      <span class="nav-name">OCD &amp; Anxiety Disorders</span>
+    </button>
+<button class="nav-item" data-target="panel-alcohol" style="--accent:#7a3d1f">
+      <span class="nav-tag">OH</span>
+      <span class="nav-name">Alcohol Use Disorder</span>
+    </button>
+<button class="nav-item" data-target="panel-bpad" style="--accent:#1f7a7a">
+      <span class="nav-tag">BPAD</span>
+      <span class="nav-name">Bipolar Affective Disorder</span>
+    </button>
+    </div>
+    <div class="sidebar-footer">8 cases &middot; Hx &middot; MSE &middot; Mx &middot; Drugs</div>
+  </aside>
+
+  <main class="content">
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="searchBox" type="text" placeholder="Search across all cases (e.g. 'clozapine', 'MMSE', 'naltrexone')">
+      </div>
+    </div>
+    <div id="searchResults" class="search-results hidden"></div>
+    <div class="panels" id="panels">
+      <div class="panel" id="panel-pd" data-accent="#7a1f3d">
+    <section class="panel-hero" style="--accent:#7a1f3d">
+      <div class="hero-tag">PDD</div>
+      <h1>Delusional Disorder</h1>
+      <p class="hero-sub">Persistent Delusional Disorder — ICD-11 term</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>PC: most of the time admitted by family members &amp; police</li><li>Describe the episode — what happened, may be an attempt of aggression</li><li>Try to elicit the delusion — 100% conviction is important, otherwise it is an overvalued idea</li><li>Checking behaviour, frequent arguments, attempt of confrontation of wife / harming alleged lover</li><li>Exclude 1st rank symptoms, manic/depressive episodes, anxiety disorders, obsessional thoughts</li><li>Types: infidelity (most common), persecutory, D. of love, somatic, grandiose, armed</li><li>Other forms of morbid jealousy: overvalued idea, obsessional thought</li><li>Personal hx: previous relationships &amp; why they broke up; alcohol/substance dependence, last intake</li><li>Pre-morbid personality: suspiciousness, difficulty trusting people, priority-seeking, insecurity</li><li>Collateral hx from partner — any violence, physical / sexual abuse</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>Diagnostic Criteria</h2>
+          <ul class='bl'><li>Presence of a delusion or set of related delusions</li><li>Persisting for at least 3 months (≥3 months)</li><li>Remarkable stability within individuals</li><li>Absence of depressive, manic or mixed episode</li><li>Absence of schizophrenia symptoms — clear &amp; persistent hallucinations, severely disorganized thinking, influence/passivity/control, negative symptoms (specific hallucinations/illusions related to delusion content may be present)</li><li>Affect, speech &amp; behaviour typically unaffected</li><li>Not a manifestation of another medical condition / substance / medication</li></ul>
+        </div>
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>A &amp; B — if no depression, self care is good</li><li>Risk to self: self harm, suicidal, physical health</li><li>Risk to others: violence to children, partner violence, physical/sexual abuse</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Decide setting</li><li>If aggressive → Mx</li><li>Ensure safe environment</li><li>O. Risperidone 2mg n (Max 16mg)</li><li>Olanzapine 5mg n (Max 20mg)</li><li>Before starting: FBS, Lipid profile</li><li>O. Clonazepam 0.5mg n short duration if poor sleep</li><li>Mx withdrawal during ward stay if alcohol dependence</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><p class="empty">—</p></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Collateral hx from partner</li><li>Any violence towards her — physical / sexual abuse</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Intermediate</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Assess pt daily &amp; MSE &amp; risk assessment</li><li>SE assessment</li><li>Titrate acc to the response</li><li>Discharge after arranging followup &amp; ensuring safety of patient &amp; family members</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation to pt &amp; family</li><li>Ensure compliance</li><li>Appoint a family member to supervise medication</li><li>Educate family on safety: duplicate keys, minimize provocation, contact plan</li><li>Motivational interviewing for substance use</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Arrange necessary safety for domestic violence</li><li>Ensure children&#x27;s safety</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Long term</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Monitoring for SEs — FBS 3-monthly, Lipid profile 6-monthly</li><li>Assess compliance</li><li>If poor, consider LAIs (e.g. Fluphenazine decanoate)</li><li>Refer follow up in the community with involvement of CPN</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Marital counselling to address relationship problems</li><li>If nothing works, consider separation as last resort</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+        </section>
+<section class="special-grid">
+    <div class="card">
+      <h3>Types of Morbid Jealousy</h3>
+      <ul class='bl'><li>Delusion — firm, 100% conviction</li><li>Overvalued idea — strong but not delusional</li><li>Obsessional thought — recognized as own, resisted</li></ul>
+    </div></section></div>
+<div class="panel" id="panel-dementia" data-accent="#1f5c7a">
+    <section class="panel-hero" style="--accent:#1f5c7a">
+      <div class="hero-tag">DEM</div>
+      <h1>Dementia</h1>
+      <p class="hero-sub">Cognitive assessment, BPSD, MMSE &amp; Alzheimer&#x27;s management</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>PC may be due to BPSD, or due to progressive memory loss</li><li>If due to BPSD, explain progression, symptoms &amp; likely precipitating events</li><li>BPSD behavioural: physical aggression, screaming, restlessness, wandering, culturally inappropriate behaviour, sexual disinhibition, hoarding, cursing</li><li>BPSD psychological: anxiety, depressive mood, apathy, hallucinations &amp; delusions, elation, negativism</li><li>Precipitants: unmet needs (hunger/thirst/pain), over/under-stimulation, acute medical problems, life stressors, hearing/vision impairment, communication issues</li><li>Assess each cognitive domain: memory (long/short/semantic), language (word finding, naming, reading/writing), praxis (dressing, brushing teeth), abstract thinking &amp; judgement (money, decisions), visuoperceptual skills (getting lost, recognizing faces), personality &amp; social conduct (withdrawal, disinhibition)</li><li>Who is caregiving? Impact to family members &amp; caregiver</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>Diagnostic Criteria</h2>
+          <ul class='bl'><li>DD exclusion — Delirium: fever, fluctuating consciousness, acute onset</li><li>Brain tumours: chronic headache, vision impairment, seizures</li><li>Hypothyroidism: cold intolerance, fatigue, constipation</li><li>Vit B12 ↓: tingling &amp; numbness of peripheries</li><li>Vascular dementia: hx of strokes, body weakness</li><li>Parkinsonism: slowing of movement, gait abnormalities</li><li>Frontotemporal: early behavioural change (disinhibition), no early memory/personality change</li><li>Exclude depression as well (does low mood or memory loss come first?)</li></ul>
+        </div>
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>A &amp; B: facial expressions, hand gestures, tremors, gait abnormalities</li><li>MMSE — 11 components, total 30: Time(5), Place(5), Serial 7s(5), Registration(3), Recall(3), Naming(2), 3-stage command(3), Reading(1), Writing(1), Repetition(1), Pentagon(1)</li><li>Scoring: ≥24 normal (easy rule); 23–20 mild; 19–10 moderate; &lt;10 severe</li><li>Risk: self negligence &amp; poor self care, accidents, getting lost, self harm/suicidal</li><li>To others: violence. From others: financial / physical exploitation</li><li>Physical exam: hyper/hypothyroid signs, Parkinson&#x27;s signs — resting tremor, cog-wheel / lead-pipe rigidity, festinating gait</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Rx setting — most of the time no need to admit; admit only if aggressive or significant risk</li><li>1. Go through past records</li><li>2. Investigate for reversible causes of cognitive impairment</li><li>FBC (macrocytic anaemia, B9/B12↓)</li><li>ESR (autoimmune cerebral involvement)</li><li>S.Cr, SE (renal failure)</li><li>Liver biochem (liver failure)</li><li>TFTs (hypothyroidism)</li><li>NCCT brain (structural lesions)</li><li>CRP, UPR (if suspect delirium)</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Objective cognitive assessment — MMSE / MOCA</li><li>Psychoeducation to family &amp; pt: nature of illness, not curable, importance of caregiver, pharm/non-pharm options</li><li>Advice on home care: good lighting/clock/calendar, night light, grab rails, walking stick, reminisce with albums, fulfil basic needs, lock doors at night</li><li>Behavioural symptoms can also be addressed with above measures</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Assessment of caregiver burden — sharing responsibility, screen for depression</li><li>Help solve accommodation &amp; financial problems through PSW</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Intermediate</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>For Alzheimer&#x27;s: AchE-I alone sufficient for mild-moderate; AchE-I + memantine if severe</li><li>Donepezil 5mg nocte/mane → ↑10mg after 4 weeks</li><li>or Rivastigmine 1.5mg bd → ↑ to 3-6mg bd</li><li>If severe: add Memantine 5mg mane, ↑5mg weekly to 20mg</li><li>BPSD (severe only): Risperidone 0.5mg n or Quetiapine 12.5mg n, max 3 months</li><li>Co-morbid depression: Sertraline (caution — hyponatraemia)</li><li>Sleep: Melatonin 3mg 1-2hrs before bed — do NOT give BDZ</li><li>Screen for metabolic disease: FBS, lipid profile, BP → medical referral if abnormal</li><li>Hearing/vision impairment → appropriate referral</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Cognitive stimulation therapy with OT involvement — group therapy, singing</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Follow-up</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Arrange in clinic — 3-monthly objective cognitive assessments (MMSE/MOCA)</li><li>Drug SE assessment</li><li>Metabolic Ix</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><p class="empty">—</p></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+        </section>
+<section class="special-grid">
+    <div class="card">
+      <h3>Drug Side Effects</h3>
+      <ul class='bl'><li>AchEIs: nausea, vomiting, diarrhoea, LOW/LOA, muscle weakness</li><li>Memantine (NMDA antagonist): dizziness, headache, constipation, confusion</li><li>Non-Alzheimer&#x27;s dementia: DLB — can give AchEI &amp; memantine; Frontotemporal &amp; Vascular — cannot give them</li></ul>
+    </div>
+    <div class="card">
+      <h3>Risk Factors</h3>
+      <ul class='bl'><li>Hearing impairment, physical inactivity, smoking, DM, HTN, obesity</li><li>Alcohol, depression, late-life social isolation, visual loss, less education</li></ul>
+    </div></section></div>
+<div class="panel" id="panel-schizo" data-accent="#3d1f7a">
+    <section class="panel-hero" style="--accent:#3d1f7a">
+      <div class="hero-tag">SCZ</div>
+      <h1>Schizophrenia</h1>
+      <p class="hero-sub">1st rank symptoms, antipsychotics, clozapine &amp; EPSE</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>Intro includes nearest hospital &amp; distance</li><li>PC ex: hearing voices of unseen people, aggressive behaviour &amp; suspiciousness</li><li>1st rank symptoms — Thought (insertion/withdrawal/broadcast), Delusion of control, Delusional perception (different meaning to a real perception, not always directed at self unlike delusion of reference)</li><li>Bizarre delusions — completely impossible things e.g. superhuman powers, controlling the weather</li><li>3rd person AH, or 2nd person running commentary; hallucinatory voices from body parts</li><li>Persistent hallucinations (&gt;2), incoherent/irrelevant speech, neologisms, catatonic behaviour, negative symptoms — duration &gt;1 month</li><li>Negative symptoms: anhedonia, social withdrawal. Cognitive symptoms: memory impairment, impaired A&amp;C</li><li>Impact of life &amp; level of functioning</li><li>Past psych: reason for this relapse → poor compliance, ongoing stressors, high EE, substance use</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>Diagnostic Criteria</h2>
+          <ul class='bl'><li>DD — Schizoaffective (mood symptoms), PDD (single clear delusion &gt;3 months), BPAD (↑ energy)</li><li>Substance-induced psychosis, Organic (hypo/hyperthyroid, headache from space-occupying lesion)</li></ul>
+        </div>
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>A: poor self care, idiosyncratic features. B: self mumbling, hand gestures, disinhibition, overfamiliarity</li><li>Speech: rate/tone/amount/volume, neologism, flight of ideas</li><li>Mood/Affect: range, congruence, reactivity, lability</li><li>Thought: delusions, obsessional, suicidal/homicidal. Perception: hallucinations</li><li>Risk — self: neglect, dehydration/nutrition, suicide, reputation, relapse. Others: homicide/self harm, education for children. From others: financial/physical exploitation</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>1. Decide setting</li><li>2. If aggressive → Mx</li><li>3. Ensure safe environment</li><li>4. Pharmacological mx — atypical &amp; typical similar efficacy</li><li>Risperidone 2mg n (Max 16mg)</li><li>Olanzapine 5-10mg n start (Max 20mg)</li><li>Quetiapine 400-600mg n (Max 750mg)</li><li>Haloperidol 2mg n (Max 20mg)</li><li>TFP 10mg (Max 20mg)</li><li>Chlorpromazine 10mg n (Max 20mg)</li><li>If non-sedative agent given, can add short course O. Clonazepam 0.5mg n</li><li>If risk ↑↑, ECT is also an option</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation to family members</li><li>Ix before starting SGA: FBS, Lipid profile at start &amp; 4-6 monthly (Olanzapine at 1 month then 4-6 monthly)</li><li>ECG, QTc prolongation</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Collateral hx</li><li>Assess family support</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Intermediate</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>1. Titrate the dose</li><li>Do MSE &amp; risk assessments during ward rounds</li><li>3. Assess SEs</li><li>4. If co-morbid, monitor &amp; refer if needed</li><li>If no response to adequate trial (4-6 weeks) → switch to another drug class</li><li>5. Mx of substance use → motivational interviewing</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation once stable</li><li>Assess cause of poor compliance</li><li>Healthy lifestyle, sleep; ↓ high EE (critical comments, hostility, over-involvement); ↓ psychological stressors</li><li>Identify early features of relapse</li><li>Plan discharge with 2-week review &amp; clinic followup</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Functional assessment &amp; OT</li><li>Plan &amp; rehabilitation</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Long term</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Continue Rx: 1st episode 1-2yrs after remission; 2nd episode 5 years; multiple episodes → may be lifelong</li><li>If no response after adequate trials of drugs → Resistant schizophrenia → start Clozapine 6.25mg evening, titrate up</li><li>If poor compliance: simplify regimen, consider LAIs</li><li>Monitor for medication SEs</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Family therapy</li><li>Coping skills improvement</li><li>Stress management</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Support from CPN if poor compliance</li><li>Rehabilitation if indicated</li><li>Financial support through PSW</li><li>Support for finding accommodation</li><li>Track functional level between episodes</li></ul></div>
+      </div>
+    </div>
+        </section>
+<section class="special-grid">
+    <div class="card">
+      <h3>Aggressive Patient — Escalation Ladder</h3>
+      <ul class='bl'><li>1. Verbal de-escalation</li><li>2. Oral: Risperidone 2-4mg / Olanzapine 5-10mg / Haloperidol 5-10mg + Promethazine 25mg / Chlorpromazine 50-100mg / Oral BDZ (Lorazepam 2mg, Clonazepam 2mg, Midazolam 10mg)</li><li>3. IM: Olanzapine 5-10mg IM (watch hypotension) / Haloperidol 5-10mg + Promethazine 25mg IM (watch EPSE, QT, NMS) — monitor BP/PR/RR ¼-hrly then ½-hrly then hrly until awake</li><li>4. Failed → physical restraining</li></ul>
+    </div>
+    <div class="card">
+      <h3>Clozapine Essentials</h3>
+      <ul class='bl'><li>Indication: resistant schizophrenia (1/3 respond completely)</li><li>Before starting: BMI, FBC, FBS, lipid profile, ECG, 2D echo</li><li>Start 12.5mg n/bd → titrate daily; max dose 900mg/day (targets differ by sex/smoking status)</li><li>Monitor: BP (hypotension risk), PR tds, T° (fever/myocarditis/agranulocytosis)</li><li>Common SEs: sedation, orthostatic hypotension, hypersalivation (Benzhexol 2mg mane), constipation (can → paralytic ileus — fluids, fibre, Bisacodyl then lactulose), weight gain, DM/DL, tachycardia &amp; fever settle by 4 weeks</li><li>Serious rare SEs: agranulocytosis, myocarditis/cardiomyopathy, fulminant hepatic failure, pancreatitis, pericarditis</li><li>Monitoring: FBC weekly ×18 weeks then monthly (watch fever/sore throat/malaise); FBS &amp; lipids at 1 month then 4-6 monthly</li><li>Missed dose: 1 day → continue; ≥2 days (48hrs) → restart titration from beginning</li></ul>
+    </div>
+    <div class="card">
+      <h3>EPSE Management</h3>
+      <ul class='bl'><li>Acute dystonia (hours): IV/IM Benztropine 2mg or Benzhexol</li><li>Akathisia (hrs-wks): ↓ dose, change drug, low-dose propranolol, Clonazepam 0.5mg (anticholinergics unhelpful)</li><li>Parkinsonism (days-wk): ↓ dose, switch to lower-propensity drug, Benzhexol 2mg</li><li>Tardive dyskinesia (months-yrs): stop anticholinergic, ↓ AP dose, switch drug</li></ul>
+    </div>
+    <div class="card">
+      <h3>NMS — Fatal Emergency</h3>
+      <ul class='bl'><li>Fever, sweating, muscle rigidity, confusion, fluctuating consciousness, labile/↑BP, tachycardia</li><li>Ix: CK &gt;1000, leukocytosis, altered LFTs — confirm with ↑CPK</li><li>Mx: withdraw antipsychotic, monitor T°/PR/BP, BDZ, hydration, bromocriptine + dantrolene, ventilation if needed, ECT may help</li><li>Restart AP after ~5 days with a low dopamine-affinity agent, avoid depot preparations</li></ul>
+    </div>
+    <div class="card">
+      <h3>Poor Prognostic Factors &amp; ECT</h3>
+      <ul class='bl'><li>Single &amp; male, co-morbid substance use, poor compliance, family hx, insidious onset, long duration untreated</li><li>If not controlled with clozapine: combination of antipsychotics, or ECT</li><li>ECT prep: written consent, RFT/SE/ECG, cognitive assessment, fasting (solid 6h, clear liquid 2h), remove dentures/jewellery</li><li>ECT CI: any illness ↑ anaesthetic risk (recent MI, HF, cerebral/aortic aneurysm, DVT)</li><li>ECT complications: headache, nausea, vertigo, muscle pain, retro/anterograde amnesia, brief disorientation, cardiac arrhythmias</li></ul>
+    </div></section></div>
+<div class="panel" id="panel-depression" data-accent="#1f7a4f">
+    <section class="panel-hero" style="--accent:#1f7a4f">
+      <div class="hero-tag">DEP</div>
+      <h1>Depression &amp; Post Partum</h1>
+      <p class="hero-sub">ICD-10 criteria, drug choice &amp; postpartum spectrum</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>PC may follow a suicidal attempt / overdose in background of persistent low mood &amp; ↓energy</li><li>Elicit: persistent low mood (diurnal variation), ↓energy/activity, lack of interest/enjoyment, ↓concentration, ↓self esteem, guilt/unworthiness, pessimism, ideas of self harm, sleep disturbance, ↓appetite</li><li>Somatic symptoms: constipation, fatigue, bodyache</li><li>Psychotic symptoms — delusions &amp; hallucinations; past depressive/manic episodes</li><li>Exclude anxiety disorders, OCD, hypothyroidism, coexistent substance use</li><li>Impact: day to day life, relationships, occupation, education, children</li><li>Premorbid — borderline traits: fear of abandonment, unstable but intense relationships, impulsivity (spending/sex/substance/driving), recurrent self harm, rapid mood changes, chronic emptiness</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>Diagnostic Criteria</h2>
+          <ul class='bl'><li>Major: depressed mood, ↓energy/activity, loss of interest/enjoyment</li><li>Minor: ↓concentration, ↓self esteem, guilt/unworthiness, pessimism, self harm ideas, disturbed sleep, ↓appetite</li><li>2A+2B → Mild, 2A+3B → Moderate, 3A+4B → Severe</li><li>Present most of the day, most days, for ≥2 weeks</li></ul>
+        </div>
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>A&amp;B: self care, self harm injuries, psychomotor retardation, eye contact &amp; rapport</li><li>Speech: poverty of speech. Mood/Affect. Thought: suicidal, homicidal, obsessional, delusions</li><li>Cognitive distortions: overgeneralization, arbitrary inference, selective abstraction, personalization</li><li>Risk: suicidal/homicidal/DSH (detailed assessment), negligence/self care, violence/domestic violence, risk to children</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Decide setting per risk/severity/support system</li><li>Ix&#x27;s not needed to start</li><li>If high risk: bed near nursing station, observe for self harm/food intake/hydration</li><li>Start O. Sertraline 50mg mane</li><li>If sleep difficulty → short course Clonazepam 0.5mg</li><li>Emotional ventilation with trained counsellor</li><li>If psychotic symptoms → add antipsychotic</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation: not pt&#x27;s fault, psychiatric illness, Rx options, importance of compliance</li><li>Medications take ~2-4 weeks to work; importance of family support &amp; adherence</li><li>Psychotherapies with OT: Interpersonal therapy, CBT (cognitive restructuring), Supportive psychotherapy &amp; problem solving, Behavioural activation</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Through PSW assess home environment; ensure safety for pt &amp; children</li><li>Discuss what kind of help pt needs — occupational training, relationships, education</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Intermediate</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Daily MSE &amp; risk assessment</li><li>Consider titrating dose after 2 weeks (75mg, max 200)</li><li>Discharge once risk minimal &amp; symptoms improved</li><li>Arrange clinic followup, assess improvement &amp; SEs</li><li>Continue drugs ~6 months after remission</li><li>Motivational interviewing for substance use</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>DSH mx if having — combine therapies with discussion of support system &amp; crisis plan</li><li>Continue this during intermediate mx as well</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+        </section>
+<section class="special-grid">
+    <div class="card">
+      <h3>Drug Choice by Scenario</h3>
+      <ul class='bl'><li>Mild-moderate: Sertraline 50mg mane (max 200mg)</li><li>Severe: Venlafaxine 75mg or Sertraline 50mg (venlafaxine slightly more effective)</li><li>Pregnancy/lactation: Sertraline 1st line</li><li>Elderly: Mirtazapine best (Bupropion if hyponatraemia risk)</li><li>Post-MI: Sertraline best</li><li>Other options: Fluoxetine 20mg (max 60mg), Venlafaxine 75mg (max 375mg div), TCAs, Mirtazapine 30mg (max 45mg)</li><li>1st drug 2wks no response → ↑dose 2wks → no response → switch drug</li></ul>
+    </div>
+    <div class="card">
+      <h3>Antidepressant Side Effects</h3>
+      <ul class='bl'><li>SSRI: nausea, diarrhoea, dyspepsia, dry mouth, headache, insomnia, dizziness, sweating, erectile dysfunction, delayed orgasm, hyponatraemia (SIADH) — often settle in 1-2 months. CI: liver/renal failure</li><li>SNRI: dose-related ↑BP/HR (monitor, caution if hypertensive), high insomnia/anxiety/agitation, more cardiotoxic than SSRI</li><li>TCA: dry mouth, constipation, tachycardia, urine retention, dry skin, postural hypotension. Overdose → tachyarrhythmias &amp; intracardiac blocks</li><li>Mirtazapine (NaSSA): ↑appetite, weight gain, drowsiness, dry mouth</li></ul>
+    </div>
+    <div class="card">
+      <h3>Postpartum Spectrum</h3>
+      <ul class='bl'><li>Blues: 50-70% get, irritability/labile mood/crying spells, day 3-4, resolves spontaneously</li><li>PPD: onset usually within 2 weeks, prominent tiredness/irritability/anxiety/phobic symptoms, obsessional fears of harming baby; most recover 2-6 months but 30% persist; screen with Edinburgh Postnatal Depression scale at 4-6 weeks; high risk (40%) of relapse</li><li>Postpartum psychosis: onset 2-3 days postpartum (1-2 per 1000 births), more common in primigravida, sudden onset &amp; rapid deterioration, mood symptoms predominant (mania/mixed/depressive), needs inpatient care, mother-baby contact supervised</li><li>Psychosis mx: antipsychotics (Olanzapine 5mg n / Risperidone / Quetiapine 25-50mg), Lithium if clear bipolar component (not if breastfeeding), ECT if very high risk</li></ul>
+    </div>
+    <div class="card">
+      <h3>Serotonin Syndrome &amp; Resistant Depression</h3>
+      <ul class='bl'><li>Mild: insomnia, anxiety, nausea, diarrhoea, hypertension, tachycardia, hyperreflexia</li><li>Moderate: agitation, myoclonus, tremor, mydriasis, flushing, diaphoresis, low-grade fever</li><li>Severe: hyperthermia, confusion — caution during cross-tapering</li><li>Resistant depression: ensure compliance &amp; adequate dose; ↑dose; combine 2 antidepressants with 2 mechanisms (SSRI+Mirtazapine, SNRI+Mirtazapine, SSRI+Bupropion); augment with antipsychotic; combine with ECT</li></ul>
+    </div>
+    <div class="card">
+      <h3>Pregnancy, Breastfeeding &amp; Stress Disorders</h3>
+      <ul class='bl'><li>Sertraline preferred in pregnancy &amp; lactation; Fluoxetine/Venlafaxine — slightly higher neonatal withdrawal risk; TCAs safe in pregnancy</li><li>Neonatal poor adaptation syndrome: 20-30% of SSRI/SNRI-exposed infants — irritability, tremor, poor feeding, tachypnoea, rarely seizures, starts within hours</li><li>Acute stress reaction: minutes onset, resolves 2-3 days. Adjustment disorder: onset &lt;1 month, usually &lt;6 months</li><li>PTSD: triad — nightmares, hypervigilance, flashbacks, avoidance. Mx: trauma-focused CBT, cognitive restructuring; SSRI/SNRI ± antipsychotic augmentation</li></ul>
+    </div></section></div>
+<div class="panel" id="panel-heroin" data-accent="#7a4f1f">
+    <section class="panel-hero" style="--accent:#7a4f1f">
+      <div class="hero-tag">SUD</div>
+      <h1>Heroin / Substance Use</h1>
+      <p class="hero-sub">Dependence, withdrawal &amp; relapse prevention</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>PC: referred from another ward or self admission</li><li>Explain substance use: onset &amp; circumstances, usage pattern (frequency/amount), tolerance, route, spend</li><li>Dependence: strong desire, inability to control, tolerance, withdrawal symptoms, neglect of pleasurable activities, continued use despite harm</li><li>Withdrawal: nausea/vomiting, anxiety, insomnia, hot/cold flushes, perspiration, muscle cramps, watery discharge from eyes/nose, diarrhoea</li><li>Impact: intoxication/respiratory difficulty, psychotic symptoms, occupation, family life, STDs, law enforcement</li><li>Co-morbid depression/anxiety; previous abstinence attempts &amp; why relapsed; motivational stage; other substance use</li><li>Pre-morbid personality: novelty-seeking, reward dependency, childhood conduct disorder, impulsivity</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>Diagnostic Criteria</h2>
+          <ul class='bl'><li>Dependence criteria: strong desire, inability to control use, tolerance, neglect of pleasurable activities, continued use despite known harm</li></ul>
+        </div>
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>Insight — motivational stage (pre-contemplation / contemplation / preparation / action / maintenance / relapse)</li><li>Risk — self: suicidal, self harm, self neglect, physical health (STDs), reputation, financial, job loss, accidents</li><li>Risk — others: violence/homicidal, domestic violence, to children. From others: physical &amp; sexual exploitation</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Heroin withdrawal is not lethal — nothing to achieve by keeping in ward</li><li>Setting depends on: risk level, motivational stage, medical/psychiatric co-morbidity, family support</li><li>Most managed as outpatient</li><li>Nausea/vomiting: Domperidone 10mg tds/PRN or Metoclopramide 10mg tds/PRN</li><li>Muscle pain: PCM 1g QDS/PRN, Diclofenac 50mg tds, PCM+codeine 1g QDS</li><li>Diarrhoea: Loperamide 4mg then 2mg per loose stool (max 16mg/day)</li><li>Agitation/poor sleep: Promethazine 25mg tds (max 75mg/day), Chlorpromazine 50mg qds (max 300mg/day), or Olanzapine 5-10mg</li><li>GORD: Omeprazole 20mg bd</li><li>Nasal congestion: Chlorphenamine 4mg tds (max 24mg/day), Cetirizine 5mg tds</li><li>Anxiety: Diazepam 5-10mg QDS/PRN (max 40mg/day) for 7 days</li><li>Address nutritional problems</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation — withdrawal not lethal, disappears after 5-7 days</li><li>Motivational interviewing — non-judgemental, empathetic; help identify pleasurable vs harmful aspects; set goals; move to next stage of motivational cycle</li><li>Assess caregiver psychological aspect</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Through PSW address domestic violence or legal issues</li><li>Help find a job</li><li>Arrange rehabilitation if significant functional impairment or legal issues</li><li>Help prevent stigma &amp; connect with family/society</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Long term</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Relapse prevention: O. Naltrexone start 25mg, monitor 4hrs, then ↑ to 50mg/day</li><li>Start 1-2 weeks after stopping (avoid precipitating withdrawal)</li><li>Warn: taking heroin while on naltrexone → precipitates intoxication</li><li>Methadone &amp; Buprenorphine not used in Sri Lanka</li><li>Rx co-morbid depression/anxiety; STD screening</li><li>Naltrexone SEs: nausea/vomiting, abdominal pain, ↓appetite, diarrhoea, headache, dizziness, fatigue, low mood. CI: hepatic dysfunction (monitor LFT) — course ~6 months</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Continue motivational interviewing at follow up</li><li>CBT &amp; OT to prevent relapse: identify triggers, urge surfing, practice saying &#x27;no&#x27;, distracting activities</li><li>Help find meaning/goal in life beyond substance use</li><li>If relapse occurs: appreciate they returned, understand without blaming, frame as part of recovery, involve PSW</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Withdrawal starts 4-6 hrs after last dose, lasts 5-7 days</li></ul></div>
+      </div>
+    </div>
+        </section>
+<section class="special-grid">
+    <div class="card">
+      <h3>Heroin Intoxication</h3>
+      <ul class='bl'><li>Breathing difficulty, RR &lt;12, unconsciousness, pinpoint pupils, cyanosis, cold clammy skin</li></ul>
+    </div>
+    <div class="card">
+      <h3>Opioid Substitution (not used in Sri Lanka)</h3>
+      <ul class='bl'><li>Methadone — full agonist, 60-100mg/day</li><li>Buprenorphine — partial agonist, 12-24mg/day</li><li>Not given due to high maintenance cost</li></ul>
+    </div>
+    <div class="card">
+      <h3>Other Substances</h3>
+      <ul class='bl'><li>Tobacco: nicotine receptors adapt quickly (early withdrawal); nicotine 150mg/day to ↓craving</li><li>Cannabis (ganja/marijuana/hashish): mild withdrawal (irritability, nausea, insomnia, anorexia); psychosis similar to schizophrenia; increases relapse severity of psychiatric illness</li><li>Methamphetamine: withdrawal = low mood, ↓energy, depression, anxiety, tremulousness, lethargy, fatigue, nightmares; Mx = MI &amp; CBT, BDZ if severe</li></ul>
+    </div></section></div>
+<div class="panel" id="panel-ocd" data-accent="#1f4f7a">
+    <section class="panel-hero" style="--accent:#1f4f7a">
+      <div class="hero-tag">OCD</div>
+      <h1>OCD &amp; Anxiety Disorders</h1>
+      <p class="hero-sub">ICD criteria, cognitive distortions &amp; management</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>OCD PC ex: gradual onset progressive recurrent distressing thoughts/doubts/images/ruminations followed by compulsion for 3 months</li><li>OCD: describes thoughts as senseless, unpleasant, own thought, fail to resist; compulsive act; ↑anxiety/panic if not performed</li><li>Social anxiety: marked fear/discomfort in social situations, feels observed/judged, avoidance, anticipatory anxiety (begins hrs-days before event)</li><li>Agoraphobia: fear situations where escape difficult/help unavailable</li><li>Specific phobia: excessive fear restricted to one object/situation (animal, height, blood)</li><li>GAD: excessive pervasive worry on most days ≥6 months about multiple issues (health/work/finance), not specific to a situation; restlessness, dry mouth, sleep disturbance, muscle tension, poor concentration</li><li>Panic disorder: recurrent unexpected episodes of racing heart, chest tightness, choking, fear of dying — no specific trigger</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>Diagnostic Criteria</h2>
+          <ul class='bl'><li>OCD: symptoms recognized as own thoughts/impulses, cannot resist, not pleasurable, unpleasantly repetitive, most of the time over past 2 weeks</li><li>Social anxiety: restricted to particular social situations, psych/behavioural/autonomic symptoms, situations avoided when possible</li><li>Agoraphobia: psych &amp; autonomic anxiety symptoms, restricted to ≥2 of crowds/public places/travelling alone, avoidance</li><li>Specific phobia: psych &amp; autonomic symptoms restricted to the phobic object/situation, avoidance</li><li>Panic disorder: several autonomic anxiety attacks within past month, no objective danger, not confined to specific situations, no anxiety between attacks</li><li>GAD: primary anxiety symptoms for several weeks — apprehension, motor tension, autonomic overactivity</li></ul>
+        </div>
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>Physical: tremor, sweating, dry mouth, GIT symptoms. Psychological: excessive worry, irritability, fearful anticipation, apprehension, restlessness</li><li>OCD cognitive distortions: thought-action fusion, inflated responsibility, perfectionism, intolerance of uncertainty</li><li>Anxiety cognitive distortions: catastrophization, overestimation of threat, selective abstraction, all-or-none thinking, intolerance of uncertainty, emotional reasoning, mind reading</li><li>Risk: self — suicide/self harm, deterioration of academic/occupational function; risk to others is low</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">OCD — Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Mx setting: outpatient if no significant risk; inpatient if risk↑</li><li>1st line SSRI: Sertraline 50mg m (educate — takes 10-12 weeks to show improvement, max 200mg)</li><li>2nd line: Fluoxetine 20mg m (max 60-80mg)</li><li>3rd line: Clomipramine (TCA) 25mg mane (max 250mg)</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation: curable, illness nature, importance of family support</li><li>Behavioural therapy — Exposure Response Prevention: list obsessional thoughts &amp; anxiety level, expose to mild-anxiety situation without compulsion, let anxiety rise then fall (20-40 min), repeat as homework, record anxiety level, avoid reassurance</li><li>Cognitive therapy — restructure identified distortions with evidence</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">OCD — Intermediate/Long term</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Continue pharmacological mx up to 1 yr after remission</li><li>Mx co-morbid depression &amp; substance use</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Continue CBT; regular follow up (MSE, drug SE, compliance)</li><li>Support for education/functional impairment &amp; OT</li><li>Advice on healthy lifestyle — sleep, diet, exercise</li><li>Educate on early identification of relapse (↑symptoms)</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Social Anxiety</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>If therapy alone insufficient: SSRI — Sertraline start 25mg mane</li><li>Short course BDZ initially (anxiety ↑ before it ↓): Clonazepam 0.5mg n or Alprazolam 0.25mg n</li><li>Continue SSRI 6-12 months after remission</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Set concrete goals with pt (e.g. continue studies without pre-occupation)</li><li>Psychoeducation: not pt&#x27;s fault, treatable illness</li><li>Graded exposure with OT: build hierarchy of anxiety-provoking situations, expose from mild → most avoided, repeat until anxiety naturally reduces, record anxiety (1-10 scale), avoid reassurance</li><li>Cognitive restructuring for overestimation of threat / underestimation of coping / selective abstraction</li><li>Same structure used for specific phobia &amp; agoraphobia (e.g. cockroach: imagine → image → dead one → non-flying → flying)</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Panic Disorder &amp; GAD</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Sertraline 25mg O mane, titrate per response; short BDZ course if symptoms worsen initially</li><li>Clonazepam 0.5mg n or Alprazolam 0.25mg n (less sedating)</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation: symptoms not due to physical illness, anxiety builds quickly</li><li>Cognitive therapy — identify &amp; restructure catastrophization</li><li>Deep breathing exercises (2-3s breath hold) — gives sense of control during attack</li><li>Anxiety symptom diary: where/what/how long. GAD: relaxation training, worry exposure, supportive psychotherapy</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><p class="empty">—</p></div>
+      </div>
+    </div>
+        </section></div>
+<div class="panel" id="panel-alcohol" data-accent="#7a3d1f">
+    <section class="panel-hero" style="--accent:#7a3d1f">
+      <div class="hero-tag">OH</div>
+      <h1>Alcohol Use Disorder</h1>
+      <p class="hero-sub">Units, withdrawal &amp; detoxification management</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>Unit calculation: Gal Arrack = 32u/L (1 bottle=750ml); illicit (25-40%) ≈40u/L; beer 6u/L; toddy 3u/L; expensive spirits ~40u/L</li><li>Drinking pattern: type, amount, duration, frequency, circumstances, last drink, describe a typical day</li><li>Dependence criteria: strong desire, inability to control, physiological withdrawal, tolerance, neglect of activities, persistent use despite harm</li><li>Withdrawal — uncomplicated: tremors, sweating, N/V, anxiety, insomnia. Complicated: seizures, DT (confusion, vivid hallucinations), WE (confusion, ataxia)</li><li>Psychotic symptoms: VH/AH, delusions (esp. infidelity); co-morbid depression, suicidal ideas</li><li>Impact: financial, physical (injuries/accidents), medical (CVD/CLD/pancreatitis), family (domestic violence, sexual dysfunction), social (forensic, friends)</li><li>Previous abstinence attempts, withdrawal symptoms experienced, where detox done; motivational level (pre-contemplation → relapse)</li><li>Pre-morbid: introvert/extrovert, coping skills, risk-taking/novelty-seeking, impulsivity</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>A: build, age, self care, withdrawal features, anxiety. Speech, mood, thought, perception, cognition, insight</li><li>Risk — self: suicidal/self harm, physical health, reputation, finances. Others: violence, children, RTA</li><li>From others: physical &amp; sexual exploitation</li><li>Exam: BMI, parotid swelling, hepatosplenomegaly, cerebellar signs (gait, nystagmus, finger-nose test)</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>1. Assess severity of withdrawal symptoms</li><li>2. Ix: FBC (nutrition), AST/ALT/GGT/INR (liver injury), FBS &amp; lipids if not done, LFTs</li><li>3. Detoxification (Maudsley regimen usually if CIWA &gt;15)</li><li>Chlordiazepoxide fixed-dose regimen with gradual taper: dose based on daily unit intake, QDS oral, max 40mg QDS +10mg PRN up to 200mg/day</li><li>Severe dependence: taper over 7-10 days; mild-moderate: 5-7 days</li><li>4. Hydration</li><li>5. Thiamine: 300mg/day oral if mild/mod (~1 month); 300mg/day IV if severe (~5 days, then convert to oral)</li><li>6. Monitor BP/PR/RR/SpO2 daily</li><li>7. Observe for severe withdrawal: confusion, seizures, ataxia, vertigo</li><li>8. Ensure adequate nutrition</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><p class="empty">—</p></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Through PSW assess for domestic violence</li><li>Risk to children</li><li>Financial status</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Intermediate</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Medical referrals if needed</li><li>Plan for discharge</li><li>Support for abstinence: anti-craving, aversion therapy</li><li>Naltrexone — 1st line but not available in our setup</li><li>Acamprosate — 2nd line, not available in our setup</li><li>Disulfiram — 3rd line: start 800mg/day → ↓ to 100-800mg/day maintenance, 3-6 months (can be longer)</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Motivational interviewing: discuss pleasurable vs harmful aspects, encourage change, move to next stage of motivational cycle</li><li>CBT: identify triggers/circumstances/thoughts; coping with craving (don&#x27;t fight it, distraction); plan for high-risk situations (different route home if bar on the way); train refusal skills; emergency/crisis plan — leave place, discard remaining alcohol, contact someone; educate that despite relapse, continue Rx</li><li>Address co-morbid depression/delusional disorder; improve adaptive coping strategies</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Occupational help</li></ul></div>
+      </div>
+    </div>
+        </section>
+<section class="special-grid">
+    <div class="card">
+      <h3>Withdrawal Management (Chlordiazepoxide)</h3>
+      <ul class='bl'><li>SE: drowsiness, dizziness, respiratory depression. CI: advanced liver failure (can decompensate)</li><li>Alternatives if CDZ unsuitable: Lorazepam 1mg 2-4hrly, Oxazepam 60mg 2-4hrs, Diazepam 10mg 4hrly</li><li>If BDZ can&#x27;t be given: Carbamazepine can be used</li></ul>
+    </div>
+    <div class="card">
+      <h3>Thiamine Prophylaxis</h3>
+      <ul class='bl'><li>Mild-moderate withdrawal: oral 300mg daily. Severe: IV/IM 300mg daily ~5 days</li><li>Suspected WE/DT: IV/IM 500mg/day for 1-5 days, then oral 1-3 months or until good nutrition</li><li>IV carries risk of anaphylaxis</li></ul>
+    </div>
+    <div class="card">
+      <h3>Relapse Prevention Drugs</h3>
+      <ul class='bl'><li>Disulfiram: inhibits aldehyde dehydrogenase → accumulation of acetaldehyde → disulfiram reaction if alcohol taken</li><li>Reaction: mild — flushing, sweating, nausea, dyspnoea, tachycardia, hypotension; severe — AF/MI/arrhythmia/resp depression</li><li>CI: recent intake &lt;24h, CVD, HTN, stroke, pregnancy, BF, severe liver disease, peripheral neuropathy — needs consent</li><li>Naltrexone: opioid blockade prevents ↑dopaminergic reward from alcohol; 25mg then 50mg/day. CI: acute liver failure</li><li>Acamprosate: NMDA antagonist + ↑GABA; 1998mg/day (&gt;60kg) or 1332mg/day (&lt;60kg). CI: severe renal/liver failure</li><li>Topiramate: 25mg → 50mg → 75mg weekly increments (effective dose)</li></ul>
+    </div>
+    <div class="card">
+      <h3>DT &amp; Wernicke&#x27;s — Emergencies</h3>
+      <ul class='bl'><li>Timeline: mild sx (agitation/anxiety/irritability) 12hr-14days; seizures 24-48hrs; DT 72-96hrs (lasts 3-4 days)</li><li>Alcohol withdrawal seizure: exclude hypoglycaemia/electrolyte imbalance/infection; manage/increase CDZ</li><li>DT (medical emergency): confusion, vivid hallucinations, marked tremors, autonomic hyperactivity, agitation, insomnia</li><li>DT Mx: HDU, monitor vitals &amp; fluid balance, Diazepam 10-20mg PO/IV repeat 1-2hrly until calm (or Lorazepam), IV/IM Thiamine 500mg, electrolyte correction</li><li>Wernicke&#x27;s: ataxia, confusion, ophthalmoplegia/nystagmus, hypothermia, hypotension, memory disturbance</li><li>WE Mx: high-dose IV thiamine 400-600mg tds ×2 days then 200-300mg daily ×5 days</li></ul>
+    </div></section></div>
+<div class="panel" id="panel-bpad" data-accent="#1f7a7a">
+    <section class="panel-hero" style="--accent:#1f7a7a">
+      <div class="hero-tag">BPAD</div>
+      <h1>Bipolar Affective Disorder</h1>
+      <p class="hero-sub">ICD-10 mania/hypomania, MSE, lithium &amp; antipsychotics</p>
+    </section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>History Pearls</h2>
+          <ul class='bl'><li>PC: ↓sleep, ↑aggression, overtalkativeness, overexpensiveness</li><li>Explore: which part of sleep is difficult, level of function before episode, GID/PD, goal-directed behaviour, hallucinations, ↑libido</li><li>Past depressive &amp; manic episodes; exclude schizophrenia 1st rank symptoms &amp; substance-induced psychosis</li><li>Organic causes: hypo/hyperthyroid, corticosteroids, fever, headache, head injuries</li><li>Personal hx: was she a person who sought centre of attention? Why did she leave jobs? Marriage problems?</li><li>Past psych hx: when diagnosed, symptoms, Rx (oral/IM/ECT), SEs, compliance &amp; reasons for poor compliance, number of relapses/admissions, other psychiatric illness, suicide attempts, last admission</li></ul>
+        </section>
+<section class="two-col">
+        <div class="card">
+          <h2><span class="dot"></span>Diagnostic Criteria</h2>
+          <ul class='bl'><li>Mania: elevated mood (sometimes irritable/suspicious), ↑energy, disturbed work &amp; social activities, for at least 1 week</li><li>Associated: ↑activity, ↓sleep, pressure of speech, excessive optimism, grandiosity</li><li>When telling dx: &#x27;BPAD, current episode manic, with/without psychotic symptoms&#x27;</li><li>Hypomania: lesser degree — persistent mild mood elevation, ↑energy/activity, talkativeness, ↑sociability, overfamiliarity, ↑sexual energy, poor sleep, but NO psychotic symptoms; daily activities not disrupted; lasts several days</li></ul>
+        </div>
+        <div class="card">
+          <h2><span class="dot"></span>MSE &amp; Risk</h2>
+          <ul class='bl'><li>A&amp;B: look/age/BMI/dress/hygiene/make-up/accessories, idiosyncratic features; overfamiliarity, disinhibition, hand gestures, abnormal movements</li><li>Speech: spontaneous/coherent/relevant, great pressure of speech, loosening of associations</li><li>Mood: elated/irritable — why? Affect: reactive, range, congruent, labile</li><li>Thought: delusions (conviction, rational arguments, cannot be explained culturally), suicidal/homicidal, obsessional</li><li>Risk to self: overspending, physical exhaustion, self negligence, reputation, prone to injuries, suicide/relapse</li><li>Risk to/from others: violence; financial/sexual/physical exploitation from others</li></ul>
+        </div></section>
+
+        <section class="card wide">
+          <h2><span class="dot"></span>Management</h2>
+          
+    <div class="mx-stage">
+      <div class="mx-stage-label">Acute</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>1. Decide setting</li><li>2. If aggressive → Mx</li><li>3. Ensure safe environment</li><li>4. Ix: FBC</li><li>5. Pharmacological mx</li><li>Risperidone 2mg nocte (Max 16mg)</li><li>Olanzapine 5-10mg nocte (Max 20mg)</li><li>Haloperidol 3mg tds (Max 30mg)</li><li>Quetiapine 50mg bd then ↑ max 800mg</li><li>Clonazepam 0.5mg n or Alprazolam 0.25mg bd (short course, not available in govt sector) if disturbed sleep</li><li>Mood stabilizer — Na Valproate 200mg bd (Max 2g), or Li 400-600mg nocte ↑ weekly (target 0.8-1.0) Max 1g</li><li>1 tab Li₂CO₃ = 250mg</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation to family — may not help patient in acute setting; maintain calm ward environment</li><li>Ix before starting one of the 4 antipsychotics: FBS, Lipid profile at start &amp; 4-6 monthly (Olanzapine 1 month then 4-6 monthly)</li><li>Lithium: TFT, RFT (eGFR, S.Ca) at start &amp; every 6 months; loading dose 20mg/kg can be given before</li><li>Na valproate: FBC, LFT initially, RFT — 3-monthly FBC/LFT in 1st year then annually</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Collateral hx</li><li>Assess family support &amp; background</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Intermediate</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Titrate doses</li><li>Do MSE &amp; risk assessments during ward rounds</li><li>Assess SEs</li><li>If co-morbidities, monitor (DM — daily CBS, HTN — BP); medical referral if not controlled</li><li>Clozapine if resistant</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Psychoeducation to patient once stable</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Functional assessment with occupational therapist</li></ul></div>
+      </div>
+    </div>
+    <div class="mx-stage">
+      <div class="mx-stage-label">Long term</div>
+      <div class="mx-grid">
+        <div class="mx-col mx-bio"><h4>Biological</h4><ul class='bl'><li>Consider discharge once stable</li><li>Continue drugs: antipsychotics → 6 months after remission</li><li>Mood stabilizer: 1st episode 2yrs after remission, 2nd episode 5yrs, multiple episodes → lifelong</li><li>Review in 2 weeks; clinic followup monitoring symptoms &amp; drug SE</li><li>Long term injectables if poor compliance</li></ul></div>
+        <div class="mx-col mx-psycho"><h4>Psychological</h4><ul class='bl'><li>Educate family, ↓high EE</li><li>Importance of healthy lifestyle — good sleep, stress mx</li><li>Identify early features of relapse: ↓sleep, overtalkativeness, overspending — bring in early</li></ul></div>
+        <div class="mx-col mx-social"><h4>Social</h4><ul class='bl'><li>Get support from CPN if poor compliance</li><li>Rehabilitation if needed</li><li>Financial support through PSW (e.g. allowance, finding a job)</li></ul></div>
+      </div>
+    </div>
+        </section>
+<section class="special-grid">
+    <div class="card">
+      <h3>Lithium Essentials</h3>
+      <ul class='bl'><li>1 tab = 250mg — give nearest dose. Good for both mania &amp; depression; needs good adherence</li><li>Before starting: TFTs, RFTs, BMI. Start 400-600mg n (Max 2g), increase weekly</li><li>Check level 12hrs post-dose &amp; 7 days after each change (no fasting needed)</li><li>Expected levels — acute: 0.8-1.0 mmol/L; prophylaxis: 0.6-0.75 mmol/L</li><li>SEs: fine tremor, polyuria, weight gain, arrhythmias; long term — renal impairment, hypothyroidism, hyperparathyroidism</li><li>Toxicity: &gt;1.5 nausea/diarrhoea/drowsiness/ataxia/coarse tremor; &gt;2mmol/L seizures; &gt;3mmol/L → haemodialysis</li><li>Pregnancy: not absolutely contraindicated; can cause Ebstein&#x27;s anomaly; mild stable BPAD → taper during pregnancy; moderate risk → taper during T1 with informed consent; high risk → continue</li><li>Can cause rebound mania if stopped abruptly; missing 2 days needs re-titration</li></ul>
+    </div>
+    <div class="card">
+      <h3>Lithium Toxicity Grades</h3>
+      <ul class='bl'><li>Mild: lethargy, N/V, diarrhoea, tremors, muscle weakness</li><li>Moderate: confusion, dysarthria, nystagmus, hyperreflexia, ataxia, fasciculation</li><li>Severe: seizures, coma, stupor, cardiopulmonary collapse, myoclonus, hypertonicity, rigidity, resistant hypotension</li><li>Mx: stop lithium, hydrate with 0.9% NaCl (prevent hyponatraemia &amp; further toxicity), check level</li></ul>
+    </div>
+    <div class="card">
+      <h3>Antipsychotic Side Effects</h3>
+      <ul class='bl'><li>Risperidone: sedation, weight gain, dizziness, dry mouth, constipation, sexual dysfunction, hyperprolactinaemia, EPSE, metabolic SEs</li><li>Olanzapine: weight gain, sedation, DM/DL, postural dizziness, dry mouth/constipation/tachycardia, less EPSE risk but ↑prolactin, rare hepatitis/pancreatitis</li><li>Quetiapine: sedation, dizziness, dry mouth, weight gain, DM/DL, constipation, ↑liver enzymes, tachycardia, headache, ↓EPSE risk</li><li>Hyperprolactinaemia: amenorrhoea, oligomenorrhoea, galactorrhoea, infertility, ↓libido, vaginal dryness, erectile dysfunction, gynaecomastia</li></ul>
+    </div>
+    <div class="card">
+      <h3>Depot Antipsychotics</h3>
+      <ul class='bl'><li>Fluphenazine decanoate: 1 vial 1ml=25mg. 1st dose 12.5mg IM (gluteal/deltoid) → after 4-7 days another 12.5mg → then monthly or 2-weekly 25mg, ↑ per response. Max 100mg 2-weekly (dose ↑ considered every 4-6 weeks)</li><li>Flupentixol decanoate: 20mg stat → repeat 20mg in 5 days → 40mg after 1 month → ↑4-weekly per response. Max 400mg weekly</li></ul>
+    </div>
+    <div class="card">
+      <h3>Bipolar Depression &amp; Schizoaffective Disorder</h3>
+      <ul class='bl'><li>If depressive episode develops while on Li/valproate: ↑dose to max therapeutic range first (Li until 0.8-1 mmol/L; valproate up to 2g/day)</li><li>If unsuccessful: 1st line Fluoxetine 20-40mg + Olanzapine 5-10mg (NICE); 2nd Quetiapine 300-600mg daily; 3rd Olanzapine alone; 4th Lamotrigine 200mg/day</li><li>Stop add-on after 3-6 months remission; continue Li/valproate as mood stabilizer</li><li>Schizoaffective manic type: Olanzapine 10mg/day / Quetiapine 100mg/day / Risperidone; add mood stabilizer if antipsychotic alone insufficient (Li 400mg/day or Na valproate 200mg bd)</li><li>Schizoaffective depressive type: Olanzapine+Fluoxetine combination, Quetiapine monotherapy, or Lamotrigine</li></ul>
+    </div></section></div>
+    </div>
+  </main>
+</div>
+
+<script>
+
+(function(){
+  const navItems = document.querySelectorAll('.nav-item');
+  const panels = document.querySelectorAll('.panel');
+  panels[0].classList.add('active');
+
+  function activate(id){
+    panels.forEach(p => p.classList.toggle('active', p.id === id));
+    navItems.forEach(n => n.classList.toggle('active', n.dataset.target === id));
+    document.getElementById('searchResults').classList.add('hidden');
+    document.getElementById('searchBox').value = '';
+    window.scrollTo({top:0, behavior:'instant'});
+    document.querySelector('.sidebar').classList.remove('open');
+  }
+
+  navItems.forEach(btn => {
+    btn.addEventListener('click', () => activate(btn.dataset.target));
+  });
+
+  document.getElementById('menuBtn').addEventListener('click', () => {
+    document.querySelector('.sidebar').classList.toggle('open');
+  });
+
+  // ---------------- Search across all case content ----------------
+  const searchBox = document.getElementById('searchBox');
+  const resultsBox = document.getElementById('searchResults');
+
+  const CASE_META = {};
+  navItems.forEach(btn => {
+    CASE_META[btn.dataset.target] = {
+      name: btn.querySelector('.nav-name').textContent,
+      tag: btn.querySelector('.nav-tag').textContent,
+      accent: getComputedStyle(btn).getPropertyValue('--accent') || '#333'
+    };
+  });
+
+  function highlight(text, q){
+    const idx = text.toLowerCase().indexOf(q.toLowerCase());
+    if(idx === -1) return text;
+    return text.slice(0, idx) + '<mark>' + text.slice(idx, idx+q.length) + '</mark>' + text.slice(idx+q.length);
+  }
+
+  searchBox.addEventListener('input', function(){
+    const q = this.value.trim();
+    if(q.length < 2){ resultsBox.classList.add('hidden'); resultsBox.innerHTML=''; return; }
+    let matches = [];
+    panels.forEach(panel => {
+      const items = panel.querySelectorAll('li, h2, h3, h1, p');
+      items.forEach(el => {
+        if(el.children.length === 0 && el.textContent.toLowerCase().includes(q.toLowerCase())){
+          matches.push({panelId: panel.id, text: el.textContent.trim()});
+        }
+      });
+    });
+    matches = matches.slice(0, 25);
+    if(matches.length === 0){
+      resultsBox.innerHTML = '<div class="sr-empty">No matches for &ldquo;' + q + '&rdquo;</div>';
+    } else {
+      resultsBox.innerHTML = '<h4>' + matches.length + ' match(es)</h4>' + matches.map(m => {
+        const meta = CASE_META[m.panelId] || {name:'', tag:'', accent:'#333'};
+        return '<div class="sr-item" data-target="' + m.panelId + '">' +
+               '<span class="sr-case" style="background:' + meta.accent + '">' + meta.tag + '</span>' +
+               highlight(m.text, q) + '</div>';
+      }).join('');
+      resultsBox.querySelectorAll('.sr-item').forEach(item => {
+        item.addEventListener('click', () => activate(item.dataset.target));
+      });
+    }
+    resultsBox.classList.remove('hidden');
+  });
+})();
+
+</script>
+</body>
+</html>
