@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final MBBS Psychiatry Viva — Case Compendium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f2f1ec;
+    --paper-raised: #fbfaf6;
+    --ink: #1c2b30;
+    --ink-soft: #4a5a5f;
+    --teal: #1f4451;
+    --teal-deep: #123138;
+    --amber: #a97128;
+    --amber-soft: #c98a3a;
+    --line: #d8d5c9;
+    --tab-bg: #e7e4d9;
+    --danger: #8a3324;
+    --ok: #2f5d3a;
+    --radius: 3px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  /* ===== Layout shell ===== */
+  .shell{
+    display:grid;
+    grid-template-columns: 300px 1fr;
+    min-height:100vh;
+  }
+
+  /* Mobile nav toggle (checkbox hack — no JS required) */
+  #nav-toggle{ display:none; }
+
+  .mobile-bar{ display:none; }
+  .nav-scrim{ display:none; }
+
+  @media (max-width: 900px){
+    .shell{ display:block; }
+
+    /* Sticky mobile top bar */
+    .mobile-bar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--teal-deep);
+      color: #f2efe4;
+      padding: 12px 16px;
+      border-bottom: 1px solid #0d262c;
+    }
+
+    .mobile-bar .mb-title{
+      font-family:'Source Serif 4', serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #f5f3ea;
+    }
+
+    .mobile-bar .mb-title small{
+      display:block;
+      font-family:'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8fb3a8;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .menu-btn{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #f2efe4;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-family:'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      flex-shrink:0;
+      min-height: 40px;
+    }
+
+    .menu-btn .bars{
+      width:16px;
+      height:12px;
+      position:relative;
+      flex-shrink:0;
+    }
+    .menu-btn .bars span{
+      position:absolute;
+      left:0; right:0;
+      height:2px;
+      background:#f2efe4;
+      border-radius:1px;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .menu-btn .bars span:nth-child(1){ top:0; }
+    .menu-btn .bars span:nth-child(2){ top:5px; }
+    .menu-btn .bars span:nth-child(3){ top:10px; }
+
+    /* Off-canvas sidebar */
+    .sidebar{
+      position: fixed;
+      top:0; left:0; bottom:0;
+      height: 100vh;
+      width: min(84vw, 340px);
+      transform: translateX(-100%);
+      transition: transform .28s ease;
+      z-index: 60;
+      box-shadow: 2px 0 24px rgba(0,0,0,0.35);
+    }
+
+    .nav-scrim{
+      display:block;
+      position: fixed;
+      inset:0;
+      background: rgba(10,20,22,0.55);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .25s ease;
+      z-index: 50;
+    }
+
+    #nav-toggle:checked ~ .shell .sidebar{
+      transform: translateX(0);
+    }
+    #nav-toggle:checked ~ .nav-scrim{
+      opacity:1;
+      pointer-events:auto;
+    }
+    #nav-toggle:checked ~ .mobile-bar .menu-btn .bars span:nth-child(1){
+      transform: translateY(5px) rotate(45deg);
+    }
+    #nav-toggle:checked ~ .mobile-bar .menu-btn .bars span:nth-child(2){
+      opacity:0;
+    }
+    #nav-toggle:checked ~ .mobile-bar .menu-btn .bars span:nth-child(3){
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+    main{ padding: 28px 18px 100px; }
+  }
+
+  /* ===== Sidebar ===== */
+  .sidebar{
+    background: var(--teal-deep);
+    color: #e9efe0;
+    position: sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    padding: 28px 0 40px;
+    border-right: 1px solid #0d262c;
+  }
+
+  .brand{
+    padding: 0 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    margin-bottom: 8px;
+  }
+
+  .brand .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8fb3a8;
+    margin-bottom: 6px;
+  }
+
+  .brand h1{
+    font-family:'Source Serif 4', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f5f3ea;
+    margin: 0 0 6px;
+    line-height:1.25;
+  }
+
+  .brand p{
+    font-size: 12.5px;
+    color: #9db8b0;
+    margin:0;
+  }
+
+  .case-nav{
+    list-style:none;
+    margin:0;
+    padding: 8px 12px;
+  }
+
+  .case-nav a{
+    display:block;
+    text-decoration:none;
+    color: #d3e2dc;
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    margin-bottom: 2px;
+    transition: background 0.15s ease, color 0.15s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .case-nav a:hover{
+    background: rgba(255,255,255,0.06);
+    border-left-color: var(--amber-soft);
+  }
+
+  .case-nav .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #7fa79b;
+    display:block;
+    margin-bottom: 2px;
+    letter-spacing: 0.06em;
+  }
+
+  .case-nav .name{
+    font-size: 14px;
+    font-weight: 600;
+    color: #f2efe4;
+    display:block;
+  }
+
+  .case-nav .dx{
+    font-size: 12px;
+    color: #9fb9b1;
+    display:block;
+    margin-top: 1px;
+  }
+
+  .sidebar-foot{
+    padding: 18px 24px 0;
+    margin-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 11.5px;
+    color: #82a099;
+    line-height: 1.6;
+  }
+
+  /* ===== Main content ===== */
+  main{
+    padding: 48px 56px 120px;
+    max-width: 880px;
+  }
+
+  @media (max-width: 700px){
+    main{ padding: 24px 16px 90px; }
+
+    .page-head h1{ font-size: 28px; }
+    .page-head p{ font-size: 14.5px; }
+    .howto{ font-size: 13px; padding: 12px 14px; }
+
+    .case-header h2{ font-size: 22px; }
+    .dx-line{ font-size: 13.5px; }
+    .background{ font-size: 13.5px; padding: 13px 15px; }
+
+    .qa summary{ padding: 12px 14px; font-size: 14px; gap: 10px; }
+    .qa-body{ padding: 2px 14px 15px 42px; font-size: 14px; }
+    .qa-body ul{ padding-left: 18px; }
+  }
+
+  .page-head{
+    margin-bottom: 44px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .page-head .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+
+  .page-head h1{
+    font-family:'Source Serif 4', serif;
+    font-size: 40px;
+    line-height:1.15;
+    margin: 0 0 14px;
+    color: var(--teal-deep);
+  }
+
+  .page-head p{
+    color: var(--ink-soft);
+    max-width: 60ch;
+    font-size: 15.5px;
+    margin: 0 0 8px;
+  }
+
+  .howto{
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--amber);
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin-top: 18px;
+    border-radius: var(--radius);
+  }
+
+  /* ===== Case card ===== */
+  .case{
+    margin-bottom: 64px;
+    scroll-margin-top: 24px;
+  }
+
+  .case-header{
+    display:flex;
+    align-items:baseline;
+    gap: 14px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .case-tab{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    background: var(--tab-bg);
+    color: var(--teal-deep);
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-weight: 600;
+    white-space:nowrap;
+  }
+
+  .case-header h2{
+    font-family:'Source Serif 4', serif;
+    font-size: 27px;
+    margin: 0;
+    color: var(--teal-deep);
+    line-height:1.2;
+  }
+
+  .dx-line{
+    font-size: 14.5px;
+    color: var(--amber);
+    font-weight: 600;
+    margin: 4px 0 14px;
+  }
+
+  .background{
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+
+  .background strong{ color: var(--ink); }
+
+  /* ===== Q&A entries ===== */
+  .qa{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+    margin-bottom: 10px;
+    overflow:hidden;
+  }
+
+  .qa summary{
+    cursor:pointer;
+    list-style:none;
+    padding: 13px 18px;
+    display:flex;
+    gap: 12px;
+    align-items:flex-start;
+    font-weight: 600;
+    color: var(--teal-deep);
+    font-size: 15px;
+    position:relative;
+    transition: background 0.15s ease;
+  }
+
+  .qa summary::-webkit-details-marker{ display:none; }
+
+  .qa summary:hover{ background: #eeece2; }
+
+  .qa summary::before{
+    content: "Q";
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--teal);
+    width: 20px;
+    height: 20px;
+    flex-shrink:0;
+    border-radius: 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top: 1px;
+  }
+
+  .qa[open] summary::before{ background: var(--amber); }
+
+  .qa .chevron{
+    margin-left:auto;
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--ink-soft);
+    font-size: 13px;
+    flex-shrink:0;
+  }
+
+  .qa[open] .chevron{ transform: rotate(90deg); }
+
+  .qa-body{
+    padding: 4px 18px 18px 50px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .qa-body p{ margin: 0 0 10px; }
+  .qa-body p:last-child{ margin-bottom:0; }
+
+  .qa-body ul{ margin: 6px 0 10px; padding-left: 20px; }
+  .qa-body li{ margin-bottom: 4px; }
+
+  .qa-body .a-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ok);
+    text-transform: uppercase;
+    display:block;
+    margin-bottom: 6px;
+  }
+
+  code, .figure{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.92em;
+    background: #eae7dc;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--teal-deep);
+  }
+
+  .case-divider{
+    height: 1px;
+    background: linear-gradient(to right, var(--line), transparent);
+    margin-top: 48px;
+  }
+
+  .end-note{
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 2px solid var(--ink);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  ::selection{ background: #cfe4da; }
+
+  /* focus visibility */
+  a:focus-visible, summary:focus-visible{
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+  }
+
+  @media print{
+    .sidebar{ display:none; }
+    .mobile-bar{ display:none; }
+    .nav-scrim{ display:none; }
+    .shell{ display:block; }
+    main{ padding: 0; max-width: none; }
+    .qa-body{ display:block !important; }
+    .qa summary .chevron{ display:none; }
+  }
+</style>
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" aria-hidden="true">
+
+<div class="mobile-bar">
+  <label for="nav-toggle" class="menu-btn" role="button" tabindex="0" aria-label="Toggle case menu">
+    <span class="bars"><span></span><span></span><span></span></span>
+    Cases
+  </label>
+  <div class="mb-title"><small>Final MBBS · Psychiatry</small>Viva Compendium</div>
+</div>
+
+<label for="nav-toggle" class="nav-scrim" aria-hidden="true"></label>
+
+<div class="shell">
+
+  <nav class="sidebar" aria-label="Case navigation">
+    <div class="brand">
+      <div class="eyebrow">Final MBBS · Psychiatry</div>
+      <h1>Long Case Viva Compendium</h1>
+      <p>12 cases · examiner Q&amp;A · book-referenced answers</p>
+    </div>
+    <ul class="case-nav">
+      <li><a href="#case1"><span class="num">CASE 01</span><span class="name">Damayanthi, 30F</span><span class="dx">Recurrent depressive disorder, severe</span></a></li>
+      <li><a href="#case2"><span class="num">CASE 02</span><span class="name">Wasana Kumari, 42–45F</span><span class="dx">Mania / BPAD</span></a></li>
+      <li><a href="#case3"><span class="num">CASE 03</span><span class="name">Sirima Gunawardena</span><span class="dx">Resistant schizophrenia + severe depression</span></a></li>
+      <li><a href="#case4"><span class="num">CASE 04</span><span class="name">MSDSP Weerasinghe</span><span class="dx">Schizophrenia / cannabis psychosis</span></a></li>
+      <li><a href="#case5"><span class="num">CASE 05</span><span class="name">Hemamalee, 46F</span><span class="dx">Severe depression, normal grief</span></a></li>
+      <li><a href="#case6"><span class="num">CASE 06</span><span class="name">Bandara, 38–39M</span><span class="dx">Schizophrenia / depression / mania overlap</span></a></li>
+      <li><a href="#case7"><span class="num">CASE 07</span><span class="name">Balamanike, 59F</span><span class="dx">Schizophrenia / schizoaffective</span></a></li>
+      <li><a href="#case8"><span class="num">CASE 08</span><span class="name">N.T. Jayarathna, 45M</span><span class="dx">Psychotic depression (first episode)</span></a></li>
+      <li><a href="#case9"><span class="num">CASE 09</span><span class="name">Kumari, 40F</span><span class="dx">BPAD + borderline traits</span></a></li>
+      <li><a href="#case10"><span class="num">CASE 10</span><span class="name">M.D.P. Dissanayaka, 32F</span><span class="dx">Schizophrenia</span></a></li>
+      <li><a href="#case11"><span class="num">CASE 11</span><span class="name">M.A.D.S. Weerasinghe, 28M</span><span class="dx">Cannabis psychosis vs schizophrenia + epilepsy</span></a></li>
+      <li><a href="#case12"><span class="num">CASE 12</span><span class="name">46F</span><span class="dx">Recurrent depressive disorder, grief</span></a></li>
+      <li><a href="#case13"><span class="num">CASE 13</span><span class="name">Sandaruwan Kumbugelle, 26M</span><span class="dx">Schizoaffective disorder + substance abuse</span></a></li>
+      <li><a href="#case14"><span class="num">CASE 14</span><span class="name">Harsha Chathuranga</span><span class="dx">Cannabis-induced psychosis vs Schizophrenia</span></a></li>
+      <li><a href="#case15"><span class="num">CASE 15</span><span class="name">Wasantha Kumara, 45M</span><span class="dx">Alcohol dependence, Delirium Tremens</span></a></li>
+      <li><a href="#case16"><span class="num">CASE 16</span><span class="name">Herath, 40M</span><span class="dx">BPAD, current episode severe depression w/ psychosis</span></a></li>
+      <li><a href="#case17"><span class="num">CASE 17</span><span class="name">Udara, 28M</span><span class="dx">OCD comorbid with depression &amp; social phobia</span></a></li>
+      <li><a href="#case18"><span class="num">CASE 18</span><span class="name">Ajith Kumara, 38M</span><span class="dx">Alcohol dependence + haematemesis</span></a></li>
+      <li><a href="#case19"><span class="num">CASE 19</span><span class="name">Rizwan</span><span class="dx">Organic psychosis (head injury)</span></a></li>
+      <li><a href="#case20"><span class="num">CASE 20</span><span class="name">Madushanka</span><span class="dx">Schizophrenia with severe depression</span></a></li>
+      <li><a href="#case21"><span class="num">CASE 21</span><span class="name">28M, chip-controlled delusions</span><span class="dx">Schizoaffective disorder + polysubstance</span></a></li>
+      <li><a href="#case22"><span class="num">CASE 22</span><span class="name">Harishchandra, 28M</span><span class="dx">Schizophrenia vs substance-induced psychosis</span></a></li>
+    </ul>
+    <div class="sidebar-foot">
+      Sources: Shorter Oxford Textbook of Psychiatry · Hanwella &amp; de Silva, Handbook of Clinical Psychiatry.<br><br>
+      Click any question to reveal the model answer.<br><br>
+      © Udana Anjana
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-head">
+      <div class="kicker">Exam Preparation · POV Candidate Answers</div>
+      <h1>Psychiatry Long Case Viva — Case-by-Case Reference</h1>
+      <p>Compiled panel questions from twelve recurring final-year long cases, with model answers grounded in the standard texts. Written from the candidate's point of view, as if answering the examiner directly after taking the history.</p>
+      <div class="howto">Each question is collapsed by default — click to expand the answer, and use the sidebar to jump straight to a case. This page prints cleanly if you want a paper copy for last-minute review.</div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- CASE 1 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case1">
+      <div class="case-header">
+        <span class="case-tab">CASE 01</span>
+        <h2>Damayanthi, 30F</h2>
+      </div>
+      <div class="dx-line">Recurrent Depressive Disorder, current episode severe, without psychotic symptoms</div>
+      <div class="background">
+        <strong>Background:</strong> Mother of 2, transferred from Thabuttegama DH with suicidal ideas. On Fe for anaemia; received 3 ECT sessions this admission. Background of harmful alcohol use by husband, frequent quarrels, domestic violence, husband repeatedly imprisoned. Concerns re: daughters' safety. Physical exam: healed self-harm scars, cannula site infection.
+      </div>
+
+      <details class="qa"><summary>What is your diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Severe depression without psychotic symptoms. Core symptoms — persistent low mood, anhedonia, decreased energy for ≥2 weeks — plus additional symptoms (poor concentration, guilt, pessimism, suicidal ideation, sleep/appetite disturbance) meeting ICD-10 criteria for a severe depressive episode.</p></div>
+      </details>
+
+      <details class="qa"><summary>What are the differentials?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Adjustment disorder with depressed mood (clear psychosocial stressors — domestic violence, alcoholic husband)</li>
+          <li>Grief reaction, if a recent bereavement exists</li>
+          <li>Depression secondary to anaemia / physical illness</li>
+          <li>Alcohol-related mood disturbance in the family system (not the patient's own use)</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>What is the relationship between anaemia and depression, and why is it relevant here?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Anaemia causes fatigue, poor concentration, and low energy that can mimic or worsen depressive symptoms, so it must be corrected before residual symptoms are fully attributed to depression. It's also relevant because SSRIs/SNRIs carry a GI bleeding risk that needs extra care in an anaemic patient.</p></div>
+      </details>
+
+      <details class="qa"><summary>Do you think inpatient management is needed?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Yes</span><p>High suicidal risk (documented self-harm) plus an unsafe home environment justify admission. On the ward: close observation level, restricting means of self-harm, monitoring oral intake, and stabilising physical comorbidities (anaemia, dysuria).</p></div>
+      </details>
+
+      <details class="qa"><summary>Pharmacological management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>First-line SSRI — <code>sertraline</code>. Favoured in medically comorbid patients for its relatively low interaction profile and good cardiac safety.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you increase the dose?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Antidepressants take about 2 weeks to show effect, with maximal benefit over 6–12 weeks. Reassess at 2 weeks; if response is inadequate despite tolerability, adherence, and stressor management, increase the dose rather than switching immediately.</p></div>
+      </details>
+
+      <details class="qa"><summary>What next — for the sleep issue?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>A short-acting benzodiazepine such as <code>clonazepam</code> for sleep, short-term only, mindful of dependence risk.</p></div>
+      </details>
+
+      <details class="qa"><summary>Patient already on ECT — what next?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Continue ECT. Rationale: bringing about improvement rapidly given high suicidal risk. ECT acts faster than antidepressants but doesn't replace pharmacotherapy — continue sertraline alongside.</p></div>
+      </details>
+
+      <details class="qa"><summary>Non-pharmacological management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Psychoeducation of patient and family</li>
+          <li>CBT, supportive psychotherapy, interpersonal therapy</li>
+          <li>Behavioural activation</li>
+          <li>Medical social worker involvement for domestic violence / children's welfare</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>Any referral needed?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Surgical referral for ongoing dysuria — needs proper work-up, not assumed functional.</p></div>
+      </details>
+
+      <details class="qa"><summary>Where would you refer for domestic violence / family issues?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Mithuru Piyasa</strong> — the police-linked women &amp; children's desk service that supports domestic violence and child protection cases in Sri Lanka.</p></div>
+      </details>
+
+      <details class="qa"><summary>ICD-10 criteria for depression?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Core symptoms</strong> (≥2 for 2 weeks): persistent low mood, loss of interest/pleasure, decreased energy/increased fatigability.</p>
+        <p><strong>Additional symptoms:</strong> reduced concentration, reduced self-esteem, ideas of guilt/worthlessness, pessimistic view of the future, ideas of self-harm/suicide, disturbed sleep, diminished appetite.</p>
+        <p><strong>Severe episode</strong> = most/all core symptoms + several additional symptoms, marked distress, functional impairment, with or without psychotic features.</p></div>
+      </details>
+
+      <details class="qa"><summary>Regarding risk to children — public or government schooling? Who do you collaborate with?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Class teachers, CPN (community psychiatric nurse), and PSW (psychiatric social worker) — collaborating across school and health systems to monitor the children's welfare.</p></div>
+      </details>
+
+      <details class="qa"><summary>If you met the husband, what would you do?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Keep a safe distance and prioritise the patient's safety; advise/refer him to counselling if infidelity or ongoing violence is confirmed, in liaison with social services.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to differentiate normal grief from abnormal grief in this patient?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Normal grief: mood fluctuates and gradually improves, guilt focused specifically on the deceased, function largely preserved. Abnormal grief / depressive episode: pervasive unremitting low mood, generalised guilt (not just about the deceased), marked biological symptoms, low self-esteem (not typical of normal grief), duration beyond expected cultural norms, suicidal ideation.</p></div>
+      </details>
+
+      <details class="qa"><summary>Is admission warranted? Apart from high suicidal risk, what other reasons justify admission?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Risk to children / others in the household</li>
+          <li>Inability to self-care (poor oral intake, self-neglect)</li>
+          <li>Lack of safe social support at home</li>
+          <li>Need for close monitoring during medication titration / ECT</li>
+          <li>Diagnostic clarification</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>How would you manage her psychosocial problems?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>MDT approach — CBT, behavioural activation, supportive psychotherapy/counselling, grief counselling, legal advice via <strong>WIN (Women In Need)</strong> given her separated-not-divorced status, PSW involvement (son's substance misuse, children's welfare), OT functional assessment.</p></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of venlafaxine?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>GI: nausea, dyspepsia, constipation</li>
+          <li>Dose-related hypertension; QT changes</li>
+          <li>Hyponatraemia (SIADH)</li>
+          <li>Tachycardia</li>
+          <li>More cardiotoxic in overdose than SSRIs — caution given suicidality</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>How to manage GORD-like symptoms from venlafaxine (pharmacological and non-pharmacological)?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Non-pharmacological:</strong> smaller, more frequent meals; take with food; avoid known aggravants.<br><strong>Pharmacological:</strong> a PPI (e.g. <code>omeprazole</code>); switch to an SSRI if severe/persistent.</p></div>
+      </details>
+
+      <details class="qa"><summary>How long do you continue medications?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>At least 6 months after remission of a first episode; up to 2 years or longer for patients at high relapse risk (recurrent episodes, poor support, residual symptoms).</p></div>
+      </details>
+
+      <details class="qa"><summary>What is the prognosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Good</span><p>If first episode, patients can remain recurrence-free for many years with good social support, treatment adherence, and resolution of psychosocial stressors — though ongoing marital conflict here is a relapse risk.</p></div>
+      </details>
+
+      <details class="qa"><summary>Neurology referral for migraine-like symptoms?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Accepted — appropriate work-up and management of the headache/migraine picture independent of the psychiatric presentation.</p></div>
+      </details>
+
+      <details class="qa"><summary>If the patient says she still has suicidal ideas a week later, what would you do?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Continue close monitoring and reassess psychosocial context; consider increasing the antidepressant dose (it's still early — full response takes ≥2 weeks) while maintaining safety measures, not increasing blindly without reviewing risk holistically.</p></div>
+      </details>
+
+      <details class="qa"><summary>If abdominal cramps and weakness develop, what do you consider?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">SIADH secondary to venlafaxine</span><p>Check serum electrolytes urgently. If Na &lt;125mmol/L: stop the drug, admit, manage as hyponatraemia. Also consider nutritional deficiency, especially with poor intake.</p></div>
+      </details>
+
+      <details class="qa"><summary>What would the PSW social report cover?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>The husband's behaviour pattern and the children's welfare and safety aspects.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you address the husband's alcohol use in a family meeting?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Motivational interviewing</strong> — explore his stage of readiness to change rather than confront; refer to addiction counselling / Mithuru Piyasa if violence is ongoing.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why might she relapse?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Ongoing marital conflict and unresolved domestic violence are major relapse risks — address with couple therapy (if safe) and continued social work involvement.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 2 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case2">
+      <div class="case-header">
+        <span class="case-tab">CASE 02</span>
+        <h2>Wasana Kumari, 42–45F</h2>
+      </div>
+      <div class="dx-line">Mania (Bipolar Affective Disorder)</div>
+      <div class="background">
+        <strong>Background:</strong> Presented following an aggressive episode with overtalkativeness, grandiose delusions, reduced need for sleep. History of Modecate, Olanzapine, and Lithium at various points.
+      </div>
+
+      <details class="qa"><summary>Diagnosis? Management overview?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Bipolar affective disorder, current episode mania (with psychotic features if grandiosity is delusional).</p>
+        <p><strong>Management sequence:</strong></p>
+        <ul>
+          <li>Stop any antidepressant</li>
+          <li>Start an antipsychotic — olanzapine, quetiapine, risperidone, or a modest dose of haloperidol (atypicals now preferred first-line)</li>
+          <li>Add a benzodiazepine (lorazepam/clonazepam) adjunctively for agitation/sleep</li>
+          <li>Add/optimise a mood stabiliser if response is unsatisfactory — <strong>lithium</strong> for classical euphoric mania, <strong>valproate</strong> for mixed/dysphoric features or if lithium contraindicated</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of sodium valproate?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>GI upset, tremor, sedation</li>
+          <li>Weight gain, transient hair loss (texture change on regrowth)</li>
+          <li>Raised liver transaminases; rare hepatotoxicity</li>
+          <li>Thrombocytopenia; rare pancreatitis; hyperammonaemia</li>
+          <li>Teratogenic — avoid in women of childbearing age unless no alternative</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>Why is the patient on a cannula? Why ECT?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Possible treatment-resistant mania. ECT is effective in severe mania unresponsive to combination drug treatment — historical response rates around 80% in refractory cases.</p></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of ECT?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Immediate: headache, muscle ache, nausea, transient confusion</li>
+          <li>Cognitive: anterograde &amp; retrograde memory impairment (usually resolves within weeks)</li>
+          <li>Rare: cardiac arrhythmia during procedure, prolonged seizure, aspiration risk under anaesthesia</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>How do you prevent relapse?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Continue mood stabiliser maintenance (≥2 years after a severe episode with significant impact); psychoeducation of patient and family on early relapse signs; lifestyle regularity — sleep hygiene, avoiding substance use.</p></div>
+      </details>
+
+      <details class="qa"><summary>Restarting olanzapine after stopping an antidepressant — how long to act?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Sedative/behavioural effects within days; full antimanic effect over 1–2 weeks.</p></div>
+      </details>
+
+      <details class="qa"><summary>She was on Lithium — check serum levels. How long does lithium take to act? How do you advise on blood checks?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Sample taken <strong>12 hours post-dose</strong>. Therapeutic range: acute mania <code>0.8–1.2 mmol/L</code>; maintenance <code>0.6–0.8 mmol/L</code> (as low as 0.4 in some patients). Full prophylactic benefit may take months to establish.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to prevent relapses / ensure compliance?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Psychoeducation and family involvement — a supervising family member, regular follow-up, and addressing side-effect burden that undermines adherence.</p></div>
+      </details>
+
+      <details class="qa"><summary>What was she on for positive symptoms? How much can you increase the dose?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Oral <code>Risperidone 2mg</code>. Usual range 2–6mg; technically titratable to 16mg, but practically limited to <strong>~4–6mg</strong> since EPSE risk rises steeply beyond that, and the drug starts behaving more like a typical antipsychotic.</p></div>
+      </details>
+
+      <details class="qa"><summary>What are the EPSEs? Features of akathisia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>EPSEs:</strong> acute dystonia, akathisia, parkinsonism, tardive dyskinesia.</p>
+        <p><strong>Akathisia:</strong> unpleasant inner restlessness, inability to sit still, urge to pace — can be mistaken for worsening psychotic agitation (risking inappropriate dose escalation). Best managed by <em>reducing</em> the antipsychotic dose; propranolol or short-term benzodiazepines help. Anticholinergics are <strong>not</strong> reliably effective for akathisia specifically.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you manage the depressive episode?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Oral <code>sertraline</code> — discuss GI side effects, sexual dysfunction, hyponatraemia risk.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why is it given in the morning?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Can cause activation/insomnia in some patients (though sedation occurs in others) — dosing time is individualised to the patient's response.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management options for GORD symptoms?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>PPI, dietary modification, dosing with food — as detailed under Case 1.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why did she relapse?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Poor compliance, often driven by impaired insight or distressing psychotic symptoms that made consistent engagement difficult — despite seeking help for physical complaints.</p></div>
+      </details>
+
+      <details class="qa"><summary>Prognosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Variable — good compliance and family psychoeducation minimise relapses; poor compliance and comorbid psychotic features predict a less favourable course.</p></div>
+      </details>
+
+      <details class="qa"><summary>Psychological management for negative symptoms?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Rehabilitation via occupational therapy — structured activity, social skills training, vocational rehabilitation — since medication has limited efficacy for negative/cognitive symptoms.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 3 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case3">
+      <div class="case-header">
+        <span class="case-tab">CASE 03</span>
+        <h2>Sirima Gunawardena</h2>
+      </div>
+      <div class="dx-line">Treatment-Resistant Schizophrenia comorbid with Severe Depression</div>
+      <div class="background">
+        <strong>Background:</strong> Transferred with 1-year history of generalized abdominal pain, worsening recently. Nihilistic and hypochondriacal delusions, 2nd/3rd person auditory hallucinations, olfactory and tactile hallucinations, severe depressive symptoms. History of epilepsy.
+      </div>
+
+      <details class="qa"><summary>Definition of nihilistic delusion and hypochondriacal delusion — how do these relate to the patient?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Nihilistic delusion:</strong> a fixed belief that oneself, others, or the world does not exist, or that one's organs are rotting/absent — classically seen in severe psychotic depression (Cotard's syndrome in its extreme form).</p>
+        <p><strong>Hypochondriacal delusion:</strong> a fixed, false belief of having a serious illness despite no medical evidence — fitting her generalized abdominal pain with no organic cause found.</p></div>
+      </details>
+
+      <details class="qa"><summary>Differentials and working diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Treatment-resistant schizophrenia comorbid with severe depression</span><p>Supported by chronicity, multiple hallucination modalities (auditory, olfactory, tactile), mood-incongruent delusions, and prior inadequate response to ≥2 antipsychotics at adequate dose/duration despite compliance — the formal definition of treatment resistance.</p></div>
+      </details>
+
+      <details class="qa"><summary>Are you happy with the current medication? Main concern starting venlafaxine here?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Main concerns are cardiovascular (BP elevation, QT changes) and serotonin syndrome risk if combined with other serotonergic drugs; also risk of exacerbating psychotic symptoms if given alone in psychotic depression — usually combined with an antipsychotic rather than given as monotherapy.</p></div>
+      </details>
+
+      <details class="qa"><summary>What is the optimum (target) dose of clozapine?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Start <code>12.5mg</code> at night, titrate slowly (12.5–25mg increments, up to 50–100mg/week increases). Most respond at <strong>300–450mg/day</strong>; maximum <code>900mg/day</code>.</p></div>
+      </details>
+
+      <details class="qa"><summary>What is the relationship between clozapine and epilepsy?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Clozapine lowers seizure threshold dose-dependently; seizure risk rises significantly above a plasma level of ~600 µg/L. In a patient with known epilepsy: slower titration, lower target dose where possible, and add sodium valproate as prophylaxis if higher doses are needed — in liaison with the treating neurologist/physician.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you improve compliance?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Family supervision of medication, psychoeducation, addressing side-effect burden, simplifying the regimen.</p></div>
+      </details>
+
+      <details class="qa"><summary>Detailed psychological management of depression?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>CBT for depressive cognitions, behavioural activation, supportive psychotherapy, family psychoeducation to reduce expressed emotion.</p></div>
+      </details>
+
+      <details class="qa"><summary>Detailed psychological management of resistant schizophrenia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Address high expressed emotion in the family (critical/over-involved communication worsens relapse risk) via family intervention; OT-led rehabilitation for negative/cognitive symptoms given weak pharmacological evidence there; social skills training; vocational rehabilitation.</p></div>
+      </details>
+
+      <details class="qa"><summary>Can you consider ECT for this patient?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Yes</span><p>ECT can be considered in schizophrenia with poor medication response, especially with prominent affective/catatonic features, and is particularly useful here given the high suicidal risk from her severe depressive component.</p></div>
+      </details>
+
+      <details class="qa"><summary>Main concern with severe depression / reason for severe depression in this patient?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>The chronic, distressing psychotic symptoms themselves — especially command/critical hallucinations and nihilistic/hypochondriacal delusions — generate severe demoralisation and depression; also the burden of chronic illness and possible post-psychotic depression.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 4 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case4">
+      <div class="case-header">
+        <span class="case-tab">CASE 04</span>
+        <h2>MSDSP Weerasinghe</h2>
+      </div>
+      <div class="dx-line">Schizophrenia / Cannabis-induced Psychosis</div>
+      <div class="background">
+        <strong>Background:</strong> History of cannabis use and epilepsy, poor compliance but good family support. On Risperidone, later switched to depot.
+      </div>
+
+      <details class="qa"><summary>Differential diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Schizophrenia vs cannabis-induced psychotic disorder — differentiated by whether psychotic symptoms persist beyond the expected intoxication/withdrawal window once cannabis stops, and whether there's a background of progressive functional decline and negative symptoms independent of substance use.</p></div>
+      </details>
+
+      <details class="qa"><summary>Treatment setting? Role of KUO nursing officer?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Given poor compliance and current relapse: inpatient stabilisation initially, transitioning to community follow-up with depot and CPN support. The KUO (out-of-clinic follow-up nursing officer) role includes home visits, monitoring compliance, and liaising between patient/family and the psychiatric team.</p></div>
+      </details>
+
+      <details class="qa"><summary>Acute management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Rapid tranquilization if agitated (oral first-line, then IM if needed), start/restart an oral antipsychotic, and coordinate epilepsy management with the medical team.</p></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of Risperidone?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>EPSE (dose-dependent)</li>
+          <li>Hyperprolactinaemia — galactorrhoea, menstrual disturbance, sexual dysfunction</li>
+          <li>Weight gain, sedation, postural hypotension</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>Given poor compliance but good family support — what would you do?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Depot antipsychotic</span><p>Switch to a depot with family/CPN supervision of appointments.</p></div>
+      </details>
+
+      <details class="qa"><summary>What depot antipsychotics are available? Typical or atypical? Doses?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Typical:</strong> fluphenazine decanoate, flupenthixol decanoate, zuclopenthixol decanoate, haloperidol decanoate.<br><strong>Atypical:</strong> risperidone long-acting injection, olanzapine pamoate, paliperidone palmitate, aripiprazole depot.</p>
+        <p>Typical clinical doses: fluphenazine decanoate ~<code>50mg / 2–5 weeks</code>; flupenthixol decanoate ~<code>60mg / 2–4 weeks</code>.</p></div>
+      </details>
+
+      <details class="qa"><summary>Regarding substance use, what are you going to do?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Brief intervention — psychoeducation on harms, motivational interviewing to assess and enhance readiness to change, referral to a specialist drug rehabilitation unit if needed.</p></div>
+      </details>
+
+      <details class="qa"><summary>What risks did you identify? How to manage overall?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Recurrent relapse/admission risk due to poor compliance — managed with an IM depot arranged with CPN support (specifically <strong>Fluphenazine decanoate</strong>).</p></div>
+      </details>
+
+      <details class="qa"><summary>Where is Fluphenazine decanoate given?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Deep intramuscular injection, gluteal or deltoid muscle. A test dose is given first to check for hypersensitivity/EPSE, with the full dose following about 7 days later, then continuing on the regular 2–4 weekly schedule.</p></div>
+      </details>
+
+      <details class="qa"><summary>As a doctor, do you believe the self-reported 1-year abstinence?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">No</span><p>Self-report alone is unreliable, especially with ongoing relapse. Verify via <strong>urine drug screening</strong>.</p></div>
+      </details>
+
+      <details class="qa"><summary>What stage of the motivational cycle is he in?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Likely contemplation or even pre-contemplation, given the mismatch between claimed abstinence and clinical picture — explore this directly using motivational interviewing rather than assuming.</p></div>
+      </details>
+
+      <details class="qa"><summary>Anything for a better outcome?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Family psychoeducation; appoint a family member as a "treatment supporter" to supervise compliance and administration; liaise with the medical/neurology team for epilepsy control (poor seizure control and substance use interact).</p></div>
+      </details>
+
+      <details class="qa"><summary>Can he marry?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Yes, but not immediately</span><p>Ideally once he's had a period of sustained stability, good compliance, and insight — with full disclosure to his partner and family involvement in planning.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 5 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case5">
+      <div class="case-header">
+        <span class="case-tab">CASE 05</span>
+        <h2>Hemamalee, 46F</h2>
+      </div>
+      <div class="dx-line">Severe Depression without psychotic symptoms, associated with normal grief</div>
+      <div class="background">
+        <strong>Background:</strong> 1 month of headache and sleeplessness. Low mood, low energy, anhedonia. Father died 1 month prior. Family history of suicide (brother, by hanging). Two children with their own difficulties. Husband left her when younger child was 3 months old; similar episode in 2013 treated for 6 months. Active suicidal thoughts controlled by a promise to her late father to protect her mother. Neck lump found incidentally; migraine-like symptoms ~1 year.
+      </div>
+
+      <details class="qa"><summary>Is she in grief — which stage of the grief cycle?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Grief models (e.g. Kübler-Ross — denial, anger, bargaining, depression, acceptance) are a useful framework, but grief doesn't move linearly. I'd describe her current stage descriptively rather than force her into a rigid staged model.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to differentiate normal grief from abnormal grief in this patient?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Favouring normal grief:</strong> recent bereavement (1 month), some preserved function, suicidal thoughts actively controlled by a meaningful commitment.<br><strong>Cautionary features:</strong> similar past episode in 2013 treated for 6 months (suggests possible recurrent depressive disorder), family history of suicide, active suicidal ideation. On balance this was accepted as normal grief — but with vigilance given the risk factors.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to manage the patient — pharmacological and psychosocial?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Pharmacological:</strong> an SSRI or SNRI (venlafaxine, starting <code>37.5mg</code>, titrating to <code>75mg</code> over about a week given severity).<br><strong>Psychosocial:</strong> psychoeducation, behavioural activation (activity scheduling), grief counselling, supportive psychotherapy, CBT.</p></div>
+      </details>
+
+      <details class="qa"><summary>How would you manage the problems of each child?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Son</strong> (tobacco use): brief intervention / substance use counselling appropriate to his age.<br><strong>Daughter</strong> (anger issues): anger management, possibly family therapy — conduct disorder considered less likely given her age without other antisocial features.</p></div>
+      </details>
+
+      <details class="qa"><summary>Is admission warranted? Apart from suicidal risk, what other reasons justify admission?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Yes</span><p>Active suicidal ideation (even if currently controlled) plus a family history of completed suicide. Other reasons: no adult supervision at home during high-risk periods, need for close monitoring during medication initiation, diagnostic clarification of the neck lump.</p></div>
+      </details>
+
+      <details class="qa"><summary>Medication started? Side effects of venlafaxine? GORD management? Duration? Prognosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>As detailed under Case 1 — venlafaxine (dyspepsia, hypertension, hyponatraemia), PPI + dietary measures for GORD, continue ≥6 months (up to 2 years if high relapse risk), prognosis generally good with protective factors present.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you prepare a patient for ECT? Post-ECT side effects?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Pre-ECT:</strong> physical examination, ECG, anaesthetic review, informed consent, fasting instructions, minimising benzodiazepine dose beforehand where feasible (benzodiazepines raise seizure threshold and can blunt ECT efficacy).</p>
+        <p><strong>Post-ECT:</strong> immediate confusion, headache, muscle ache, nausea; anterograde/retrograde memory impairment (usually transient).</p></div>
+      </details>
+
+      <details class="qa"><summary>Other aspects of management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Supportive psychotherapy; referral to Mithuru Piyasa given the husband's alcoholism/abandonment history.</p></div>
+      </details>
+
+      <details class="qa"><summary>Migraine-like symptoms — neurology referral?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Accepted — the incidental neck lump also needs proper physical work-up (thyroid/surgical/ENT as appropriate), not overlooked amid the psychiatric presentation.</p></div>
+      </details>
+
+      <details class="qa"><summary>Children's psychological status / future risk?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Conduct disorder considered less likely given their ages without a persistent antisocial pattern. Future depression risk in the children is difficult to predict definitively given the family history of suicide and parental depression as risk factors — requires ongoing monitoring rather than a firm prediction.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 6 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case6">
+      <div class="case-header">
+        <span class="case-tab">CASE 06</span>
+        <h2>Bandara, 38–39M</h2>
+      </div>
+      <div class="dx-line">Schizophrenia comorbid with Severe Depression / BPAD mania (multiple presentations)</div>
+      <div class="background">
+        <strong>Background:</strong> Known psychiatric patient for years, poor compliance, multiple past admissions, ECT twice monthly historically. Extramarital relationship of wife with his brother; aggressive thoughts/threats toward wife and brother; domestic violence. On Imipramine, Venlafaxine, Lithium (stopped). Reported elated mood, increased libido, reduced sleep, overspending. Recently self-harmed with a knife against wife.
+      </div>
+
+      <details class="qa"><summary>Differential diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>BPAD current episode mania with psychotic symptoms vs schizophrenia vs schizoaffective disorder vs agitated depression secondary to reactive distress. The formulation genuinely shifts depending on which symptom cluster is emphasised — the key skill is justifying whichever formulation fits the mental state elicited.</p></div>
+      </details>
+
+      <details class="qa"><summary>What supports a manic episode diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Elevated mood, increased libido, decreased need for sleep, overspending (buying gold), disinhibited behaviour — in the absence of primary negative symptoms or a clear chronic deteriorating course.</p></div>
+      </details>
+
+      <details class="qa"><summary>Any physical exam findings?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>None found on checking for self-inflicted cuts; poor oral hygiene noted from betel chewing.</p></div>
+      </details>
+
+      <details class="qa"><summary>Do you want to give a definitive diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Agitated depression</span><p>Secondary to distress from his wife's extramarital affair — reflecting a reconsideration after re-eliciting the mood as more agitated than euphoric during history-taking.</p></div>
+      </details>
+
+      <details class="qa"><summary>Initial management if acutely agitated?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Verbal de-escalation first. If that fails: rapid tranquilization — oral option first if cooperative, IM if not. Combination of <code>haloperidol + promethazine</code> is more effective than haloperidol alone. IM olanzapine is an alternative. Avoid IM chlorpromazine (muscle pain, abscess, orthostatic hypotension). Midazolam only where resuscitation facilities are available (respiratory depression risk).</p></div>
+      </details>
+
+      <details class="qa"><summary>What would you monitor?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>EPSE — acute dystonia, akathisia, and NMS (rigidity, hyperthermia, autonomic instability, raised CK). Vital signs (BP, pulse, respiratory rate) every 15 minutes for the first hour post-IM medication.</p></div>
+      </details>
+
+      <details class="qa"><summary>Do you want cardiac monitoring?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Yes</span><p>Given haloperidol's QT-prolongation risk.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you manage acute dystonia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>IM anticholinergic (e.g. benztropine/procyclidine) — resolves quickly.</p></div>
+      </details>
+
+      <details class="qa"><summary>Which delusions occur in depression?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Mood-congruent delusions — nihilistic, guilt-related, hypochondriacal, poverty delusions.</p></div>
+      </details>
+
+      <details class="qa"><summary>Schizoaffective framing — risk assessment level?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">High</span><p>Given documented self-harm with a weapon directed at his wife plus psychiatric instability — full risk assessment covering suicide, harm to wife/brother, disinhibited spending, non-compliance.</p></div>
+      </details>
+
+      <details class="qa"><summary>Starting drug for depression + dose?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><code>Venlafaxine 75mg</code>, with monitoring given cardiac risk profile — watch for tachycardia, postural hypotension.</p></div>
+      </details>
+
+      <details class="qa"><summary>PSW social report — what does it cover?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>The husband's/family's behaviour pattern, domestic violence documentation, and the children's welfare and safety.</p></div>
+      </details>
+
+      <details class="qa"><summary>IM Modecate — starting regimen?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Test dose given first (e.g. <code>12.5mg</code>) to check for hypersensitivity/EPSE; full dose follows after about 3 days to a week; then continue on a 2–5 weekly maintenance schedule.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to reduce risk in the community?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>MDT approach — CPN follow-up, collateral history from family at each review, ongoing psychosocial stress management, psychoeducation of the whole family, rehabilitation.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 7 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case7">
+      <div class="case-header">
+        <span class="case-tab">CASE 07</span>
+        <h2>Balamanike, 59F</h2>
+      </div>
+      <div class="dx-line">Schizophrenia / Schizoaffective Disorder</div>
+      <div class="background">
+        <strong>Background:</strong> Known psychiatric patient for ~20–22 years. Presented with 2nd/3rd person commanding voices, thought broadcasting/withdrawal/insertion, persistent grandiose delusions ("boon from Goddess Saraswathi"), neologisms, low mood, poor appetite, olfactory/tactile/somatic hallucinations. History of increased energy/reduced sleep ~1.5 years ago. Past suicide attempt. Morbid jealousy, domestic violence, frequent police involvement.
+      </div>
+
+      <details class="qa"><summary>Diagnosis — schizoaffective vs schizophrenia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>This is genuinely a borderline case worth being honest about. Schizoaffective disorder requires that definite schizophrenic and definite affective symptoms be <strong>equally prominent and concurrent</strong> — not just present at different points across a 20-year illness. Given her chronic course with predominant psychotic symptoms and only episodic mood change, I'd lean towards <strong>schizophrenia</strong> as the primary diagnosis, reserving "schizoaffective" for when mood and psychotic symptoms are clearly concurrent in the current presentation.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why relapse — poor compliance — why?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Likely impaired insight (she believes her grandiose experience is real, not illness), possible side-effect burden from previous medication, and a chaotic domestic situation disrupting routine and follow-up.</p></div>
+      </details>
+
+      <details class="qa"><summary>If starting at 4mg risperidone, how do you continue/titrate? Side effects?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Titrate gradually upward (1–2mg increments) while monitoring EPSE, up to a practical ceiling around <code>6mg</code>. Side effects: EPSE, hyperprolactinaemia, weight gain, sedation, postural hypotension.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to manage akathisia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Reduce the antipsychotic dose if possible; <code>propranolol</code> or short-term benzodiazepines are recommended — anticholinergics are not reliably effective for akathisia specifically.</p></div>
+      </details>
+
+      <details class="qa"><summary>Modecate dosing available in Sri Lanka — how is it given?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Fluphenazine decanoate, <code>12.5–50mg every 2–5 weeks</code>, starting with a test dose to check tolerance before committing to the regular schedule.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you assess cognition?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Orientation (time/place/person), attention/concentration (serial 7s, days of week backwards), memory (immediate/recent/remote). Given she never attended school, MMSE/MOCA scores are confounded by education level; formal <strong>IQ testing</strong> is more appropriate to distinguish a possible comorbid learning disability from illness-related cognitive impairment.</p></div>
+      </details>
+
+      <details class="qa"><summary>If there's a history of several depressive and manic episodes, what investigations would you do?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>If previously on lithium — check serum lithium level. Otherwise: fasting blood sugar and lipid profile (baseline and to monitor antipsychotic-induced metabolic effects), thyroid function tests, FBC, ECG as relevant.</p></div>
+      </details>
+
+      <details class="qa"><summary>Assume no records available — how do you manage?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><code>Olanzapine 5mg</code>, or risperidone 2mg — I'd actually favour risperidone here given her elevated BMI, since olanzapine carries the highest weight-gain/metabolic risk among commonly used atypicals.</p></div>
+      </details>
+
+      <details class="qa"><summary>Mood stabilizer choice? Why not lithium?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Sodium valproate</strong> — faster onset ("valproate loading" can show effect within 1–4 days vs lithium's slower onset), and lithium requires strict renal/thyroid monitoring that may be harder to manage given her chaotic compliance history. Dose: start <code>200–400mg</code>, up to <code>1–2g/day</code>; check LFTs, FBC, and weight before starting.</p></div>
+      </details>
+
+      <details class="qa"><summary>Any significant physical exam findings?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Fine tremor in hands (could reflect lithium use, akathisia, or anxiety) and elevated BMI (relevant to antipsychotic choice — favour weight-neutral options like aripiprazole where possible, and requires metabolic monitoring).</p></div>
+      </details>
+
+      <details class="qa"><summary>Probable reason for admission despite reported good drug compliance?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Possible missed or partial doses not disclosed, or genuinely adequate compliance with treatment-resistant illness — either way, raises the question of checking serum levels/collateral history rather than accepting self-report.</p></div>
+      </details>
+
+      <details class="qa"><summary>Suppose there were no past records — what would you start? Maximum dose? Titration?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Risperidone</strong> (preferred over olanzapine given weight gain concern), <code>2mg daily</code>. Maximum technically <code>16mg</code>, practically capped ~<code>6mg</code> due to EPSE. Titrate by ~1mg per week.</p></div>
+      </details>
+
+      <details class="qa"><summary>If poor drug adherence — what next?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Long-acting IM antipsychotic (Modecate)</span><p>Pharmacological name: <strong>fluphenazine decanoate</strong> — a typical (first-generation) depot. Precautions: baseline physical exam, informed consent, test dose first before committing to the ongoing schedule.</p></div>
+      </details>
+
+      <details class="qa"><summary>If you met the husband, what advice would you give?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Ensure the patient's physical safety first (given documented domestic violence and police involvement) — this takes priority over relationship counselling; refer him for counselling/anger management only once safety is secured, and involve PSW/legal services.</p></div>
+      </details>
+
+      <details class="qa"><summary>Psychological management for negative symptoms? How would you improve compliance?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>OT-led rehabilitation — activities of daily living, social skills training, vocational rehabilitation; compliance improved through rehabilitation engagement and family supervision.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 8 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case8">
+      <div class="case-header">
+        <span class="case-tab">CASE 08</span>
+        <h2>N.T. Jayarathna, 45M</h2>
+      </div>
+      <div class="dx-line">Psychotic Depression (first episode assumed)</div>
+      <div class="background">
+        <strong>Background:</strong> Unemployed, poor sleep and loss of appetite for 2 weeks. Thought broadcasting, delusion of perception, delusion of reference; no hallucinations. Past history of 3 suicide attempts.
+      </div>
+
+      <details class="qa"><summary>Differential diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Given thought broadcasting, delusion of perception, and delusion of reference without hallucinations, plus only 2 weeks' duration and 3 past suicide attempts — differentials include: severe depressive episode with psychotic (mood-congruent or incongruent) symptoms, first-episode schizophrenia, schizophreniform disorder (if &lt;1 month duration), or an acute and transient psychotic disorder. The short duration and absence of hallucinations favours an affective psychosis or acute transient psychosis over established schizophrenia — longer follow-up may be needed to clarify.</p></div>
+      </details>
+
+      <details class="qa"><summary>Assuming this is the first episode, what would you start?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Given psychotic features: combination treatment — an antipsychotic (e.g. risperidone at a low-to-moderate first-episode dose, <code>1–4mg</code>) plus an antidepressant if depressive features are prominent, rather than an antipsychotic alone.</p></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of Risperidone and venlafaxine?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>As previously covered (EPSE/hyperprolactinaemia for risperidone; GI upset, hypertension, hyponatraemia, cardiac risk in overdose for venlafaxine). Particularly relevant here given his 3 previous suicide attempts — an antidepressant with lower overdose toxicity (SSRIs safer than venlafaxine/TCAs) is a real consideration, plus careful supply control regardless of choice.</p></div>
+      </details>
+
+      <details class="qa"><summary>Case scenario of acute dystonia — how would you manage it?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>IM anticholinergic (benztropine/procyclidine) promptly; reassure the patient, as this can be frightening — resolves quickly with treatment.</p></div>
+      </details>
+
+      <details class="qa"><summary>Further management — psychotherapy with an MDT approach?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>CBT for psychotic symptoms and depressive cognitions, family psychoeducation, close risk monitoring given his suicide history, OT functional assessment, and clear safety planning before any discharge.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 9 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case9">
+      <div class="case-header">
+        <span class="case-tab">CASE 09</span>
+        <h2>Kumari, 40F</h2>
+      </div>
+      <div class="dx-line">Bipolar Affective Disorder (with Borderline Personality traits raised)</div>
+      <div class="background">
+        <strong>Background:</strong> Married, on second marriage. Aggressive behaviour and a suicide attempt. Elevated mood, overactivity, reduced sleep need, over-familiarity, past suicide attempt. On lithium, Modecate, Risperidone, Benzhexol. Appeared drowsy.
+      </div>
+
+      <details class="qa"><summary>Why did you diagnose Bipolar Affective Disorder?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Elevated mood, overactivity, reduced need for sleep, over-familiarity/disinhibition — a discrete episodic pattern distinct from her baseline.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why did you consider Borderline Personality Disorder?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>If there's a longstanding pattern (not just episodic) of affective instability, intense/unstable relationships, impulsivity, chronic emptiness, and recurrent self-harm — these point towards BPD. Key discriminators: BPD mood shifts are rapid, over hours to days, and typically triggered by interpersonal issues (fear of abandonment); true mania has more sustained elevated mood with grandiosity and increased energy not simply reactive to relationship events. A family history of bipolar disorder favours BPAD.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management plan — goal setting, safety, investigations?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Goal-setting: safety and stabilisation first, then functional recovery. Safety measures given self-harm history. Investigations below.</p></div>
+      </details>
+
+      <details class="qa"><summary>What additional investigations would you do? Why measure serum lithium?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Serum lithium level</span><p>To check for toxicity, since her drowsiness could reflect either medication effect (Modecate + Risperidone + Benzhexol together are quite sedating) or lithium toxicity.</p></div>
+      </details>
+
+      <details class="qa"><summary>Does this patient have lithium toxicity?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Toxicity typically presents at ≥<code>1.5 mmol/L</code>, with vomiting, diarrhoea, coarse tremor, ataxia, dysarthria; severe toxicity (&gt;<code>2.0 mmol/L</code>) causes hyperreflexia, convulsions, renal/cardiac failure. Correlate serum level with these clinical features before concluding toxicity — drowsiness alone, especially with polypharmacy, is nonspecific.</p></div>
+      </details>
+
+      <details class="qa"><summary>Apart from toxicity, why else is serum lithium monitoring important?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>To confirm the level is within the therapeutic range for efficacy — subtherapeutic levels would explain ongoing instability — plus periodic monitoring of long-term renal/thyroid function.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you collect a blood sample for serum lithium (timing)?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>12 hours after the last dose</strong> (typically the evening dose) — if drawing blood at 9am, she should take the lithium dose at 9pm the night before and skip the morning dose.</p></div>
+      </details>
+
+      <details class="qa"><summary>What is the expected therapeutic serum lithium level?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Maintenance: <code>0.6–0.8 mmol/L</code>. During acute mania, a higher target of <code>0.8–1.2 mmol/L</code> may be used.</p></div>
+      </details>
+
+      <details class="qa"><summary>If serum lithium is 0.2 mmol/L, what causes besides poor compliance could explain this?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>A recently increased dose not yet at steady state, increased renal clearance/dilution (high fluid intake, pregnancy), or a lab/sampling timing error (sample drawn too soon, or a dose missed before rather than after the sample).</p></div>
+      </details>
+
+      <details class="qa"><summary>Usually Modecate isn't given in bipolar disorder — why is it being used here?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Likely for compliance reasons — with recurrent severe relapses and dangerous behaviour plus poor oral adherence, a depot secures treatment continuity even though evidence for typical antipsychotics specifically in BPAD maintenance is weaker than for mood stabilisers or atypical depots.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you educate the family about the illness?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Explain bipolar illness as a recurring, treatable medical condition (not a character flaw), the importance of adherence, early warning signs (reduced sleep, overspending, irritability), the role of routine and reduced stress, and how to access help quickly in a crisis.</p></div>
+      </details>
+
+      <details class="qa"><summary>Sleep patterns in bipolar disorder?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Reduced need for sleep is a hallmark of mania (rested despite little sleep); depressive episodes may show insomnia or hypersomnia. Sleep disruption is a recognised trigger/early warning sign of relapse into mania.</p></div>
+      </details>
+
+      <details class="qa"><summary>Prognosis of Bipolar Affective Disorder?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Variable, lifelong-relapsing in nature — with good compliance to maintenance mood stabilisers and psychoeducation, relapses can be minimised and functioning/quality of life reasonably preserved.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 10 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case10">
+      <div class="case-header">
+        <span class="case-tab">CASE 10</span>
+        <h2>M.D.P. Dissanayaka, 32F</h2>
+      </div>
+      <div class="dx-line">Schizophrenia</div>
+      <div class="background">
+        <strong>Background:</strong> Mother of one, lives alone. History difficult to obtain, required repeated questioning. Diagnosis inferred from findings including bizarre delusions.
+      </div>
+
+      <details class="qa"><summary>What are bizarre delusions?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Delusions with highly improbable, culturally implausible content (e.g. being controlled by aliens, connected to a computer) — given particular diagnostic weight for schizophrenia, though the category has recognised reliability problems and isn't part of formal DSM-5 criteria.</p></div>
+      </details>
+
+      <details class="qa"><summary>Differential diagnoses? Diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Schizophrenia</span><p>Supported by bizarre/mood-incongruent delusions, difficulty obtaining a coherent history (suggesting thought disorder), and functional decline (difficulty caring for her child). Differentials: schizoaffective disorder, drug-induced psychosis, organic psychosis (needs physical work-up), postpartum-related psychosis if temporally linked to her child's birth.</p></div>
+      </details>
+
+      <details class="qa"><summary>Problem list?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Positive psychotic symptoms</li>
+          <li>Likely negative symptoms/functional decline</li>
+          <li>Impaired child-care capacity</li>
+          <li>Social isolation (lives alone)</li>
+          <li>Uncertain compliance and follow-up history</li>
+          <li>Safeguarding concern for the child</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>How do you start management with no previous records available?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><code>Risperidone 2mg</code> starting dose, titrate as needed up to a practical ceiling of ~<code>6mg</code> (beyond which EPSE risk rises disproportionately and it behaves more like a typical antipsychotic).</p></div>
+      </details>
+
+      <details class="qa"><summary>How to address poor compliance? How to start a depot? Why the gap after the first dose?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Switch to a depot (e.g. fluphenazine decanoate) once stabilised on oral treatment — a test dose is given first, with the full dose following about a week later. The gap allows observation for any hypersensitivity or acute EPSE reaction before committing to a long-acting preparation that can't easily be "taken back" once injected.</p></div>
+      </details>
+
+      <details class="qa"><summary>EPSE — how do you identify if a patient has akathisia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Ask specifically about an <strong>inner restlessness</strong> and urge to move — not just observed pacing. Distinguish it from psychotic agitation, since mistaking one for the other can lead to inappropriately increasing (rather than reducing) the antipsychotic dose.</p></div>
+      </details>
+
+      <details class="qa"><summary>Psychological management? Details on OT functional assessment — what is assessed?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Self-care (washing, dressing, bathing), household survival skills (cooking, shopping, using transport, managing money), occupational/parental role functioning, social/leisure engagement, and quality of relationships — precisely the domains relevant to whether she can safely resume childcare.</p></div>
+      </details>
+
+      <details class="qa"><summary>Next step — rehabilitation, how?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>OT-led programme building on the functional assessment — self-care training, social skills training, vocational rehabilitation, cognitive remediation as needed.</p></div>
+      </details>
+
+      <details class="qa"><summary>What would need to improve for her to resume childcare? Can a patient with schizophrenia safely be with a child?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Yes, in principle</span><p>Many people with schizophrenia parent safely once stabilised. Needed: resolution of acute psychotic symptoms, demonstrated self-care and household functioning, sufficient insight to maintain treatment adherence, and ideally a support system to share caregiving during any future relapse — assessed jointly by the clinical team, OT, and social services, not assumed either way.</p></div>
+      </details>
+
+      <details class="qa"><summary>Pharmacological management for depression (if comorbid)?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>An SSRI first-line, given the need for a favourable side-effect/interaction profile alongside her antipsychotic.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 11 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case11">
+      <div class="case-header">
+        <span class="case-tab">CASE 11</span>
+        <h2>M.A.D.S. Weerasinghe, 28M</h2>
+      </div>
+      <div class="dx-line">Cannabis-induced Psychosis vs Schizophrenia (with epilepsy)</div>
+      <div class="background">
+        <strong>Background:</strong> Unmarried, unemployed. Admitted with aggressive behaviour, generalized weakness, and shaking after running out of medications. Known psychiatric patient since 2022. Cannabis use disorder since age 14 (reportedly abstinent for 1 year) and epilepsy. History of grandiose/bizarre delusions, auditory hallucinations, thought interference. On sodium valproate, Risperidone, Benztropine, monthly Modecate depot. Good family/financial support.
+      </div>
+
+      <details class="qa"><summary>How do you differentiate cannabis-induced psychosis from schizophrenia here?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Cannabis-induced psychosis typically resolves after stopping the substance. If symptoms (grandiose/bizarre delusions, auditory hallucinations, thought interference) persist well beyond the expected intoxication/withdrawal window and despite a year of reported abstinence, this favours an underlying schizophrenic process — with cannabis possibly acting as a precipitant/risk factor rather than sole cause. Longitudinal course and response to abstinence are the most reliable discriminators.</p></div>
+      </details>
+
+      <details class="qa"><summary>Acute management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Verbal de-escalation given the aggressive presentation; restart/optimise his regular antipsychotic and sodium valproate given comorbid epilepsy. His "generalized weakness and shaking" after running out of medication could reflect relapse of psychosis, breakthrough seizures, or withdrawal effects — all need to be actively distinguished, not assumed to be one cause.</p></div>
+      </details>
+
+      <details class="qa"><summary>Modecate — indications, monitoring, side effects, initial doses?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Indicated for poor compliance despite reasonable insight/family support. Test dose, then full dose about a week later, then maintenance every 2–5 weeks. Monitor for EPSE, and — given his epilepsy — monitor seizure control closely since he's also on sodium valproate (interaction and additive sedation potential).</p></div>
+      </details>
+
+      <details class="qa"><summary>Suicidal risk assessment?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>No documented depressive or manic features or suicidal ideation in this presentation — but systematic screening is still warranted, as both psychosis and cannabis use are independent risk factors for later self-harm.</p></div>
+      </details>
+
+      <details class="qa"><summary>Drug compliance?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Given his self-reported 1-year abstinence alongside current relapse, don't take this at face value — verify via urine drug screening rather than accepting self-report; use depot antipsychotic plus family supervision (a designated family member overseeing both psychiatric medication and anticonvulsant compliance) for better outcomes.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 12 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case12">
+      <div class="case-header">
+        <span class="case-tab">CASE 12</span>
+        <h2>46F</h2>
+      </div>
+      <div class="dx-line">Recurrent Depressive Disorder, severe episode, without psychotic symptoms (grief-related)</div>
+      <div class="background">
+        <strong>Background:</strong> Previous suicide attempt and a recent suicide attempt; separated from husband; recent death of her father; ongoing issues with children and caregiving burden. Migraine symptoms ~1 year. (Closely mirrors Cases 1, 5 and 6 — highlights below focus on what's distinct.)
+      </div>
+
+      <details class="qa"><summary>Differentiating grief from depression, given two suicide attempts?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>The presence of two suicide attempts, ongoing caregiving burden, and marital separation are strong pointers <strong>away</strong> from normal grief and towards a superimposed depressive episode. The presence of low self-esteem is a key discriminator — normal grief doesn't typically include the pervasive low self-worth seen in depression, so if present here, it favours depressive disorder over grief alone.</p></div>
+      </details>
+
+      <details class="qa"><summary>Comprehensive suicide risk assessment?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Previous attempt (the strongest single predictor of future attempts) + recent attempt + ongoing life stressors (bereavement, separation, caregiving burden) together indicate <strong>very high risk</strong>. Assess method, lethality, planning, access to means, protective factors, and current intent explicitly.</p></div>
+      </details>
+
+      <details class="qa"><summary>Overall management — inpatient care, ward monitoring/suicide risk minimization?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Admission clearly warranted given the recent attempt; close observation level, means restriction, structured ward routine, and engaging her in activity to counter withdrawal.</p></div>
+      </details>
+
+      <details class="qa"><summary>ECT — indications, pre-ECT preparation, side effects, effect of benzodiazepines, post-ECT monitoring?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Indications:</strong> high suicidal risk, need for rapid symptom control, poor oral intake/depressive stupor, or psychotic depression.</p>
+        <p><strong>Pre-ECT preparation:</strong> physical exam, ECG, anaesthetic review, consent, fasting.</p>
+        <p><strong>Benzodiazepines:</strong> raise the seizure threshold and can shorten/blunt the induced seizure, reducing ECT efficacy — ideally minimise the dose beforehand where clinically feasible.</p>
+        <p><strong>Post-ECT monitoring:</strong> recovery position/airway monitoring, checking for confusion, headache, memory disturbance, vital signs.</p></div>
+      </details>
+
+      <details class="qa"><summary>Venlafaxine — mechanism, side effects, dose escalation?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>MOA:</strong> serotonin and noradrenaline reuptake inhibition (SNRI).<br><strong>Dose:</strong> starting <code>75mg</code> (or <code>37.5mg</code> for more cautious titration), up to <code>375mg</code> (or <code>225mg</code> extended-release), escalated by response/tolerability. Monitor BP above <code>150mg/day</code>.</p></div>
+      </details>
+
+      <details class="qa"><summary>Components of a safe discharge plan?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Confirmed follow-up appointment soon after discharge, given the recent attempt</li>
+          <li>Medication supply limited/supervised</li>
+          <li>Family involved and briefed on warning signs</li>
+          <li>Crisis contact information provided</li>
+          <li>Means restriction reinforced at home</li>
+          <li>Community mental health/CPN follow-up arranged</li>
+          <li>Social work involvement for ongoing caregiving/financial stressors</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>Which psychotherapies would you prioritise, and why?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Given bereavement, marital separation, and suicidality together — prioritise <strong>grief counselling</strong> and <strong>CBT targeting hopelessness/suicidal cognitions</strong> first (safety-focused), with behavioural activation and supportive psychotherapy running alongside, and interpersonal therapy or couple/family work introduced only once she's safely stabilised.</p></div>
+      </details>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 13 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case13">
+      <div class="case-header">
+        <span class="case-tab">CASE 13</span>
+        <h2>Sandaruwan Kumbugelle, 26M (Kurunegala)</h2>
+      </div>
+      <div class="dx-line">Schizoaffective Disorder + Polysubstance Use</div>
+      <div class="background">
+        <strong>Background:</strong> Well cooperative patient. Thought insertion, thought withdrawal, thought broadcasting; delusion of control, delusion of perception, persecutory delusion. 2nd person auditory hallucinations (commanding) and 3rd person auditory hallucinations. Substance use — cannabis, alcohol, methamphetamine. Prominent persecutory delusion with severe depression. Previous history of a manic episode.
+      </div>
+
+      <details class="qa"><summary>Full history, MSE, risk assessment?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Structured as: presenting complaint → history of presenting illness (onset, course of psychotic and mood symptoms, chronology relative to substance use) → past psychiatric history (the previous manic episode — important for the schizoaffective formulation) → substance use history (cannabis, alcohol, methamphetamine — amount, pattern, last use, dependence features) → past medical, family, personal, and premorbid personality history.</p>
+        <p><strong>MSE:</strong> appearance/behaviour, speech, mood (concurrent depressive symptoms), thought (form — TI/TW/TB; content — delusion of control, delusion of perception, persecutory delusion), perception (2nd/3rd person auditory hallucinations, including commanding hallucinations), cognition, insight.</p>
+        <p><strong>Risk assessment:</strong> risk of harm to self (given severe depression + persecutory delusions), risk of harm to others (command hallucinations carry real risk if content is threatening), risk from disinhibition/intoxication with methamphetamine, and safeguarding/social risk from substance-seeking behaviour.</p></div>
+      </details>
+
+      <details class="qa"><summary>If the patient presents with very aggressive behaviour, how are you going to manage?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Two-part answer: <strong>initial (immediate) management</strong> — ensure safety of patient/staff/other patients, remove potential weapons, verbal de-escalation first; and <strong>aggressive patient management</strong> more broadly — assess for reversible causes (intoxication, pain, akathisia mistaken for agitation), offer oral medication first if the patient is still cooperative, escalate to IM rapid tranquilization only if verbal de-escalation fails and there is genuine risk of harm.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you do verbal de-escalation?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Approach calmly, at eye level (not looming), maintain a safe exit route for both patient and staff, use a low non-confrontational tone, introduce yourself and explain what's happening, actively listen and acknowledge the patient's distress without arguing about delusional content, offer choices (e.g. oral medication rather than injection) to restore a sense of control, and keep instructions simple and non-threatening. Ensure adequate staff presence nearby without crowding the patient.</p></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of haloperidol? Dose?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Dose (rapid tranquilization):</strong> IM haloperidol <code>5–10mg</code>, can repeat 4–8 hourly, maximum <code>18mg/24 hours</code>; best combined with promethazine rather than given alone.</p>
+        <p><strong>Side effects:</strong> extrapyramidal symptoms (acute dystonia, akathisia, parkinsonism, tardive dyskinesia — haloperidol has high EPSE liability as a high-potency FGA), QTc prolongation and risk of arrhythmia/sudden death, neuroleptic malignant syndrome, anticholinergic effects, hyperprolactinaemia, postural hypotension, sedation.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why promethazine? Mechanism of action?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Promethazine is added because the combination of <strong>haloperidol + promethazine</strong> is more effective for rapid tranquilization than haloperidol alone, and promethazine's sedative action allows a lower effective haloperidol dose — reducing the EPSE burden (particularly acute dystonia) that haloperidol alone would carry.</p>
+        <p><strong>Mechanism:</strong> promethazine is a first-generation antihistamine (H1 receptor antagonist) with additional anticholinergic and antiadrenergic (alpha-1 blocking) properties, which is what produces its marked sedative effect.</p></div>
+      </details>
+
+      <details class="qa"><summary>Pharmacokinetics of promethazine?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Well absorbed both orally and by IM injection; lipophilic, crosses the blood-brain barrier readily (accounting for its central sedative effect); extensively metabolised in the liver; has a relatively long duration of sedative action (single dose sedation typically lasting several hours), making it practical for one-off use in acute tranquilization rather than needing frequent redosing.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to do physical restraint?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Physical restraint is a last resort, used only when verbal de-escalation has failed and there's imminent risk of harm. It should be carried out by an adequately sized trained team (typically 4–5 members, one per limb plus one for the head/airway), following a clear pre-agreed plan, minimising force to the least required, protecting the airway and monitoring breathing throughout, avoiding prone restraint or pressure on the chest/neck (asphyxiation risk), keeping restraint time as short as possible, and using it as a bridge to rapid tranquilization rather than a standalone intervention — with full documentation afterwards.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to identify acute dystonia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Occurs within the first few hours of starting/increasing an antipsychotic (antipsychotic-naïve young males at highest risk) — look for spasm of head and neck muscles: torticollis, protrusion of the tongue, spasms of the ocular muscles (oculogyric crisis), trismus. It's frightening for the patient and can look dramatic, but is not itself life-threatening (unlike laryngeal dystonia, which is an emergency due to airway compromise).</p></div>
+      </details>
+
+      <details class="qa"><summary>Management of dystonia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>IM anticholinergic — <strong>benztropine</strong> (or procyclidine) — gives rapid relief, usually within 5–10 minutes. Reassure the patient throughout, as the experience is distressing. If recurrent, consider reducing the antipsychotic dose or adding regular prophylactic anticholinergic cover.</p></div>
+      </details>
+
+      <details class="qa"><summary>How many times can we give promethazine and haloperidol?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Haloperidol: repeat 4–8 hourly, up to a maximum of <code>18mg in 24 hours</code>. Promethazine is generally combined once per haloperidol dose (25–50mg) rather than repeatedly stacked, given its long duration of action — redosing frequency and total daily limits should follow the ward's rapid tranquilization protocol, with vital signs (sedation level, temperature, pulse, BP, respiratory rate) monitored every 10–15 minutes in the first hour, then every 30 minutes until the patient is ambulatory.</p></div>
+      </details>
+
+      <details class="qa"><summary>How to diagnose akathisia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Occurs within a few days of starting/increasing an antipsychotic. Ask specifically about an inner sense of restlessness (not just observe pacing) — the patient feels compelled to move the legs, shift weight, or pace, and finds it very difficult to sit or stand still. Important to distinguish from psychotic agitation, since the two can look similar but require opposite management.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management of akathisia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Reduce the antipsychotic dose</strong> or switch to a second-generation antipsychotic — this is the primary step. <strong>Anticholinergics are not effective</strong> for akathisia (unlike for dystonia/parkinsonism). Propranolol or a short-term benzodiazepine can help symptomatically.</p></div>
+      </details>
+
+      <details class="qa"><summary>If admitted to the ward, pharmacological management? Why Risperidone?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Risperidone</strong> is a reasonable first choice here: effective for the positive psychotic symptoms, available and affordable in government hospitals (one of the few atypicals routinely stocked), has a well-established dosing range, and — compared with olanzapine — carries a much lower risk of weight gain and metabolic syndrome, which matters given this patient's young age and long expected treatment duration.</p></div>
+      </details>
+
+      <details class="qa"><summary>Can't we use Olanzapine?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Olanzapine is a reasonable alternative and also effective, but it carries a higher risk of weight gain, diabetes, and metabolic syndrome than risperidone — a real concern in a 26-year-old facing long-term maintenance treatment. It would be preferred instead of risperidone mainly if there were prominent agitation needing more sedation, or if risperidone caused intolerable hyperprolactinaemia/EPSE.</p></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of Risperidone?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>EPSE — dystonia, akathisia, parkinsonism, tardive dyskinesia (dose-dependent, less than FGA but still occurs, especially above ~6mg)</li>
+          <li>Hyperprolactinaemia — galactorrhoea, menstrual disturbance, gynaecomastia, erectile dysfunction</li>
+          <li>Metabolic — weight gain (moderate), less than olanzapine/clozapine</li>
+          <li>Postural hypotension, sedation, QTc prolongation</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>If this patient has suicidal thoughts, which medication would you give?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Lithium</span><p>There is accumulating evidence that lithium prophylaxis reduces suicide rates in patients with recurrent mood disorders, and it is specifically noted that carefully supervised lithium use is associated with a lowered risk of suicidal behaviour — an effect not necessarily shared by other mood stabilisers. There is also some evidence that clozapine can reduce suicide attempts specifically in schizophrenia/schizoaffective disorder, making it worth mentioning as an alternative consideration given this patient's diagnosis.</p></div>
+      </details>
+
+      <details class="qa"><summary>Side effects of lithium?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Fine tremor, GI upset (nausea, diarrhoea), weight gain, oedema</li>
+          <li>Polyuria/polydipsia (nephrogenic diabetes insipidus-like effect), long-term risk of chronic kidney disease</li>
+          <li>Hypothyroidism (long-term)</li>
+          <li>Cardiac — T-wave changes, arrhythmia risk</li>
+          <li>Toxicity (≥1.5mmol/L) — vomiting, diarrhoea, coarse tremor, ataxia, dysarthria; severe (&gt;2.0mmol/L) — hyperreflexia, convulsions, renal/cardiac failure</li>
+          <li>Teratogenic (cardiac malformations — Ebstein's anomaly) — caution in women of childbearing potential</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>This patient had sexual dysfunction — how do you address this?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>First clarify the likely mechanism — decreased dopamine transmission, hyperprolactinaemia, anticholinergic effects, and alpha-1 receptor blockade from the antipsychotic can all contribute (decreased libido, poor arousal, erectile/ejaculatory difficulty). Management: reduce the antipsychotic dose if possible, or switch to an agent with lower potential for sexual side effects — <strong>aripiprazole, quetiapine, or clozapine</strong> — since these cause little or no prolactin elevation. Also provide advice and reassurance, since the problem often causes secondary anxiety and relationship strain by the time it's disclosed.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you give sex therapy?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Sex therapy is a structured psychological/behavioural treatment, typically involving the couple where possible. It begins with detailed assessment of the problem and its context, followed by education and reassurance (often longstanding anxiety has built up around the problem). Core technique: <strong>sensate focus</strong> — a graded series of exercises where the couple takes turns giving non-genital, then genital, touch with an explicit initial ban on intercourse, to reduce performance anxiety and rebuild intimacy before reintroducing full sexual activity in stages. Delivered over multiple sessions with a trained therapist, alongside addressing any underlying relationship or psychological contributors.</p></div>
+      </details>
+
+      <details class="qa"><summary>Any drugs to manage the sexual dysfunction?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Beyond switching/reducing the antipsychotic: <strong>phosphodiesterase type 5 (PDE-5) inhibitors</strong> (e.g. sildenafil) are the most widely used physical treatment for erectile dysfunction, once organic contributors (diabetes, hormonal causes) are checked and other high-risk drug interactions excluded.</p></div>
+      </details>
+
+      <details class="qa"><summary>If the patient presents with poor compliance, how are you going to address this?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Explore the specific reason for poor compliance first (side effects, poor insight, substance use disrupting routine, cost, stigma) rather than assuming — then: switch to a long-acting depot antipsychotic if oral adherence is the core issue, involve family in supervising medication, psychoeducation for patient and family, address the substance use in parallel (since ongoing cannabis/methamphetamine/alcohol use both worsens psychiatric symptoms and undermines adherence), and arrange CPN/community follow-up.</p></div>
+      </details>
+
+      <details class="qa"><summary>Function of Mithuru Piyasa?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Mithuru Piyasa is a police-linked "friendly" desk service in Sri Lanka set up to support women and children, particularly around domestic violence, abuse, and family conflict — providing a safe, approachable first point of contact for reporting, counselling referral, and coordinating protective/legal action, rather than a purely punitive police response.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 14 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case14">
+      <div class="case-header">
+        <span class="case-tab">CASE 14</span>
+        <h2>Harsha Chathuranga</h2>
+      </div>
+      <div class="dx-line">Cannabis-induced Psychosis vs Schizophrenia (with alcohol use)</div>
+      <div class="background">
+        <strong>Background:</strong> Panel 1 — examiners Buddika sir and Lakshika madam. Presentation involving both cannabis use and psychotic symptoms, with alcohol use also elicited on history, and prominent negative symptoms raised for discussion.
+      </div>
+
+      <details class="qa"><summary>History and MSE?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>History structured as: presenting complaint → history of presenting illness, with particular attention to the <strong>temporal relationship</strong> between substance use and psychotic symptoms (which came first, whether symptoms persist during abstinent periods) → substance use history in detail (cannabis — age of onset, quantity, pattern, last use; alcohol — quantity/frequency, features of dependence) → past psychiatric and family history (any family history of schizophrenia strengthens the case for a primary psychotic illness rather than purely substance-induced) → premorbid personality and functioning.</p>
+        <p><strong>MSE:</strong> appearance/behaviour, speech, mood, thought form and content (delusions), perception (hallucinations), cognition, and — importantly here — a deliberate look for <strong>negative symptoms</strong> (flattened affect, poverty of speech, avolition, social withdrawal) since their presence or absence is central to the differential.</p></div>
+      </details>
+
+      <details class="qa"><summary>Diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>The working differential sits between <strong>cannabis-induced psychotic disorder</strong> and <strong>schizophrenia</strong> (with cannabis as a possible precipitant/risk factor rather than sole cause) — the final diagnosis depends on the longitudinal course, particularly whether psychotic symptoms persist beyond the expected intoxication/withdrawal window once cannabis use stops.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you differentiate cannabis-induced psychosis from schizophrenia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Key discriminators:</p>
+        <ul>
+          <li><strong>Temporal relationship</strong> — cannabis-induced psychosis typically arises during or shortly after heavy use/intoxication; schizophrenia can present independent of any temporal link to substance use, though cannabis may still have acted as a trigger in a vulnerable individual</li>
+          <li><strong>Course after abstinence</strong> — cannabis-induced psychosis usually resolves within days to a few weeks of stopping use; if florid psychotic symptoms persist well beyond this window despite confirmed abstinence, an underlying primary psychotic disorder is more likely</li>
+          <li><strong>Negative symptoms</strong> — prominent negative symptoms (flattened affect, avolition, alogia) and a background of gradual functional decline point towards schizophrenia; cannabis-induced psychosis is more often dominated by positive symptoms without this negative symptom / decline pattern</li>
+          <li><strong>Family history</strong> — a family history of schizophrenia favours an underlying primary psychotic illness</li>
+          <li><strong>Premorbid functioning</strong> — a longer history of social/occupational decline predating heavy cannabis use favours schizophrenia</li>
+        </ul>
+        <p>In practice, the diagnosis often can't be finalised at a single presentation — a period of monitored abstinence with follow-up is usually needed to see whether symptoms fully resolve.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Acute:</strong> ensure safety, treat any acute agitation with rapid tranquilization if needed, start an oral antipsychotic (e.g. risperidone) for the psychotic symptoms regardless of final attribution, since both differentials need antipsychotic treatment in the acute phase.</p>
+        <p><strong>Substance use:</strong> brief intervention — psychoeducation on the link between cannabis/alcohol and psychosis, motivational interviewing to explore readiness to change, referral to a specialist drug/alcohol rehabilitation service if dependence is confirmed.</p>
+        <p><strong>Ongoing:</strong> monitor symptom course over weeks of confirmed abstinence to help clarify the diagnosis; family psychoeducation; OT/rehabilitation input if negative symptoms or functional decline are present; regular follow-up to reassess whether long-term antipsychotic maintenance (as in schizophrenia) or time-limited treatment (as in a resolving substance-induced psychosis) is appropriate.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you manage if compliance is poor?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Explore the specific reason first (side effects, poor insight, ongoing substance use disrupting routine, cost, stigma). Then: switch to a long-acting depot antipsychotic (e.g. fluphenazine decanoate — test dose first, full dose about a week later, then 2–4 weekly) if oral adherence is the core problem; involve family in supervising medication; psychoeducation for patient and family on relapse risk; address the substance use in parallel, since continued cannabis/alcohol use both worsens psychotic symptoms and undermines treatment adherence; arrange CPN/community follow-up to catch early signs of relapse or disengagement.</p></div>
+      </details>
+
+      <details class="qa"><summary>Alcohol dependence criteria?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Per ICD-10, a diagnosis of dependence syndrome requires <strong>3 or more</strong> of the following to have been present together at some point in the previous year:</p>
+        <ul>
+          <li>A strong desire or sense of compulsion to take alcohol</li>
+          <li>Difficulty controlling drinking — onset, termination, or level of use</li>
+          <li>A physiological withdrawal state when alcohol is reduced/stopped (or drinking to relieve/avoid withdrawal symptoms)</li>
+          <li>Evidence of tolerance — needing increasing amounts to achieve the same effect</li>
+          <li>Progressive neglect of other pleasures/interests because of drinking, and increased time spent obtaining, using, or recovering from alcohol</li>
+          <li>Persisting with drinking despite clear evidence of harmful physical or mental consequences</li>
+        </ul>
+        <p>Note that dependence always implies harmful use, but harmful use can occur without meeting full dependence criteria.</p></div>
+      </details>
+
+      <details class="qa"><summary>Negative symptoms?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Classically remembered as the <strong>"four As":</strong></p>
+        <ul>
+          <li><strong>Alogia</strong> — decreased spontaneous speech / poverty of speech</li>
+          <li><strong>Avolition</strong> — decreased motivation and initiative</li>
+          <li><strong>Affective flattening</strong> — lack of emotional expressivity (distinct from depression)</li>
+          <li><strong>Anhedonia</strong> — loss of pleasure in previously enjoyable activities</li>
+        </ul>
+        <p>These are termed "negative" because they represent a loss of normal functioning (as opposed to positive symptoms — delusions and hallucinations — which are an addition to normal experience). Negative symptoms are more characteristic of chronic schizophrenia than of an acute episode or a purely substance-induced psychosis, tend to respond poorly to antipsychotic medication, and are a key target for psychosocial rehabilitation (OT, social skills training) rather than pharmacotherapy alone. Care is needed not to confuse negative symptoms with depressive symptoms or with antipsychotic-induced parkinsonism, both of which can look similar.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 15 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case15">
+      <div class="case-header">
+        <span class="case-tab">CASE 15</span>
+        <h2>Wasantha Kumara, 45M</h2>
+      </div>
+      <div class="dx-line">Alcohol Dependence with Delirium Tremens; past Cannabis use; evaluated for liver failure</div>
+      <div class="background">
+        <strong>Background:</strong> Recurring case across multiple panels. 45-year-old male with 3rd person auditory hallucinations, tactile and visual hallucinations, alcohol dependence, past cannabis history. Evaluated for liver failure. On one presentation: disoriented, tremulous, with hallucinations.
+      </div>
+
+      <details class="qa"><summary>History, MSE, risk assessment, differential diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>History should establish the pattern and quantity of alcohol use, features of dependence (see below), time since last drink (critical for withdrawal timing), past withdrawal complications (seizures, DTs), and physical health impact (liver disease). MSE would show disorientation, perceptual disturbance (visual/tactile hallucinations — "formication"-type tactile hallucinations are classic), and autonomic signs on examination.</p>
+        <p><strong>Differentials for a disoriented patient with tremor and hallucinations:</strong> delirium tremens, hepatic encephalopathy (given known/suspected liver failure), Wernicke's encephalopathy, alcohol-induced psychotic disorder (perceptions occurring in clear consciousness, unlike DTs), other causes of delirium (infection, electrolyte disturbance).</p></div>
+      </details>
+
+      <details class="qa"><summary>Disoriented patient with tremors and hallucinations — what is the diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Delirium tremens (DT)</span><p>Features: confusion, agitation, visual and tactile hallucinations, fever, tachycardia, and raised blood pressure — typically developing 24–72 hours after stopping alcohol, the period of highest risk. Clinical features and liver function tests help differentiate delirium due to liver failure from delirium tremens, which matters here given his known liver evaluation.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management of delirium tremens?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Manage ideally in a medical/ICU setting, in a calm environment with minimal excess light/sound/stimulation, adequate nutrition and hydration, and monitoring of vital signs. A <strong>titrating dose regimen of a benzodiazepine</strong> is used — the dose is titrated hourly against severity of symptoms to keep the patient sedated and prevent autonomic hyperactivity, continuing until asymptomatic.</p>
+        <p><strong>Given evidence of liver failure specifically: use lorazepam</strong> (or oxazepam) rather than chlordiazepoxide/diazepam — these shorter-acting benzodiazepines are metabolised by glucuronidation, which is not significantly affected by liver impairment, avoiding drug accumulation and over-sedation.</p></div>
+      </details>
+
+      <details class="qa"><summary>If giving chlordiazepoxide, how do you give it? Doses?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>For DT (in a patient without significant liver impairment): a titrating regimen — chlordiazepoxide <code>5–40mg every 2–3 hours</code>, titrated to the severity of withdrawal symptoms (higher than the dose used for uncomplicated withdrawal), continued until the patient is asymptomatic.</p>
+        <p>For uncomplicated withdrawal (tapering regimen, for context): typically <code>60–120mg/day</code> in divided doses (6–8 hourly), tapered off over 5–7 days — e.g. Day 1: 30mg mane, 30mg noon, 40mg nocte, reducing daily to complete omission by around day 6.</p></div>
+      </details>
+
+      <details class="qa"><summary>Potential risk with DT?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Wernicke's encephalopathy</span><p>Alongside withdrawal seizures — both are recognised complications of complicated alcohol withdrawal.</p></div>
+      </details>
+
+      <details class="qa"><summary>Pharmacological management of Wernicke's encephalopathy? Why thiamine? Why vitamin B1 deficiency occurs?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Thiamine (Vitamin B1)</strong> — given parenterally, as intravenous thiamine <code>400–600mg three times a day for 2 days</code>, followed by <code>200–300mg/day for 5 days</code>. Since IV administration carries a small anaphylaxis risk, it should only be given where resuscitation facilities are available. Thiamine should always precede glucose administration in an at-risk patient, since glucose can precipitate or worsen Wernicke's encephalopathy in a thiamine-deficient state.</p>
+        <p><strong>Why B1 deficiency occurs:</strong> chronic heavy alcohol use leads to poor dietary intake, reduced GI absorption of thiamine, and impaired hepatic storage/utilisation — alcohol itself also directly impairs thiamine absorption in the gut.</p></div>
+      </details>
+
+      <details class="qa"><summary>Diagnosis and management overall — how do you address poor compliance? What drugs? Alcohol dependence management overall?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Poor compliance:</strong> explore the reason (ambivalence, ongoing craving, poor insight into dependence, lack of social support), engage family/community support, use motivational interviewing to build readiness for change rather than confrontation.</p>
+        <p><strong>Long-term management of alcohol dependence:</strong> combines psychosocial and pharmacological approaches — psychoeducation, motivational enhancement therapy, relapse prevention (identifying triggers/high-risk situations, urge surfing, refusal skills training), CBT, and self-help groups (Alcoholics Anonymous). Pharmacologically: <strong>acamprosate</strong> (reduces craving by normalising glutamate/GABA balance, dosed by body weight — e.g. 666mg three times daily if &gt;60kg — continued ≥6 months) or <strong>naltrexone</strong> (opioid antagonist, blocks the reinforcing/rewarding effects of alcohol, reduces relapse and heavy drinking days) — both are more effective combined with psychological therapy than alone.</p></div>
+      </details>
+
+      <details class="qa"><summary>What happens if disulfiram is taken with alcohol?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Disulfiram inhibits aldehyde dehydrogenase, so if alcohol is consumed, acetaldehyde accumulates, producing an unpleasant and potentially dangerous reaction: facial flushing, throbbing headache, palpitations, tachycardia, nausea and vomiting — and in vulnerable patients, hypotension, collapse, arrhythmias, and rarely death. It works as a deterrent rather than reducing craving itself, so it suits motivated patients who want additional external support, ideally with supervised administration.</p></div>
+      </details>
+
+      <details class="qa"><summary>Non-pharmacological management of alcohol dependence — how do you do CBT / manage craving?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Urge surfing</strong> — teaching the patient to let cravings occur, peak, and pass without either fighting or giving in to them, treating the urge as a wave to be "ridden out" rather than resisted or acted upon.<br><strong>Distraction techniques</strong> — engaging in an alternative activity, drinking a non-alcoholic beverage, or discussing the craving with another person until it passes. Both techniques are combined with identifying and planning for high-risk situations and training in substance refusal skills.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 16 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case16">
+      <div class="case-header">
+        <span class="case-tab">CASE 16</span>
+        <h2>Herath, 40M (Kurunegala)</h2>
+      </div>
+      <div class="dx-line">Bipolar Affective Disorder, current episode severe depression with psychotic symptoms</div>
+      <div class="background">
+        <strong>Background:</strong> Recurring case across multiple panels. Unmarried, lives with parents and brother. Known psychiatric patient, recently defaulted follow-up and medication. Admitted 2–3 weeks after a hanging attempt, with persistent low mood, lack of energy, anhedonia. Past 2–3 suicide attempts (paracetamol and kerosene ingestion). Grandiose delusions (believes he can change skin texture, prolong someone's lifespan). Past history of manic episodes and past ECT; on lithium, following up at Kurunegala. Cognitive errors of overgeneralisation and minimisation; negative cognitions of guilt, worthlessness, hopelessness. Tremor on MSE. Some versions: denies elevated mood/reduced sleep but reports past excessive spending.
+      </div>
+
+      <details class="qa"><summary>Full history, MSE, risk assessment?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>History covers HOPC of the current depressive presentation, past psychiatric history (manic episodes, past ECT, lithium follow-up), forensic/social history, and specifically probes for current or past hypomanic/manic features (elevated mood, decreased need for sleep, overspending, grandiosity) even when not spontaneously volunteered — since these determine whether this is unipolar or bipolar depression.</p>
+        <p><strong>MSE:</strong> psychomotor changes, tremor (noted on exam — could reflect lithium, anxiety, or alcohol withdrawal), mood, grandiose delusional content, cognitive errors (overgeneralisation, minimisation), negative cognitions (guilt, worthlessness, hopelessness).</p>
+        <p><strong>Risk assessment:</strong> very high — multiple past attempts by different methods, a recent near-lethal attempt (hanging), ongoing anhedonia/hopelessness, and grandiose delusions which could paradoxically increase risk-taking behaviour.</p></div>
+      </details>
+
+      <details class="qa"><summary>Probable diagnosis, and why? Why not unipolar depression?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Bipolar affective disorder, current episode severe depression with psychotic symptoms</span><p>Justified by the documented past manic episode(s) — the presence of even one past manic episode means any subsequent depressive episode is classified under bipolar disorder rather than recurrent depressive disorder, regardless of how the current episode presents. The grandiose delusions here are mood-incongruent/psychotic features layered on a severe depressive episode.</p></div>
+      </details>
+
+      <details class="qa"><summary>Other differentials, considering the psychotic symptoms?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Schizoaffective disorder — if psychotic and mood symptoms are not clearly concurrent/proportionate</li>
+          <li>Severe depressive episode with psychotic symptoms (if the manic history were less clear-cut)</li>
+          <li>Substance-induced mood/psychotic disorder — given his alcohol/substance history in some versions of the case</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>What would you clarify further on collateral history?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Detailed timeline and clear-cut features of any manic episode (duration, functional impact, whether it required treatment/admission), medication adherence pattern before the current relapse, alcohol/substance use pattern, and any family history of bipolar disorder.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you manage this patient?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Setting:</strong> admission given very high suicidal risk.<br><strong>Education:</strong> psychoeducation of patient and family about bipolar illness, its recurring nature, and the importance of long-term adherence.<br><strong>Risk management:</strong> close observation, means restriction.<br><strong>Pharmacological:</strong> as below.</p></div>
+      </details>
+
+      <details class="qa"><summary>Pharmacological management — what do you check before starting/continuing lithium?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Check <strong>serum lithium level</strong> and optimise the dose — since he's already on lithium and has relapsed, either the level is subtherapeutic (compliance or dosing issue) or he needs augmentation. Baseline/monitoring investigations before (re)starting lithium: renal function (U&amp;E, creatinine), thyroid function tests, ECG if cardiac risk factors, pregnancy test if relevant, and baseline weight.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why check lithium level? What happens if lithium is given without checking the level?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Because the therapeutic and toxic doses of lithium are close together, plasma levels must be measured to keep dosing within the narrow therapeutic window. Without checking, the patient risks either being subtherapeutic (no benefit, ongoing relapse) or developing <strong>toxicity</strong> — coarse tremor, ataxia, dysarthria, vomiting, diarrhoea, progressing to hyperreflexia, convulsions, renal and cardiac failure if severe.</p></div>
+      </details>
+
+      <details class="qa"><summary>If not responding to lithium, what other drugs? Why quetiapine? Sodium valproate side effects?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>If inadequate response to lithium: add or switch to <strong>quetiapine</strong> — an atypical antipsychotic with evidence for efficacy in both bipolar depression and mania, useful here given the psychotic features. Accepted side effect to highlight: <strong>sedation</strong>.</p>
+        <p><strong>Sodium valproate side effects</strong> (if raised as an alternative mood stabiliser): GI upset, tremor, sedation, weight gain, hair thinning, raised transaminases, thrombocytopenia, rare pancreatitis, teratogenicity — avoid in women of childbearing potential where possible.</p>
+        <p>Antidepressants are used cautiously in bipolar depression — venlafaxine in particular carries a higher risk of destabilising mood/triggering rapid cycling compared with SSRIs, so this needs to be weighed carefully if an antidepressant is considered.</p></div>
+      </details>
+
+      <details class="qa"><summary>What other antipsychotics can be considered? Non-pharmacological management? Role of CPN/PSW/OT?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Other options: olanzapine, or combination strategies (e.g. quetiapine + lamotrigine for bipolar depression specifically, since lamotrigine is more effective at preventing depressive than manic relapse).</p>
+        <p><strong>Non-pharmacological:</strong> CBT targeting the negative cognitions and cognitive errors identified (overgeneralisation, minimisation), family psychoeducation, relapse-signature planning.</p>
+        <p><strong>MDT roles:</strong> <strong>CPN</strong> — community follow-up, monitoring compliance and early relapse signs; <strong>PSW</strong> — social/family assessment and support, addressing psychosocial stressors; <strong>OT</strong> — functional assessment and rehabilitation; <strong>psychiatrist</strong> — overall diagnostic and pharmacological responsibility, coordinating the team.</p></div>
+      </details>
+
+      <details class="qa"><summary>What can you do more, given the high suicidal risk?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">ECT</span><p>Given very high suicidal risk with a recent near-lethal attempt, ECT should be considered — it acts faster than medication, which matters when the risk to life is immediate.</p></div>
+      </details>
+
+      <details class="qa"><summary>What about his alcohol use? Features of Wernicke's encephalopathy to check for?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Take a full alcohol history and manage any dependence/harmful use alongside the mood disorder (see Case 15 for detoxification protocol). Screen for <strong>Wernicke's encephalopathy</strong> — the classic triad is confusion, ataxia, and ophthalmoplegia/nystagmus — though the full triad is present in only a minority of cases, so a high index of suspicion is needed in any patient with significant alcohol use.</p></div>
+      </details>
+
+      <details class="qa"><summary>If he later got a security job, what would you advise? (agreeing with sleep deprivation as a risk)<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Advise caution — shift work disrupting his sleep routine is a recognised trigger for relapse into mania in bipolar disorder, so a role with irregular/night shifts would carry real relapse risk; regular sleep-wake routine should be emphasised as part of relapse prevention, and this should be discussed openly with him when considering future employment.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 17 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case17">
+      <div class="case-header">
+        <span class="case-tab">CASE 17</span>
+        <h2>Udara, 28M (Thambuththegama)</h2>
+      </div>
+      <div class="dx-line">Obsessive-Compulsive Disorder comorbid with moderate depression (± social phobia)</div>
+      <div class="background">
+        <strong>Background:</strong> University graduate, cooperative. Obsessional thoughts, obsessional doubts, obsessional slowness, with counting and checking rituals. An overvalued idea had developed that an external force controlled him, which he came to understand better after watching a YouTube video about OCD. On MSE: restless behaviour; mood subjectively normal but objectively anxious in one panel version.
+      </div>
+
+      <details class="qa"><summary>History and MSE?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>History up to family history, then focus on positive findings: obsessional thoughts (recurrent, intrusive, recognised by the patient as his own and resisted, at least initially), obsessional doubts, obsessional slowness, and the checking/counting compulsions performed to reduce the anxiety these generate.</p>
+        <p><strong>MSE:</strong> important to describe restless/anxious behaviour, and to explicitly cover thought content in full — not just "obsessional thoughts" but also ruminations and any other obsessional phenomena — since MSE presentation was marked down in one panel for being incomplete on this point. Mood should be assessed both subjectively and objectively; a mismatch (e.g. subjectively "normal" but objectively anxious) is worth commenting on rather than smoothing over.</p></div>
+      </details>
+
+      <details class="qa"><summary>Diagnosis and other differentials?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">OCD comorbid with moderate depression (± social phobia)</span><p>Other differentials to mention: depressive disorder with secondary obsessional symptoms (obsessions can occur as a feature of depression itself), and psychotic disorder causing obsessions (relevant here given the transient overvalued idea of external control — needs to be distinguished from a true delusion of control; the patient's own insight, reinforced after learning about OCD, supports OCD over a psychotic process).</p></div>
+      </details>
+
+      <details class="qa"><summary>Problem list and management — outpatient or inpatient?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Outpatient management</strong> is appropriate here given preserved insight, no significant risk, and reasonable functioning. Problem list: obsessional rituals affecting daily functioning, moderate depressive symptoms, possible social avoidance.</p></div>
+      </details>
+
+      <details class="qa"><summary>Pharmacological management — SSRI choice, dose, side effects, dose increase?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Sertraline</strong> (or fluoxetine) as first-line SSRI — dose range <code>50–200mg/day</code>, started low and titrated. Antidepressant/anti-obsessional effect can take longer to appear in OCD than in depression — clinical improvement may need <strong>10–12 weeks</strong>, and patients with OCD may need the higher end of the dose range.</p>
+        <p><strong>If symptoms haven't settled after 1 week:</strong> this is far too early to judge — response is not expected this quickly, so continue the current dose and reassess properly at 2–3 weeks before considering any change, rather than increasing prematurely.</p>
+        <p><strong>If inadequate response after an adequate trial</strong> (8–12 weeks including 4–6 weeks at maximum tolerated dose): increase to the maximum tolerated dose first if not already there; if still inadequate, consider switching to another SSRI, or to clomipramine, or augmenting with a low-dose atypical antipsychotic (e.g. risperidone).</p></div>
+      </details>
+
+      <details class="qa"><summary>Sexual dysfunction as a side effect — how do you manage? Loss of libido / delayed ejaculation with fluoxetine?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>SSRIs commonly cause delayed ejaculation, erectile dysfunction, and loss of libido. Management: first confirm the side effect is genuinely drug-related and not part of the underlying depressive picture, then consider dose reduction if clinically feasible, or <strong>switching to an antidepressant with a lower sexual side-effect burden</strong> (e.g. clomipramine actually tends to cause more sexual dysfunction than SSRIs, so this needs care — options with a lower burden generally include mirtazapine or agomelatine outside the OCD-specific first-line agents). Psychoeducation, reassurance, and — where relevant — referral for sex therapy/psychological input can help alongside any pharmacological adjustment.</p></div>
+      </details>
+
+      <details class="qa"><summary>Non-pharmacological management — how is CBT/exposure and response prevention done?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Exposure and response prevention (ERP):</strong> the patient is gradually and systematically exposed to situations/cues that trigger obsessional anxiety (exposure), while being supported to resist performing the compulsive ritual that would normally follow (response prevention) — allowing the anxiety to rise and then naturally subside without the ritual, which over repeated sessions weakens the learned link between the trigger and the compulsion. Delivered via weekly sessions with daily homework, typically over 13–20 weeks, starting with less distressing items on a hierarchy and progressing to more difficult ones (graded exposure). Family members are educated not to provide reassurance or participate in rituals, as this undermines treatment.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 18 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case18">
+      <div class="case-header">
+        <span class="case-tab">CASE 18</span>
+        <h2>Ajith Kumara, 38M</h2>
+      </div>
+      <div class="dx-line">Alcohol Dependence (managed in the community) + Nicotine dependence, with a Haematemesis episode</div>
+      <div class="background">
+        <strong>Background:</strong> Managed in the community following a haematemesis episode; also has nicotine dependence. Went home during the assessment process (managed as an outpatient/community case rather than admitted).
+      </div>
+
+      <details class="qa"><summary>History, MSE, physical examination?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Full alcohol history (pattern, quantity, dependence features, complications), nicotine use history, and physical examination specifically looking for signs of chronic liver disease (jaundice, spider naevi, palmar erythema, hepatomegaly/splenomegaly, ascites) given the haematemesis — a red flag for variceal bleeding or gastritis/peptic ulcer disease related to alcohol use.</p></div>
+      </details>
+
+      <details class="qa"><summary>Diagnosis and differentials? Problem list?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Alcohol dependence syndrome</strong> with a physical complication (haematemesis — needs urgent medical/gastroenterology evaluation for varices vs gastritis/ulcer) and comorbid nicotine dependence.</p>
+        <p><strong>Problem list, organised by system:</strong></p>
+        <ul>
+          <li><strong>Alcohol-related disorders:</strong> liver disease (haematemesis, possible cirrhosis/portal hypertension), cardiovascular effects (cardiomyopathy, hypertension), psychiatric — dependence itself, possible cognitive impairment</li>
+          <li>Nicotine dependence — added cardiovascular and respiratory risk</li>
+          <li>Social/occupational impact of ongoing alcohol use</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>Psychotherapy components?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Motivational enhancement therapy (building readiness to change), CBT-based relapse prevention (identifying triggers/high-risk situations, urge surfing, refusal skills training), family/couples-based approaches, and encouragement toward self-help groups (Alcoholics Anonymous).</p></div>
+      </details>
+
+      <details class="qa"><summary>Pharmacotherapy — anti-craving agents?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Baclofen</strong> — a GABA-B receptor agonist used off-label in some settings as an anti-craving agent for alcohol dependence.<br><strong>Acamprosate</strong> — reduces craving by normalising glutamate/GABA balance; dosed by body weight (e.g. 666mg tds if &gt;60kg), continued for 6 months or more, most effective once abstinence has already been achieved for about a week.<br>Other options include naltrexone (opioid antagonist, reduces the reinforcing effect of alcohol) and disulfiram (deterrent-based, via aldehyde dehydrogenase inhibition) — all are more effective combined with psychosocial therapy than used alone.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 19 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case19">
+      <div class="case-header">
+        <span class="case-tab">CASE 19</span>
+        <h2>Rizwan</h2>
+      </div>
+      <div class="dx-line">Psychosis with a background of Head Injury — Organic Psychosis on the differential</div>
+      <div class="background">
+        <strong>Background:</strong> From Kurunegala. Thought insertion, thought withdrawal, delusion of control (described the fan as controlling him), grandiose delusions, persecutory delusions. History of head injury in 2013.
+      </div>
+
+      <details class="qa"><summary>Given the head injury history, what could this be? What do you call this condition?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Organic psychosis (psychotic disorder due to a known physiological condition)</span><p>A head injury is a recognised cause of a secondary/organic psychotic disorder — psychotic symptoms arising as a direct physiological consequence of brain injury, as opposed to a primary psychotic illness like schizophrenia. This diagnosis requires demonstrating a plausible causal/temporal link between the injury and the psychotic symptoms, and appropriate investigation (neuroimaging, physical/neurological examination) to support an organic attribution rather than assuming it purely from the history.</p></div>
+      </details>
+
+      <details class="qa"><summary>Functions of the brain lobes?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li><strong>Frontal lobe:</strong> executive function, personality, impulse control, motor function, expressive speech (Broca's area) — frontal lobe injury classically causes personality change, disinhibition, and poor planning/judgement</li>
+          <li><strong>Temporal lobe:</strong> memory, receptive language (Wernicke's area), auditory processing — implicated in some psychotic and mood symptoms, and in temporal lobe epilepsy-related psychiatric presentations</li>
+          <li><strong>Parietal lobe:</strong> sensory integration, spatial awareness</li>
+          <li><strong>Occipital lobe:</strong> visual processing</li>
+        </ul>
+        <p>Head injury affecting frontal or temporal regions in particular can produce personality change and psychotic-type symptoms, relevant to considering an organic contribution here.</p></div>
+      </details>
+
+      <details class="qa"><summary>How do you take the history around the injury itself?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Ask specifically about the mechanism and severity of the head injury (loss of consciousness, duration, any skull fracture, whether a "head bump" or visible injury was noted at the time), any post-traumatic amnesia, prior neurological/psychiatric assessment following the injury, and the interval between the injury and the onset of psychotic symptoms — a close temporal relationship strengthens an organic causal link.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management — main steps?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Kept concise to the core steps: exclude/confirm an organic cause (physical examination, neuroimaging, relevant investigations) in parallel with treating the acute psychotic symptoms (antipsychotic medication), ensure safety, involve neurology/medical teams if an organic contribution is confirmed, and psychoeducation/follow-up once stabilised.</p></div>
+      </details>
+
+      <details class="qa"><summary>Why do you take a collateral history?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Psychotic patients often have impaired insight and an unreliable or incomplete account of their own symptoms and history — collateral history from family fills gaps in timeline (including confirming details of the head injury and its aftermath), verifies substance use and compliance, and helps distinguish between competing differentials (organic vs primary psychotic vs substance-induced) that the patient's own account alone cannot resolve.</p></div>
+      </details>
+
+      <details class="qa"><summary>Aggressive patient management? Poor compliance management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>As detailed in earlier cases — verbal de-escalation first, rapid tranquilization (oral first, then IM haloperidol + promethazine, or IM olanzapine) if needed, with monitoring for EPSE and vital signs. Poor compliance addressed via exploring the specific cause, family supervision, depot antipsychotic if oral adherence is the core issue, and CPN follow-up.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 20 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case20">
+      <div class="case-header">
+        <span class="case-tab">CASE 20</span>
+        <h2>Madushanka</h2>
+      </div>
+      <div class="dx-line">Schizophrenia comorbid with Severe Depression (prominent negative symptoms)</div>
+      <div class="background">
+        <strong>Background:</strong> 2nd person auditory hallucinations, thought insertion, ± visual hallucinations, high suicidal risk. The depressive component was uncertain on presentation — possibly reflecting prominent negative symptoms rather than a true comorbid depressive episode.
+      </div>
+
+      <details class="qa"><summary>History, MSE, risk assessment?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Full history and MSE presented without interruption in this panel — a reminder that examiners will sometimes let the candidate run the full structure uninterrupted, so a clear, systematic, well-organised presentation (appearance/behaviour → speech → mood → thought → perception → cognition → insight, then risk) matters even more when there's no prompting.</p>
+        <p><strong>Risk assessment:</strong> high suicidal risk given the presentation — explore intent, plan, access to means, and protective factors explicitly.</p></div>
+      </details>
+
+      <details class="qa"><summary>Distinguishing negative symptoms from a true comorbid depressive episode here?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>This distinction is genuinely difficult and worth acknowledging as such. Pointers towards negative symptoms rather than depression: flattened affect without the subjective distress/low mood that patients with depression typically report, avolition without pervasive guilt or hopelessness, and a chronic stable pattern rather than an episodic depressive course. Pointers towards true comorbid depression: patient-reported low mood, guilt, hopelessness, and biological symptoms (sleep/appetite change) alongside the psychotic features. The Calgary Depression Scale for Schizophrenia is a validated tool designed specifically to help make this distinction in clinical practice.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management? How do you manage the suicidal risk?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Admission given high suicidal risk, close observation, means restriction, treat the underlying psychotic/depressive presentation pharmacologically, and involve the MDT (psychiatrist, CPN, PSW, OT) for a comprehensive plan. If risk remains very high despite antipsychotic/antidepressant treatment, ECT can be considered given its faster onset of action.</p></div>
+      </details>
+
+      <details class="qa"><summary>Olanzapine maximum dose?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><code>20mg/day</code> is the standard maximum oral dose for schizophrenia/acute mania.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 21 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case21">
+      <div class="case-header">
+        <span class="case-tab">CASE 21</span>
+        <h2>28M, "chip-controlling-thoughts" delusion (also presented as Udan, 26M)</h2>
+      </div>
+      <div class="dx-line">Schizoaffective Disorder + Polysubstance Use Disorder</div>
+      <div class="background">
+        <strong>Background:</strong> Unemployed, chronic mental illness for 5 years, on monthly IM depot antipsychotic. Polysubstance use disorder with dependence present, no current withdrawal symptoms, last use of all substances 2 months ago. Bizarre delusion (believes a chip is controlling his thoughts), thought insertion, thought echo, running commentary auditory hallucinations, grandiose delusion, persecutory delusion, delusion of control.
+      </div>
+
+      <details class="qa"><summary>History, MSE, risk assessment, diagnosis?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Schizoaffective disorder</span><p>Justified by the presence of affective symptoms alongside definite first-rank symptoms of schizophrenia (thought insertion, thought echo, running commentary hallucinations) occurring together — meeting the requirement that both symptom clusters be prominent and concurrent, not just present at different points in the illness course.</p></div>
+      </details>
+
+      <details class="qa"><summary>How will you confirm the psychotic symptoms are not due to substance use?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">Urine toxicology screening</span><p>For cannabis and other substances — noting that cannabis metabolites can remain detectable in urine for about 3–4 weeks in chronic/heavy users, so timing of the test relative to last use needs to be considered when interpreting a negative result.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management — from collateral history through to considering clozapine?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Structured as: collateral history (confirm timeline, substance pattern, medication adherence) → relevant investigations (FBC, LFT, RFT, FBS, lipid profile — baseline and metabolic monitoring given long-term antipsychotic use) → acute management (address any acute risk/agitation) → long-term management (optimise current depot, address substance use) → escalation to clozapine if treatment resistance is confirmed (inadequate response to two adequate antipsychotic trials).</p></div>
+      </details>
+
+      <details class="qa"><summary>Is he able to take clozapine, given he's already on a depot IM antipsychotic?<span class="chevron">›</span></summary>
+        <div class="qa-body"><span class="a-label">No — not straightforwardly</span><p>Clozapine requires very close initial monitoring (physical observation for hypotension, weekly FBC initially) and a controlled, gradual oral titration — this doesn't combine cleanly with an existing long-acting depot still active in his system, and starting clozapine typically requires the prior antipsychotic to be tapered/stopped first, with the decision made by a consultant psychiatrist after confirming genuine treatment resistance and adequate adherence to rule out poor compliance as the real reason for relapse.</p></div>
+      </details>
+
+      <details class="qa"><summary>Reasons for relapse?<span class="chevron">›</span></summary>
+        <div class="qa-body"><ul>
+          <li>Ongoing substance use</li>
+          <li>Poor medication adherence</li>
+          <li>Living alone / poor social support</li>
+        </ul></div>
+      </details>
+
+      <details class="qa"><summary>Non-pharmacological management for the substance use?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Motivational interviewing</strong> — exploring and building his own motivation to change rather than confronting or lecturing.</p></div>
+      </details>
+
+      <details class="qa"><summary>(Related presentation) Reasons for poor compliance? Modecate dose and form? If poor compliance to Modecate, what next? How to manage cannabis dependence?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Reasons for poor compliance:</strong> poor insight, substance use disrupting routine, side-effect burden, lack of social support, cost/access issues.</p>
+        <p><strong>Modecate (fluphenazine decanoate):</strong> available as an oily IM injection; test dose first (~12.5mg), full dose 4–7 days later, then continued every 2–4 weeks, titrated by response.</p>
+        <p><strong>If poor compliance persists despite depot:</strong> intensify <strong>community psychiatric nurse (CPN)</strong> follow-up — home visits, directly observed administration, closer monitoring for early relapse signs — and involve family supervision.</p>
+        <p><strong>Cannabis dependence management:</strong> motivational interviewing, psychoeducation on the link between cannabis and relapse/poor treatment response, referral to specialist substance use services if needed.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CASE 22 -->
+    <!-- ============================================================ -->
+    <section class="case" id="case22">
+      <div class="case-header">
+        <span class="case-tab">CASE 22</span>
+        <h2>Harishchandra, 28M (Kalawewa / Mihinthale)</h2>
+      </div>
+      <div class="dx-line">Schizophrenia vs Substance-Induced Psychosis, progressing through treatment resistance to Clozapine</div>
+      <div class="background">
+        <strong>Background:</strong> Unemployed, admitted by family/police following aggression. Thought insertion, thought withdrawal (no thought broadcasting or thought echo). 3rd and 2nd person auditory hallucinations for 3 months. Dependence on cannabis and alcohol, last intake of both 2 months ago; also past use of heroin (once), pregabalin, methamphetamine, and other substances in some versions.
+      </div>
+
+      <details class="qa"><summary>History, MSE — any important points? Risk assessment?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>History up to past psychiatric history, with specific attention to any important positive finding elsewhere in the history (e.g. forensic history given police involvement, or specific substance use timeline). MSE as standard. Risk assessment sometimes not explicitly asked in this panel sequence, but should still be considered/mentioned proactively — given aggression severe enough to prompt police involvement, risk to others is a key feature here.</p></div>
+      </details>
+
+      <details class="qa"><summary>Diagnosis and differentials? How do you differentiate substance-induced psychosis from schizophrenia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Differentials:</strong> schizophrenia vs schizoaffective disorder vs substance-induced psychosis.</p>
+        <p><strong>Key differentiator:</strong> the psychotic symptoms here <strong>preceded</strong> the substance misuse in timeline / persisted independent of the pattern of substance use — when the psychotic symptoms clearly predate or continue well beyond the expected window of intoxication/withdrawal, this favours an underlying primary psychotic disorder over a purely substance-induced picture.</p></div>
+      </details>
+
+      <details class="qa"><summary>How does cannabis affect schizophrenia?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Cannabis use in patients with schizophrenia is associated with a <strong>higher relapse rate</strong> and <strong>poorer response to treatment</strong> — it doesn't just trigger episodes but appears to worsen the overall course and treatment responsiveness of the illness.</p></div>
+      </details>
+
+      <details class="qa"><summary>Management — treatment setting through to pharmacological management?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Start from deciding the treatment setting (admission given aggression/police involvement), then collateral history and past records review, then pharmacological management: <strong>Risperidone 2mg</strong> with side effects (EPSE, hyperprolactinaemia) discussed.</p></div>
+      </details>
+
+      <details class="qa"><summary>If no response to Risperidone, what next? If no response to that?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p>Switch to <strong>olanzapine</strong> if risperidone at an adequate dose/duration is inadequate. If olanzapine also fails at an adequate trial, this now meets criteria for <strong>treatment-resistant schizophrenia</strong> (inadequate response to two antipsychotics at adequate dose and duration) — manage with <strong>clozapine</strong>.</p></div>
+      </details>
+
+      <details class="qa"><summary>Clozapine — doses, monitoring, side effects to watch for?<span class="chevron">›</span></summary>
+        <div class="qa-body"><p><strong>Starting dose:</strong> <code>12.5mg nocte</code>, titrated slowly (12.5–25mg increments, 50–100mg/week increases), most respond at <code>300–450mg/day</code>, maximum <code>900mg/day</code>.</p>
+        <p><strong>Baseline investigations before starting:</strong> weight, serum lipids, fasting blood sugar, LFTs, FBC, ECG, echocardiogram. Admit to hospital to start, given risk of hypotension after the initial dose — monitor BP, temperature, and pulse in the first 6 hours.</p>
+        <p><strong>Key side effects to monitor for:</strong> <strong>agranulocytosis/neutropenia</strong> (weekly FBC for the first 18 weeks, then monthly), <strong>paralytic ileus</strong> from hypersalivation/constipation-related bowel hypomotility — identified on abdominal exam by <strong>abdominal mass and absent bowel sounds</strong> — and <strong>myocarditis</strong>, which can present with <strong>fever</strong> as an early warning sign and requires urgent cardiac assessment.</p></div>
+      </details>
+      <div class="case-divider"></div>
+    </section>
+
+    <div class="end-note">
+      Compiled for exam revision from Shorter Oxford Textbook of Psychiatry and Hanwella &amp; de Silva's Handbook of Clinical Psychiatry. Cross-check drug doses against current local formulary/guidelines before clinical use — this is a study aid, not a prescribing reference.
+      <br><br>
+      © Udana Anjana. All rights reserved.
+    </div>
+
+  </main>
+</div>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('nav-toggle');
+    var menuBtn = document.querySelector('.menu-btn');
+    var navLinks = document.querySelectorAll('.case-nav a');
+
+    // keyboard support for the label-as-button
+    if(menuBtn){
+      menuBtn.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          toggle.checked = !toggle.checked;
+        }
+      });
+    }
+
+    // close the off-canvas menu once a case is chosen
+    navLinks.forEach(function(link){
+      link.addEventListener('click', function(){
+        if(toggle) toggle.checked = false;
+      });
+    });
+  })();
+</script>
+</body>
+</html>

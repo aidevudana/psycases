@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Universal Psychiatric History Template — Long Case Viva</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#faf8f4; --panel:#ffffff; --ink:#241f1a; --ink-soft:#5b5348;
+    --accent:#7a3b2e; --accent-soft:#b8a08f; --line:#e4ddd2;
+    --ox:#7a3b2e; --hb:#2e5e4e; --bnf:#1f4e79; --tip:#8a6d1f;
+    font-size:16px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',sans-serif; line-height:1.55;
+  }
+  h1,h2,h3,h4{ font-family:'Source Serif 4',serif; font-weight:700; color:var(--accent); }
+  .layout{ display:flex; min-height:100vh; }
+
+  /* Sidebar */
+  nav.sidebar{
+    width:250px; flex-shrink:0; background:var(--panel);
+    border-right:1px solid var(--line); padding:24px 16px;
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  nav.sidebar h2{ font-size:1.05rem; margin:0 0 14px; }
+  nav.sidebar a{
+    display:block; padding:7px 10px; margin-bottom:2px; border-radius:6px;
+    color:var(--ink-soft); text-decoration:none; font-size:0.88rem; font-weight:500;
+  }
+  nav.sidebar a:hover{ background:var(--bg); color:var(--accent); }
+
+  #drawer-toggle{ display:none; }
+  .drawer-btn{ display:none; }
+
+  main{ flex:1; max-width:900px; margin:0 auto; padding:36px 40px 100px; }
+  header.top{ margin-bottom:28px; border-bottom:2px solid var(--accent); padding-bottom:14px; }
+  header.top p{ color:var(--ink-soft); font-size:0.92rem; margin:4px 0 0; }
+
+  section.block{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px 26px; margin-bottom:22px;
+  }
+  section.block h2{ font-size:1.3rem; margin-top:0; display:flex; align-items:center; gap:10px; }
+  section.block h2 .num{
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem; background:var(--accent);
+    color:#fff; padding:2px 8px; border-radius:20px;
+  }
+  section.block h3{ font-size:1.02rem; color:var(--ink); margin:18px 0 8px; }
+
+  ul{ margin:6px 0 10px 0; padding-left:20px; }
+  li{ margin-bottom:4px; }
+
+  table{ width:100%; border-collapse:collapse; margin:10px 0 16px; font-size:0.88rem; }
+  th,td{ border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+  th{ background:var(--bg); font-family:'Inter'; font-weight:600; }
+
+  .tip{
+    background:#fbf6ea; border-left:3px solid var(--tip); padding:8px 12px;
+    font-size:0.85rem; border-radius:0 6px 6px 0; margin:8px 0;
+  }
+  .tip b{ color:var(--tip); }
+
+  .src{
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; font-weight:500;
+    padding:1px 6px; border-radius:4px; color:#fff; margin-left:4px; white-space:nowrap;
+  }
+  .src.ox{ background:var(--ox); }
+  .src.hb{ background:var(--hb); }
+  .src.bnf{ background:var(--bnf); }
+
+  .quote{ font-style:italic; color:var(--ink-soft); }
+
+  details{ border:1px solid var(--line); border-radius:8px; margin:8px 0; padding:0; }
+  details summary{
+    cursor:pointer; padding:9px 14px; font-weight:600; font-size:0.9rem;
+    background:var(--bg); border-radius:8px; list-style:none;
+  }
+  details summary::-webkit-details-marker{ display:none; }
+  details summary::before{ content:"▸ "; color:var(--accent); }
+  details[open] summary::before{ content:"▾ "; }
+  details .content{ padding:12px 16px; font-size:0.9rem; }
+
+  footer{ text-align:center; color:var(--ink-soft); font-size:0.78rem; padding:30px 0; }
+
+  @media (max-width:820px){
+    nav.sidebar{ display:none; }
+    main{ padding:20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="sidebar">
+  <h2>Contents</h2>
+  <a href="#intro">1. Introduction</a>
+  <a href="#pc">2. Presenting Complaint</a>
+  <a href="#hpc">3. History of PC</a>
+  <a href="#fh">4. Family History</a>
+  <a href="#ph">5. Personal History</a>
+  <a href="#ppsych">6. Past Psychiatric Hx</a>
+  <a href="#pmed">7. Past Medical Hx</a>
+  <a href="#psurg">8. Past Surgical Hx</a>
+  <a href="#premorbid">9. Premorbid Personality</a>
+  <a href="#risk">10. Risk Assessment</a>
+  <a href="#mse">11. Mental State Exam</a>
+</nav>
+
+<main>
+<header class="top">
+  <h1>Universal Psychiatric History Template</h1>
+  <p>Long-case viva reference — structured order, key questions, and examiner-ready framing.
+  Sources: <span class="src ox">OX</span> Shorter Oxford Textbook of Psychiatry ·
+  <span class="src hb">HB</span> Hanwella's Handbook of Clinical Psychiatry ·
+  <span class="src bnf">BNF</span> BNF-80 (side effects only)</p>
+</header>
+
+<section class="block" id="intro">
+<h2><span class="num">1</span>Introduction</h2>
+<ul>
+<li>Introduce yourself, confirm patient's name, age, and confirm consent to be examined/presented.</li>
+<li>State who your informant is — usually the patient; if a relative/other informant was used, name them, their relationship, and duration of acquaintance <span class="src ox">OX</span>.</li>
+<li>Note the referral source and reason for referral (self, GP, ward, family) <span class="src ox">OX</span>.</li>
+</ul>
+<div class="tip"><b>Viva framing:</b> "This is Mrs/Mr X, a [age]-year-old [occupation], admitted/referred via [source], with informant being the patient herself/himself, who is a reliable/unreliable historian."</div>
+</section>
+
+<section class="block" id="pc">
+<h2><span class="num">2</span>Presenting Complaint (PC)</h2>
+<ul>
+<li>State in the patient's own words, with duration — e.g. "low mood for 3 months."</li>
+<li>List each complaint separately with its own duration if there are several.</li>
+<li>Always quantify duration precisely (days/weeks/months/years), not "a while."</li>
+</ul>
+</section>
+
+<section class="block" id="hpc">
+<h2><span class="num">3</span>History of Presenting Complaint (HPC)</h2>
+<p>This is the diagnostic core of the interview <span class="src ox">OX</span>. Structure chronologically from onset to now.</p>
+<h3>Points to cover</h3>
+<ul>
+<li><b>Onset</b> — acute vs insidious; any identifiable trigger/stressor.</li>
+<li><b>Course</b> — continuous, episodic, fluctuating, deteriorating, improving.</li>
+<li><b>Duration</b> of each symptom individually.</li>
+<li><b>Severity</b> — functional impact on work, self-care, relationships (a useful severity marker: has the patient stopped working because of the illness?) <span class="src hb">HB</span>.</li>
+<li><b>Full symptom enquiry</b> relevant to the suspected diagnosis (biological, cognitive, psychotic symptoms as relevant).</li>
+<li><b>Pertinent negatives</b> — explicitly record expected symptoms that are absent, e.g. no suicidal ideation in a depressed patient, no first-rank symptoms in a patient with delusions <span class="src ox">OX</span>.</li>
+<li><b>Precipitating/perpetuating/relieving factors.</b></li>
+<li><b>Associated features</b> — sleep, appetite, weight, biological functions.</li>
+<li><b>Treatment so far</b> — contact with services, medication trialled, doses, compliance, response, side effects <span class="src ox">OX</span>.</li>
+<li><b>Impact on functioning</b> — occupational, social, self-care (GAF-type assessment) <span class="src hb">HB</span>.</li>
+</ul>
+<div class="tip"><b>Viva tip:</b> present HPC as a clear timeline — "symptoms began insidiously 3 months ago following X stressor, progressively worsening, now affecting occupational functioning as evidenced by absenteeism..." This demonstrates you understand severity grading, not just symptom listing.</div>
+</section>
+
+<section class="block" id="fh">
+<h2><span class="num">4</span>Family History</h2>
+<ul>
+<li>Parents and siblings — age, health status (or age/cause of death), occupation, personality, quality of relationship with patient <span class="src ox">OX</span>.</li>
+<li>Family psychiatric history — mood disorder, psychosis, suicide, substance misuse (specifically ask, not just "any mental illness") <span class="src hb">HB</span>.</li>
+<li>Family medical history relevant to presentation (e.g. epilepsy, thyroid disease, dementia).</li>
+<li>If complex, draw/describe a family tree (genogram) <span class="src ox">OX</span>.</li>
+<li>Consanguinity and current household composition where relevant.</li>
+</ul>
+</section>
+
+<section class="block" id="ph">
+<h2><span class="num">5</span>Personal History</h2>
+<p>Variable in depth depending on age/diagnosis — more detailed in younger patients or where an early-life origin is suspected <span class="src ox">OX</span>.</p>
+<ul>
+<li><b>Birth &amp; early development</b> — antenatal/perinatal complications, developmental milestones.</li>
+<li><b>Childhood</b> — any prolonged separation from parents and reaction to it, emotional problems, serious childhood illness, family disruption.</li>
+<li><b>Schooling</b> — type, academic performance, relationships with peers/teachers, bullying (experienced or perpetrated), exclusions.</li>
+<li><b>Occupational history</b> — jobs held, duration, performance, reasons for leaving, current job satisfaction.</li>
+<li><b>Relationship &amp; sexual history</b> — current partner (duration, quality), past relationships, marital history, attitude to sex/any difficulties.</li>
+<li><b>Children</b> — number, ages, health, who cares for them.</li>
+<li><b>Social circumstances</b> — accommodation, who patient lives with, financial situation, social support.</li>
+<li><b>Substance use</b> — alcohol, tobacco, illicit drugs: type, amount, duration, dependence features, problems caused.</li>
+<li><b>Forensic history</b> — arrests, convictions, imprisonment; nature and dangerousness of any offences <span class="src ox">OX</span>.</li>
+</ul>
+</section>
+
+<section class="block" id="ppsych">
+<h2><span class="num">6</span>Past Psychiatric History</h2>
+<ul>
+<li>Previous episodes — nature, duration, similarity to current presentation.</li>
+<li>Number of admissions, voluntary vs involuntary.</li>
+<li>Treatments received — drug names, doses, duration, response, side effects, ECT if any.</li>
+<li>Compliance history — has the patient defaulted from follow-up or stopped medication before?</li>
+<li>Any past self-harm or suicide attempts — date, method, lethality, circumstances, outcome <span class="src ox">OX</span>.</li>
+<li>Longest period of wellness between episodes, and level of functioning during remission.</li>
+</ul>
+</section>
+
+<section class="block" id="pmed">
+<h2><span class="num">7</span>Past Medical History</h2>
+<ul>
+<li>Chronic illnesses — diabetes, hypertension, epilepsy, thyroid disease, cardiac disease (relevant to both aetiology and drug choice).</li>
+<li>Head injury, seizures, neurological illness — important in organic differential.</li>
+<li>Current medication (psychiatric and non-psychiatric), including OTC and traditional/alternative remedies.</li>
+<li>Allergies and past adverse drug reactions.</li>
+</ul>
+</section>
+
+<section class="block" id="psurg">
+<h2><span class="num">8</span>Past Surgical History</h2>
+<ul>
+<li>Any operations, dates, complications.</li>
+<li>Relevance to current presentation (e.g. thyroidectomy, bariatric surgery, any surgery with anaesthetic complications).</li>
+<li>Hospitalisations in general.</li>
+</ul>
+</section>
+
+<section class="block" id="premorbid">
+<h2><span class="num">9</span>Premorbid Personality</h2>
+<p>Assessed from how the patient describes themselves <em>before</em> the onset of illness — asking "what were you like as a person before you became unwell?" Caution: it can be difficult to separate true premorbid personality from an emerging prodrome <span class="src ox">OX</span>.</p>
+
+<h3>Domains to cover</h3>
+<ul>
+<li><b>Relationships</b> — few/many friends, superficial or close, with same or opposite sex; relationships with colleagues/superiors.</li>
+<li><b>Use of leisure time</b> — hobbies, interests.</li>
+<li><b>Predominant mood/emotional tone</b> — anxious, despondent, optimistic, self-deprecating, overconfident, stable vs fluctuating <span class="src ox">OX</span>.</li>
+<li><b>Character traits</b> — perfectionist, obsessional, isolated, impulsive, sensitive, controlling.</li>
+<li><b>Attitudes and standards</b> — moral/religious views, attitude to health.</li>
+<li><b>"Ultimate concern"</b> — what/who matters most in their life <span class="src ox">OX</span>.</li>
+</ul>
+
+<h3>Personality type ↔ disorder associations (high-yield for viva)</h3>
+<table>
+<tr><th>Premorbid personality</th><th>Core features</th><th>Associated disorder</th></tr>
+<tr><td>Schizoid</td><td>Emotionally cold, detached, aloof, solitary, excessive fantasy, little interest in relationships or sex <span class="src ox">OX</span></td><td>Historically linked by Kretschmer to schizophrenia spectrum; genetic link now considered weak/unconfirmed <span class="src ox">OX</span></td></tr>
+<tr><td>Schizotypal</td><td>Odd beliefs, eccentricity, social anxiety, ideas of reference</td><td>Genetically linked to schizophrenia (classified with schizophrenia in ICD-10) <span class="src ox">OX</span></td></tr>
+<tr><td>Paranoid</td><td>Suspicious, sensitive, bears grudges, sense of self-importance, easily feels humiliated <span class="src ox">OX</span></td><td>Predisposes to paranoid/persecutory symptoms and delusional disorder <span class="src ox">OX</span></td></tr>
+<tr><td>Anankastic (obsessive–compulsive)</td><td>Perfectionistic, preoccupied with rules/order, rigid, miserly, over-conscientious <span class="src ox">OX</span></td><td>Premorbid trait in OCD (note: ICD-10 term "anankastic" was deliberately chosen to avoid implying direct link to OCD) <span class="src ox">OX</span>; also predisposes to depression under stress</td></tr>
+<tr><td>Cyclothymic / hyperthymic</td><td>Alternating cheerful/productive and gloomy/low-energy states, or persistent mild elation <span class="src ox">OX</span></td><td>Premorbid/subthreshold pattern seen in bipolar affective disorder; classified under mood disorders, not personality disorder, in both ICD-10 and DSM-5 <span class="src ox">OX</span></td></tr>
+<tr><td>Anxious/avoidant</td><td>Tense, low self-esteem, fears rejection/criticism, avoids social risk <span class="src ox">OX</span></td><td>Predisposes to generalized anxiety disorder, agoraphobia, social anxiety <span class="src ox">OX</span></td></tr>
+<tr><td>Dependent</td><td>Allows others to take responsibility, unable to make decisions alone, needs excessive support <span class="src ox">OX</span></td><td>Predisposes to adjustment/depressive reactions after loss of a supporting partner</td></tr>
+<tr><td>Antisocial / dissocial</td><td>Disregard for others' rights, impulsivity, low tolerance of frustration, history of conduct problems in childhood <span class="src ox">OX</span></td><td>Strongly associated with substance misuse and forensic history <span class="src ox">OX</span></td></tr>
+</table>
+
+<div class="tip"><b>Viva tip:</b> when asked "what was the premorbid personality?", answer with the domain-based description first (relationships, mood, traits), then explicitly state whether this fits a recognised personality type and how it relates aetiologically to the current diagnosis — this is exactly the link examiners are listening for <span class="src ox">OX</span>.</div>
+</section>
+
+<section class="block" id="risk">
+<h2><span class="num">10</span>Risk Assessment</h2>
+<p>Always structured under three headings: risk <b>to self</b>, risk <b>to others</b>, and risk <b>from others</b> (vulnerability).</p>
+
+<h3>Risk to self</h3>
+<ul>
+<li>Suicidal ideation — passive ("wish I were dead") vs active (thoughts, plans, intent).</li>
+<li>Any specific plan, means available, steps taken towards preparation (e.g. hoarding medication, writing a note).</li>
+<li>Past attempts — method, lethality, circumstances of discovery, regret vs disappointment at survival.</li>
+<li>Deliberate self-harm — method, frequency, function (e.g. affect regulation vs suicidal intent).</li>
+<li>Impulsive/reckless behaviour secondary to illness — e.g. in mania: overspending, access to credit cards/bank accounts, resigning from job, sexual disinhibition <span class="src hb">HB</span>.</li>
+<li>Neglect of self-care, nutrition, or safety due to illness (e.g. in psychosis or severe depression).</li>
+</ul>
+
+<h3>Risk to others</h3>
+<ul>
+<li>Irritability, aggression, history of violence, current thoughts of harming a specific person.</li>
+<li>Command hallucinations to harm others; delusions of a persecutory/jealous nature directed at an identifiable person.</li>
+<li>Access to weapons or means.</li>
+<li>Risk to dependents — children, elderly relatives under patient's care.</li>
+<li>Forensic history of violence.</li>
+<li>In mania specifically: disinhibited, argumentative, or aggressive behaviour, legal problems <span class="src hb">HB</span>.</li>
+</ul>
+
+<h3>Risk from others (vulnerability)</h3>
+<ul>
+<li>Risk of exploitation, financial or sexual, due to illness (e.g. disinhibition in mania, cognitive impairment in dementia, negative symptoms in schizophrenia).</li>
+<li>Domestic violence or abuse — current or historical.</li>
+<li>Social isolation increasing vulnerability to neglect or exploitation.</li>
+<li>Safeguarding concerns for dependent children/vulnerable adults in the household.</li>
+</ul>
+
+<div class="tip"><b>Viva tip:</b> always finish risk assessment with an overall risk stratification statement — "overall risk to self is currently [low/moderate/high] given [specific factors], necessitating [level of observation/admission decision]." Examiners want to see synthesis, not just a list.</div>
+</section>
+
+<section class="block" id="mse">
+<h2><span class="num">11</span>Mental State Examination (MSE)</h2>
+<p>Covers signs and symptoms present <em>at the time of interview</em>, distinct from the history <span class="src ox">OX</span>.</p>
+
+<details><summary>Appearance and Behaviour</summary><div class="content">
+<ul>
+<li>General appearance — grooming, hygiene, dress (appropriate/dishevelled/bizarre/brightly coloured).</li>
+<li>Eye contact — reduced (depression, psychosis), intense/hostile, avoidant.</li>
+<li>Rapport — easy, guarded, suspicious, difficult to establish.</li>
+<li>Psychomotor activity — retardation (depression) vs agitation; abnormal movements (extrapyramidal signs, tardive dyskinesia — relevant to antipsychotic side effects <span class="src bnf">BNF</span>).</li>
+<li>Social disinhibition, over-familiarity, distractibility — difficulty sitting through interview, characteristic of mania <span class="src hb">HB</span>.</li>
+<li>Any evidence of self-neglect or catatonic features (posturing, waxy flexibility, mutism).</li>
+</ul>
+</div></details>
+
+<details><summary>Speech</summary><div class="content">
+<ul>
+<li>Rate — pressured/rapid (mania), slowed (depression, retardation).</li>
+<li>Volume — loud, whispered, mute.</li>
+<li>Quantity — talkative vs poverty of speech.</li>
+<li>Form — spontaneous vs requiring prompting; tone and rhythm.</li>
+<li>Note any dysarthria, neologisms, or thought disorder manifesting in speech (loosening of associations, word salad).</li>
+</ul>
+</div></details>
+
+<details><summary>Mood and Affect</summary><div class="content">
+<ul>
+<li>Subjective mood — ask directly, in the patient's own words ("how would you describe your mood?").</li>
+<li>Objective affect — observed range, reactivity, and congruency with thought content.</li>
+<li>Elated (mild/moderate/severe), depressed, anxious, irritable, labile (rapid swings, sometimes with both elation and depression) <span class="src hb">HB</span>.</li>
+<li>Note if mood is congruent or incongruent with described thought content.</li>
+<li>Ask specifically about anhedonia, hopelessness, and diurnal variation where depression is suspected.</li>
+</ul>
+</div></details>
+
+<details><summary>Thought</summary><div class="content">
+<ul>
+<li><b>Form/stream</b> — flight of ideas (mania), thought block, circumstantiality, tangentiality, loosening of associations.</li>
+<li><b>Content</b> — delusions (persecutory, grandiose, nihilistic, guilt, reference, jealousy), grandiose plans/schemes and increased self-esteem in mania <span class="src hb">HB</span>; suicidal/homicidal ideation.</li>
+<li>Obsessions and compulsions if relevant — thoughts, ruminations, doubts, impulses, obsessional phobias, rituals <span class="src ox">OX</span>.</li>
+<li><b>Possession of thought</b> — thought insertion, withdrawal, broadcasting, passivity phenomena (note: rare in bipolar disorder, more supportive of schizophrenia when present) <span class="src hb">HB</span>.</li>
+</ul>
+</div></details>
+
+<details><summary>Perception</summary><div class="content">
+<ul>
+<li>Hallucinations — modality (auditory most common; also visual, tactile, olfactory, gustatory), content (commanding, commentary, second/third person).</li>
+<li>Illusions — misperception of a real stimulus.</li>
+<li>Depersonalisation/derealisation.</li>
+<li>Ask sensitively and non-leadingly — "do you ever hear/see things that others say they cannot?"</li>
+</ul>
+</div></details>
+
+<details><summary>Cognition</summary><div class="content">
+<ul>
+<li>Level of consciousness and orientation — time, place, person.</li>
+<li>Attention and concentration — serial 7s, digit span, spelling WORLD backwards.</li>
+<li>Memory — immediate registration, short-term recall (e.g. 3-word recall), long-term/autobiographical memory.</li>
+<li>Do a detailed cognitive assessment (e.g. MMSE/MoCA) if organic aetiology is suspected <span class="src hb">HB</span>.</li>
+<li>Consider frontal/executive function testing if indicated (e.g. suspected frontotemporal dementia).</li>
+</ul>
+</div></details>
+
+<details><summary>Insight</summary><div class="content">
+<ul>
+<li>Does the patient believe they are unwell? Do they attribute symptoms to a psychiatric illness, a physical illness, or external causes?</li>
+<li>Do they agree with the need for treatment and follow-up?</li>
+<li>Grade descriptively rather than as simply "present/absent" — e.g. "partial insight: acknowledges low mood but attributes it entirely to marital problems and does not accept need for medication."</li>
+<li>Insight is characteristically impaired in mania and psychosis <span class="src hb">HB</span>.</li>
+</ul>
+</div></details>
+
+<div class="tip"><b>Viva tip:</b> present MSE fluently in the fixed order (Appearance &amp; Behaviour → Speech → Mood → Thought → Perception → Cognition → Insight) even if you elicited findings out of sequence during the actual interview — examiners expect the standard structure <span class="src ox">OX</span>.</div>
+</section>
+
+<footer>© Udana Anjana — Psychiatry Long Case Viva Reference</footer>
+</main>
+</div>
+</body>
+</html>

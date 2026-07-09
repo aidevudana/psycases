@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alcohol Dependence — Case History | Final MBBS Psychiatry Viva</title>
+<style>
+  :root{
+    --navy:#0d2438; --navy-2:#123049;
+    --teal:#1f6f78; --teal-2:#2b8a94;
+    --amber:#c8892f; --amber-2:#e0a94f;
+    --paper:#faf7f0; --ink:#1c2530; --line:#dfe3e6;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:"Georgia","Iowan Old Style",serif; background:var(--paper); color:var(--ink); line-height:1.6; }
+  header{ background:linear-gradient(135deg,var(--navy),var(--navy-2)); color:#fff; padding:28px 32px 22px; border-bottom:5px solid var(--amber); }
+  header .kicker{ font-family:"Helvetica Neue",Arial,sans-serif; letter-spacing:2.5px; text-transform:uppercase; font-size:11px; color:var(--amber-2); margin-bottom:6px; }
+  header h1{ margin:0 0 4px; font-size:30px; font-weight:700; }
+  header .sub{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:13.5px; color:#c9d6de; }
+  .disclaimer{ background:#fff4e2; border-left:4px solid var(--amber); margin:18px 32px 0; padding:12px 16px; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; color:#5a4620; border-radius:0 4px 4px 0; }
+  .disclaimer b{ color:#7a4a00; }
+  nav.tabs{ display:flex; flex-wrap:wrap; gap:6px; background:var(--navy-2); padding:10px 26px; position:sticky; top:0; z-index:50; border-bottom:3px solid var(--teal); }
+  nav.tabs button{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; letter-spacing:.3px; text-transform:uppercase; background:transparent; color:#b9c8d2; border:1px solid rgba(255,255,255,.18); padding:8px 14px; border-radius:5px 5px 0 0; cursor:pointer; transition:.15s; }
+  nav.tabs button:hover{ color:#fff; border-color:var(--teal-2); }
+  nav.tabs button.active{ background:var(--paper); color:var(--navy); border-color:var(--paper); font-weight:700; }
+  main{ max-width:900px; margin:0 auto; padding:28px 32px 80px; }
+  .panel{ display:none; animation:fade .2s ease-in; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+  .case-block{ background:#fff; border:1px solid var(--line); border-left:5px solid var(--teal); border-radius:6px; padding:20px 24px; margin-bottom:20px; }
+  .case-block h2{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:1.6px; color:var(--teal); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .case-block h2 .num{ background:var(--teal); color:#fff; width:22px;height:22px; border-radius:50%; display:inline-flex;align-items:center;justify-content:center; font-size:11px; }
+  .case-block p{ margin:0 0 12px; font-size:15.5px; }
+  .case-block p:last-child{ margin-bottom:0; }
+  .case-block ul{ margin:0 0 10px 18px; padding:0; }
+  .uncertain{ background:#fdf0f0; color:#8a3b3b; padding:1px 5px; border-radius:3px; font-size:.92em; font-family:"Helvetica Neue",Arial,sans-serif; }
+  .oxford{ background:#eef6f6; border:1px solid var(--teal-2); border-radius:6px; padding:16px 20px; margin:0 0 24px; position:relative; }
+  .oxford::before{ content:"OXFORD GUIDANCE"; font-family:"Helvetica Neue",Arial,sans-serif; font-size:10.5px; letter-spacing:1.6px; color:#fff; background:var(--teal); padding:3px 10px; border-radius:3px; position:absolute; top:-11px; left:16px; }
+  .oxford h3{ margin:10px 0 8px; font-family:"Helvetica Neue",Arial,sans-serif; font-size:14px; color:var(--navy); }
+  .oxford p, .oxford li{ font-size:14.5px; color:#243642; }
+  .oxford ul{ margin:0 0 8px 18px; padding:0; }
+  .oxford .cite{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; color:var(--teal); font-style:italic; margin-top:4px; }
+  table.problem{ width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:14px; }
+  table.problem th, table.problem td{ border:1px solid var(--line); padding:8px 10px; vertical-align:top; text-align:left; }
+  table.problem th{ background:var(--navy); color:#fff; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:.5px; }
+  table.problem td:first-child{ background:#f2f5f6; font-weight:700; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; color:var(--navy); }
+  table.taper{ width:100%; border-collapse:collapse; margin:10px 0; font-size:14px; }
+  table.taper th, table.taper td{ border:1px solid var(--line); padding:6px 10px; text-align:center; }
+  table.taper th{ background:var(--teal); color:#fff; font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; text-transform:uppercase; }
+  .drugbox{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin-bottom:14px; }
+  .drugbox h4{ margin:0 0 6px; font-size:14.5px; color:var(--amber); font-family:"Helvetica Neue",Arial,sans-serif; }
+  .drugbox ul{ margin:0 0 0 18px; font-size:14px; }
+  .footer-note{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; color:#8a97a0; text-align:center; margin-top:30px; }
+  .risk-high{ color:#a4342a; font-weight:700; }
+  .risk-mod{ color:#a17417; font-weight:700; }
+  .risk-low{ color:#2a7a4c; font-weight:700; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11.5px;color:#e0a94f;text-decoration:none;display:inline-block;margin-bottom:10px;">&larr; Casebook Home</a><br>
+  <div class="kicker">Final MBBS &middot; Psychiatry Viva &middot; Ideal Case History</div>
+  <h1>Alcohol Dependence</h1>
+  <div class="sub">With Uncomplicated Alcohol Withdrawal &mdash; Mr. Prasad Siripala, 40M, Mason</div>
+</header>
+
+<div class="disclaimer">
+  Machine-assisted transcription (OCR) of your handwritten case sheet, corrected for legibility while preserving your original wording as closely as possible. Text highlighted <span class="uncertain">like this</span> was hard to read or partly illegible in the scan (place names, some numeric values, drug taper doses, vitals) &mdash; please verify these against your original notes, especially the Chlordiazepoxide tapering schedule and CIWA cut-offs before using this in a viva. "Oxford Guidance" boxes summarise the corresponding section of the <em>Shorter Oxford Textbook of Psychiatry</em> (Cowen, Harrison &amp; Burns) &mdash; not part of your original notes.
+</div>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="history">History</button>
+  <button class="tab-btn" data-tab="mse">MSE</button>
+  <button class="tab-btn" data-tab="pe">Physical Exam &amp; Summary</button>
+  <button class="tab-btn" data-tab="management">Management</button>
+  <button class="tab-btn" data-tab="drugs">Drug Side Effects</button>
+</nav>
+
+<main>
+
+  <!-- HISTORY -->
+  <section class="panel active" id="history">
+
+    <div class="case-block">
+      <h2><span class="num">1</span>Introduction</h2>
+      <p>Mr. Prasad Siripala, 40 years old mason, father of two children, from <span class="uncertain">place name unclear in scan</span>, currently lives with his wife and children. History is taken from the patient, who is educated up to O/L.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">2</span>Presenting Complaint</h2>
+      <p>Patient was brought by the police while he was at home, following a conflict with his wife. Patient does not seem aware of the exact reason for admission.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">3</span>History of Presenting Complaint</h2>
+      <p>He is a known patient who has been receiving psychiatric services for the last 2 years, but defaulted clinic follow-up. This is the 2nd day after admission. The day before admission, while at home, he had a conflict with his wife regarding his alcohol consumption. The patient accepted that he was under the influence of alcohol at the time. There was only a verbal argument &mdash; no physical violence, according to the patient. His wife then called the police, and he was brought to the ward. After admission, several blood investigations were done, and he was given some IV and oral medications.</p>
+      <p>According to the patient, he started drinking alcohol at the age of 16 years, initially due to the influence of his friends. During that period he consumed alcohol occasionally with friends, about <span class="uncertain">750ml</span> per week. Other than arrack, he has also consumed non-distilled beverages &amp; beer from time to time.</p>
+      <p>Since then, the amount of alcohol he consumed &mdash; alone or sometimes with friends &mdash; increased, along with occasional beer. Initially, there was no evidence of violence or any abnormal behaviour towards others following alcohol consumption.</p>
+      <p>With time, he started drinking not only on weekends but also during the day. He progressed to daily drinking, where he needed alcohol to continue his usual activities. He describes strong cravings to consume alcohol, and that once he started drinking he could not stop. Over time he developed an urge to drink alcohol in the morning. He also had evidence of tolerance, needing a higher amount of alcohol than previously to achieve the same effect, and complained of loss of pleasure during this period.</p>
+      <p>Whenever he couldn't consume alcohol for a day, he developed tremors, loss of appetite &amp; sleep disturbances; sometimes there was associated vomiting as well. Despite awareness of the negative consequences of alcohol, he continued to use it.</p>
+      <p>He denies past history of severe intoxication, no history of withdrawal seizures or acute confusional state in the past, and no past history of loss of consciousness with ataxia or gait impairment. Other than alcohol, he denies any other illicit drug or psychoactive substance abuse.</p>
+      <p><strong>Medical:</strong> He had burning-type epigastric pain with regurgitation for the last few months, treated as gastritis. He currently complains of nausea, reduced appetite, and sleep disturbance. He denies serious medical problems such as myocardial infarction.</p>
+      <p><strong>Psychiatric:</strong> He denies any evidence of a delusional disorder, no morbid jealousy, no suspiciousness regarding his wife. He denies related memory impairment. He believes his thoughts are his own, and denies hearing voices when he is alone. He denies loss of interest &amp; lack of enjoyment, and denies suicidal thoughts or ideation.</p>
+      <p><strong>Financial:</strong> He is the breadwinner of the family. He admits he spends part of his salary on alcohol; however, he was able to fulfil his family's needs.</p>
+      <p>He has a past history of drink-driving, but has never had an accident. He has recurrent conflicts with his wife because of his drinking, with no history of domestic violence. He denies any behavioural problems in his children, though he acknowledges this could negatively impact their mental health. He denies poor performance at work even under the influence of alcohol, and no history of work-related accidents.</p>
+      <p>He doesn't have any suicidal thoughts, no past history of violence, and no history of road traffic accidents.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Alcohol dependence syndrome &mdash; ICD criteria</h3>
+      <p>The Shorter Oxford Textbook summarises the dependence syndrome (ICD) as requiring several of: compulsion/craving to drink, difficulty controlling drinking, physiological withdrawal state, tolerance, progressive neglect of alternative pleasures, and persisting use despite awareness of harm. This history documents all of these clearly &mdash; craving, loss of control ("couldn't stop"), a withdrawal syndrome (tremor, sleep/appetite disturbance, vomiting), tolerance, and continued use despite gastritis and family conflict &mdash; giving a textbook basis for the diagnosis.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Alcohol Misuse and Dependence.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">4</span>Family History</h2>
+      <p>No first-degree relative with a diagnosed psychiatric illness, and no family history of suicidal attempts.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">5</span>Personal History</h2>
+      <p>His childhood &amp; developmental period were problematic. During early childhood, his father separated from his mother. His mother then went abroad to work as a housemaid because of financial issues, so the patient was raised by his grandmother. He is the youngest in his family.</p>
+      <p>He was educated up to O/L with average performance. He went to work in a garment factory <span class="uncertain">at around age 15</span> instead of continuing his education, due to financial issues.</p>
+      <p>He got married at the age of <span class="uncertain">~21 years</span>. Currently they live in their own house and also own a motorbike. The patient claims that he and his wife have not had a sexual relationship for the last few years. He denies any extramarital relationship, either on his part or his wife's.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">6</span>Past Psychiatric History</h2>
+      <p>He first started receiving psychiatric services 2 years back and was admitted to the ward. It was similar to the current presentation &mdash; he presented with vomiting, nausea, abdominal pain &amp; tremors. He was admitted for a few days and discharged with oral medications.</p>
+      <p>After that, he had 6 months of abstinence, then relapsed again following a family issue involving his mother. Since then he defaulted clinic follow-up, as he had to go to hospital from time to time because of his child's condition (a disabled child at home). After that he was again abstinent for a period, following financial problems, but this did not last long.</p>
+      <p>As mentioned, he denies past history of alcohol intoxication requiring treatment, no withdrawal seizures, and no history of delirium.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">7</span>Past Medical / Surgical History</h2>
+      <p>Unremarkable.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">8</span>Premorbid Personality</h2>
+      <p>He describes himself as a calm, responsible &amp; social person, and a strong, caring father to his children. He had a good relationship with his family members and the wider society.</p>
+      <p>However, he sometimes felt stressed due to a monotonous daily routine, and used alcohol as a coping mechanism during stressful periods, without telling anyone about it. He spent a significant part of his income on alcohol. He is a religious person who likes to worship, and in his leisure time was active and participated in social activities.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>&#9733; Risk Assessment</h2>
+      <p><span class="risk-low">Suicidal risk &mdash; Low.</span> He does not have any sense of hopelessness, no suicidal ideas or plans. No past history of suicidal attempts or deliberate self-harm. No family history of psychiatric illness other than his own alcohol dependence. Not a user of any other psychoactive substances. He has pesticides available at home but has never tried to harm himself. He has good family and social support, and no evidence of impulsive personality traits. So suicidal risk is low.</p>
+      <p><span class="risk-mod">Risk of violence &mdash; Moderate.</span> He currently has no intention to harm anyone, no past history of domestic violence or aggressive behaviour towards others. But he has frequent conflicts &amp; verbal arguments with his wife and mother when under the influence of alcohol. At home &amp; his workplace he has immediate access to sharp tools/weapons, but has never used them to harm anyone.</p>
+      <p><span class="risk-mod">Risk of accidents &mdash; Moderate.</span> He currently uses a bicycle, often while under the influence of alcohol, though with no history of road traffic accidents. He has been stopped by police for drink-driving in the past when he owned a motorbike, but has never been taken into police custody. As a mason, he works at heights and with sharp equipment; he reports avoiding such tasks while under the influence, and has no history of occupational accidents.</p>
+      <p><span class="risk-mod">Risk to children &mdash; Moderate.</span> His children have been present during some arguments with his wife driven by his drinking. However, he denies any resulting abnormal behaviour in his children, and even with his alcohol spending, he has still managed to meet his children's basic needs.</p>
+      <p><span class="risk-mod">Risk of self-neglect &mdash; Moderate.</span> Although his personal hygiene is satisfactory, his food intake is poor due to loss of appetite, and he has sleep disturbance &mdash; together contributing to malnutrition and functional impairment.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Risk assessment in alcohol dependence</h3>
+      <p>Per the Shorter Oxford Textbook, risk assessment in alcohol misuse should routinely cover self-harm/suicide, violence (particularly domestic), accidents (road traffic and occupational), risk to dependants, and self-neglect/nutritional risk (notably thiamine deficiency), since alcohol dependence carries elevated risk across all these domains even without a single dominant "red flag." This case illustrates a fairly typical moderate-risk profile spread across several domains rather than one severe risk, which shapes the choice of a cautious but not maximally restrictive management setting.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Alcohol Misuse &mdash; Risk and Complications.</p>
+    </div>
+  </section>
+
+  <!-- MSE -->
+  <section class="panel" id="mse">
+    <div class="case-block">
+      <h2><span class="num">1</span>Appearance and Behaviour</h2>
+      <p>His appearance is compatible with his chronological age. He was thin built. Personal care is satisfactory. He is wearing appropriate clean clothes &mdash; a blue colour sarong and a white colour T-shirt. Beard is trimmed. No jewellery, tattoos or nicotine stains.</p>
+      <p>His facial expressions change appropriately with his emotions. He does not seem distractible, and did not respond to any hallucinatory experiences during the interview. He had good eye contact and maintained a good rapport throughout. He had bilateral fine tremors in his hands; no other abnormal motor movements.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">2</span>Speech</h2>
+      <p>Speech is spontaneous, coherent &amp; relevant. Tone, rate and volume are normal, but the amount of speech is low &mdash; when directed with questions, he tends to give short answers. His speech changes appropriately with his emotions.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">3</span>Mood</h2>
+      <p>Subjectively he was neither happy nor sad. Objectively he was euthymic. His mood was congruent with his thoughts, and reactive.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">4</span>Thought</h2>
+      <p>No abnormalities in form or content of thought.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">5</span>Perception</h2>
+      <p>No hallucinations or illusions.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">6</span>Cognition</h2>
+      <p>He was oriented to time, place and person. Attention and concentration are satisfactory. Long-term and short-term memory are intact.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">7</span>Insight</h2>
+      <p>Currently he is in the contemplation stage following a relapse. His insight is good &mdash; he understands his behaviour is abnormal, and that others can notice this when he is under the influence of alcohol. He is willing to take medications for his alcohol dependence, and is well aware of the negative consequences of heavy alcohol consumption.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Stages of change (Prochaska &amp; DiClemente)</h3>
+      <p>The Shorter Oxford Textbook frames motivation to change substance use along the transtheoretical "stages of change" model: pre-contemplation &rarr; contemplation &rarr; preparation &rarr; action &rarr; maintenance (&plusmn; relapse, cycling back). Documenting that this patient is in the <em>contemplation</em> stage &mdash; aware of the problem, weighing pros/cons, not yet fully committed to action &mdash; directly determines the choice of motivational interviewing as the primary psychological technique in his management plan, rather than more action-oriented relapse-prevention work alone.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Models of Behaviour Change in Addiction.</p>
+    </div>
+  </section>
+
+  <!-- PE + Summary -->
+  <section class="panel" id="pe">
+    <div class="case-block">
+      <h2>Physical Examination</h2>
+      <p><strong>General:</strong> He was well looking. Afebrile. Not pale or icteric. No parotid enlargement. No angular stomatitis or glossitis.<br>
+      Weight &mdash; 56 kg &nbsp;|&nbsp; Height &mdash; 160 cm &nbsp;|&nbsp; BMI &mdash; 20.8 kg/m&sup2;</p>
+      <p><strong>CVS:</strong> BP and PR &mdash; <span class="uncertain">exact figures illegible in scan; good volume, regular rhythm noted, no murmurs</span>.</p>
+      <p><strong>Respiratory:</strong> Bilateral air entry equal, no added sounds.</p>
+      <p><strong>Abdomen:</strong> Soft, non-tender. No significant findings.</p>
+      <p><strong>CNS:</strong> No significant findings.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Summary</h2>
+      <p>Mr. Prasad Siripala, 40 years old, chronic alcohol consumer, presented to the ward following a conflict with his wife while under the influence of alcohol. He has been under psychiatric services for the last 2 years for alcohol dependence, had a 6-month period of abstinence, then relapsed &mdash; this time also with withdrawal symptoms such as bilateral tremors, nausea, loss of appetite and sleep disturbance. He has features of alcohol dependence, including tolerance. He has no history of road traffic accidents, homicidal attempts, or domestic violence, other than verbal arguments.</p>
+      <p>On MSE, he was subjectively and objectively euthymic, with no delusions or hallucinations, and no cognitive impairment. He is currently in the contemplation stage following his relapse, and is willing to take medications for his alcohol dependence.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Problem List</h2>
+      <table class="problem">
+        <tr><th></th><th>Acute</th><th>Chronic</th></tr>
+        <tr><td>Biological</td><td>Tremors, nausea, vomiting, poor sleep, reduced appetite</td><td>Alcohol dependence. Risk of Wernicke's encephalopathy.</td></tr>
+        <tr><td>Psychological</td><td>Alcohol dependence, tolerance</td><td>Risk of relapse. Poor refusal skills.</td></tr>
+        <tr><td>Social</td><td>Risk of road traffic &amp; occupational accidents, risk of violence</td><td>Financial problems. Poor social &amp; family support. Disabled child at home.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- MANAGEMENT -->
+  <section class="panel" id="management">
+    <div class="case-block">
+      <h2>Goals of Management</h2>
+      <ul>
+        <li>Help the patient change his current alcohol use behaviour</li>
+        <li>Minimise negative consequences</li>
+        <li>Improve the wellbeing of patient and family</li>
+      </ul>
+      <p>Management plan: deciding treatment setting &rarr; deciding treatment goals &rarr; detoxification of the dependent patient &rarr; relapse prevention.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Treatment Setting</h2>
+      <p>I would consider admitting this patient for in-ward management, as he is an alcohol-dependent patient with poor social &amp; family support. He did not have severe withdrawal symptoms such as delirium tremens or other complications like withdrawal seizures, hepatic illness, comorbid psychiatric illness, or liver dysfunction &mdash; but the poor social support and history of relapse justify inpatient detoxification.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Acute Management &mdash; Detoxification</h2>
+      <p>I would start a tapering dose of Chlordiazepoxide. Before starting treatment, I would perform baseline investigations including FBC, FBS/RBS, serum electrolytes, and liver function tests.</p>
+      <p>I would assess the severity of alcohol withdrawal using the CIWA-Ar score (Clinical Institute Withdrawal Assessment for Alcohol scale). Patients with a CIWA score below the mild threshold do not need pharmacological treatment; moderate-to-severe withdrawal can be treated with a tapering-dose or titrating-dose regime.</p>
+      <p>Benzodiazepines (such as Chlordiazepoxide) have a long half-life and low addictive potential, making them the treatment of choice. <span class="uncertain">The exact mg-by-day tapering schedule in the original notes was partly illegible &mdash; please verify against your sheet; a typical structure is outlined below for reference:</span></p>
+      <table class="taper">
+        <tr><th>Day</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+        <tr><td>Regimen</td><td colspan="7" style="text-align:left;padding-left:14px;">Tapering oral Chlordiazepoxide, reducing frequency (tds &rarr; bd &rarr; nocte) and dose over ~7 days &mdash; confirm exact mg values from your original chart.</td></tr>
+      </table>
+      <p>I would also consider starting IV thiamine <em>before</em> giving IV glucose/dextrose, especially if there are clinical features of Wernicke's encephalopathy (confusion, ataxia, ophthalmoplegia/nystagmus) &mdash; thiamine first, followed by oral thiamine thereafter.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Why thiamine before glucose</h3>
+      <p>A frequently tested point in the Shorter Oxford Textbook: administering glucose to a thiamine-deficient patient can precipitate or worsen Wernicke's encephalopathy, as glucose metabolism consumes remaining thiamine stores. IV thiamine should therefore always be given before, or alongside, glucose-containing fluids in a patient at risk of alcohol-related thiamine deficiency, with caution for anaphylaxis during IV administration.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Alcohol Withdrawal and Wernicke-Korsakoff Syndrome.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Managing Complications</h2>
+      <p>I would correct hypoglycaemia if present on investigation. If the patient develops delirium tremens, I would liaise with the general medical team, manage him in a calm &amp; safe environment, and he may need higher doses of Chlordiazepoxide for about 2 weeks.</p>
+      <p>I would give IV fluids, correct electrolytes, hydrate the patient, and provide adequate nutrition, then monitor his symptoms. I would perform liver function tests to differentiate delirium tremens from delirium due to liver failure, and arrange medical referral if hepatic dysfunction is present.</p>
+      <p><strong>Management of Wernicke's encephalopathy:</strong> prophylaxis with oral thiamine 100mg daily during detoxification. If symptomatic, IV thiamine 200&ndash;500mg 3 times per day for 3 days, then 250&ndash;300mg/day IV for 5 days, taking precautions for the risk of anaphylaxis with IV thiamine.</p>
+      <p><strong>Patient and family education:</strong> I would educate the family regarding the patient's condition, aetiology, and treatment options, obtain collateral history to understand the relapse cycle, and stress the importance of treatment adherence to prevent relapse.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Intermediate Management</h2>
+      <p>I would conduct daily ward rounds to assess improvement of his withdrawal symptoms, with regular CIWA reassessments, and address any ongoing problems, as the patient could not attend his job during his ward stay.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Non-pharmacological Management</h2>
+      <p>I would focus on helping the patient make a change and maintain abstinence. Psychological treatment options include:</p>
+      <ul>
+        <li>Motivational interviewing</li>
+        <li>Cognitive behavioural therapy</li>
+        <li>Psychoeducation</li>
+        <li>Social and interpersonal skills training</li>
+        <li>Relapse prevention with exposure</li>
+        <li>Problem-solving skills</li>
+      </ul>
+      <p><strong>Motivational interviewing:</strong> educate about the cycle of behaviour change. As he is in the contemplation stage, I would provide information about alcohol-related harm and discuss the advantages of reducing consumption, using open-ended questions, appreciating positive things about the patient, and directing him towards "change talk" rather than "sustain talk." I would instruct him to discard remaining alcohol at home, and try to avoid people who encourage him to drink.</p>
+      <p><strong>Cognitive behavioural therapy:</strong></p>
+      <ul>
+        <li>Management of urge &mdash; convince the patient this is short-lasting.</li>
+        <li>Cue cards &mdash; cards written with adverse past experiences due to alcohol.</li>
+        <li>Urge surfing &mdash; train the patient's mind to move through the urge without trying to suppress it.</li>
+        <li>Distraction &mdash; listening to music, walking, gardening, or talking to family.</li>
+        <li>Habit break-up plan &mdash; identify high-risk situations (weddings, parties, socialising with friends, following an argument) and collaboratively select alternative coping strategies for each.</li>
+      </ul>
+      <p><strong>Family meeting:</strong> to appreciate the patient's abstinence, advise family members on how to help suppress his urge to drink, and encourage his continued participation in rehabilitation.</p>
+      <p><strong>Cognitive therapy:</strong> identify dysfunctional beliefs and use cognitive restructuring, challenging his beliefs, and building emotional-regulation skills.</p>
+      <p><strong>Problem-solving skills / assertiveness training:</strong> if a relapse occurs, he should leave the place where he consumed alcohol. If it happens at home, remaining alcohol should be disposed of, and a support person identified for emergencies.</p>
+      <p><strong>Social management:</strong> social behaviour and network therapy &mdash; engaging family and friends, social skills acquisition, strategies for dealing with crises, and pleasant social activities as an alternative to drinking. Drink-refusal skills training &mdash; assertiveness, and choosing non-alcoholic drinks socially.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Motivational interviewing principles</h3>
+      <p>The Shorter Oxford Textbook describes motivational interviewing as a collaborative, non-confrontational style that works with the patient's own ambivalence, using open questions, affirmations, reflective listening, and summarising (OARS) to elicit the patient's own "change talk" rather than imposing advice &mdash; consistent with the approach outlined here, appropriately matched to a patient in the contemplation stage.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Psychological Treatments for Substance Misuse.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Long-term Management</h2>
+      <p>Once acute symptoms have improved, I would consider discharging the patient and arrange a follow-up plan for relapse prevention. I would start pharmacological therapy for relapse prevention &mdash; choosing from Acamprosate, Disulfiram, Naltrexone, or Topiramate, depending on suitability.</p>
+      <p>At follow-up visits I would encourage him to continue his lifestyle changes, monitor him using his habit-breaking plan, and advise him that if he does relapse, he should come and seek medical attention promptly, as relapse is a normal part of the recovery process.</p>
+    </div>
+  </section>
+
+  <!-- DRUGS -->
+  <section class="panel" id="drugs">
+    <div class="drugbox">
+      <h4>Acamprosate (GABA agonist / glutamate antagonist)</h4>
+      <ul>
+        <li>333mg tab tds, for 6&ndash;12 months. Contraindicated in severe renal impairment.</li>
+        <li>Side effects: abdominal pain, diarrhoea, sexual dysfunction, drowsiness.</li>
+      </ul>
+    </div>
+    <div class="drugbox">
+      <h4>Disulfiram (Acetaldehyde dehydrogenase inhibitor)</h4>
+      <ul>
+        <li>Start 100&ndash;200mg/day; must start only when blood alcohol level is zero for &ge;24h.</li>
+        <li>Contraindicated in recent heart disease, psychosis, suicidal attempts, patients on antihypertensives, or hepatic failure.</li>
+        <li>Side effects: breath odour, metallic taste, decreased libido.</li>
+      </ul>
+    </div>
+    <div class="drugbox">
+      <h4>Naltrexone (opioid receptor antagonist &mdash; reduces craving)</h4>
+      <ul>
+        <li>Start 25mg/day, increase to 50mg/day; start only after achieving abstinence.</li>
+        <li>Side effects: GI upset, opioid withdrawal (if opioid-dependent), lethargy, sexual dysfunction, anxiety, alopecia.</li>
+      </ul>
+    </div>
+    <div class="drugbox">
+      <h4>Topiramate</h4>
+      <ul>
+        <li>25&ndash;50mg bd.</li>
+        <li>Side effects: mood disorder, anaemia, constipation.</li>
+      </ul>
+    </div>
+
+    <div class="oxford">
+      <h3>Choosing a relapse-prevention agent</h3>
+      <p>The Shorter Oxford Textbook notes Acamprosate and Naltrexone as first-line anti-craving agents with the best evidence base, Disulfiram as an aversive agent requiring high motivation and careful cardiac/psychiatric screening given its strict abstinence requirement and interaction risks, and Topiramate as an option with emerging evidence, particularly where the licensed options are unsuitable or ineffective. Renal and hepatic function, cardiac history, and current mental state should all be checked before starting any of these agents.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Pharmacological Relapse Prevention in Alcohol Dependence.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-note">Developed with &#10084;&#65039; by Udana Anjana &amp; Adithya Bandara &middot; &copy; Amasha Lowe. All rights reserved. &middot; <a href="about.html" style="color:#8a97a0;">About</a> &middot; Prepared for Final MBBS psychiatry viva preparation &middot; Case transcription + Oxford guidance annotations</div>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>

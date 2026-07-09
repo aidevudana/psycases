@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schizophrenia — Case History | Final MBBS Psychiatry Viva</title>
+<style>
+  :root{
+    --navy:#0d2438;
+    --navy-2:#123049;
+    --teal:#1f6f78;
+    --teal-2:#2b8a94;
+    --amber:#c8892f;
+    --amber-2:#e0a94f;
+    --paper:#faf7f0;
+    --ink:#1c2530;
+    --line:#dfe3e6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Georgia","Iowan Old Style",serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    background:linear-gradient(135deg,var(--navy),var(--navy-2));
+    color:#fff;
+    padding:28px 32px 22px;
+    border-bottom:5px solid var(--amber);
+  }
+  header .kicker{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    font-size:11px;
+    color:var(--amber-2);
+    margin-bottom:6px;
+  }
+  header h1{
+    margin:0 0 4px;
+    font-size:30px;
+    font-weight:700;
+  }
+  header .sub{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:13.5px;
+    color:#c9d6de;
+  }
+  .disclaimer{
+    background:#fff4e2;
+    border-left:4px solid var(--amber);
+    margin:18px 32px 0;
+    padding:12px 16px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12.5px;
+    color:#5a4620;
+    border-radius:0 4px 4px 0;
+  }
+  nav.tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    background:var(--navy-2);
+    padding:10px 26px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    border-bottom:3px solid var(--teal);
+  }
+  nav.tabs button{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12.5px;
+    letter-spacing:.3px;
+    text-transform:uppercase;
+    background:transparent;
+    color:#b9c8d2;
+    border:1px solid rgba(255,255,255,.18);
+    padding:8px 14px;
+    border-radius:5px 5px 0 0;
+    cursor:pointer;
+    transition:.15s;
+  }
+  nav.tabs button:hover{ color:#fff; border-color:var(--teal-2); }
+  nav.tabs button.active{
+    background:var(--paper);
+    color:var(--navy);
+    border-color:var(--paper);
+    font-weight:700;
+  }
+  main{ max-width:900px; margin:0 auto; padding:28px 32px 80px; }
+  .panel{ display:none; animation:fade .2s ease-in; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+
+  .case-block{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:5px solid var(--teal);
+    border-radius:6px;
+    padding:20px 24px;
+    margin-bottom:20px;
+  }
+  .case-block h2{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1.6px;
+    color:var(--teal);
+    margin:0 0 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .case-block h2 .num{
+    background:var(--teal);
+    color:#fff;
+    width:22px;height:22px;
+    border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:11px;
+  }
+  .case-block p{ margin:0 0 12px; font-size:15.5px; }
+  .case-block p:last-child{ margin-bottom:0; }
+  .case-block ul{ margin:0 0 10px 18px; padding:0; }
+
+  .oxford{
+    background:#eef6f6;
+    border:1px solid var(--teal-2);
+    border-radius:6px;
+    padding:16px 20px;
+    margin:0 0 24px;
+    position:relative;
+  }
+  .oxford::before{
+    content:"OXFORD GUIDANCE";
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10.5px;
+    letter-spacing:1.6px;
+    color:#fff;
+    background:var(--teal);
+    padding:3px 10px;
+    border-radius:3px;
+    position:absolute;
+    top:-11px;
+    left:16px;
+  }
+  .oxford h3{
+    margin:10px 0 8px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:14px;
+    color:var(--navy);
+  }
+  .oxford p, .oxford li{ font-size:14.5px; color:#243642; }
+  .oxford ul{ margin:0 0 8px 18px; padding:0; }
+  .oxford .cite{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11.5px;
+    color:var(--teal);
+    font-style:italic;
+    margin-top:4px;
+  }
+
+  table.problem{ width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:14px; }
+  table.problem th, table.problem td{ border:1px solid var(--line); padding:8px 10px; vertical-align:top; text-align:left; }
+  table.problem th{ background:var(--navy); color:#fff; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:.5px; }
+  table.problem td:first-child{ background:#f2f5f6; font-weight:700; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; color:var(--navy); }
+
+  .drugbox{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin-bottom:14px; }
+  .drugbox h4{ margin:0 0 6px; font-size:14.5px; color:var(--amber); font-family:"Helvetica Neue",Arial,sans-serif; }
+  .drugbox ul{ margin:0 0 0 18px; font-size:14px; }
+
+  .footer-note{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11.5px;
+    color:#8a97a0;
+    text-align:center;
+    margin-top:30px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11.5px;color:#e0a94f;text-decoration:none;display:inline-block;margin-bottom:10px;">&larr; Casebook Home</a><br>
+  <div class="kicker">Final MBBS &middot; Psychiatry Viva &middot; Ideal Case History</div>
+  <h1>Schizophrenia</h1>
+  <div class="sub">Paranoid Schizophrenia &mdash; Mrs. D.B. Bandaramenike, 51F</div>
+</header>
+
+<div class="disclaimer">
+  This is a machine-assisted transcription (OCR) of your handwritten case sheet, corrected for legibility while preserving your original wording as closely as possible. Please cross-check numbers, drug doses, and proper nouns against your original notes. "Oxford Guidance" boxes summarise the corresponding section of the <em>Shorter Oxford Textbook of Psychiatry</em> (Cowen, Harrison &amp; Burns) for quick viva cross-reference &mdash; they are not part of your original notes.
+</div>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="history">History</button>
+  <button class="tab-btn" data-tab="mse">MSE</button>
+  <button class="tab-btn" data-tab="pe">Physical Exam &amp; DDx</button>
+  <button class="tab-btn" data-tab="summary">Summary &amp; Problem List</button>
+  <button class="tab-btn" data-tab="management">Management</button>
+  <button class="tab-btn" data-tab="drugs">Drug Side Effects</button>
+</nav>
+
+<main>
+
+  <!-- HISTORY -->
+  <section class="panel active" id="history">
+
+    <div class="case-block">
+      <h2><span class="num">1</span>Introduction</h2>
+      <p>Mrs. D.B. Bandaramenike, 51 years old, female patient, mother of 2 children, from Nachchaduwa, who works in a paddy mill, lives in their own house with her husband, 2 sons, daughter-in-law &amp; grand-daughter. History is taken from the patient.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">2</span>Presenting Complaint</h2>
+      <p>She was brought to the ward by her family members due to altered behaviour for one day duration, and associated suspicious thoughts.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">3</span>History of Presenting Complaint</h2>
+      <p>She was a diagnosed patient with a psychiatric illness for 4 years duration, but defaulted clinic follow-up. This is her 3rd admission.</p>
+      <p>One day prior to this admission, patient attended a 'Bana programme'. There were some people talking to each other at the programme. But the patient firmly believed that those people were talking about her, and that they were planning to irritate her, and dig up her past to get information about her. She then developed a fear that these people might harm her, so she ran back home without telling anyone. While running, two three-wheelers stopped by her and asked her to get in. But she did not stop, as she firmly believed that these people were also trying to harm her, so she did not respond.</p>
+      <p>Once back at home, she told her family members, but they did not believe her. She was told that this is due to her psychiatric illness, and then they brought the patient to the ward.</p>
+      <p>She claimed that while back in the home she smelled 'dummala' &amp; heard the sound of drums, even though there were none of them there, before this incident.</p>
+      <p>She was able to do her day-to-day activities without any problem. Most of the time she stays at home to look after her grand-daughter, and also goes to work in the paddy mill.</p>
+      <p>Even though she did not properly follow up in the clinic, from time to time she received an IM injection at the clinic, but she did not take her oral medications properly. Other than that, no recent financial issues or substance abuse which could be the trigger for this episode.</p>
+      <p>She denies feeling of excessive sadness, low mood, loss of appetite or reduced self-esteem. However, she claimed that she becomes emotional very easily. She denies grandiose ideas, over-expansive plans, elevated mood or reduced sleep. She is non-alcoholic and has no history of use of any psychoactive substances. No past history of head injury or neurosurgery. She denies nausea, vomiting or early morning headache.</p>
+      <p>She believes that her thoughts are her own &amp; no external force has inserted or withdrawn them. She denies that her thoughts are known to others without her communicating with them.</p>
+      <p>She denies clearly hearing voices talking about her when no one else is nearby. But a few years back, during the 1st episode, she had this experience &mdash; she heard two people talking about her, one being her previous partner.</p>
+      <p>She had a past history of suicidal attempts, 3 times. The last one was very recent, where she tried to ingest several tablets of oral hypoglycaemic drugs. But she does not have any ideas to harm anyone else. Her 2 children are also not affected by her illness, and they are doing their jobs without any problem.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Schizophrenia &mdash; core diagnostic concepts</h3>
+      <p>The Shorter Oxford Textbook of Psychiatry frames schizophrenia around Schneider's first-rank symptoms (thought insertion/withdrawal/broadcasting, passivity phenomena, third-person auditory hallucinations, delusional perception) together with negative symptoms (blunted affect, avolition, poverty of speech) and disorganisation. This case shows delusions of reference and persecution plus auditory and olfactory hallucinations, but explicitly denies thought interference and passivity &mdash; useful for the viva when asked to justify why first-rank symptoms were sought and found absent.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Schizophrenia and Related Disorders.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">4</span>Family History</h2>
+      <p>She has 6 brothers and 1 sister in her family, but 2 of her brothers died. One committed suicide, but the patient is not aware of the exact cause. Another died due to chronic liver disease. There are no first-degree relatives with similar symptoms or any diagnosed psychiatric illness.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">5</span>Personal History</h2>
+      <p>Her childhood &amp; adolescence was problematic. She was educated only up to grade 6 because of some financial issues and elephant attacks on the way to school.</p>
+      <p>At the age of 9 years, she was sexually abused by one of her own brothers. And at the age of 18 years, again she was sexually abused by one of her cousins. But she did not tell anyone, as she was asked not to do so.</p>
+      <p>At the age of 21 years, she got married via a proposal. As her husband was very alcoholic, there were frequent conflicts from the beginning. Sometimes husband's family members were also involved, so after some time the patient and her husband left the husband's home &amp; planned to live separately.</p>
+      <p>At 22 years of age, her first pregnancy ended up as a stillbirth at POA of 28 weeks. And at the ages of 23 years &amp; 27 years she became pregnant and had 2 children (boys).</p>
+      <p>The patient had several extramarital relationships, most of them sexual. But her husband is not aware of them.</p>
+      <p>At one time, the patient had told her husband about one extramarital relationship, and the patient claims that her illness developed since then.</p>
+      <p>Her husband still consumes alcohol heavily, but there are no conflicts now. They have not had any sexual relationship for the last 8 years, and they sleep in separate rooms. But she says her husband is a good man and cares for her very much, better than earlier. Now her husband is doing a manioc business, and she is working in a paddy mill. Their financial &amp; family support is satisfactory.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">6</span>Past Psychiatric History</h2>
+      <p>As mentioned, her illness started 4 years back, when she told her husband about her extramarital relationship. At that time she suddenly became irritable and shouted at villagers. At that time, she claims she heard 2 people talking to each other, one being her previous partner. They were talking about her, especially about her past. She also claimed she experienced the smell of 'dummala' &amp; heard the sound of drums. She firmly believed that this was done by the man who had a relationship with her, and she was admitted to a psychiatric ward.</p>
+      <p>She had a previous history of suicidal attempts &mdash; one at the age of 22 years, where she tried to ingest pesticides, and one at the age of 26 years, where she tried to hang herself using a bed sheet.</p>
+      <p>Altogether, this is her 3rd episode of exacerbation of her illness. Previous episodes were similar to this. In between episodes she was able to do her activities and household work, and also go to her job without any problem.</p>
+      <p>According to the patient, there is no history of violence. As mentioned above, clinic follow-up was defaulted as she believes that she does not have a psychiatric illness. She does not have abnormal weight gain, hair loss, or tremors.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">7</span>Past Medical / Surgical History</h2>
+      <p>She is diabetic for 5 years duration. Currently on oral hypoglycaemic agents &amp; on proper clinic follow-up.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">8</span>Premorbid Personality</h2>
+      <p>As mentioned above, she did not have a good relationship with her family members even before the illness, and had conflicts with her husband and husband's family as well. Relationship with the husband is neutral.</p>
+      <p>She was able to do household work by herself. In leisure time she likes to look after her grand-daughter. She is a religious person and admires good social, cultural and moral values.</p>
+      <p>At work, she had a good relationship with co-workers. Her coping mechanisms with stress were very poor &mdash; she easily became sad and tried to harm herself. However, sometimes she talked to her husband and her daughter-in-law to ventilate her feelings.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>&#9733; Risk Assessment</h2>
+      <p><strong>To self &mdash; Moderate.</strong> I assessed the suicidal risk of Mrs. D.B. Bandaramenike, who is a known patient with a psychiatric illness. Previously she had on-and-off suicidal thoughts and has attempted suicide two times. Now she denies any suicidal thoughts, and denies a sense of hopelessness or worthlessness.</p>
+      <p>She had a family history of suicide as well, where one of her own brothers committed suicide. She is non-alcoholic and does not consume any psychoactive substances. She is interested in religious activities and has a good relationship with her husband and daughter-in-law as good stress-coping mechanisms.</p>
+      <p>Currently she denies suicidal thoughts, but she still has access to pesticides in their home. As this patient has a past history of suicidal attempts and access to pesticides, her suicidal risk is moderate.</p>
+      <p><strong>To others &mdash; Low.</strong> She has persecutory delusions, but she does not have any ideas or clear plans to harm anyone. But she wants to punish the people who she believes led her to this illness, through legal actions. No history of violence or aggressive behaviour.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Structuring a psychiatric risk assessment</h3>
+      <p>The Shorter Oxford Textbook of Psychiatry emphasises that risk assessment should always integrate static factors (past attempts, family history of suicide, chronic illness) with dynamic/protective factors (current ideation, means, social support, insight) rather than a single score. Here, past attempts + household access to pesticides = moderate self-risk, despite currently denying ideation &mdash; a distinction examiners often probe.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Risk Assessment and Management.</p>
+    </div>
+
+  </section>
+
+  <!-- MSE -->
+  <section class="panel" id="mse">
+    <div class="case-block">
+      <h2><span class="num">1</span>Appearance and Behaviour</h2>
+      <p>She is well looking. Appearance compatible with the chronological age. Appropriately dressed &mdash; a yellow colour blouse and a brown colour skirt. Hair was well maintained and combed. No signs of self-neglect. No jewellery or tattoos, no self-harm injuries.</p>
+      <p>She had good eye contact and good rapport. She was tearful &amp; sobbing from time to time during the interview. She did not respond to any hallucinatory experiences during the interview. No abnormal movements like tremors, restlessness or dystonia. Facial expressions were normal other than sobbing.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">2</span>Speech</h2>
+      <p>Rate and speed were normal, but volume was low. Tone and amount of speech normal. Speech was coherent and relevant. Her emotions were reflected in the tone of her speech. No other speech abnormalities like dysarthria.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">3</span>Mood</h2>
+      <p>Subjectively she was neither happy nor sad. Objectively she was dysphoric. Her mood was reactive and congruent.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">4</span>Thought</h2>
+      <p>She has delusion of reference, where she firmly believes that others are talking about her. She has persecutory delusions, where she firmly believes that her villagers are trying to harm her to get information regarding her past events. But there was no suspicious evidence.</p>
+      <p>She does not have any formal thought disorder, thought insertion, or withdrawal. No passivity phenomena.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">5</span>Perception</h2>
+      <p>She has auditory hallucinations, where she heard the sound of drums. She has olfactory hallucinations on &amp; off. She denies thought echo.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">6</span>Cognition</h2>
+      <p>She was oriented to time, place and person. She had good short &amp; long-term memory. Attention &amp; concentration were good.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">7</span>Insight</h2>
+      <p>Impaired. Patient believes that others think she has a psychiatric illness, but the patient denies it. She did not understand that this behaviour is abnormal. Therefore, she does not want to take medication.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Delusions of reference vs. persecutory delusions</h3>
+      <ul>
+        <li><strong>Delusion of reference:</strong> a firm, unfounded belief that neutral events (conversations, gestures, media) refer specifically to oneself.</li>
+        <li><strong>Persecutory delusion:</strong> a firm, unfounded belief that others intend harm.</li>
+      </ul>
+      <p>Both may co-exist, as here. The Shorter Oxford Textbook stresses distinguishing true olfactory/auditory hallucinations (perceived as external, in the absence of a stimulus, as in this case) from illusions or pseudohallucinations, and testing for passivity phenomena explicitly, since their presence/absence materially changes the ICD-11 picture and DDx weighting toward or away from schizophrenia.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Symptoms and Signs of Mental Disorder / Schizophrenia.</p>
+    </div>
+  </section>
+
+  <!-- PE + DDx -->
+  <section class="panel" id="pe">
+    <div class="case-block">
+      <h2>Physical Examination</h2>
+      <p><strong>General:</strong> She was well looking. Afebrile. Not pale or icteric. No tremors. No clubbing. No ankle oedema.<br>
+      Weight &mdash; 83.5 kg &nbsp;|&nbsp; Height &mdash; 160 cm &nbsp;|&nbsp; BMI &mdash; 32.6 kg/m&sup2; (Obese)</p>
+      <p><strong>CVS:</strong> BP &mdash; 121/81 mmHg. PR &mdash; 88 bpm, good volume, regular rhythm. No murmurs.</p>
+      <p><strong>Respiratory:</strong> Bilateral air entry equal, vesicular breathing, no added sounds. RR &mdash; 19/min.</p>
+      <p><strong>Abdomen:</strong> Soft &amp; non-tender.</p>
+      <p><strong>CNS:</strong> No abnormal neurological findings.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Differential Diagnosis</h2>
+      <ul>
+        <li>Schizophrenia</li>
+        <li>Depression with psychosis</li>
+        <li>Schizoaffective disorder</li>
+        <li>Delusional disorder</li>
+      </ul>
+    </div>
+
+    <div class="oxford">
+      <h3>Differentiating the psychotic differentials</h3>
+      <ul>
+        <li><strong>Depression with psychosis:</strong> mood-congruent psychotic features should be preceded by/co-occur with a prominent depressive syndrome &mdash; absent here (she explicitly denies excessive sadness, anhedonia).</li>
+        <li><strong>Schizoaffective disorder:</strong> requires a substantial concurrent mood episode alongside first-rank/psychotic symptoms within the same episode &mdash; not supported by this history.</li>
+        <li><strong>Delusional disorder:</strong> a single, well-systematised delusion (often persecutory or jealous) without prominent hallucinations or negative symptoms &mdash; this case has both auditory and olfactory hallucinations, arguing against this.</li>
+      </ul>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Schizophrenia, Schizoaffective and Delusional Disorders.</p>
+    </div>
+  </section>
+
+  <!-- SUMMARY + PROBLEM LIST -->
+  <section class="panel" id="summary">
+    <div class="case-block">
+      <h2>Summary</h2>
+      <p>Mrs. D.B. Bandaramenike, 51 years old, diagnosed patient with psychiatric illness for 4 years duration (schizophrenia), with defaulted clinic follow-up and poor drug compliance, this time presented with altered behaviour for one day duration, where she suddenly became irritable &amp; fearful while at a 'Bana' program. She has delusion of reference, persecutory delusion, auditory hallucination and olfactory hallucination. No thought insertion, withdrawal or broadcasting. She denies excessive sadness, fatiguability or reduced energy. Currently she does not have any suicidal or homicidal thoughts, but has a past history of suicidal attempts, 3 times.</p>
+      <p>On examination she had good self-care. Rate and speed of speech were normal but volume was low. Subjectively she was neither happy nor sad, but objectively she was dysphoric; she was tearful &amp; sobbing from time to time. She was oriented to time, place &amp; person, and other examination findings were unremarkable.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Problem List</h2>
+      <table class="problem">
+        <tr><th></th><th>Acute</th><th>Chronic</th></tr>
+        <tr><td>Biological</td><td>&mdash;</td><td>Known patient with DM for 5 years. Obesity.</td></tr>
+        <tr><td>Psychological</td><td>Persecutory delusion. Delusion of reference. Auditory hallucination. Olfactory hallucination.</td><td>Diagnosed patient with schizophrenia for 4 years. 3 suicidal attempts.</td></tr>
+        <tr><td>Social</td><td>Extramarital relationships</td><td>Family conflicts</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- MANAGEMENT -->
+  <section class="panel" id="management">
+    <div class="case-block">
+      <h2>Goals of Management</h2>
+      <ul>
+        <li>(1) Deciding on treatment setting</li>
+        <li>(2) Providing a supportive environment</li>
+        <li>(3) Minimising harm to herself and others</li>
+        <li>(4) Educating patient and patient's family</li>
+        <li>(5) Pharmacological treatment</li>
+        <li>(6) Non-pharmacological treatment</li>
+        <li>(7) Discharge planning</li>
+        <li>(8) Follow-up care</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <h2>Immediate Management</h2>
+      <p><strong>(1) Deciding on treatment setting.</strong> This patient is diagnosed with schizophrenia but has defaulted clinic follow-up and has poor drug compliance. So, for acute management, I would consider admitting this patient to the ward, as it is also beneficial for risk minimisation, because this patient had a previous history of 2 (documented 3) suicidal attempts. I would admit this patient to exclude any organic cause for the diagnosis and do basic investigations before starting the drugs.</p>
+      <p><strong>(2) Provide supportive environment.</strong> My priority would be to provide empathetic and non-judgemental support to the patient, allowing her to participate in ward activities once her symptoms subside.</p>
+      <p><strong>(3) Assessing the patient.</strong> I will conduct a thorough assessment including a detailed history from her and a collateral history from her husband and sons. Then I would do a thorough mental state examination and physical examination including weight, height, BP. Then I would order baseline investigations relevant before starting antipsychotic drugs &mdash; FBS (as this patient is diabetic), liver function tests, FBC.</p>
+      <p><strong>(4) Educating patient and the family members.</strong> I will educate them about the diagnosis, symptoms, treatment options and side effects of drugs, prognosis, and the importance of adherence to medical management.</p>
+      <p><strong>(5) Pharmacological management.</strong> After confirming the patient is stable for drugs, I will start her on an atypical antipsychotic, as they are considered first-line in schizophrenia &mdash; Risperidone 2 mg oral (can increase gradually by 1 mg). Along with that, I would start Fluoxetine 20 mg oral (nocte), and Clonazepam 0.5 mg oral (nocte), which she was previously on. I would consider giving IM Haloperidol 5 mg whenever needed, if the patient becomes agitated or aggressive, after trying verbal de-escalation. At the same time I would add Gliclazide 40 mg oral bd and Atorvastatin 20 mg oral (nocte) as her routine medication.</p>
+      <p><strong>Intermediate management.</strong> I will arrange daily monitoring of this patient. I would conduct daily ward rounds to assess the response to drugs and to look for any side effects.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Choice of antipsychotic &amp; principles of acute management</h3>
+      <p>Consistent with the Shorter Oxford Textbook, second-generation antipsychotics are generally preferred first-line for their more favourable extrapyramidal side-effect profile (at the cost of metabolic risk), with dose titrated to the lowest effective dose. IM/parenteral options and short-term benzodiazepines are reserved for acute agitation after verbal de-escalation has failed. Baseline metabolic and physical screening (weight, BP, glucose, lipids) before and during antipsychotic treatment is a recurring textbook emphasis, reflected well in this plan (FBS, LFTs given comorbid diabetes/obesity).</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Drugs and Other Physical Treatments / Schizophrenia management.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Intermediate &amp; Long-term Management (continued)</h2>
+      <p>Considering the response and drug side effects, I would adjust the doses and switch medications if needed. I would monitor her daily with BP, PR, and weight. I would manage the patient in the ward until her risk subsides, assessing daily for signs of improvement. I would check whether she is taking her routine medications properly, and encourage her to participate in ward activities. I would gradually reduce the Clonazepam dose to prevent dependence.</p>
+      <p><strong>Long term management.</strong> Once her symptoms have improved and she is stable, I would consider discharging the patient with maintenance doses. I would prepare a detailed discharge plan including a summary of the patient's symptoms, treatment given, test results and follow-up plan.</p>
+      <p>I would arrange a family meeting and educate the family regarding medications (dose, route, frequency, side effects) and the importance of compliance and follow-up. As this patient has poor drug compliance, I would consider giving depot antipsychotics 2&ndash;4 weekly (e.g. Flupentixol decanoate 12.5 mg). I would also arrange psychotherapy for this patient, as she has a previous history of suicidal attempts and maladaptive coping strategies to stress.</p>
+      <p>During follow-up, I would consider FBS (3-monthly) and lipid profile (6-monthly). I would advise the patient and family members about the importance of regular exercise, healthy diet, and physical fitness while on antipsychotics.</p>
+      <p>During follow-up visits, I would assess the extent and severity of symptoms, risk assessment, and functional assessment &mdash; including self-care, basic living skills, leisure and social activities, employment and relationships. I would also assess drug compliance, side effects of medications, and ongoing psychological treatments.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Follow-up &amp; relapse prevention</h3>
+      <p>The textbook frames long-term schizophrenia care around relapse prevention: maintenance antipsychotic treatment, depot preparations where compliance is poor, regular metabolic monitoring, and structured psychosocial input (family psychoeducation, CBT for psychosis, social/occupational rehabilitation). Poor insight and non-adherence &mdash; both prominent in this case &mdash; are recognised predictors of relapse and are the explicit rationale here for choosing depot therapy.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Schizophrenia &mdash; Course, Prognosis and Management.</p>
+    </div>
+  </section>
+
+  <!-- DRUGS -->
+  <section class="panel" id="drugs">
+    <div class="drugbox">
+      <h4>Risperidone (SGA)</h4>
+      <ul>
+        <li>Extrapyramidal side effects: dystonia, akathesia, tardive dyskinesia, parkinsonism</li>
+        <li>Hyperprolactinaemia, HTN, metabolic syndrome, sexual dysfunction</li>
+        <li>Common: anxiety, chest discomfort, headache, nasal congestion, nausea</li>
+      </ul>
+    </div>
+    <div class="drugbox">
+      <h4>Haloperidol (FGA)</h4>
+      <ul><li>Extrapyramidal side effects (prominent)</li></ul>
+    </div>
+    <div class="drugbox">
+      <h4>Fluoxetine (SSRI)</h4>
+      <ul>
+        <li>GIT: nausea/vomiting, diarrhoea, dyspepsia, dry mouth</li>
+        <li>Urinary retention, sexual dysfunction, hyponatraemia</li>
+      </ul>
+    </div>
+    <div class="drugbox">
+      <h4>Clonazepam (Benzodiazepine)</h4>
+      <ul><li>Drowsiness, ataxia, motor incoordination, slurred speech</li></ul>
+    </div>
+
+    <div class="oxford">
+      <h3>Monitoring antipsychotic side effects</h3>
+      <p>The Shorter Oxford Textbook recommends baseline and periodic monitoring of weight/BMI, blood pressure, fasting glucose/HbA1c and lipid profile for all patients on antipsychotics, alongside clinical screening for extrapyramidal signs and prolactin-related symptoms (galactorrhoea, sexual dysfunction, menstrual irregularity). Benzodiazepines should be tapered rather than stopped abruptly once acute agitation resolves, to avoid withdrawal &mdash; consistent with the plan to gradually reduce Clonazepam here.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Antipsychotic Drugs and Their Side Effects.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-note">Developed with &#10084;&#65039; by Udana Anjana &amp; Adithya Bandara &middot; &copy; Amasha Lowe. All rights reserved. &middot; <a href="about.html" style="color:#8a97a0;">About</a> &middot; Prepared for Final MBBS psychiatry viva preparation &middot; Case transcription + Oxford guidance annotations</div>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Severe Depression — Case History | Final MBBS Psychiatry Viva</title>
+<style>
+  :root{
+    --navy:#0d2438; --navy-2:#123049;
+    --teal:#1f6f78; --teal-2:#2b8a94;
+    --amber:#c8892f; --amber-2:#e0a94f;
+    --paper:#faf7f0; --ink:#1c2530; --line:#dfe3e6;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:"Georgia","Iowan Old Style",serif; background:var(--paper); color:var(--ink); line-height:1.6; }
+  header{ background:linear-gradient(135deg,var(--navy),var(--navy-2)); color:#fff; padding:28px 32px 22px; border-bottom:5px solid var(--amber); }
+  header .kicker{ font-family:"Helvetica Neue",Arial,sans-serif; letter-spacing:2.5px; text-transform:uppercase; font-size:11px; color:var(--amber-2); margin-bottom:6px; }
+  header h1{ margin:0 0 4px; font-size:30px; font-weight:700; }
+  header .sub{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:13.5px; color:#c9d6de; }
+  .disclaimer{ background:#fff4e2; border-left:4px solid var(--amber); margin:18px 32px 0; padding:12px 16px; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; color:#5a4620; border-radius:0 4px 4px 0; }
+  .disclaimer b{ color:#7a4a00; }
+  nav.tabs{ display:flex; flex-wrap:wrap; gap:6px; background:var(--navy-2); padding:10px 26px; position:sticky; top:0; z-index:50; border-bottom:3px solid var(--teal); }
+  nav.tabs button{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; letter-spacing:.3px; text-transform:uppercase; background:transparent; color:#b9c8d2; border:1px solid rgba(255,255,255,.18); padding:8px 14px; border-radius:5px 5px 0 0; cursor:pointer; transition:.15s; }
+  nav.tabs button:hover{ color:#fff; border-color:var(--teal-2); }
+  nav.tabs button.active{ background:var(--paper); color:var(--navy); border-color:var(--paper); font-weight:700; }
+  main{ max-width:900px; margin:0 auto; padding:28px 32px 80px; }
+  .panel{ display:none; animation:fade .2s ease-in; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+  .case-block{ background:#fff; border:1px solid var(--line); border-left:5px solid var(--teal); border-radius:6px; padding:20px 24px; margin-bottom:20px; }
+  .case-block h2{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:1.6px; color:var(--teal); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .case-block h2 .num{ background:var(--teal); color:#fff; width:22px;height:22px; border-radius:50%; display:inline-flex;align-items:center;justify-content:center; font-size:11px; }
+  .case-block p{ margin:0 0 12px; font-size:15.5px; }
+  .case-block p:last-child{ margin-bottom:0; }
+  .case-block ul{ margin:0 0 10px 18px; padding:0; }
+  .uncertain{ background:#fdf0f0; color:#8a3b3b; padding:1px 5px; border-radius:3px; font-size:.92em; font-family:"Helvetica Neue",Arial,sans-serif; }
+  .oxford{ background:#eef6f6; border:1px solid var(--teal-2); border-radius:6px; padding:16px 20px; margin:0 0 24px; position:relative; }
+  .oxford::before{ content:"OXFORD GUIDANCE"; font-family:"Helvetica Neue",Arial,sans-serif; font-size:10.5px; letter-spacing:1.6px; color:#fff; background:var(--teal); padding:3px 10px; border-radius:3px; position:absolute; top:-11px; left:16px; }
+  .oxford h3{ margin:10px 0 8px; font-family:"Helvetica Neue",Arial,sans-serif; font-size:14px; color:var(--navy); }
+  .oxford p, .oxford li{ font-size:14.5px; color:#243642; }
+  .oxford ul{ margin:0 0 8px 18px; padding:0; }
+  .oxford .cite{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; color:var(--teal); font-style:italic; margin-top:4px; }
+  table.problem{ width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:14px; }
+  table.problem th, table.problem td{ border:1px solid var(--line); padding:8px 10px; vertical-align:top; text-align:left; }
+  table.problem th{ background:var(--navy); color:#fff; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:.5px; }
+  table.problem td:first-child{ background:#f2f5f6; font-weight:700; font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; color:var(--navy); }
+  .drugbox{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin-bottom:14px; }
+  .drugbox h4{ margin:0 0 6px; font-size:14.5px; color:var(--amber); font-family:"Helvetica Neue",Arial,sans-serif; }
+  .drugbox ul{ margin:0 0 0 18px; font-size:14px; }
+  .footer-note{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; color:#8a97a0; text-align:center; margin-top:30px; }
+  .risk-high{ color:#a4342a; font-weight:700; }
+  .risk-mod{ color:#a17417; font-weight:700; }
+  .risk-low{ color:#2a7a4c; font-weight:700; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11.5px;color:#e0a94f;text-decoration:none;display:inline-block;margin-bottom:10px;">&larr; Casebook Home</a><br>
+  <div class="kicker">Final MBBS &middot; Psychiatry Viva &middot; Ideal Case History</div>
+  <h1>Severe Depression</h1>
+  <div class="sub">Severe Depressive Episode without Psychotic Symptoms &mdash; Mrs. B.M.D. Dissanayaka, Female</div>
+</header>
+
+<div class="disclaimer">
+  Machine-assisted transcription (OCR) of your handwritten case sheet, corrected for legibility while preserving your original wording as closely as possible. Text highlighted <span class="uncertain">like this</span> was hard to read or partly ambiguous in the scan (exact age, some dates, one vital sign) &mdash; please verify against your original notes. "Oxford Guidance" boxes summarise the corresponding section of the <em>Shorter Oxford Textbook of Psychiatry</em> (Cowen, Harrison &amp; Burns) &mdash; not part of your original notes.
+</div>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="history">History</button>
+  <button class="tab-btn" data-tab="mse">MSE</button>
+  <button class="tab-btn" data-tab="pe">Physical Exam &amp; DDx</button>
+  <button class="tab-btn" data-tab="summary">Summary &amp; Problem List</button>
+  <button class="tab-btn" data-tab="management">Management</button>
+  <button class="tab-btn" data-tab="drugs">Drug Side Effects</button>
+</nav>
+
+<main>
+
+  <!-- HISTORY -->
+  <section class="panel active" id="history">
+
+    <div class="case-block">
+      <h2><span class="num">1</span>Introduction</h2>
+      <p>Mrs. B.M.D. Dissanayaka, <span class="uncertain">age unclear in scan</span>, mother of two children, from <span class="uncertain">Medawachchiya (place name unclear)</span>, who works as an accountant at a metal crusher company. Currently lives with her husband &amp; 2 children.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">2</span>Presenting Complaint</h2>
+      <p>She was brought by her family members, initially to Base Hospital Thabuttegama, due to a suicidal attempt &mdash; she jumped into a well &mdash; then was transferred to THA.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">3</span>History of Presenting Complaint</h2>
+      <p>She is a known patient receiving psychiatric services since 2016. Since then, she has had low mood &amp; feelings of unworthiness from time to time. This time, she attempted suicide on 23rd October. It occurred during a conflict with her husband &amp; his brother, who had also become involved. She then left home and went to her parents' home with her younger son.</p>
+      <p>Her husband came to bring her back, but she refused, and there was another conflict; her husband then left home with the children. At that point she experienced a sudden impulse to end her life, as her husband told her to divorce him. She suddenly jumped into a well. However, her sister saw this, and with the help of family members and villagers, she was taken to Thabuttegama hospital &amp; then transferred to THA, where she was admitted to ICU for 1 day, then a medical ward, and from there transferred to this ward.</p>
+      <p>Apart from this incident, she has had several previous episodes of suicidal attempts &amp; deliberate self-harm. It all started around 2016, when she discovered her husband still had some relationship with his previous girlfriend. Since then, her illness began &mdash; she has had low mood, a sense of hopelessness &amp; anxiety, and feels she is a burden to her family members. She has feelings of guilt, and a loss of interest &amp; lack of enjoyment in activities that were previously pleasurable to her.</p>
+      <p>Now, most of the time she prefers to stay alone, with reduced interaction even with her family members. She also complains of reduced appetite and difficulty sleeping &mdash; she couldn't initiate sleep, and couldn't maintain sleep through the night.</p>
+      <p>She claims she still has ongoing stressors, as her husband's brother argues with them most of the time over land issues, which has led her to develop a pessimistic view of her children's future. After this incident, villagers spread rumours that she had an extramarital relationship, and she is now worried about that as well &mdash; she claims that because of this, she has wanted to end her life.</p>
+      <p>Over the last couple of years, her symptoms have gradually worsened, leading to several suicidal attempts within the last 3 months. Most of these acts followed an acute trigger. She previously had good drug compliance, and this is the first time she has been admitted to a psychiatric ward for in-patient management.</p>
+      <p>However, even with these stressors &amp; events, she managed to attend her job, and maintained good personal care. She was able to carry out household activities and look after her children carefully, taking them to school every day &mdash; so there is a low risk of child neglect. She has a high suicidal risk as noted above, and a moderate risk to others, as she sometimes has impulsive urges towards her husband's brother &amp; his wife, but has never acted on violence against them beyond verbal arguments.</p>
+      <p>She did not have past episodes of overtalkativeness, increased energy or elated mood. She denies any past history of substance abuse. No recent history of head trauma. She believes her thoughts are her own, and denies clearly hearing voices when no one else is nearby.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Severe depression &mdash; core diagnostic features</h3>
+      <p>The Shorter Oxford Textbook characterises a depressive episode by persistent low mood, anhedonia, and reduced energy as core symptoms, plus associated features such as reduced concentration, low self-esteem, guilt, pessimism about the future, sleep and appetite disturbance, and suicidal ideation/acts &mdash; present for at least two weeks. "Severe" episodes typically show most of these symptoms markedly, with significant functional impact and often suicidal behaviour, as seen here. The absence of hallucinations or mood-congruent delusions (e.g. guilt-related delusions, nihilistic beliefs) is what keeps this "without psychotic symptoms" rather than psychotic depression.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Mood (Affective) Disorders &mdash; Depressive Episodes.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">4</span>Family History</h2>
+      <p>She doesn't have first-degree relatives with similar symptoms, or any other psychiatric illnesses or suicidal attempts in the family.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">5</span>Personal History</h2>
+      <p>Her childhood &amp; development were uneventful. She was educated up to O/L, then married her husband, who is an air force officer, at the age of <span class="uncertain">~21 years</span>. After marriage she completed her A/Ls and a diploma. She wanted to become a dancing teacher, but her husband didn't like the idea.</p>
+      <p>They have 2 children. Until last month she stayed at home looking after her two children, and recently went to work at a metal crusher company as an accountant. It was near home, so her husband didn't restrict her from working. At this time she denies any stressors at work, and works happily there.</p>
+      <p>However, she has ongoing stressors within the family due to recurrent conflicts with her husband's brother over land issues. She has a good relationship with her mother, father, siblings, husband &amp; children. In her leisure time she used to dance &amp; go out with her sisters, but she claims she now has poor interest in these activities. She denies past history of any other relationships except her husband, and no history of substance abuse.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">6</span>Past Psychiatric History</h2>
+      <p>In 2016, during the antenatal period of her first pregnancy, she discovered her husband had a relationship with his previous girlfriend. She worried excessively about this, and developed low mood, loss of interest &amp; enjoyment for several weeks. She sought medical attention and was diagnosed with depression. She was started on antidepressants, and her symptoms improved. Even with treatment, she had recurrent episodes, feeling somewhat better between episodes but not fully recovered.</p>
+      <p>Around this time, she developed a dependence on Clonazepam use. When she tried to stop, she developed withdrawal symptoms.</p>
+      <p>This is the first time she has been admitted to a psychiatric unit for in-patient management; during previous episodes she was managed in medical wards, and was on psychiatric clinic follow-up.</p>
+      <p>She has a past history of a total of 7 suicidal attempts. During the last 3 months, she made 5 attempts, but was not admitted to hospital for these. She attempted suicide twice by hanging herself, and on several occasions by self-ingestion of Clonazepam tablets (20&ndash;30 tablets, obtained separately from 3 different pharmacies). Her most recent attempt was this one, where she jumped into a well; just before that she had also tried to hang herself.</p>
+      <p>She doesn't have a history of violence, and has never acted violently against others.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">7</span>Past Medical / Surgical History</h2>
+      <p>Unremarkable, apart from the Clonazepam dependence noted above.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">8</span>Premorbid Personality</h2>
+      <p>Before this illness, she used to dance with her sister, which made her happy. She had good friends, and loved going out with them. She also actively participated in religious activities to relieve her stress. As mentioned above, she developed maladaptive coping strategies after her illness began, but before that, she used to tell everything to her sister to ventilate her feelings.</p>
+      <p>Sometimes, during a stressful event, she prefers to be socially isolated and stay in a quiet environment. In her leisure time she loves spending time with her children &amp; dancing with her sister.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>&#9733; Risk Assessment</h2>
+      <p><span class="risk-high">Risk of suicide &mdash; High.</span> Most of her attempts were impulsive acts in response to a stressor &mdash; she has harmed herself even with a small stressor. She has searched for information online and collected medications from multiple sources. There are ropes and her own medications available at home, which she has previously used in attempts. She has ongoing stressors, as her husband's brother is in conflict with them over the land issue. Currently she has a stable job and good family support; however, social support is poor, as she doesn't interact much now, and tends to withdraw socially during stress. Overall, suicidal risk is high.</p>
+      <p><span class="risk-mod">Risk to others / violence &mdash; Moderate.</span> She has a past history of verbal conflicts with her husband's brother &amp; his wife. Sometimes she has had thoughts of harming them, but has never acted on this &mdash; no history of physical violence. When stressed, she sometimes breaks household belongings, but later worries about this behaviour. No past history of physical violence against anyone, and no history of substance abuse. She has good family support but poor social support, good drug compliance, and is engaged with mental health services.</p>
+      <p><span class="risk-low">Risk of self-neglect &mdash; Low to Moderate.</span> Despite her illness, she has been able to maintain good personal care; her overall hygiene is satisfactory. She has a good appetite now, but her sleep remains poor.</p>
+      <p><span class="risk-mod">Risk to children &mdash; Moderate.</span> She has never had thoughts of harming her children. Even with her illness, she takes good care of them, and takes them to school herself. She never argues with her husband in front of the children, and does not want them to know about her illness. Currently the children are doing well at school, with no complaints from teachers.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Suicide risk assessment in severe depression</h3>
+      <p>The Shorter Oxford Textbook stresses that a history of multiple prior attempts (here, 7 in total, with 5 in the last 3 months) is one of the strongest predictors of future completed suicide, and that access to lethal means at home (medications, ropes) combined with poor social support and ongoing psychosocial stressors compounds this risk substantially. This is precisely why the case correctly grades suicidal risk "high" despite good family support and reasonable day-to-day functioning &mdash; risk assessment should weight the pattern of repeated impulsive attempts more heavily than current apparent stability.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Suicide and Attempted Suicide.</p>
+    </div>
+  </section>
+
+  <!-- MSE -->
+  <section class="panel" id="mse">
+    <div class="case-block">
+      <h2><span class="num">1</span>Appearance and Behaviour</h2>
+      <p>She looks well; appearance compatible with her chronological age. She is well built and well nourished, wearing a clean, appropriate dress &mdash; a black colour T-shirt and a brown colour trouser. No jewellery or tattoos. No signs of self-neglect. Hair was well maintained and combed.</p>
+      <p>She has multiple scars on her forearm from previous self-harm injuries. She had a tearful, sad face and sobbed from time to time during the interview. However, she had good eye contact and good rapport. Her facial expressions changed appropriately with her speech. She didn't seem distracted, and it was not apparent that she was responding to any hallucinatory experience. No abnormal movements such as tremors or arm swinging.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">2</span>Speech</h2>
+      <p>Speech is spontaneous. Flow, rate and amount are normal, but volume is low, and speech is monotonous. Her speech changes with her emotions. Speech was coherent &amp; relevant, with a logical connection throughout.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">3</span>Mood</h2>
+      <p>Subjectively the patient was sad. Objectively she was depressed &mdash; persistent low mood, lack of energy, and reduced interest &amp; enjoyment. Thought range was restricted towards depressive themes. Mood was congruent with her thoughts, and reactive.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">4</span>Thought</h2>
+      <p>She doesn't have any abnormalities in form of thought &mdash; no flight of ideas, formal thought disorder, blocking, or perseveration. She denies delusions of guilt, but has feelings of hopelessness &amp; unworthiness, and low self-esteem. She has been preoccupied with these thoughts.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">5</span>Perception</h2>
+      <p>No hallucinations.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">6</span>Cognition</h2>
+      <p>She is well oriented to time, place, person. Attention &amp; concentration are good, and short &amp; long-term memory are intact.</p>
+    </div>
+
+    <div class="case-block">
+      <h2><span class="num">7</span>Insight</h2>
+      <p>Good. The patient knows her behaviour is abnormal, and knows others also perceive her behaviour as abnormal. She accepts that she has a psychiatric illness &amp; is willing to take medications for it.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Depressive cognitions vs. mood-congruent delusions</h3>
+      <p>The Shorter Oxford Textbook distinguishes ordinary depressive cognitions (pessimism, worthlessness, guilt, hopelessness &mdash; present here) from mood-congruent psychotic depression, where these themes become fixed, unshakeable delusional beliefs (e.g. delusions of guilt, poverty, or nihilism/Cotard's syndrome), sometimes with accompanying hallucinations. The explicit denial of delusions here, alongside intact insight, supports the "without psychotic symptoms" qualifier and has direct treatment implications (antidepressant monotherapy vs. antidepressant plus antipsychotic/ECT).</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Psychotic Depression.</p>
+    </div>
+  </section>
+
+  <!-- PE + DDx -->
+  <section class="panel" id="pe">
+    <div class="case-block">
+      <h2>Physical Examination</h2>
+      <p><strong>General:</strong> She was well looking. Afebrile. Not pale or icteric. No tremors. No clubbing. No ankle oedema.<br>
+      Weight &mdash; 63 kg &nbsp;|&nbsp; Height &mdash; 158 cm &nbsp;|&nbsp; BMI &mdash; 25.2 kg/m&sup2;</p>
+      <p><strong>CVS:</strong> BP &mdash; 137/85 mmHg. PR &mdash; <span class="uncertain">exact figure illegible; good volume, regular rhythm</span>.</p>
+      <p><strong>Respiratory:</strong> Bilateral air entry equal, no added sounds. RR &mdash; <span class="uncertain">~13&ndash;19 breaths/min (figure unclear in scan)</span>.</p>
+      <p><strong>Abdomen:</strong> Soft, non-tender.</p>
+      <p><strong>CNS:</strong> No abnormal neurological findings.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Differential Diagnosis</h2>
+      <ul>
+        <li>Depressive disorder without psychosis</li>
+        <li>Adjustment disorder</li>
+        <li>Somatoform disorder</li>
+        <li>Depressive episode of Bipolar Affective Disorder</li>
+      </ul>
+    </div>
+
+    <div class="oxford">
+      <h3>Excluding the differentials</h3>
+      <ul>
+        <li><strong>Adjustment disorder:</strong> typically a briefer, less severe reaction proportionate to an identifiable stressor, without the pervasive biological symptoms (sleep, appetite, energy) or repeated serious suicidal behaviour seen here.</li>
+        <li><strong>Somatoform disorder:</strong> would be led by persistent physical symptoms without organic cause, rather than the mood, cognitive and biological depressive syndrome dominating this picture.</li>
+        <li><strong>Depressive episode of BAD:</strong> requires evidence of a past manic/hypomanic episode &mdash; explicitly denied here (no history of elevated mood, overtalkativeness or increased energy).</li>
+      </ul>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Differential Diagnosis of Depressive Disorders.</p>
+    </div>
+  </section>
+
+  <!-- SUMMARY + PROBLEM LIST -->
+  <section class="panel" id="summary">
+    <div class="case-block">
+      <h2>Summary</h2>
+      <p>Mrs. B.M.D. Dissanayaka, mother of two children, is a diagnosed patient with severe depression without psychosis, this time admitted to a medical ward &amp; transferred here following a suicidal attempt. She has had persistent low mood, lack of energy/fatiguability, reduced appetite &amp; sleep disturbance for several months, with multiple suicidal attempts over the last 3 months. She denies feelings of guilt but consistently worries that she is a burden to her family and feels unworthy. She has recurrent conflicts with her husband's brother over land issues, and claims she persistently worries about these things. Since 2016, she has had 7 suicidal attempts in total, most of which were impulsive acts.</p>
+      <p>On examination, she had multiple self-harm scars on her forearm in retrospect; she was tearful, subjectively sad &amp; objectively depressed. She was alert &amp; well oriented, with good insight regarding her psychiatric illness.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Problem List</h2>
+      <table class="problem">
+        <tr><th></th><th>Acute</th><th>Chronic</th></tr>
+        <tr><td>Biological</td><td>Reduced sleep, loss of appetite, increased fatiguability</td><td>&mdash;</td></tr>
+        <tr><td>Psychological</td><td>Low mood, feelings of worthlessness, suicidal thoughts, lack of interest/joy</td><td>Diagnosed patient with severe depression. Past history of 7 suicidal attempts &amp; deliberate self-harm.</td></tr>
+        <tr><td>Social</td><td>Social withdrawal, social isolation</td><td>Recurrent conflicts with family members (land dispute).</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- MANAGEMENT -->
+  <section class="panel" id="management">
+    <div class="case-block">
+      <h2>Goals of Management</h2>
+      <ul>
+        <li>(1) Decide the treatment setting</li>
+        <li>(2) Educating the patient and family</li>
+        <li>(3) Provide supportive environment</li>
+        <li>(4) Minimising risk of harm</li>
+        <li>(5) Pharmacological treatment</li>
+        <li>(6) Non-pharmacological treatment / ensuring optimal quality of life</li>
+        <li>(7) Preventing relapse</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <h2>Immediate Management</h2>
+      <p><strong>(1) Management setting.</strong> I would offer in-patient management, because: she is a diagnosed patient with severe depression; she was admitted following a suicidal attempt and still complains of suicidal thoughts; she has a past history of multiple suicidal attempts; and she has ongoing stressors within the family. I would inform staff about the patient and ensure the safety of both the patient and staff.</p>
+      <p><strong>(2) Educating the patient and the family.</strong> I would educate them regarding the current condition, symptoms, treatment options, and prognosis, along with reasons for relapse and the importance of in-patient management.</p>
+      <p><strong>(3) Assess the current condition.</strong> I would build a good rapport with the patient, then take a proper history and examination to assess the severity of illness, and assess her concerns directly. I would perform baseline investigations before starting medication &mdash; FBC, FBS, serum creatinine, serum electrolytes, LFTs.</p>
+      <p>I would recommend pharmacological and non-pharmacological management depending on current symptoms, and would trace her past medical records to know which drugs she was on and her response to previous medications.</p>
+      <p><strong>(4) Pharmacological management.</strong> I would immediately stop Clonazepam, given her past history of dependence on it.</p>
+      <p>I would start her on a Selective Serotonin Reuptake Inhibitor as first-line treatment &mdash; Fluoxetine 20mg oral (nocte), or Sertraline 50mg oral (nocte). I would avoid TCAs given they are toxic in overdose, and she has a significant history of self-harm/overdose. If an SSRI proves insufficiently effective, I would consider an SNRI such as Venlafaxine, starting at 37.5mg.</p>
+      <p>I would monitor her carefully with the help of nurses &mdash; current symptoms/compliance/side effects/behaviour/sleep &amp; appetite/self-care/suicidal risk. As she has children at home, I would address any risk of child neglect that arises.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Why avoid TCAs here</h3>
+      <p>The Shorter Oxford Textbook highlights that tricyclic antidepressants carry significant toxicity in overdose (cardiac arrhythmia, seizures), making them a poor choice for patients with active suicidal ideation or a history of impulsive self-poisoning &mdash; both present in this case. SSRIs are relatively much safer in overdose and are recommended as first-line for this reason as much as for their side-effect profile.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Antidepressant Drugs &mdash; Choice and Safety in Overdose.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Intermediate Management</h2>
+      <p>I would arrange daily reviews to observe her improvement, monitor symptoms and make necessary dose adjustments; if response is poor, I would consider switching drugs or combination therapy.</p>
+      <p><strong>Regular risk assessments</strong> &mdash; as she has suicidal thoughts, I would perform daily risk assessment during ward rounds.</p>
+      <p><strong>Family meeting</strong> &mdash; I would arrange a family meeting to obtain collateral history, educate about the disease, identify the aetiology, and reinforce the importance of compliance. I would address any ongoing problems, such as the children's education and her overall level of functioning.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Non-pharmacological Management</h2>
+      <p><strong>Supportive psychotherapy</strong> &mdash; identification and resolution of the patient's current life difficulties, mainly through the social care worker, helping her cope with symptoms and address problems.</p>
+      <p><strong>Cognitive behavioural therapy</strong> &mdash; in the cognitive component, she would be taught to identify maladaptive thinking patterns and challenge negative thoughts. The behavioural component encourages engagement in activities that improve mood and encourage further activity, helping her understand the connection between cognition and resulting distressing emotions.</p>
+      <p><strong>Interpersonal therapy</strong> &mdash; to help manage difficulties in her relationships (notably the conflict with her husband's brother, and marital strain).</p>
+      <p>When symptoms are improving, I would arrange a parole leave. On her return, I would assess improvement and side effects of drugs, and consider any dose adjustments.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>CBT in depression &mdash; the cognitive triad</h3>
+      <p>The Shorter Oxford Textbook references Beck's cognitive model, where depression is maintained by a negative view of the self, the world, and the future (the "cognitive triad"). This patient's preoccupation with worthlessness (self), family conflict (world), and pessimism about her children's future (future) maps closely onto this triad, and is precisely the target of the cognitive restructuring component of CBT.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Cognitive Behavioural Therapy for Depression.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Long-term Management</h2>
+      <p>Goals: plan for discharge and follow-up care. Once acute symptoms have resolved and risks are low, I would consider discharging the patient and arrange follow-up. My discharge plan would include details of her assessment, the dose and frequency of treatment given in the ward, response to medications, and arrangement of a clinic visit for review (at THA or a base hospital, depending on medication availability).</p>
+      <p>I would inform the clinic and community psychiatric nurse about the patient. Before discharge, I would educate the patient &amp; family regarding follow-up care, early warning signs of relapse, the importance of her physical health, good sleep and a relaxed mind, and the importance of treatment compliance and regular follow-up.</p>
+      <p>The main purpose of follow-up is to maintain the achieved improvement and prevent relapse. At each follow-up visit I would assess: extent and severity of symptoms; risk assessment; drug compliance; side effects of medications; ongoing psychological treatment; and level of functioning.</p>
+      <p>I would educate her that it typically takes about 2&ndash;3 months to become completely free of symptoms, and that she would need to continue treatment for a further 6 months to prevent relapse.</p>
+    </div>
+
+    <div class="oxford">
+      <h3>Duration of antidepressant treatment</h3>
+      <p>Consistent with the Shorter Oxford Textbook, antidepressants should typically be continued for at least 6 months after symptom remission (longer after recurrent or severe episodes, as here) to reduce the risk of early relapse, with gradual tapering rather than abrupt discontinuation once treatment is eventually stopped.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Continuation and Maintenance Treatment of Depression.</p>
+    </div>
+  </section>
+
+  <!-- DRUGS -->
+  <section class="panel" id="drugs">
+    <div class="drugbox">
+      <h4>SSRIs (e.g. Fluoxetine, Sertraline)</h4>
+      <ul>
+        <li>Anxiety, GI disturbance, dry mouth, sexual dysfunction</li>
+        <li>Uncommon: menstrual irregularities, tremors, alopecia/galactorrhoea, serotonin syndrome, thrombocytopenia</li>
+      </ul>
+    </div>
+    <div class="drugbox">
+      <h4>TCAs (avoided here, but relevant for viva)</h4>
+      <ul>
+        <li>Anticholinergic syndrome: dry mouth, blurred vision, constipation, urinary retention</li>
+        <li>Drowsiness, weight gain, gynaecomastia, hypertension</li>
+        <li>Alopecia, agranulocytosis, anxiety, arrhythmia (danger in overdose)</li>
+      </ul>
+    </div>
+
+    <div class="oxford">
+      <h3>Serotonin syndrome &mdash; recognition</h3>
+      <p>The Shorter Oxford Textbook describes serotonin syndrome as a triad of neuromuscular abnormalities (tremor, clonus, hyperreflexia), autonomic instability (hyperthermia, tachycardia, sweating), and altered mental state (agitation, confusion), typically arising from combining serotonergic agents (e.g. SSRI + MAOI, or SSRI + tramadol). Given this patient's history of collecting/self-administering medications from multiple sources, clear counselling about avoiding other serotonergic drugs and over-the-counter interactions is particularly important here.</p>
+      <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Antidepressant Drug Interactions and Serotonin Syndrome.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-note">Developed with &#10084;&#65039; by Udana Anjana &amp; Adithya Bandara &middot; &copy; Amasha Lowe. All rights reserved. &middot; <a href="about.html" style="color:#8a97a0;">About</a> &middot; Prepared for Final MBBS psychiatry viva preparation &middot; Case transcription + Oxford guidance annotations</div>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
