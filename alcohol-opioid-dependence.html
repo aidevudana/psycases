@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Alcohol &amp; Opioid Dependence — Psychiatry Viva Kuppiya</title>
+<style>
+:root{
+  --navy:#0b2545;
+  --navy-deep:#081b34;
+  --teal:#0f6e56;
+  --teal-light:#e6f5f1;
+  --amber:#c98a1f;
+  --amber-light:#fdf1dc;
+  --ink:#1c2733;
+  --paper:#fbfaf7;
+  --line:#dfe3e8;
+  --red:#a3352c;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Georgia','Iowan Old Style',serif;
+  background:var(--paper);
+  color:var(--ink);
+}
+header{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+  color:#fff;
+  padding:26px 32px 20px;
+  position:sticky;
+  top:0;
+  z-index:50;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+header h1{
+  margin:0 0 4px;
+  font-size:1.5rem;
+  letter-spacing:.5px;
+}
+header p{
+  margin:0;
+  font-size:.85rem;
+  color:#cfe3da;
+  font-style:italic;
+}
+.topbar{
+  display:flex;
+  gap:8px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+.topbtn{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;
+  padding:8px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:.85rem;
+  font-family:inherit;
+  transition:.2s;
+}
+.topbtn:hover{background:rgba(255,255,255,.18);}
+.topbtn.active{
+  background:var(--amber);
+  border-color:var(--amber);
+  color:var(--navy-deep);
+  font-weight:bold;
+}
+.tabnav{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  padding:14px 32px;
+  background:var(--teal-light);
+  border-bottom:2px solid var(--teal);
+  position:sticky;
+  top:96px;
+  z-index:40;
+}
+.tabbtn{
+  white-space:nowrap;
+  background:#fff;
+  border:1px solid var(--teal);
+  color:var(--teal);
+  padding:7px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:.82rem;
+  font-weight:bold;
+}
+.tabbtn.active{
+  background:var(--teal);
+  color:#fff;
+}
+main{
+  max-width:1000px;
+  margin:0 auto;
+  padding:24px 32px 80px;
+}
+.section{display:none;}
+.section.active{display:block;animation:fade .25s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-left:5px solid var(--teal);
+  border-radius:8px;
+  padding:18px 22px;
+  margin-bottom:20px;
+  box-shadow:0 1px 3px rgba(0,0,0,.05);
+}
+.card h2{
+  margin:0 0 12px;
+  color:var(--navy);
+  font-size:1.15rem;
+  border-bottom:2px solid var(--amber);
+  padding-bottom:6px;
+}
+.card h3{
+  color:var(--teal);
+  font-size:1rem;
+  margin:16px 0 8px;
+}
+.card.amber{border-left-color:var(--amber);}
+.card.amber h2{border-bottom-color:var(--teal);}
+.card.red{border-left-color:var(--red);}
+ul{margin:6px 0 10px 18px;padding:0;}
+li{margin-bottom:5px;line-height:1.5;}
+ol{margin:6px 0 10px 20px;}
+ol li{margin-bottom:6px;}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:10px 0 16px;
+  font-size:.92rem;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:7px 10px;
+  text-align:left;
+  vertical-align:top;
+}
+th{
+  background:var(--navy);
+  color:#fff;
+  font-weight:normal;
+}
+tr:nth-child(even){background:#f7f7f4;}
+.pill{
+  display:inline-block;
+  background:var(--amber-light);
+  color:#7a5310;
+  border:1px solid var(--amber);
+  border-radius:14px;
+  padding:2px 10px;
+  font-size:.78rem;
+  font-weight:bold;
+  margin:2px 4px 2px 0;
+}
+.tag-teal{
+  display:inline-block;
+  background:var(--teal-light);
+  color:var(--teal);
+  border:1px solid var(--teal);
+  border-radius:4px;
+  padding:1px 8px;
+  font-size:.78rem;
+  font-weight:bold;
+}
+.note{
+  background:var(--amber-light);
+  border:1px dashed var(--amber);
+  border-radius:6px;
+  padding:10px 14px;
+  font-size:.9rem;
+  margin:10px 0;
+}
+.flow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin:12px 0;
+}
+.flowbox{
+  background:var(--navy);
+  color:#fff;
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:.85rem;
+  font-weight:bold;
+}
+.flowbox.teal{background:var(--teal);}
+.flowbox.amber{background:var(--amber);color:var(--navy-deep);}
+.arrow{color:var(--teal);font-size:1.2rem;}
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+@media(max-width:700px){.grid2{grid-template-columns:1fr;}}
+.dosebox{
+  background:var(--navy);
+  color:#fff;
+  border-radius:6px;
+  padding:10px 14px;
+  font-size:.88rem;
+  margin:6px 0;
+}
+.dosebox b{color:var(--amber);}
+.key{color:var(--red);font-weight:bold;}
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:.8rem;
+  color:#888;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Alcohol &amp; Opioid Dependence</h1>
+  <p>Final MBBS Psychiatry Viva — Medicine Kuppiya</p>
+  <div class="topbar">
+    <button class="topbtn active" onclick="showTop('alcohol')">Alcohol Dependence</button>
+    <button class="topbtn" onclick="showTop('opioid')">Opioid / Heroin Dependence</button>
+  </div>
+</header>
+
+<!-- ===================== ALCOHOL TAB NAV ===================== -->
+<nav class="tabnav" id="nav-alcohol">
+  <button class="tabbtn active" onclick="showSection('a1')">Assessment</button>
+  <button class="tabbtn" onclick="showSection('a2')">Rx Setting &amp; Goals</button>
+  <button class="tabbtn" onclick="showSection('a3')">Scales &amp; Screening</button>
+  <button class="tabbtn" onclick="showSection('a4')">MI / MET / CBT</button>
+  <button class="tabbtn" onclick="showSection('a5')">Detox Regime</button>
+  <button class="tabbtn" onclick="showSection('a6')">Wernicke–Korsakoff</button>
+  <button class="tabbtn" onclick="showSection('a7')">Delirium Tremens &amp; Seizures</button>
+  <button class="tabbtn" onclick="showSection('a8')">Consequences &amp; Admission</button>
+  <button class="tabbtn" onclick="showSection('a9')">Pharmacotherapy &amp; Relapse</button>
+</nav>
+
+<!-- ===================== OPIOID TAB NAV ===================== -->
+<nav class="tabnav" id="nav-opioid" style="display:none;">
+  <button class="tabbtn active" onclick="showSection('o1')">Assessment</button>
+  <button class="tabbtn" onclick="showSection('o2')">Withdrawal</button>
+  <button class="tabbtn" onclick="showSection('o3')">Consequences</button>
+  <button class="tabbtn" onclick="showSection('o4')">Mx of Dependence</button>
+  <button class="tabbtn" onclick="showSection('o5')">Pharmacological Mx</button>
+  <button class="tabbtn" onclick="showSection('o6')">Overdose &amp; Symptomatic Mx</button>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- ALCOHOL SECTIONS -->
+<!-- ============================================================ -->
+
+<section class="section active" id="a1">
+  <div class="card">
+    <h2>01 · Assessment</h2>
+    <p><span class="tag-teal">Cross sectional &amp; longitudinal Hx</span> — take the patient through a typical day.</p>
+    <ul>
+      <li>Features of alcohol dependence (ICD-D)
+        <ul>
+          <li>Withdrawal symptoms — complicated / uncomplicated</li>
+        </ul>
+      </li>
+      <li>Other substance abuse</li>
+      <li>Motivation to stop / level — <span class="key">ask about comorbid depression</span></li>
+      <li>Details of previous use</li>
+      <li>Previous attempts at abstaining — why relapse</li>
+      <li>Consequences of alcohol use — Risks
+        <ul>
+          <li>Physical — CVS / CNS / GI etc.</li>
+          <li>Psychiatric</li>
+          <li>Wernicke–Korsakoff <span class="pill">Physical examination must</span></li>
+          <li>Financial</li>
+          <li>Social</li>
+        </ul>
+      </li>
+      <li>Ix — FBC / FBS / Blood alcohol / LFT / RFT</li>
+    </ul>
+    <div class="note">Physical examination: BP / PR — Liver palpation — peripheral neuropathy — cerebellar signs — high MCV.</div>
+  </div>
+
+  <div class="card">
+    <h2>Rx &amp; Examination + Investigations</h2>
+    <ul>
+      <li>Pattern of use</li>
+      <li>Features of dependence — 6 criteria</li>
+      <li>Withdrawal symptoms · Risks</li>
+      <li>Motivation to stop</li>
+      <li>Details of previous use</li>
+      <li>Previous attempts to give up</li>
+      <li>Consequences (Medical / Social / Financial / Psychiatric)</li>
+      <li>Physical examination — Nutrition / evidence of IV use / pupils</li>
+      <li>Ix — urine for drug screen, ESR, FBC, Hep B / Hep C / HIV</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="a2">
+  <div class="card">
+    <h2>02 · Deciding on Rx Setting</h2>
+    <ul>
+      <li>Low risk / high risk → out patient management</li>
+      <li>Dependence → Inward management</li>
+      <li><span class="key">Indications for admission</span> ⚑</li>
+    </ul>
+  </div>
+
+  <div class="card amber">
+    <h2>03 · Deciding on Goals of Rx</h2>
+    <p>Categorise according to AUDIT score.</p>
+    <ul>
+      <li>Low risk → stay in low risk zone</li>
+      <li>High risk → Abstinence or drinking at a lower level w/o problems</li>
+      <li>Dependence → complete abstinence &amp; rebuild their life</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Deciding the Goals of Rx (detailed)</h2>
+    <ul>
+      <li>Main goal — Abstinence</li>
+      <li>Intermediate — Engage with Rx programme, discourage risky behaviour, minimise financial impact, encourage occupation &amp; healthy relationships</li>
+      <li>Harm reduction — ↓ needle sharing / Methadone maintenance programme</li>
+    </ul>
+  </div>
+
+  <div class="card red">
+    <h2>Indications for Admission</h2>
+    <ol>
+      <li>Severe withdrawal symptoms</li>
+      <li>History of delirium tremens</li>
+      <li>History of seizures</li>
+      <li>Medical complications such as IHD or liver dysfunction</li>
+      <li>Comorbid psychiatric illness</li>
+      <li>Poor social support</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="a3">
+  <div class="card">
+    <h2>Assessment Scales</h2>
+    <table>
+      <tr><th>Scale</th><th>Full form</th><th>Cut-offs</th></tr>
+      <tr><td>CIWA-Ar</td><td>Clinical Institute Withdrawal Assessment of Alcohol Scale</td><td>Mild &lt;10 · Moderate &lt;15 · Severe &gt;15</td></tr>
+      <tr><td>SAW</td><td>Short Alcohol Withdrawal scale</td><td>&lt;4 mild · &gt;15 severe</td></tr>
+    </table>
+    <div class="note">AWS — Alcohol Withdrawal Scale · symptomatic.</div>
+  </div>
+
+  <div class="card">
+    <h2>CAGE — Brief Screening Tool</h2>
+    <table>
+      <tr><th>Letter</th><th>Question</th></tr>
+      <tr><td><b>C</b>ut</td><td>Have you ever felt you should <b>cut down</b> your drinking?</td></tr>
+      <tr><td><b>A</b>nnoyed</td><td>Have people <b>annoyed</b> you by criticising your drinking?</td></tr>
+      <tr><td><b>G</b>uilty</td><td>Have you ever felt <b>guilty</b> about your drinking?</td></tr>
+      <tr><td><b>E</b>ye opener</td><td>Have you ever had a drink first thing in the morning (<b>eye opener</b>)?</td></tr>
+    </table>
+    <p>≥2 → problematic drinking.</p>
+  </div>
+
+  <div class="card amber">
+    <h2>AUDIT Score</h2>
+    <p>Alcohol Use Disorders Identification Test — used in primary care setting.</p>
+    <ul>
+      <li><b>Low risk</b> — current drinking habit doesn't ↑ the risk of medical, financial, or social harm</li>
+      <li><b>High risk</b> — risk of negative medical / financial / psychosocial consequences but doesn't meet criteria for dependence</li>
+      <li><b>Dependence</b></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Brief Intervention — FRAMES</h2>
+    <p>For low risk &amp; high risk patients.</p>
+    <ol>
+      <li>Identify level of risk (AUDIT score — low risk / high risk / dependence)</li>
+      <li>Enhance motivation</li>
+      <li>Provide information about effects</li>
+      <li>Draw up action plan — identify high risk situations &amp; coping strategies</li>
+      <li>Follow up</li>
+    </ol>
+    <table>
+      <tr><th>F</th><td>Feedback of personal risk</td></tr>
+      <tr><th>R</th><td>Responsibility of the patient for personal control</td></tr>
+      <tr><th>A</th><td>Advice to change</td></tr>
+      <tr><th>M</th><td>Menu of ways to reduce or stop alcohol</td></tr>
+      <tr><th>E</th><td>Empathetic counselling styles</td></tr>
+      <tr><th>S</th><td>Self efficacy</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Habit Breaking Plan</h2>
+    <p>For a person in contemplation &amp; action stages.</p>
+    <ol>
+      <li>Write down benefits of cutting down or stopping alcohol</li>
+      <li>Identify at least 4 high risk situations which might influence the person to drink</li>
+      <li>Identify at least 2 strategies to avoid or resist each high risk situation</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="a4">
+  <div class="card">
+    <h2>04 · Motivational Enhancing Therapy &amp; MI (for dependence)</h2>
+    <h3>Stages of Change Model — Prochaska &amp; DiClemente</h3>
+    <div class="flow">
+      <div class="flowbox">Pre-contemplation</div><span class="arrow">→</span>
+      <div class="flowbox teal">Contemplation</div><span class="arrow">→</span>
+      <div class="flowbox teal">Preparation</div><span class="arrow">→</span>
+      <div class="flowbox amber">Action</div><span class="arrow">→</span>
+      <div class="flowbox">Maintenance</div><span class="arrow">→</span>
+      <div class="flowbox" style="background:var(--red);">Relapse</div>
+    </div>
+
+    <h3>Motivational Interviewing — 3 steps: ORAS</h3>
+    <ol>
+      <li><b>O</b> — Engage</li>
+      <li><b>E</b> — Evoke (evoke change talk — don't encourage sustained talk)</li>
+      <li><b>P</b> — Plan (get the plan from the patient; identify situations &amp; solutions)</li>
+    </ol>
+    <h3>OARS</h3>
+    <ul>
+      <li><b>O</b> — Open ended questions</li>
+      <li><b>R</b> — Reflection</li>
+      <li><b>A</b> — Affirmation &amp; Appreciate things in the patient</li>
+      <li><b>S</b> — Summarise</li>
+    </ul>
+    <ul>
+      <li>Do not start the interview with negative things</li>
+      <li>Let the person take a good look at the mirror → change talk &amp; sustained talk</li>
+      <li>Try to direct the patient to change talk</li>
+      <li>Explain the advantages &amp; disadvantages &amp; let the patient decide</li>
+      <li>Ask the patient what can he do? what is best for him?</li>
+      <li>Train refusal skills &amp; assertiveness training — refuse drinks/cigars, saying no to something undesirable</li>
+      <li>Preparation for urge surfing — craving comes in waves, lasts 15–20 minutes. Instead of alcohol, can drink fruit juice etc.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Brief Intervention (CBT)</h2>
+    <ul>
+      <li>Functional analysis of substance use — triggers / cues / feelings / behaviour</li>
+      <li>Coping with craving &amp; boredom — urge surfing</li>
+      <li>Identify &amp; deal with high risk situations — habit breaking plan</li>
+      <li>Managing thoughts about substance use</li>
+      <li>Training in substance refusal skills</li>
+      <li>Planning for emergencies</li>
+    </ul>
+  </div>
+
+  <div class="card amber">
+    <h2>Relapse Prevention</h2>
+    <ul>
+      <li><b>Non-pharmacological</b> — CBT / Motivational enhancement therapy / Brief intervention / MI</li>
+      <li><b>Pharmacological</b>
+        <ul>
+          <li>Acamprosate (↓ craving)</li>
+          <li>Disulfiram</li>
+          <li>Naltrexone</li>
+          <li>Topiramate</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="note">More effective when combined with psychological therapy — motivational enhancement &amp; MI.</div>
+  </div>
+</section>
+
+<section class="section" id="a5">
+  <div class="card">
+    <h2>04 · Detoxification of Dependence / Withdrawal Symptoms (CCD2P)</h2>
+    <ol>
+      <li>Assess the severity — CIWA scale / SAW scale</li>
+      <li><b>Mild</b> → No / Low chlordiazepoxide</li>
+      <li><b>Moderate</b> → 10–20 mg 6-hourly, O. Taper in 5–7 days</li>
+      <li><b>Severe</b> → In-patient Rx · 30 mg 6-hourly, O. Taper in 7–10 days</li>
+      <li>Symptomatic → 20–30 mg stat. Monitor hourly. Taper 20% daily. Stop at day 6.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Chlordiazepoxide (CDPX) Regime</h2>
+    <p>Fixed dose regime — usually practised in Sri Lanka.</p>
+    <ol>
+      <li>Fixed dose regime</li>
+      <li>Symptomatic / triggered regime</li>
+      <li>Loading dose regime</li>
+    </ol>
+    <div class="note">Fixed dose: first calculate no. of units = % × volume(mL) / 1000. If daily units is 30 → chlordiazepoxide 30 mg qds + PRN 30 mg.</div>
+    <ul>
+      <li>Moderate dependence — taper off over 5–7 days</li>
+      <li>Severe dependence — taper off over 7–10 days</li>
+      <li>If chlordiazepoxide contraindicated → can give lorazepam. 1 mg lorazepam = 25 mg chlordiazepoxide</li>
+    </ul>
+
+    <h3>Detailed Chlordiazepoxide Regime (severe withdrawal — moderate start from 20 mg)</h3>
+    <table>
+      <tr><th>Day</th><th>Dose</th></tr>
+      <tr><td>D1</td><td>30 mg tds (or 40 mg 6-hourly, dose depends on alcohol units/day, up to 30 units/day)</td></tr>
+      <tr><td>D2</td><td>20 mg tds</td></tr>
+      <tr><td>D3</td><td>10 mg tds</td></tr>
+      <tr><td>D4</td><td>5 mg tds</td></tr>
+      <tr><td>D5</td><td>5 mg bd</td></tr>
+      <tr><td>D6</td><td>5 mg (nocte)</td></tr>
+      <tr><td>D7</td><td>5 mg (nocte)</td></tr>
+      <tr><td>D8</td><td>Omit</td></tr>
+    </table>
+    <p><span class="key">Side effects:</span> Drowsiness / sleepiness / dizziness / muscle weakness / slurred speech / ataxia / impaired coordination.</p>
+  </div>
+
+  <div class="card">
+    <h2>Alcohol Unit Calculation</h2>
+    <div class="dosebox">Units = Volume (mL) × %<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1000</div>
+    <table>
+      <tr><th>Drink</th><th>%</th></tr>
+      <tr><td>Beer</td><td>5%</td></tr>
+      <tr><td>Wine</td><td>12%</td></tr>
+      <tr><td>Arrack</td><td>40%</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Management of Withdrawal Seizures</h2>
+    <ol>
+      <li>Acute management of seizure — suck out secretions. Put in lateral position, O₂.</li>
+      <li>BZD or Carbamazepine — loading dose. After initial management, exclude other causes of seizures.</li>
+      <li>History of withdrawal seizure / seizure during current episode → seizure prophylaxis (BZD or carbamazepine)</li>
+      <li>The chlordiazepoxide dose</li>
+    </ol>
+    <h3>Mx of Withdrawal Seizures</h3>
+    <ul>
+      <li>Doc — BZD</li>
+      <li>If patient not already on BZD, start chlordiazepoxide</li>
+      <li>If patient already on chlordiazepoxide, optimise the dose</li>
+      <li>Repeat basic Ix, take neurology opinion if suspecting other cause, other than withdrawal seizures</li>
+      <li>No need for prophylactic anti-epileptics</li>
+    </ul>
+  </div>
+
+  <div class="card amber">
+    <h2>Alcohol → Sudden Stop → Hyperexcitability</h2>
+    <ul>
+      <li>Alcohol enhances GABA activity &amp; ↓ glutamate activity</li>
+      <li>About 45 minutes – 1 hour time for alcohol to reach the brain</li>
+    </ul>
+    <h3>Long-term Management Goals</h3>
+    <ul>
+      <li>Maximising motivation for abstinence</li>
+      <li>Help to reconstruct life w/o alcohol</li>
+      <li>Relapse prevention</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="a6">
+  <div class="card red">
+    <h2>05 · Prophylaxis &amp; Rx for Wernicke's</h2>
+    <ul>
+      <li><b>Oral thiamine</b> → mild–moderate withdrawal &amp; no Wernicke — 200 mg/day</li>
+      <li><b>IV / IM</b> → Wernicke or delirium — 200–300 mg/day</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Thiamine &amp; Chlordiazepoxide (CDPX) — Detailed</h2>
+    <h3>Thiamine</h3>
+    <ol>
+      <li>Community setting — oral 200–300 mg/day (daily or bd)</li>
+      <li>Severe dependence with malnutrition → IM/IV thiamine 300 mg daily × 5 days, then convert to oral 300 mg daily</li>
+      <li>Suspected or confirmed Wernicke's encephalopathy → Delirium tremens
+        <ul>
+          <li>IV 500 mg TDS for 5 days &amp; then</li>
+          <li>IV 300 mg daily for 5 days</li>
+          <li>Then convert to oral thiamine</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Thiamine Regime (liver stores only adequate for 1–2 hrs)</h2>
+    <ul>
+      <li>Mild–moderate withdrawal symptoms → oral thiamine 200–300 mg/day during detoxification, for 3–5 days, convert to oral 100 mg daily; community setting 100 mg daily</li>
+      <li>Delirium tremens — IM/IV 200–300 mg/day × 5 days, followed by oral 300 mg daily</li>
+    </ul>
+    <div class="dosebox">
+      <b>Wernicke's Encephalopathy</b><br>
+      IV Thiamine 400–600 mg tds × 5 days<br>
+      Followed by 200–300 mg/day × 5 days<br>
+      (Ophthalmoplegia resolves first, then oral)
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Wernicke–Korsakoff Syndrome</h2>
+    <p><span class="key">Acute thiamine reduction</span> — brain stem acute demyelination.</p>
+    <ul>
+      <li><b>Wernicke's</b> (reversible) — Ophthalmoplegia / Ataxia / Confusion
+        <ul>
+          <li>Encephalopathy — disorientation / indifference / inattentiveness</li>
+          <li>Oculomotor dysfunction — nystagmus / lateral rectus palsy / conjugate gaze palsy</li>
+          <li>Ataxia — gait</li>
+        </ul>
+      </li>
+      <li><b>Korsakoff's</b> (irreversible) — Antegrade &amp; retrograde amnesia / poor recall / impairment of recent memory / disorientation / poor insight</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Alcohol Withdrawal — Staged Progression</h2>
+    <table>
+      <tr><th>Stage</th><th>Timing</th><th>Features</th></tr>
+      <tr><td>Stage I</td><td>W/T 8 hrs</td><td>Headache, GI discomfort (N/V/D), tremors, insomnia, palpitations</td></tr>
+      <tr><td>Stage II</td><td>W/T 12–24 hrs</td><td>↑PR &amp; BP, rapid breathing, convulsion</td></tr>
+      <tr><td>Stage III</td><td>W/T 24–92 hrs</td><td>Hallucinations, seizures, delirium tremens — severe withdrawal</td></tr>
+    </table>
+    <p>80% have peripheral neuropathy.</p>
+    <div class="note">In alcoholic hallucinosis, patient is NOT confused (distinguishes from delirium tremens).</div>
+  </div>
+</section>
+
+<section class="section" id="a7">
+  <div class="card red">
+    <h2>Delirium Tremens</h2>
+    <p><b>Confusion / Agitation / Visual hallucination / Tactile hallucination</b> — fever, tachycardia, ↑BP. Occurs in 24–72 hrs of stopping alcohol/cocaine tremors.</p>
+  </div>
+
+  <div class="card">
+    <h2>Delirium Tremens — Management</h2>
+    <ul>
+      <li>Management in HDU or medical unit</li>
+      <li>Management in calm, safe environment where excessive light, sound stimulation is minimised</li>
+      <li>Adequate nutrition &amp; hydration</li>
+      <li>Monitor BP / PR / RR</li>
+      <li>Ix → LFT to differentiate delirium due to liver failure or delirium tremens</li>
+    </ul>
+    <div class="note">Titrating dose regime of BZD — loading dose &amp; titrate 2-hourly according to severity of symptoms. Total dose in 1st 24 hrs given as divided doses; dose can be reduced by day 2 if no complications.</div>
+  </div>
+
+  <div class="card">
+    <h2>High-dose BZD Regime for Delirium Tremens (CCD2P)</h2>
+    <div class="dosebox">High dose CCD2P — 5–40 mg every 2–3 hourly</div>
+    <p><span class="key">Impaired liver function</span> → short acting BZD (Clorazepam / Oxazepam).</p>
+    <ul>
+      <li>In 2–3 days: taper. Ix — FBC, LFT, U&amp;E, Ca balance, seizures</li>
+      <li>Examine for hypoglycaemia / TIA / meningism</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Seizure Management</h2>
+    <ol>
+      <li>Acute mx of seizure — suck out secretions, put in lateral position, O₂</li>
+      <li>BZD or carbamazepine — loading dose, after initial mx exclude other causes of seizures</li>
+      <li>Hx of withdrawal seizure / seizure during current episode → seizure prophylaxis (BZD or carbamazepine)</li>
+    </ol>
+    <div class="note">Withdrawal seizures — within 24–48 hrs of stopping alcohol.</div>
+  </div>
+</section>
+
+<section class="section" id="a8">
+  <div class="card">
+    <h2>Consequences of Alcohol Use</h2>
+    <div class="grid2">
+      <div>
+        <h3>1. Medical</h3>
+        <ul>
+          <li>IHD / HTN / stroke</li>
+          <li>Peripheral neuropathy</li>
+          <li>Dementia / cancer</li>
+          <li>TB / erectile dysfunction</li>
+        </ul>
+      </div>
+      <div>
+        <h3>2. Psychiatric</h3>
+        <ul>
+          <li>Alcohol induced dementia</li>
+          <li>Rx of intoxication, withdrawal</li>
+          <li>Morbid jealousy (delusional disorder)</li>
+          <li>Depression / BAD (Bipolar Affective Disorder)</li>
+          <li>Sexual dysfunction / Alcoholic hallucinosis</li>
+          <li>Wernicke — reversible; Korsakoff — irreversible</li>
+        </ul>
+      </div>
+      <div>
+        <h3>3. Financial</h3>
+      </div>
+      <div>
+        <h3>4. Social</h3>
+        <ul>
+          <li>Violence / RTA</li>
+          <li>Risk of being in police custody</li>
+          <li>Behavioural problems in children</li>
+          <li>Poor work performance / work-related accidents</li>
+          <li>Risky sexual behaviour</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <h2>Indications for Admission</h2>
+    <ol>
+      <li>Severe withdrawal symptoms</li>
+      <li>History of delirium tremens</li>
+      <li>History of seizures</li>
+      <li>Medical complications such as IHD or liver dysfunction</li>
+      <li>Comorbid psychiatric illness</li>
+      <li>Poor social support</li>
+    </ol>
+  </div>
+
+  <div class="card amber">
+    <h2>Dependence — ICD Criteria</h2>
+    <p>3 or more features have been present together at some time during the previous year.</p>
+    <table>
+      <tr><th>Uncomplicated Withdrawal</th><th>Complicated Withdrawal</th></tr>
+      <tr>
+        <td>Tremors / anxiety / nausea / retching / vomiting / sweating / poor sleep / ↑BP / ↑PR (develop within few hours)</td>
+        <td>Delirium tremens / withdrawal seizures / Wernicke–Korsakoff syndrome</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="a9">
+  <div class="card">
+    <h2>Pharmacological Management — Relapse Prevention</h2>
+    <h3>1. Acamprosate</h3>
+    <p>↓ Craving (maintains abstinence). Given for 6 months or more.</p>
+
+    <h3>2. Disulfiram</h3>
+    <ul>
+      <li>Inhibits aldehyde dehydrogenase → accumulates acetaldehyde</li>
+      <li>If alcohol consumed while on disulfiram → unpleasant &amp; dangerous: throbbing headache / flushing / nausea / vomiting / sweating / palpitations / arrhythmia / ↓BP</li>
+      <li>Not a craving reducer — it's a deterrent</li>
+      <li>For 6–8 months</li>
+      <li>Side effects — drowsy / ↓libido / metallic taste in mouth / breath odour</li>
+    </ul>
+
+    <h3>3. Naltrexone</h3>
+    <p>Relapse prevention.</p>
+
+    <h3>4. Topiramate</h3>
+    <p>Relapse prevention.</p>
+
+    <div class="note">More effective when combined with psychological therapy — motivational enhancement &amp; MI.</div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- OPIOID / HEROIN SECTIONS -->
+<!-- ============================================================ -->
+
+<section class="section" id="o1">
+  <div class="card">
+    <h2>Assessment of Patient with Heroin Use</h2>
+    <ol>
+      <li>Introduction</li>
+      <li>PC — Referred from court? / Self admission</li>
+      <li>HPC — Risks explain</li>
+      <li>Fmx — Substance</li>
+      <li>Personal Hx — Childhood trauma
+        <ul>
+          <li>Behavioural problems (conduct disorders)</li>
+          <li>Features of ADHD</li>
+          <li>Dissocial personality</li>
+        </ul>
+      </li>
+      <li>Past psy. Rx — when start meds, why stop, how long, impulsive acts</li>
+      <li>PMHx — STD, Hepatitis</li>
+      <li>Premorbid personality — Dissociative personality? Impulsivity, novelty seeking</li>
+      <li>Impact — social (wife/children/legal system/police), financial, psychological</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="o2">
+  <div class="card">
+    <h2>Withdrawal Symptoms</h2>
+    <p>Heroin — short half-life → develops withdrawal symptoms several times/day. Withdrawal symptoms occur within 6–24 hrs, lasts for 5–7 days.</p>
+    <div class="grid2">
+      <ul>
+        <li>Lacrimation</li>
+        <li>Rhinorrhea</li>
+        <li>Increased sweating</li>
+        <li>Piloerection</li>
+        <li>Abdominal cramps</li>
+        <li>Insomnia</li>
+        <li>Hot &amp; cold flushes</li>
+      </ul>
+      <ul>
+        <li>Body aches / muscle cramps</li>
+        <li>Anxiety</li>
+        <li>Restlessness</li>
+        <li>↑PR / ↑BP / ↑T</li>
+        <li>Yawning</li>
+        <li>Pupillary dilatation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card amber">
+    <h2>Mild Withdrawal Management</h2>
+    <p>Rx of mild withdrawal — 2–3 L of water/day. Vit B/C supplements.</p>
+    <p><b>Symptomatic Rx:</b> reduce sweating / diarrhoea / vomiting / abdominal cramps / anxiety.</p>
+    <p><b>Moderate to severe:</b> + clonidine or opioid medication (Buprenorphine / Methadone / Codeine phosphate).</p>
+  </div>
+</section>
+
+<section class="section" id="o3">
+  <div class="card">
+    <h2>Consequences of Heroin Dependence</h2>
+    <h3>1. Medical</h3>
+    <ul>
+      <li>Poor nutrition</li>
+      <li>IV users → Hepatitis B/C, HIV, local abscess &amp; ulcers</li>
+      <li>Respiratory depression due to accidental overdose</li>
+    </ul>
+    <h3>2. Social &amp; Financial</h3>
+    <ul>
+      <li>Illegal smuggling or selling, crime &amp; commercial sex work to earn money</li>
+      <li>Forensic involvement — arrest / imprisonment</li>
+      <li>Income / job / relationship (family) issues</li>
+    </ul>
+    <h3>3. Psychiatric</h3>
+    <ul>
+      <li>Depression / suicidal attempts / ADHD / antisocial personality disorder</li>
+    </ul>
+    <div class="note">Wernicke–Korsakoff — encephalopathy (disorientation/indifference/inattentiveness); oculomotor dysfunction (nystagmus/lateral rectus palsy/conjugate gaze palsy); ataxia.</div>
+    <div class="note">Opioids — μ receptors: ↓GI motility → constipation, respiratory depression, ↓cough reflex.</div>
+  </div>
+</section>
+
+<section class="section" id="o4">
+  <div class="card">
+    <h2>Management of Heroin Dependence</h2>
+    <h3>1. Engaging the Patient</h3>
+    <p>Regular &amp; frequent contact with the patient.</p>
+
+    <h3>2. Deciding the Goals of Rx</h3>
+    <ul>
+      <li>Main goal — abstinence</li>
+      <li>Intermediate — engage with Rx programme / discourage risky behaviour, minimise financial impact, encourage occupation &amp; healthy relationships</li>
+      <li>Harm reduction — ↓ needle sharing / methadone maintenance programme</li>
+    </ul>
+
+    <h3>3. Deciding Rx Setting</h3>
+    <p>No need for in-patient care (heroin withdrawal not life threatening). Can admit to ↓ access.</p>
+
+    <h3>4. Detoxification of Dependent Patients / Withdrawal Mx</h3>
+    <ul>
+      <li>Reassurance</li>
+      <li>BZD — for sleep &amp; anxiety</li>
+      <li>NSAIDs — for body aches</li>
+      <li>Opioid agonists — Methadone / Buprenorphine (detox in IV users)</li>
+      <li>Loperamide for diarrhoea (running nose, gooseflesh)</li>
+      <li>(Methadone — maintenance therapy)</li>
+    </ul>
+
+    <h3>5. Enhancing Motivation</h3>
+    <ol>
+      <li>Identify stage of motivation (Prochaska &amp; DiClemente cycle of change)</li>
+      <li>In pre-contemplation → general information about heroin &amp; its harm</li>
+      <li>In contemplation → consider pros &amp; cons of drug use</li>
+      <li>In action stage → advice on how to cut down or stop drug</li>
+    </ol>
+
+    <h3>6. Coping with High Risk Situations</h3>
+    <ul>
+      <li>Strategies to minimise contact with dealers</li>
+      <li>Encourage dealers to take up another occupation</li>
+      <li>Address the heroin-using subculture</li>
+      <li>Use community-based Rx services</li>
+    </ul>
+
+    <h3>7. Optimising Quality of Life</h3>
+    <ul>
+      <li>Relationships / family life / occupation / health / leisure activities / imprisonments</li>
+      <li>Encourage refrain from illegal activities</li>
+      <li>Better financial management</li>
+      <li>↓ money on heroin / ↑ in good AOL (activities of living)</li>
+      <li>Family therapy</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="o5">
+  <div class="card amber">
+    <h2>Pharmacological Management of Dependence</h2>
+    <table>
+      <tr><th>Drug</th><th>Notes</th></tr>
+      <tr><td>1. Naltrexone</td><td>CVS — opioid antagonist, long acting. 25 mg then 50 mg daily. Start 1–2 weeks after stopping heroin. If not, precipitates withdrawal symptoms.</td></tr>
+      <tr><td>2. Methadone</td><td>Long T½, oral. Once daily. Opioid agonist. Reduces craving. Used for both detoxification &amp; maintenance. (Not allowed as gel/IV administration — reduce craving.)</td></tr>
+      <tr><td>3. Buprenorphine</td><td>Partial agonist. Reduces craving.</td></tr>
+      <tr><td>4. Codeine phosphate</td><td>—</td></tr>
+    </table>
+    <div class="note">IV injecting patient on high dose heroin (2g/day) → prescribe naltrexone. (Previous tolerance accumulated gradually — can't tolerate that much suddenly if start to consume that much heroin again.)</div>
+    <p><span class="key">Heroin in pregnant patients</span> → IUGR / birth asphyxia / prematurity / neonatal withdrawal.</p>
+  </div>
+</section>
+
+<section class="section" id="o6">
+  <div class="card red">
+    <h2>Heroin / Opioid Overdose — Intoxication</h2>
+    <p><b>Fatal</b> → slow breathing → cyanosis → constipation.</p>
+    <ul>
+      <li>Euphoria</li>
+      <li>Deep sleeping</li>
+      <li>Cold, clammy extremities</li>
+      <li>Choking</li>
+      <li>Pin point pupils</li>
+    </ul>
+    <div class="dosebox">Management — <b>Naloxone</b></div>
+  </div>
+
+  <div class="card">
+    <h2>Mx of Opioid / Cannabis / Methamphetamine / Polysubstance Withdrawal at Primary Care</h2>
+    <p>Establish reason for consultation / features to establish substance withdrawal / drug use adaptive dose.</p>
+    <table>
+      <tr><th>Symptom</th><th>Medication &amp; Dose</th></tr>
+      <tr><td>1. Restless / Anxiety</td><td>Diazepam 5 mg</td></tr>
+      <tr><td>2. Nausea</td><td>Metoclopramide 10 mg tds; Domperidone 10 mg tds</td></tr>
+      <tr><td>3. Muscle pain / body aches</td><td>Paracetamol 1g 6-hourly; Diclofenac Na 50 mg tds</td></tr>
+      <tr><td>4. Diarrhoea</td><td>Loperamide 4 mg/day</td></tr>
+      <tr><td>5. Agitation / poor sleep</td><td>Promethazine 25–50 mg tds; Chlorpromazine 50–100 mg tds; Olanzapine 5–10 mg (nocte)</td></tr>
+      <tr><td>6. Gastritis</td><td>Omeprazole 20 mg</td></tr>
+      <tr><td>7. Nasal congestion</td><td>Chlorpheniramine 4 mg tds; Cetirizine</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Support &amp; Advice</h2>
+    <ul>
+      <li>Support without discrimination &amp; stigmatisation. Don't reject or blame the person.</li>
+      <li>Advice on harm reduction strategies (availability of Rx / not to take other prescribed meds etc.)</li>
+      <li>Clearly point out the physical, psychological &amp; social problems caused by drugs</li>
+      <li>Make future assessments for STD services / immunisation etc.</li>
+      <li>Discuss strategies to avoid or cope with high risk situations</li>
+      <li>Make specific plans to avoid drug use</li>
+      <li>Identify family or friends who will support stopping drug use</li>
+      <li>Patients who do not succeed or relapse — identify &amp; give credit for any success. Discuss situations which led to relapse.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>Digitised study notes — Alcohol &amp; Opioid Dependence — Final MBBS Psychiatry</footer>
+
+<script>
+function showTop(which){
+  document.getElementById('nav-alcohol').style.display = which==='alcohol' ? 'flex' : 'none';
+  document.getElementById('nav-opioid').style.display = which==='opioid' ? 'flex' : 'none';
+  document.querySelectorAll('.topbtn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  if(which==='alcohol'){ showSection('a1'); } else { showSection('o1'); }
+}
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
