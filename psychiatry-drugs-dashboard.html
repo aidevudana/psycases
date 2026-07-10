@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psychiatry Drugs — Viva Dashboard</title>
+<style>
+  :root{
+    --navy:#1B2A41;
+    --navy-2:#26405e;
+    --teal:#1F7A8C;
+    --teal-light:#E7F3F5;
+    --amber:#E8A33D;
+    --amber-light:#FDF3E1;
+    --red:#B23A48;
+    --red-light:#FBEAEC;
+    --green:#2f7d5b;
+    --grey:#5b6470;
+    --bg:#F4F6F8;
+    --card:#ffffff;
+    --line:#e5e9ee;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI', Roboto, Arial, sans-serif;
+    background:var(--bg); color:#1a1a1a; -webkit-text-size-adjust:100%;
+  }
+
+  header{
+    background:linear-gradient(135deg, var(--navy), var(--navy-2));
+    color:#fff; padding:18px 18px 14px;
+  }
+  header h1{margin:0 0 3px; font-size:1.25rem;}
+  header p{margin:0; font-size:0.78rem; opacity:0.82;}
+
+  .searchbar{padding:10px 14px; background:var(--card); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:60;}
+  .searchbar input{
+    width:100%; padding:11px 14px; border-radius:10px; border:1px solid #d0d6dc;
+    font-size:0.95rem; outline:none;
+  }
+  .searchbar input:focus{border-color:var(--teal); box-shadow:0 0 0 3px rgba(31,122,140,.12);}
+
+  .wrap{display:flex; max-width:1150px; margin:0 auto;}
+  .side{
+    width:230px; flex-shrink:0; background:var(--card); border-right:1px solid var(--line);
+    padding:12px 10px 40px; height:calc(100vh - 108px); overflow-y:auto; position:sticky; top:63px;
+  }
+  .grp-title{
+    font-size:0.68rem; text-transform:uppercase; letter-spacing:.6px; color:var(--grey);
+    font-weight:700; margin:14px 8px 6px;
+  }
+  .grp-title:first-child{margin-top:2px;}
+  .navbtn{
+    display:flex; align-items:center; gap:8px; width:100%; text-align:left; border:none;
+    background:transparent; color:#26333f; padding:9px 10px; border-radius:8px; cursor:pointer;
+    font-size:0.85rem; font-family:inherit; margin:1px 0;
+  }
+  .navbtn:hover{background:#eef2f5;}
+  .navbtn.active{background:var(--navy); color:#fff;}
+  .navbtn .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+  main{flex:1; min-width:0; padding:18px 18px 70px; max-width:900px;}
+
+  .panel{display:none; animation:fade .18s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(3px);} to{opacity:1; transform:none;}}
+
+  .hero{color:#fff; border-radius:12px; padding:16px 18px; margin-bottom:16px;}
+  .hero .cls{font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; background:rgba(255,255,255,.2);
+    display:inline-block; padding:2px 9px; border-radius:6px; margin-bottom:8px;}
+  .hero h2{margin:0 0 3px; font-size:1.3rem;}
+  .hero p{margin:0; font-size:0.82rem; opacity:.9;}
+
+  .sec{background:var(--card); border:1px solid var(--line); border-radius:12px; margin-bottom:12px; overflow:hidden;}
+  .sec-h{
+    padding:11px 16px; font-weight:700; font-size:0.9rem; color:var(--navy);
+    display:flex; align-items:center; gap:9px; cursor:pointer; user-select:none;
+    border-left:4px solid var(--teal);
+  }
+  .sec-h .chev{margin-left:auto; transition:.2s; color:var(--grey); font-size:0.8rem;}
+  .sec-h.closed .chev{transform:rotate(-90deg);}
+  .sec-b{padding:2px 16px 14px;}
+  .sec-b.hidden{display:none;}
+
+  .kv{display:flex; gap:10px; padding:9px 0; border-bottom:1px dashed var(--line); font-size:0.86rem;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{font-weight:700; color:var(--navy); min-width:64px; flex-shrink:0;}
+
+  ul.bl{margin:6px 0 2px; padding-left:18px;}
+  ul.bl li{font-size:0.86rem; line-height:1.5; margin-bottom:4px;}
+  ul.bl li::marker{color:var(--teal);}
+
+  table.se{width:100%; border-collapse:collapse; font-size:0.83rem; margin-top:4px;}
+  table.se th{padding:7px 9px; color:#fff; text-align:left; font-size:0.78rem;}
+  table.se th.c{background:var(--teal);}
+  table.se th.r{background:var(--red);}
+  table.se td{padding:6px 9px; vertical-align:top; border-bottom:1px solid #f0f3f5; width:50%;}
+  table.se td.c{background:var(--teal-light);}
+  table.se td.r{background:var(--red-light);}
+
+  .callout{border-radius:8px; padding:9px 12px; font-size:0.82rem; margin:6px 0 2px;}
+  .callout.warn{background:var(--red-light); border:1px solid var(--red);}
+  .callout.note{background:var(--amber-light); border:1px solid var(--amber);}
+
+  .menu-btn{display:none;}
+  @media(max-width:820px){
+    .wrap{flex-direction:column;}
+    .side{
+      position:fixed; left:-260px; top:0; height:100vh; width:250px; z-index:80;
+      transition:left .2s ease; box-shadow:4px 0 20px rgba(0,0,0,.18); padding-top:16px;
+    }
+    .side.open{left:0;}
+    main{max-width:100%; padding:16px 14px 70px;}
+    .menu-btn{display:inline-flex; align-items:center; gap:7px; background:var(--teal-light);
+      color:var(--navy); border:none; border-radius:8px; padding:9px 13px; font-size:0.85rem;
+      font-weight:600; cursor:pointer; margin-bottom:14px; font-family:inherit;}
+    .backdrop{display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:79;}
+    .backdrop.show{display:block;}
+  }
+
+  footer{text-align:center; padding:14px; font-size:0.7rem; color:var(--grey);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Psychiatry Drugs — Viva Dashboard</h1>
+  <p>Final MBBS · Antipsychotics · Mood Stabilizers · Antidepressants · Anxiolytics · Anti-dementia</p>
+</header>
+
+<div class="searchbar">
+  <input id="search" type="text" placeholder="Search drug or side effect… (e.g. clozapine, EPSE, lithium toxicity)">
+</div>
+
+<div class="wrap">
+  <aside class="side" id="side"></aside>
+  <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+  <main id="main"></main>
+</div>
+
+<footer>Reformatted for revision — drug content sourced from Hanwella's Handbook of Clinical Psychiatry &amp; Shorter Oxford Textbook of Psychiatry.</footer>
+
+<script>
+const COLORS = {navy:"#1B2A41", teal:"#1F7A8C", amber:"#E8A33D", red:"#B23A48", green:"#2f7d5b"};
+
+const drugs = [
+  {
+    id:"clozapine", name:"Clozapine", group:"Antipsychotics", cls:"Atypical / SGA",
+    subtitle:"Resistant schizophrenia · needs FBC monitoring", color:"navy",
+    moa:"Dopamine D2 &amp; D4 antagonist, serotonin 5HT2A antagonist; also H1, alpha-1 adrenergic and muscarinic antagonist.",
+    route:"Oral.",
+    indications:["Resistant schizophrenia (fails ≥2 antipsychotics, each ≥8 weeks) — about 1/3 respond.","Refractory mania.","Psychosis in Parkinson's disease."],
+    contra:["History of myocarditis / severe cardiac disorder.","Neutropenia or history of agranulocytosis.","Bone marrow disorders.","Paralytic ileus.","Uncontrolled epilepsy.","Avoid in pregnancy &amp; breast feeding."],
+    common:["Hypersalivation","Constipation → can cause intestinal obstruction","Sedation, drowsiness","Postural hypotension","Tachycardia","Weight gain","Hyperthermia","Headache, nausea"],
+    rare:["Agranulocytosis / neutropenia (bone marrow suppression)","Myocarditis / cardiomyopathy","Seizures (dose-related)","DM, dyslipidaemia","Thromboembolism"],
+    dosage:[
+      "Start in hospital (hypotension risk with first dose). Starting dose 12.5 mg nocte — monitor BP, PR and temperature over the first 6 hours.",
+      "Increase slowly by 12.5 mg, then 25 mg, at 50–100 mg/week.",
+      "Most respond to 300–450 mg/day. Maximum 900 mg/day.",
+      "If treatment stopped for >48 hours → restart at 12.5 mg and re-titrate."
+    ],
+    monitor:[
+      "Before starting: weight, serum lipids, FBS, LFT, FBC, ECG, echocardiogram.",
+      "FBC weekly × 18 weeks, then monthly (agranulocytosis risk highest early).",
+      "If sore throat / fever / infection → urgent FBC.",
+      "Weight monthly · FBS 3-monthly · serum lipids 6-monthly.",
+      "Stop immediately if WBC <3 ×10⁹/L, neutrophils <1.5 ×10⁹/L, or eosinophils >4 ×10⁹/L; repeat blood counts daily."
+    ],
+    callouts:[{type:"warn", text:"Constipation can progress to a dangerous paralytic ileus — treat early; check bowel sounds. Fever may signal myocarditis or agranulocytosis — investigate."}]
+  },
+  {
+    id:"olanzapine", name:"Olanzapine", group:"Antipsychotics", cls:"Atypical / SGA",
+    subtitle:"High metabolic burden · low EPSE", color:"teal",
+    moa:"D1, D2, D4 antagonist; H1 (histamine) and muscarinic antagonist; 5HT2A antagonist.",
+    route:"Oral, IM.",
+    indications:["Schizophrenia.","Acute mania and prevention of bipolar disorder.","Control of agitation in mania and schizophrenia."],
+    contra:["IM contraindicated in acute MI, bradycardia, recent heart surgery, severe hypotension, sick sinus syndrome, unstable angina.","Caution: epilepsy, cardiac disease, elderly with dementia (CVA risk)."],
+    common:["Weight gain (↑ appetite)","Sedation","Anticholinergic — dry mouth, constipation, urinary retention","Postural dizziness","Tachycardia"],
+    rare:["DM, dyslipidaemia (metabolic syndrome)","Hepatic disorders","Pancreatitis","Thrombocytopenia","Little/no prolactin rise; EPSE uncommon"],
+    dosage:[
+      "Start 5 mg. Usual 5–20 mg daily nocte. Maximum 20 mg/day.",
+      "Schizophrenia / combination for mania / bipolar prophylaxis: 10 mg nocte.",
+      "Monotherapy for acute mania: 15 mg nocte.",
+      "Agitation (IM): 5–10 mg; repeat after 2 hours if needed; max 3 injections/day for 3 days (combined oral+IM max 20 mg)."
+    ],
+    monitor:[
+      "Lipid profile &amp; weight: baseline, every 3 months for the first year, then yearly.",
+      "FBS: baseline, after 1 month, then every 4–6 months.",
+      "BP at baseline and reviews."
+    ],
+    callouts:[{type:"note", text:"With clozapine, olanzapine carries the highest risk of weight gain and metabolic syndrome — counsel on diet, exercise, smoking."}]
+  },
+  {
+    id:"risperidone", name:"Risperidone", group:"Antipsychotics", cls:"Atypical / SGA",
+    subtitle:"Prolactin-raising · dose-related EPSE", color:"amber",
+    moa:"D2 antagonist; alpha-1 adrenergic antagonist; H1 (histamine) antagonist; 5HT2A antagonist.",
+    route:"Oral, IM (long-acting depot).",
+    indications:["Schizophrenia and other psychoses.","Mania.","Short-term (up to 6 weeks) for persistent aggression in Alzheimer's dementia."],
+    contra:["No absolute contraindication recorded.","Caution: cardiac disease, epilepsy, renal/hepatic impairment, elderly with dementia (CVA risk)."],
+    common:["Hyperprolactinaemia (galactorrhoea, menstrual disturbance)","Weight gain","Sedation (less than olanzapine)","EPSE (dose-related, esp. >6 mg)","Anticholinergic — constipation, urinary retention","Postural hypotension","Headache, GI upset, anxiety"],
+    rare:["DM, DKA","Thrombocytopenia","SIADH → hyponatraemia","Pancreatitis","Glaucoma"],
+    dosage:[
+      "Day 1: 2 mg oral nocte. Day 2: 4 mg nocte. Usual 4–6 mg. Maximum 16 mg/day (in ward often capped ~6 mg).",
+      "Depot (long-acting IM, deep gluteal): oral ≤4 mg → 25 mg every 2 weeks; oral >4 mg → 37.5 mg every 2 weeks. Adjust in steps of 12.5 mg no more often than every 4 weeks; max 50 mg/2 weeks.",
+      "Continue oral cover for 4–6 weeks after starting the depot."
+    ],
+    monitor:["Weight, FBS, lipid profile, BP at baseline, 3 months, 6 months, then annually.","Prolactin if symptomatic (galactorrhoea, sexual dysfunction, menstrual change)."],
+    callouts:[]
+  },
+  {
+    id:"chlorpromazine", name:"Chlorpromazine", group:"Antipsychotics", cls:"Typical / FGA",
+    subtitle:"Highly sedating low-potency FGA", color:"red",
+    moa:"First-generation antipsychotic — dopamine D2 post-synaptic antagonist; also strong anticholinergic, antiadrenergic (alpha-1) and antihistamine actions.",
+    route:"Oral, deep IM.",
+    indications:["Schizophrenia and acute mania.","Sedation of agitated patients; agitated / psychotic depression.","Antiemetic in palliative care; intractable hiccups."],
+    contra:["Caution: renal/hepatic impairment, epilepsy, cardiac problems, pregnancy, breast feeding, prostatic hypertrophy."],
+    common:["Marked sedation","Postural hypotension","Anticholinergic — dry mouth, constipation, urinary retention, blurred vision","Weight gain","EPSE","Hyperprolactinaemia (galactorrhoea, gynaecomastia)"],
+    rare:["Neuroleptic malignant syndrome","Cholestatic jaundice","Photosensitivity &amp; skin/eye pigmentation (prolonged use)","Arrhythmias, sudden death","Agranulocytosis","Reduced seizure threshold"],
+    dosage:[
+      "Oral range 200–1000 mg/day.",
+      "IM (rapid tranquilization): 25–50 mg every 6–8 hours.",
+      "IM route best avoided where alternatives exist — causes muscle pain, sterile abscess and orthostatic hypotension."
+    ],
+    monitor:["Weight at each visit.","FBS &amp; lipid profile at baseline, 3 months, 6 months, then annually.","FBC at 6 months and annually.","BP (postural drop)."],
+    callouts:[]
+  },
+  {
+    id:"trifluoperazine", name:"Trifluoperazine (TFP)", group:"Antipsychotics", cls:"Typical / FGA",
+    subtitle:"High-potency FGA · prominent EPSE", color:"red",
+    moa:"First-generation antipsychotic — mainly dopamine D2 antagonist; also muscarinic, alpha-1 and H1 (histamine) antagonist.",
+    route:"Oral, IM.",
+    indications:["Schizophrenia and other psychoses.","Short-term adjunctive management of severe anxiety.","Severe nausea and vomiting."],
+    contra:["Caution: renal/hepatic impairment, epilepsy, cardiac problems, pregnancy, breast feeding, prostatic hypertrophy."],
+    common:["EPSE (prominent — high potency)","Anticholinergic effects","Decreased appetite","Urinary retention","Muscle weakness","Anxiety, restlessness"],
+    rare:["Pancytopenia / thrombocytopenia","Cardiac toxicity, arrhythmias","Reduced seizure threshold","Hyperpyrexia","Photosensitivity","Cholestatic jaundice"],
+    dosage:[
+      "Titration: 5 mg → after 1 week 10 mg → increase by 5 mg every 3 days.",
+      "Schizophrenia / psychoses: start 5 mg twice daily.",
+      "Other conditions (anxiety, N&amp;V): start 2 mg daily, maximum 6 mg daily.",
+      "Overall oral range 10–30 mg/day."
+    ],
+    monitor:["Standard antipsychotic metabolic monitoring (weight, FBS, lipids, FBC).","Routine BP monitoring not mandatory."],
+    callouts:[{type:"note", text:"Highest EPSE risk together with fluphenazine and haloperidol — cover emergent EPSE with benzhexol."}]
+  },
+  {
+    id:"haloperidol", name:"Haloperidol", group:"Antipsychotics", cls:"Typical / FGA",
+    subtitle:"High-potency FGA · preferred in delirium", color:"red",
+    moa:"First-generation antipsychotic — dopamine D2 post-synaptic receptor antagonist.",
+    route:"Oral, IM.",
+    indications:["Schizophrenia and acute mania.","Sedation of agitated patients; agitated / psychotic depression.","Delirium — less anticholinergic and less postural hypotension than other FGAs, so often preferred.","Rapid tranquilization."],
+    contra:["Caution: renal/hepatic impairment, epilepsy, cardiac problems, pregnancy, breast feeding, prostatic hypertrophy."],
+    common:["EPSE — dystonia, akathisia, Parkinsonism, tardive dyskinesia","Anticholinergic effects","Postural hypotension","Ejaculatory delay","Drowsiness","Weight gain"],
+    rare:["Neuroleptic malignant syndrome","QTc prolongation, arrhythmias, sudden death","Hyperprolactinaemia (galactorrhoea, gynaecomastia)","Seizures","Liver dysfunction","Agranulocytosis"],
+    dosage:[
+      "Oral range 1.5–30 mg/day.",
+      "Delirium: 1.5–3 mg orally twice daily (elderly start 0.75 mg bd); if very restless, 5–10 mg IM.",
+      "Rapid tranquilization (IM lactate): 5–10 mg, repeat every 4–8 hours; maximum 18 mg in 24 hours.",
+      "Combining haloperidol 5–10 mg IM with promethazine 25 mg IM is more effective than haloperidol alone."
+    ],
+    monitor:["Weight, FBS &amp; lipids at baseline, 3 months, 6 months, then annually; FBC 6-monthly/annually.","ECG if cardiac risk factors (QTc)."],
+    callouts:[]
+  },
+  {
+    id:"quetiapine", name:"Quetiapine", group:"Antipsychotics", cls:"Atypical / SGA",
+    subtitle:"Dose-dependent effect · low EPSE &amp; prolactin", color:"teal",
+    moa:"SGA — D2 and 5HT2A antagonist; also H1 (histamine) and alpha-1 adrenergic antagonist.",
+    route:"Oral.",
+    indications:["Schizophrenia.","Acute mania and bipolar prophylaxis.","Bipolar depression.","Agitation / adjunct sedation."],
+    contra:["Caution: cardiac disease, epilepsy, renal/hepatic impairment, pregnancy, breast feeding, elderly with dementia (CVA risk)."],
+    common:["Sedation","Dizziness, postural hypotension","Dry mouth, constipation","Weight gain","Tachycardia, headache","Low EPSE risk"],
+    rare:["QTc prolongation, arrhythmia","Raised liver enzymes","DM, dyslipidaemia","Blood dyscrasias","NMS"],
+    dosage:[
+      "Dose-dependent action: hypnotic ~50 mg · antidepressant ~300 mg · antipsychotic up to 800 mg.",
+      "Start 50 mg bd and titrate to response. Overall range 150–800 mg/day."
+    ],
+    monitor:["Weight, FBS, lipid profile, BP at baseline, 3 months, 6 months, then annually.","Little or no prolactin elevation."],
+    callouts:[]
+  },
+
+  {
+    id:"lithium", name:"Lithium", group:"Mood Stabilizers", cls:"Mood stabilizer",
+    subtitle:"Narrow therapeutic index · needs level monitoring", color:"navy",
+    moa:"Modulates second-messenger signalling — reduces excitatory transmission (dopamine, glutamate), enhances inhibitory (GABA); neuroprotective effects (↓ oxidative stress, GSK-3 inhibition).",
+    route:"Oral.",
+    indications:["Acute treatment of mania.","Prophylaxis of unipolar and bipolar mood disorders.","Augmentation in resistant depression.","Prevention of aggressive behaviour in learning disability."],
+    contra:["Renal failure.","Current cardiac failure.","Recent MI.","Caution in pregnancy (Ebstein's anomaly) and breast feeding."],
+    common:["Diuresis / polyuria, polydipsia, dry mouth","Fine tremor of the hands","Metallic taste","Weight gain","Muscle weakness, fatigue","GI disturbance"],
+    rare:["Hypothyroidism, thyroid enlargement","Hyperparathyroidism → ↑ serum calcium","Leucocytosis (harmless)","Nephropathy (long-term renal impairment)"],
+    dosage:[
+      "Start 400–500 mg (single dose); commonly 400–600 mg nocte, increase weekly to response. Maximum ~2 g/day. Ward tablet = 250 mg (Li₂CO₃).",
+      "More convenient as a single night dose; divide if gastric irritation.",
+      "Acute mania level: 0.8–1.0 mmol/L (some sources 1.0–1.2). Prophylaxis: 0.6–0.75 mmol/L (minimum efficacious 0.4).",
+      "Continue at least 1 year; taper slowly over weeks if stopping (abrupt stop → rebound mania)."
+    ],
+    monitor:[
+      "Before starting: BP, weight/BMI; check ACEI/ARB/diuretic use; bloods — electrolytes, calcium, S.creatinine, eGFR, FBC, TFT; ECG &amp; pregnancy test if indicated.",
+      "Level 12 hours after last dose: at 7 days → every 2 weeks until steady → then every 3 months.",
+      "Electrolytes, urea/creatinine, eGFR, calcium, TFT every 6 months."
+    ],
+    callouts:[
+      {type:"warn", text:"Toxicity >1.5 mmol/L: coarse tremor, ataxia, slurred speech, vomiting, drowsiness → confusion, seizures, coma. Management: stop lithium, rehydrate with 0.9% NaCl, check level; >3 mmol/L → haemodialysis."},
+      {type:"note", text:"Interactions: thiazides, ACEI/ARB, NSAIDs raise levels; dehydration and low sodium precipitate toxicity. SSRIs + lithium → serotonin syndrome."}
+    ]
+  },
+  {
+    id:"valproate", name:"Sodium Valproate", group:"Mood Stabilizers", cls:"Mood stabilizer / anticonvulsant",
+    subtitle:"Fast-acting antimanic · avoid in women of childbearing age", color:"teal",
+    moa:"Blocks voltage-sensitive sodium channels; increases GABA.",
+    route:"Oral (bd; extended-release once daily).",
+    indications:["Acute manic episode, mixed episodes, rapid-cycling bipolar disorder.","Prophylaxis of bipolar disorder.","Epilepsy — complex partial and absence seizures."],
+    contra:["Acute liver disease.","Pregnancy and breast feeding.","Avoid in reproductive-age females where possible (PCOS &amp; teratogenicity risk)."],
+    common:["Nausea, gastric irritation","Weight gain","Hair loss (alopecia)","Tremor","Ataxia","Headache"],
+    rare:["Hepatic impairment / hepatotoxicity","Pancreatitis","Pancytopenia, thrombocytopenia, leucopenia","Polycystic ovarian disease","Teratogenic — neural tube &amp; craniofacial/cardiac defects, cognitive deficits"],
+    dosage:[
+      "Start 300 mg bd (15 mg/kg) after food; increase 200 mg every 3 days. Usual antimanic dose ~400 mg bd/tds.",
+      "Maximum 1–2 g/day (20–30 mg/kg/day).",
+      "Acute mania: loading dose 20–30 mg/kg/day gives rapid onset. Trough level >45 µg/mL for antimanic effect."
+    ],
+    monitor:["LFT before starting and during the first 6 months of therapy.","Weight, FBS and lipids as part of mood-stabiliser follow-up.","FBC if bruising/bleeding."],
+    callouts:[{type:"note", text:"Raises the risk of Stevens-Johnson syndrome with lamotrigine — halve the lamotrigine dose if combined."}]
+  },
+
+  {
+    id:"clonazepam", name:"Clonazepam", group:"Anxiolytics &amp; Detox", cls:"Benzodiazepine (long-acting)",
+    subtitle:"Short-course sedation &amp; anxiety cover", color:"amber",
+    moa:"Binds the benzodiazepine site on GABA-A receptors, enhancing GABA neurotransmission.",
+    route:"Oral (IV formulation exists for status epilepticus).",
+    indications:["Panic disorder and generalized anxiety disorder.","Adjunct in acute mania and rapid tranquilization.","Insomnia; short-term antipsychotic-induced sleep disturbance.","Epilepsy, status epilepticus, catatonia, NMS.","Akathisia (EPSE)."],
+    contra:["Pregnancy and breast feeding.","Myasthenia gravis.","Sleep apnoea.","Severe hepatic impairment."],
+    common:["Drowsiness","Ataxia","Motor incoordination","Slurred speech","Headache"],
+    rare:["GI disturbance","Urinary incontinence","Confusion","Tolerance / dependence","Respiratory depression (parenteral)"],
+    dosage:["0.5 mg nocte (typical short-course dose, e.g. for disturbed sleep or anxiety cover).","Use for the shortest period possible."],
+    monitor:["Not for long-term use — review need at each visit; watch for tolerance/dependence.","Watch for excess sedation, ataxia and confusion, especially in the elderly."],
+    callouts:[]
+  },
+  {
+    id:"chlordiazepoxide", name:"Chlordiazepoxide", group:"Anxiolytics &amp; Detox", cls:"Benzodiazepine (long-acting)",
+    subtitle:"Drug of choice for alcohol withdrawal", color:"red",
+    moa:"Long-acting benzodiazepine — enhances GABA-A transmission; low addictive potential relative to other benzodiazepines.",
+    route:"Oral.",
+    indications:["Alcohol withdrawal and delirium tremens (drug of choice).","General benzodiazepine uses: panic/GAD, adjunct in acute mania, rapid tranquilization, insomnia, epilepsy, catatonia, NMS."],
+    contra:["Pregnancy and breast feeding.","Myasthenia gravis.","Sleep apnoea.","Severe hepatic impairment (prefer oxazepam/lorazepam)."],
+    common:["Drowsiness","Ataxia","Motor incoordination","Slurred speech","Headache"],
+    rare:["Urinary incontinence","Confusion","Tolerance / dependence","Respiratory depression"],
+    dosage:[
+      "General range 100–250 mg/day in divided doses for withdrawal.",
+      "Uncomplicated withdrawal (tapering): 60–120 mg/day, 6–8 hourly, tapered over 5–7 days (e.g. Day 1: 30 mg mane / 30 noon / 40 nocte → omit by Day 6).",
+      "Titrating (severe): loading up to 50 mg, then 5–10 mg every 2–4 hours by severity; caution above 250 mg/day.",
+      "Delirium tremens: 5–40 mg every 2–3 hours, titrated to sedation, until asymptomatic. Ward tablet = 10 mg."
+    ],
+    monitor:["Monitor BP, PR, RR and withdrawal severity (CIWA-Ar) during detox.","Watch for over-sedation / respiratory depression, especially in elderly or liver impairment."],
+    callouts:[{type:"note", text:"In liver impairment prefer short-acting benzodiazepines cleared by glucuronidation (oxazepam, lorazepam)."}]
+  },
+  {
+    id:"disulfiram", name:"Disulfiram", group:"Anxiolytics &amp; Detox", cls:"Alcohol relapse-prevention (deterrent)",
+    subtitle:"Aversive agent for motivated abstinent patients", color:"navy",
+    moa:"Inhibits aldehyde dehydrogenase → acetaldehyde accumulates if alcohol is taken, producing an unpleasant reaction (deterrent). Does not reduce craving.",
+    route:"Oral.",
+    indications:["Adjunct to psychological therapy for maintaining abstinence in alcohol dependence, in motivated patients."],
+    contra:["Ischaemic heart / coronary artery disease, cardiac failure.","History of CVA, hypertension.","Psychosis.","Pregnancy and breast feeding.","Severe personality disorder / suicide risk; caution in renal impairment."],
+    common:["Drowsiness","Fatigue","Nausea, vomiting","Halitosis (breath odour)"],
+    rare:["Depression, psychosis","Encephalopathy","Peripheral neuropathy (nerve disorder)","Disulfiram-alcohol reaction: flushing, headache, palpitations, tachycardia, hypotension → arrhythmia/collapse, rarely death"],
+    dosage:[
+      "Ensure no alcohol for ≥24 hours before starting.",
+      "800 mg on day one, reduced over 5 days to a maintenance dose of 100–200 mg daily.",
+      "Continue 3–6 months (can be longer) with supervision; must accompany psychological treatment."
+    ],
+    monitor:["Warn about the alcohol reaction (and alcohol-containing products) for a week after stopping.","Supervised dosing improves effectiveness.","LFTs; monitor at least 2-weekly for 2 months, monthly for 4 months, then 6-monthly."],
+    callouts:[{type:"warn", text:"Drinking alcohol while on disulfiram can cause a severe reaction — flushing, hypotension, arrhythmia, rarely fatal. Full patient consent and education essential."}]
+  },
+  {
+    id:"naltrexone", name:"Naltrexone", group:"Anxiolytics &amp; Detox", cls:"Opioid antagonist (relapse prevention)",
+    subtitle:"Anti-craving in alcohol &amp; opioid dependence", color:"navy",
+    moa:"Opioid receptor antagonist — blocks the endorphin-mediated dopaminergic reward from alcohol and the effects of opioids such as heroin.",
+    route:"Oral (monthly IM depot also available).",
+    indications:["Maintenance treatment of alcohol dependence (reduces craving).","Maintenance of opioid dependence (blocks opioid effect)."],
+    contra:["Currently using opioids (precipitates withdrawal).","Acute liver failure.","Caution: liver dysfunction, renal impairment, pregnancy."],
+    common:["Nausea, vomiting","Poor sleep","Loss of appetite","Dizziness, headache","Fatigue, low mood"],
+    rare:["Hepatotoxicity","Precipitated opioid withdrawal (if used too soon after opioids)"],
+    dosage:[
+      "Alcohol dependence: start directly at 50 mg/day.",
+      "Opioid dependence: must be opioid-free 7–10 days; start 25 mg, monitor 4 hours for withdrawal, then increase to 50 mg/day.",
+      "Long-acting IM: 380 mg/vial every 30 days. Course ~6 months, with psychological treatment."
+    ],
+    monitor:["LFTs (hepatic dysfunction).","Warn: taking heroin while on naltrexone can precipitate intoxication/overdose attempts."],
+    callouts:[]
+  },
+  {
+    id:"thiamine", name:"Thiamine", group:"Anxiolytics &amp; Detox", cls:"Vitamin B1 supplement",
+    subtitle:"Prevents Wernicke–Korsakoff in detox", color:"red",
+    moa:"Vitamin B1 — essential cofactor for brain carbohydrate metabolism. Deficiency (chronic alcohol misuse + poor diet) damages mammillary bodies, thalamus and periaqueductal grey → Wernicke's encephalopathy / Korsakoff syndrome.",
+    route:"Oral, IM, IV.",
+    indications:["Prophylaxis of Wernicke–Korsakoff syndrome during alcohol detoxification (esp. dependence + poor nutrition).","Treatment of established Wernicke's encephalopathy or delirium tremens."],
+    contra:["None absolute.","Caution with IV use — small risk of anaphylaxis; give IV only where resuscitation facilities exist."],
+    common:["Generally well tolerated orally","Local irritation at IM injection site"],
+    rare:["Anaphylaxis (rare, with IV administration)"],
+    dosage:[
+      "Mild–moderate withdrawal (oral prophylaxis): 300 mg/day for ~1 month.",
+      "Delirium tremens: 100–300 mg/day IM or IV for 5 days, then oral.",
+      "Wernicke's encephalopathy: IV 400–600 mg three times daily for 2 days, then 200–300 mg/day for 5 days, then oral until nutrition adequate."
+    ],
+    monitor:["Clinical response — resolution of confusion, ataxia, ophthalmoplegia."],
+    callouts:[{type:"warn", text:"Always give thiamine BEFORE (or with) any IV glucose — glucose alone in a thiamine-deficient patient can precipitate Wernicke's encephalopathy."}]
+  },
+
+  {
+    id:"donepezil", name:"Donepezil", group:"Anti-dementia", cls:"Cholinesterase inhibitor",
+    subtitle:"Mild–moderate Alzheimer's disease", color:"teal",
+    moa:"Reversible acetylcholinesterase inhibitor — increases synaptic acetylcholine.",
+    route:"Oral.",
+    indications:["Mild to moderate Alzheimer's dementia.","Also benefit in vascular dementia and (rivastigmine especially) Lewy body / Parkinson's dementia."],
+    contra:["Caution: cardiac arrhythmias / conduction disease, hepatic or renal impairment, peptic ulcer, seizures.","Do an ECG before starting."],
+    common:["Loss of appetite","Nausea / vomiting, diarrhoea","Headache","Insomnia, vivid dreams &amp; nightmares","Muscle weakness","Urinary incontinence"],
+    rare:["Bradycardia / cardiac conduction disorder, syncope","Seizures","Hypersalivation","Hallucinations, confusion"],
+    dosage:["Start 5 mg/day; increase to 10 mg/day after 4 weeks (1 month). Maximum 10 mg/day."],
+    monitor:["Baseline cognitive assessment (MMSE/MoCA); repeat every 3–6 months.","ECG before starting (bradycardia risk).","Take with food."],
+    callouts:[{type:"note", text:"Cholinesterase inhibitors are NOT effective in frontotemporal dementia (may worsen behaviour); of little benefit in pure vascular dementia."}]
+  },
+
+  {
+    id:"sertraline", name:"Sertraline", group:"Antidepressants", cls:"SSRI",
+    subtitle:"First-line SSRI · safe in cardiac disease &amp; pregnancy", color:"navy",
+    moa:"Selectively inhibits the re-uptake of serotonin (5-HT).",
+    route:"Oral.",
+    indications:["Depression.","OCD.","Panic disorder.","PTSD.","Social anxiety disorder."],
+    contra:["Severe hepatic impairment.","Caution in breast feeding (consider discontinuing) — otherwise preferred in pregnancy/lactation."],
+    common:["Nausea, diarrhoea, dyspepsia, loss of appetite","Dry mouth","Headache, dizziness","Insomnia, anxiety, tremor","Sweating","Sexual dysfunction","Postural hypotension"],
+    rare:["Hyponatraemia (SIADH)","Increased bleeding risk (GI)","Serotonin syndrome","Thrombocytopenia","Suicidal ideation in young people early in treatment"],
+    dosage:[
+      "Depression / OCD: start 50 mg oral mane; increase in 50 mg steps at ≥1-week intervals; maximum 200 mg.",
+      "Panic / PTSD / social anxiety: start 25 mg oral mane; then increase; maximum 200 mg.",
+      "Antidepressant effect takes ~2–4 weeks."
+    ],
+    monitor:["Review response and side effects at 2 weeks; watch for early agitation/anxiety.","Serum sodium if drowsy/confused (hyponatraemia), especially elderly.","Continue ≥6 months after remission."],
+    callouts:[]
+  },
+  {
+    id:"fluoxetine", name:"Fluoxetine", group:"Antidepressants", cls:"SSRI",
+    subtitle:"Long half-life SSRI · activating", color:"teal",
+    moa:"Selectively inhibits the re-uptake of serotonin (5-HT); long half-life (least discontinuation syndrome).",
+    route:"Oral.",
+    indications:["Major depression (more effective in moderate than severe).","OCD.","Bulimia nervosa.","Menopausal symptoms."],
+    contra:["Severe hepatic impairment.","Caution: cardiac disease, epilepsy, bleeding risk; more drug interactions (strong CYP2D6 inhibitor)."],
+    common:["Nausea, diarrhoea, appetite loss","Headache, insomnia","Anxiety, agitation, tremor","Sexual dysfunction","Sweating, dry mouth"],
+    rare:["Hyponatraemia","Increased bleeding risk","Serotonin syndrome","Suicidal ideation in young people early in treatment"],
+    dosage:["Start 20 mg mane. Increase after 3–4 weeks if needed. Maximum 60 mg daily."],
+    monitor:["Review at 2 weeks (agitation/anxiety can occur early).","Serum sodium if symptomatic.","Continue ≥6 months after remission."],
+    callouts:[]
+  }
+];
+
+const concepts = [
+  {
+    id:"epse", name:"EPSE", group:"Concepts", cls:"Extrapyramidal side effects", subtitle:"Onset, features &amp; management", color:"teal",
+    blocks:[
+      {h:"Mechanism", body:"Antipsychotics block dopamine receptors (nigrostriatal pathway) → relative excess of acetylcholine → EPSE. Highest risk: fluphenazine, haloperidol, trifluoperazine (rarely clozapine)."},
+      {h:"① Acute dystonia", body:"Hours–days. Sustained muscle spasm — torticollis, tongue protrusion, grimacing, oculogyric crisis. Young antipsychotic-naïve males most at risk. → IM benztropine."},
+      {h:"② Akathisia", body:"Within first 2 weeks. Restlessness of lower limbs, subjective need to move. → reduce dose, switch to SGA, low-dose propranolol or clonazepam (anticholinergics unhelpful)."},
+      {h:"③ Parkinsonism", body:"Days–weeks/months. Rigidity, coarse tremor, stooped posture, mask-like face. → add benzhexol, reduce dose or switch to SGA."},
+      {h:"④ Tardive dyskinesia", body:"Months–years; may be irreversible. Choreoathetoid tongue/mouth/facial movements. → stop anticholinergics, reduce/switch antipsychotic (clozapine/olanzapine). Can worsen on abrupt stop."},
+      {h:"⑤ Neuroleptic malignant syndrome (rare)", body:"Fever, rigidity, fluctuating consciousness, autonomic instability (↑BP, tachycardia). ↑CPK, leucocytosis. → stop antipsychotic, monitor T°/PR/BP, benzodiazepine, hydration, bromocriptine + dantrolene, ECT if needed."}
+    ]
+  },
+  {
+    id:"fgasga", name:"FGA vs SGA", group:"Concepts", cls:"Class side-effect profiles", subtitle:"Typical vs atypical antipsychotics", color:"teal",
+    seTables:[
+      {title:"First-generation (FGA)", common:["EPSE","Sedation","Anticholinergic — dry mouth, constipation, blurred vision, urinary retention","Orthostatic hypotension","Hyperprolactinaemia (galactorrhoea, gynaecomastia)","Weight gain"], rare:["Neuroleptic malignant syndrome","Agranulocytosis","Cardiac toxicity, sudden death","Reduced seizure threshold"]},
+      {title:"Second-generation (SGA)", common:["Metabolic — weight gain, ↑DM risk","Sedation","Anticholinergic effects","Postural hypotension","Dyslipidaemia"], rare:["Agranulocytosis","QT prolongation / arrhythmia","Cardiomyopathy","DKA"]}
+    ],
+    blocks:[
+      {h:"Rapid tranquilization", body:"Ward option: IM haloperidol 5 mg + IM promethazine 25 mg ± benzodiazepine. Oral: olanzapine rapitab. Aripiprazole/ziprasidone — minimal metabolic effect. Olanzapine — rarely causes EPSE/hyperprolactinaemia."},
+      {h:"Quetiapine — dose-dependent", body:"Hypnotic ~50 mg · antidepressant ~300 mg · antipsychotic up to 800 mg."}
+    ]
+  },
+  {
+    id:"serotonin", name:"Serotonin Syndrome", group:"Concepts", cls:"Toxidrome", subtitle:"Severity grading", color:"amber",
+    blocks:[
+      {h:"Mild", body:"Insomnia, anxiety, nausea, diarrhoea, hypertension, tachycardia, hyperreflexia."},
+      {h:"Moderate", body:"Agitation, myoclonus, tremor, mydriasis, flushing, diaphoresis, low-grade fever."},
+      {h:"Severe", body:"Hyperthermia, confusion. Caution during cross-tapering of serotonergic drugs."}
+    ]
+  },
+  {
+    id:"depot", name:"Depot &amp; Monitoring", group:"Concepts", cls:"Long-acting injectables", subtitle:"For poor compliance", color:"navy",
+    blocks:[
+      {h:"Fluphenazine decanoate", body:"12.5–100 mg every 2–4 weeks (e.g. test 12.5 mg, then 12.5 mg after 4–7 days, then 25 mg monthly). ↑EPSE — cover with benzhexol."},
+      {h:"Flupentixol decanoate", body:"20–40 mg every 2–4 weeks; up to 400 mg/week max."},
+      {h:"Risperidone LAI", body:"25 mg every 2 weeks (37.5 mg if oral >4 mg); oral cover 4–6 weeks. Depots not for antipsychotic-naïve or acute episodes."},
+      {h:"Routine antipsychotic monitoring", body:"Weight each visit · FBS &amp; lipids at 3 mo, 6 mo, then annually · FBC 6-monthly/annually · BP."}
+    ]
+  },
+  {
+    id:"adclass", name:"Antidepressant Classes", group:"Concepts", cls:"SSRI · TCA · SNRI", subtitle:"Class side effects", color:"amber",
+    seTables:[
+      {title:"SSRI (fluoxetine, sertraline)", common:["Nausea/vomiting, dyspepsia, diarrhoea","Anxiety, insomnia, tremor","Dry mouth, headache","Sexual dysfunction","Postural hypotension"], rare:["Hyponatraemia (SIADH)","Serotonin syndrome","Increased bleeding","Seizures","Suicidal ideation in young people"]},
+      {title:"TCA (imipramine, amitriptyline, clomipramine)", common:["Anticholinergic — dry mouth, constipation, blurred vision","Drowsiness","Urinary retention (elderly)","Postural hypotension"], rare:["Arrhythmia / heart block","Hyponatraemia","Agranulocytosis","Galactorrhoea, gynaecomastia"]},
+      {title:"SNRI (venlafaxine, duloxetine)", common:["Nausea, vomiting","Constipation / diarrhoea","Hypertension (dose-related)","Insomnia, anxiety"], rare:["QT prolongation","Hyponatraemia","Seizures","Sexual dysfunction"]}
+    ],
+    blocks:[
+      {h:"TCA overdose", body:"Cardiotoxic (arrhythmia) — prescribe with caution to patients at risk of self-harm/overdose."},
+      {h:"Typical doses", body:"Sertraline 50 mg (max 200) · Fluoxetine 20 mg (max 60) · Venlafaxine 75 mg (max 375, divided)."}
+    ]
+  }
+];
+
+const main = document.getElementById('main');
+const side = document.getElementById('side');
+const allItems = [...drugs, ...concepts];
+
+const groupOrder = ["Antipsychotics","Mood Stabilizers","Antidepressants","Anxiolytics &amp; Detox","Anti-dementia","Concepts"];
+const grouped = {};
+allItems.forEach(d=>{ (grouped[d.group] ||= []).push(d); });
+
+let navHtml = "";
+groupOrder.forEach(g=>{
+  if(!grouped[g]) return;
+  navHtml += `<div class="grp-title">${g}</div>`;
+  grouped[g].forEach(d=>{
+    navHtml += `<button class="navbtn" data-id="${d.id}" onclick="show('${d.id}')">
+      <span class="dot" style="background:${COLORS[d.color]}"></span>${d.name}</button>`;
+  });
+});
+side.innerHTML = navHtml;
+
+function section(title, inner){
+  return `<div class="sec">
+    <div class="sec-h" onclick="this.classList.toggle('closed');this.nextElementSibling.classList.toggle('hidden');">
+      ${title}<span class="chev">▾</span></div>
+    <div class="sec-b">${inner}</div>
+  </div>`;
+}
+function bullets(arr){ return `<ul class="bl">${arr.map(x=>`<li>${x}</li>`).join('')}</ul>`; }
+function seTable(common, rare){
+  const n = Math.max(common.length, rare.length); let rows="";
+  for(let i=0;i<n;i++){
+    rows += `<tr><td class="c">${common[i]?'• '+common[i]:''}</td><td class="r">${rare[i]?'• '+rare[i]:''}</td></tr>`;
+  }
+  return `<table class="se"><tr><th class="c">Common</th><th class="r">Rare / serious</th></tr>${rows}</table>`;
+}
+function callouts(arr){ return (arr||[]).map(c=>`<div class="callout ${c.type}">${c.text}</div>`).join(''); }
+
+function renderDrug(d){
+  let html = `<div class="hero" style="background:${COLORS[d.color]}">
+      <span class="cls">${d.cls}</span><h2>${d.name}</h2><p>${d.subtitle}</p></div>`;
+  html += section("Mechanism &amp; Route",
+    `<div class="kv"><span class="k">MOA</span><span>${d.moa}</span></div>
+     <div class="kv"><span class="k">Route</span><span>${d.route}</span></div>`);
+  html += section("Indications", bullets(d.indications));
+  html += section("Contraindications &amp; Cautions", bullets(d.contra));
+  html += section("Side Effects", seTable(d.common, d.rare));
+  html += section("Dosage", bullets(d.dosage));
+  html += section("Monitoring", bullets(d.monitor) + callouts(d.callouts));
+  return html;
+}
+function renderConcept(c){
+  let html = `<div class="hero" style="background:${COLORS[c.color]}">
+      <span class="cls">${c.cls}</span><h2>${c.name}</h2><p>${c.subtitle}</p></div>`;
+  (c.seTables||[]).forEach(t=>{ html += section(t.title, seTable(t.common, t.rare)); });
+  (c.blocks||[]).forEach(b=>{ html += section(b.h, `<p style="font-size:0.86rem;line-height:1.55;margin:6px 0 2px;">${b.body}</p>`); });
+  return html;
+}
+
+let panelsHtml = "";
+drugs.forEach(d=>{ panelsHtml += `<section class="panel" id="p-${d.id}">${renderDrug(d)}</section>`; });
+concepts.forEach(c=>{ panelsHtml += `<section class="panel" id="p-${c.id}">${renderConcept(c)}</section>`; });
+main.innerHTML = panelsHtml;
+
+function show(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const el = document.getElementById('p-'+id); if(el) el.classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active', b.dataset.id===id));
+  window.scrollTo({top:0, behavior:'smooth'});
+  closeMenu();
+}
+function openMenu(){ document.getElementById('side').classList.add('open'); document.getElementById('backdrop').classList.add('show'); }
+function closeMenu(){ document.getElementById('side').classList.remove('open'); document.getElementById('backdrop').classList.remove('show'); }
+
+document.getElementById('search').addEventListener('input', function(){
+  const q = this.value.trim().toLowerCase();
+  if(q.length<2){ document.querySelectorAll('.navbtn').forEach(b=>b.style.display=''); return; }
+  let first=null;
+  allItems.forEach(d=>{
+    const hay = JSON.stringify(d).toLowerCase();
+    const btn = side.querySelector(`[data-id="${d.id}"]`);
+    if(hay.includes(q)){ if(btn) btn.style.display=''; if(!first) first=d.id; }
+    else if(btn){ btn.style.display='none'; }
+  });
+  if(first) show(first);
+});
+
+const menuBtn = document.createElement('button');
+menuBtn.className='menu-btn'; menuBtn.innerHTML='☰ &nbsp;Browse drugs';
+menuBtn.onclick=openMenu;
+main.insertBefore(menuBtn, main.firstChild);
+
+show('clozapine');
+</script>
+</body>
+</html>
