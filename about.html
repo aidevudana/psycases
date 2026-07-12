@@ -38,10 +38,7 @@
   }
   .profile .avatar{
     width:72px; height:72px; border-radius:50%;
-    background:linear-gradient(135deg,var(--teal),var(--navy));
-    color:#fff; display:flex; align-items:center; justify-content:center;
-    font-family:"Helvetica Neue",Arial,sans-serif; font-size:26px; font-weight:700;
-    flex-shrink:0;
+    object-fit:cover; flex-shrink:0;
   }
   .profile .info{ flex:1; min-width:200px; }
   .profile h2{ margin:0 0 4px; font-size:22px; color:var(--navy); }
@@ -90,7 +87,7 @@
 <main>
 
   <div class="profile">
-    <div class="avatar">AL</div>
+    <img class="avatar" src="assets/amasha-lowe.svg" alt="Amasha Lowe">
     <div class="info">
       <h2>Amasha Lowe</h2>
       <div class="role">MBBS Undergraduate</div>

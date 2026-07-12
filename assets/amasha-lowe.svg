@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="65%">
+      <stop offset="0%" stop-color="#fdf1da"/>
+      <stop offset="100%" stop-color="#f6dfae"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a3526"/>
+      <stop offset="100%" stop-color="#2f2118"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+
+  <!-- shirt / shoulders -->
+  <path d="M28,200 Q100,146 172,200 Z" fill="#1f6f78"/>
+  <path d="M52,197 Q100,166 148,197 L148,200 L52,200 Z" fill="#e0a94f"/>
+
+  <!-- hair back (smooth rounded silhouette) -->
+  <path d="M100,40
+           C62,40 44,74 47,110
+           C48,130 54,148 64,160
+           C58,146 56,126 60,110
+           C60,128 66,144 76,152
+           C72,138 70,122 74,108
+           C76,120 82,128 90,130
+           L90,108
+           C93,112 96,114 100,114
+           C104,114 107,112 110,108
+           L110,130
+           C118,128 124,120 126,108
+           C130,122 128,138 124,152
+           C134,144 140,128 140,110
+           C144,126 142,146 136,160
+           C146,148 152,130 153,110
+           C156,74 138,40 100,40 Z" fill="url(#hair)"/>
+
+  <!-- ears -->
+  <ellipse cx="58" cy="108" rx="7" ry="10" fill="#ffdfc2"/>
+  <ellipse cx="142" cy="108" rx="7" ry="10" fill="#ffdfc2"/>
+
+  <!-- face -->
+  <ellipse cx="100" cy="112" rx="44" ry="42" fill="#ffe4c8"/>
+
+  <!-- blush -->
+  <ellipse cx="72" cy="124" rx="9" ry="6" fill="#ffb3ab" opacity="0.65"/>
+  <ellipse cx="128" cy="124" rx="9" ry="6" fill="#ffb3ab" opacity="0.65"/>
+
+  <!-- eyebrows -->
+  <path d="M70,91 Q80,85 90,90" stroke="#3a2a1d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M110,90 Q120,85 130,91" stroke="#3a2a1d" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- eyes -->
+  <ellipse cx="80" cy="108" rx="8.5" ry="10.5" fill="#2c2018"/>
+  <ellipse cx="120" cy="108" rx="8.5" ry="10.5" fill="#2c2018"/>
+  <circle cx="83" cy="103" r="2.6" fill="#fff"/>
+  <circle cx="123" cy="103" r="2.6" fill="#fff"/>
+  <circle cx="77" cy="112" r="1.4" fill="#fff" opacity="0.8"/>
+  <circle cx="117" cy="112" r="1.4" fill="#fff" opacity="0.8"/>
+
+  <!-- nose -->
+  <path d="M99,116 Q100,119 102,119" stroke="#e8a876" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- mouth -->
+  <path d="M89,130 Q100,140 111,130" stroke="#b5624f" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+
+  <!-- glasses -->
+  <g fill="none" stroke="#2b2b2b" stroke-width="3.4">
+    <circle cx="80" cy="108" r="17"/>
+    <circle cx="120" cy="108" r="17"/>
+    <path d="M97,106 Q100,102 103,106"/>
+    <path d="M63,104 L52,100"/>
+    <path d="M137,104 L148,100"/>
+  </g>
+  <circle cx="80" cy="108" r="17" fill="#bfe3e6" opacity="0.18"/>
+  <circle cx="120" cy="108" r="17" fill="#bfe3e6" opacity="0.18"/>
+
+  <!-- hair front bangs (soft centre-parted fringe, gentle double scallop) -->
+  <path d="M59,104
+           C57,80 72,62 100,62
+           C128,62 143,80 141,104
+           C136,92 128,86 122,90
+           C124,80 118,72 108,74
+           C111,84 107,92 100,94
+           C93,92 89,84 92,74
+           C82,72 76,80 78,90
+           C72,86 64,92 59,104 Z" fill="url(#hair)"/>
+
+  <!-- hair clip -->
+  <g transform="translate(133,86) rotate(24)">
+    <path d="M0,0 L9,-4 L11,3 L2,7 Z" fill="#e0a94f"/>
+    <path d="M0,0 L-9,4 L-7,-4 L2,-7 Z" fill="#c8892f"/>
+    <circle cx="0" cy="0" r="2.6" fill="#fff6e6"/>
+  </g>
+
+  <!-- ================= cute cat ================= -->
+  <g transform="translate(140,150) scale(0.92)">
+    <!-- tail -->
+    <path d="M20,8 C36,2 36,-18 22,-22" stroke="#e8a35c" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <!-- body -->
+    <ellipse cx="4" cy="16" rx="19" ry="15" fill="#f0b56e"/>
+    <!-- head -->
+    <circle cx="-2" cy="-6" r="16" fill="#f5c584"/>
+    <!-- ears -->
+    <path d="M-15,-16 L-20,-30 L-6,-20 Z" fill="#f5c584"/>
+    <path d="M11,-16 L16,-30 L2,-20 Z" fill="#f5c584"/>
+    <path d="M-14,-18 L-17,-26 L-8,-19 Z" fill="#f9a8ad"/>
+    <path d="M10,-18 L13,-26 L4,-19 Z" fill="#f9a8ad"/>
+    <!-- stripes -->
+    <path d="M-11,-18 L-14,-24" stroke="#d98d4a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M7,-18 L10,-24" stroke="#d98d4a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M-16,9 Q-4,15 10,9" stroke="#d98d4a" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <!-- face -->
+    <path d="M-9,-7 Q-7,-4 -5,-7" stroke="#3a2a1d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M5,-7 Q3,-4 1,-7" stroke="#3a2a1d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M-2,-3 L-4,0 Q-2,2 0,0 Z" fill="#f9a8ad"/>
+    <path d="M-4,1 Q-2,3 0,1" stroke="#3a2a1d" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M-16,-3 L-26,-5" stroke="#c8892f" stroke-width="1.2" opacity="0.7"/>
+    <path d="M-16,1 L-26,3" stroke="#c8892f" stroke-width="1.2" opacity="0.7"/>
+    <path d="M12,-3 L22,-5" stroke="#c8892f" stroke-width="1.2" opacity="0.7"/>
+    <path d="M12,1 L22,3" stroke="#c8892f" stroke-width="1.2" opacity="0.7"/>
+  </g>
+</svg>
