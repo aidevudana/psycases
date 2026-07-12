@@ -142,6 +142,29 @@ p.empty{ font-family:-apple-system,sans-serif; color:#a9b2b7; font-size:12.5px; 
 
 mark{ background: var(--amber); color:#1c2b34; padding:0 2px; border-radius:2px; }
 
+.nav-divider{ font-family:-apple-system,sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#5c7284; padding:14px 12px 6px; }
+
+/* ---------------- Flashcards ---------------- */
+.fc-controls{ display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+.fc-controls select{ padding:9px 14px; border-radius:8px; border:1px solid var(--line); font-family:-apple-system,sans-serif; font-size:13px; color:var(--ink); background:#fff; cursor:pointer; }
+.fc-controls button{ padding:9px 16px; border-radius:8px; border:1px solid var(--line); background:#fff; color:var(--navy); font-family:-apple-system,sans-serif; font-size:13px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:background .15s ease; }
+.fc-controls button:hover{ background:var(--paper); }
+.fc-progress{ font-family:-apple-system,sans-serif; font-size:12px; color:var(--ink-soft); margin-bottom:14px; letter-spacing:.3px; }
+.fc-stage{ perspective:1400px; margin-bottom:22px; }
+.fc-card{ position:relative; width:100%; min-height:260px; transform-style:preserve-3d; transition:transform .5s; cursor:pointer; }
+.fc-card.flipped{ transform:rotateY(180deg); }
+.fc-face{ position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius); border:1px solid var(--line); background:var(--paper-2); padding:30px 34px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,.05); }
+.fc-face.fc-back{ transform:rotateY(180deg); background:#fbf8f0; }
+.fc-tag{ font-family:'Courier New',monospace; font-size:11px; font-weight:700; letter-spacing:1px; color:#fff; background:var(--teal); padding:3px 10px; border-radius:5px; margin-bottom:16px; }
+.fc-face p{ font-family:Georgia,serif; font-size:17px; line-height:1.6; color:var(--ink); margin:0; max-width:640px; }
+.fc-hint{ margin-top:18px; font-family:-apple-system,sans-serif; font-size:11px; color:var(--ink-soft); letter-spacing:.3px; text-transform:uppercase; }
+.fc-nav{ display:flex; gap:10px; justify-content:center; }
+.fc-nav button{ padding:10px 22px; border-radius:8px; border:none; background:var(--navy); color:#fff; font-family:-apple-system,sans-serif; font-size:13.5px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:background .15s ease; }
+.fc-nav button:hover{ background:var(--navy-2); }
+.fc-nav button#fcFlipBtn{ background:var(--teal); }
+.fc-nav button#fcFlipBtn:hover{ background:var(--teal-light); }
+@media (max-width:640px){ .fc-card{ min-height:320px; } .fc-face{ padding:24px 20px; } .fc-face p{ font-size:15.5px; } }
+
 @media (max-width: 900px){
   .sidebar{ position:fixed; left:-280px; z-index:20; transition: left .2s ease; box-shadow: 4px 0 24px rgba(0,0,0,.2);}
   .sidebar.open{ left:0; }
@@ -196,8 +219,13 @@ mark{ background: var(--amber); color:#1c2b34; padding:0 2px; border-radius:2px;
       <span class="nav-tag">BPAD</span>
       <span class="nav-name">Bipolar Affective Disorder</span>
     </button>
+    <div class="nav-divider">Study Tools</div>
+    <button class="nav-item" data-target="panel-flashcards" style="--accent:#c98a1f">
+      <span class="nav-tag"><i class="fa-solid fa-layer-group"></i></span>
+      <span class="nav-name">Flashcards</span>
+    </button>
     </div>
-    <div class="sidebar-footer">8 cases &middot; Hx &middot; MSE &middot; Mx &middot; Drugs</div>
+    <div class="sidebar-footer">8 cases &middot; 64 flashcards &middot; Hx &middot; MSE &middot; Mx &middot; Drugs</div>
   </aside>
 
   <main class="content">
@@ -689,6 +717,53 @@ mark{ background: var(--amber); color:#1c2b34; padding:0 2px; border-radius:2px;
       <h3>Bipolar Depression &amp; Schizoaffective Disorder</h3>
       <ul class='bl'><li>If depressive episode develops while on Li/valproate: ↑dose to max therapeutic range first (Li until 0.8-1 mmol/L; valproate up to 2g/day)</li><li>If unsuccessful: 1st line Fluoxetine 20-40mg + Olanzapine 5-10mg (NICE); 2nd Quetiapine 300-600mg daily; 3rd Olanzapine alone; 4th Lamotrigine 200mg/day</li><li>Stop add-on after 3-6 months remission; continue Li/valproate as mood stabilizer</li><li>Schizoaffective manic type: Olanzapine 10mg/day / Quetiapine 100mg/day / Risperidone; add mood stabilizer if antipsychotic alone insufficient (Li 400mg/day or Na valproate 200mg bd)</li><li>Schizoaffective depressive type: Olanzapine+Fluoxetine combination, Quetiapine monotherapy, or Lamotrigine</li></ul>
     </div></section></div>
+
+    <div class="panel" id="panel-flashcards" data-accent="#c98a1f">
+    <section class="panel-hero" style="--accent:#c98a1f">
+      <div class="hero-tag">STUDY</div>
+      <h1>Flashcards</h1>
+      <p class="hero-sub">High-yield facts from all 8 topics &mdash; tap the card to reveal the answer</p>
+    </section>
+
+    <div class="fc-controls">
+      <select id="fcTopicSelect" aria-label="Filter flashcards by topic">
+        <option value="all">All topics</option>
+        <option value="pd">Delusional Disorder (PDD)</option>
+        <option value="dementia">Dementia</option>
+        <option value="schizo">Schizophrenia</option>
+        <option value="depression">Depression &amp; Post Partum</option>
+        <option value="heroin">Heroin / Substance Use</option>
+        <option value="ocd">OCD &amp; Anxiety Disorders</option>
+        <option value="alcohol">Alcohol Use Disorder</option>
+        <option value="bpad">Bipolar Affective Disorder</option>
+      </select>
+      <button id="fcShuffleBtn"><i class="fa-solid fa-shuffle"></i> Shuffle</button>
+    </div>
+
+    <div class="fc-progress" id="fcProgress">Card 1 of 64</div>
+
+    <div class="fc-stage">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-face fc-front">
+          <span class="fc-tag" id="fcFrontTag">PDD</span>
+          <p id="fcFrontText">&nbsp;</p>
+          <span class="fc-hint">Tap to flip</span>
+        </div>
+        <div class="fc-face fc-back">
+          <span class="fc-tag" id="fcBackTag">PDD</span>
+          <p id="fcBackText">&nbsp;</p>
+          <span class="fc-hint">Tap to flip back</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-nav">
+      <button id="fcPrevBtn"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+      <button id="fcFlipBtn"><i class="fa-solid fa-rotate"></i> Flip</button>
+      <button id="fcNextBtn">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    </div>
+
     </div>
   </main>
 </div>
@@ -764,6 +839,147 @@ mark{ background: var(--amber); color:#1c2b34; padding:0 2px; border-radius:2px;
     }
     resultsBox.classList.remove('hidden');
   });
+})();
+
+// ---------------- Flashcards ----------------
+(function(){
+  const FLASHCARDS = [
+    {topic:'pd', tag:'PDD', q:'Minimum duration a delusion must persist for a diagnosis of Persistent Delusional Disorder?', a:'At least 3 months, with remarkable stability within the individual.'},
+    {topic:'pd', tag:'PDD', q:'What mood-related exclusion is required for a PDD diagnosis?', a:'Absence of a depressive, manic or mixed episode — if mood symptoms occur intermittently, the delusion must persist even when mood is normal.'},
+    {topic:'pd', tag:'PDD', q:'Name the types of morbid jealousy delusion.', a:'Infidelity (most common), persecutory, delusion of love, somatic, grandiose, armed.'},
+    {topic:'pd', tag:'PDD', q:'How does a delusion differ from an overvalued idea in morbid jealousy?', a:'A delusion is held with 100% conviction; an overvalued idea is strong but not fully delusional, and an obsessional thought is recognised as one’s own and resisted.'},
+    {topic:'pd', tag:'PDD', q:'First-line acute biological management for PDD?', a:'Oral Risperidone 2mg nocte (max 16mg) or Olanzapine 5mg nocte (max 20mg) — check FBS &amp; lipid profile before starting.'},
+    {topic:'pd', tag:'PDD', q:'What long-term option is considered for poor drug compliance in PDD?', a:'Long-acting injectable (depot) antipsychotics, e.g. Fluphenazine decanoate.'},
+    {topic:'pd', tag:'PDD', q:'What must be excluded before diagnosing PDD?', a:'1st-rank symptoms of schizophrenia, hallucinations beyond content related to the delusion, manic/depressive episodes, anxiety disorders, and obsessional thoughts.'},
+    {topic:'pd', tag:'PDD', q:'What safety issue must always be assessed in jealousy-type PDD?', a:'Domestic violence / risk to the partner and children — take collateral history from the partner about any violence or abuse.'},
+
+    {topic:'dementia', tag:'DEM', q:'Name the 11 components of the MMSE and its maximum score.', a:'Time(5), Place(5), Serial 7s(5), Registration(3), Recall(3), Naming(2), 3-stage command(3), Reading(1), Writing(1), Repetition(1), Pentagon(1) — total 30.'},
+    {topic:'dementia', tag:'DEM', q:'MMSE severity cut-offs?', a:'≥24 normal; 23–20 mild; 19–10 moderate; &lt;10 severe.'},
+    {topic:'dementia', tag:'DEM', q:'List reversible/organic causes of cognitive impairment to exclude before diagnosing dementia.', a:'Hypothyroidism, Vitamin B12 deficiency, space-occupying lesion (NCCT brain), and delirium.'},
+    {topic:'dementia', tag:'DEM', q:'First-line drugs for Alzheimer’s dementia by severity?', a:'AChE inhibitor (Donepezil/Rivastigmine) alone for mild–moderate disease; AChE-I + Memantine for severe disease.'},
+    {topic:'dementia', tag:'DEM', q:'Drug and duration limit for BPSD (behavioural &amp; psychological symptoms of dementia)?', a:'Low-dose Risperidone 0.5mg nocte or Quetiapine 12.5mg nocte, for severe symptoms only, maximum 3 months.'},
+    {topic:'dementia', tag:'DEM', q:'Why avoid benzodiazepines for sleep disturbance in dementia?', a:'They worsen confusion/cognition and increase fall risk — Melatonin 3mg is preferred instead.'},
+    {topic:'dementia', tag:'DEM', q:'List 3 modifiable risk factors for dementia.', a:'Hearing impairment, physical inactivity, and smoking (also: DM, HTN, obesity, alcohol, depression, social isolation, visual loss, low education).'},
+    {topic:'dementia', tag:'DEM', q:'Which non-Alzheimer’s dementias should NOT be given AChE-I/memantine?', a:'Frontotemporal dementia and vascular dementia — Dementia with Lewy Bodies CAN be given them.'},
+
+    {topic:'schizo', tag:'SCZ', q:'List the Schneiderian 1st-rank symptoms of schizophrenia.', a:'Thought insertion/withdrawal/broadcast, delusion of control, delusional perception, and 3rd-person or running-commentary auditory hallucinations.'},
+    {topic:'schizo', tag:'SCZ', q:'Minimum symptom duration for ICD-10 diagnosis of schizophrenia?', a:'More than 1 month.'},
+    {topic:'schizo', tag:'SCZ', q:'Escalation ladder for an aggressive psychotic patient?', a:'1. Verbal de-escalation → 2. Oral antipsychotic + benzodiazepine → 3. IM antipsychotic + Promethazine (± BDZ) → 4. Physical restraint if failed.'},
+    {topic:'schizo', tag:'SCZ', q:'Clozapine starting and maximum dose?', a:'Start 6.25–12.5mg nocte, titrate daily; maximum dose 900mg/day.'},
+    {topic:'schizo', tag:'SCZ', q:'Mandatory baseline investigations before starting Clozapine?', a:'BMI, FBC, FBS, lipid profile, ECG, and 2D echocardiogram.'},
+    {topic:'schizo', tag:'SCZ', q:'FBC monitoring schedule on Clozapine?', a:'Weekly for the first 18 weeks, then monthly.'},
+    {topic:'schizo', tag:'SCZ', q:'Features and key confirmatory investigation for NMS?', a:'Fever, sweating, muscle rigidity, confusion, fluctuating consciousness, labile/↑BP, tachycardia — confirmed with markedly ↑CPK (&gt;1000) and leucocytosis.'},
+    {topic:'schizo', tag:'SCZ', q:'How long should antipsychotics continue after a 1st vs 2nd episode of schizophrenia?', a:'1st episode: 1–2 years after remission; 2nd episode: 5 years; multiple episodes: may be lifelong.'},
+
+    {topic:'depression', tag:'DEP', q:'What are the 3 typical (core) symptoms of a depressive episode?', a:'Depressed mood, decreased energy/activity, and loss of interest or enjoyment.'},
+    {topic:'depression', tag:'DEP', q:'Symptom counts needed for mild, moderate, and severe depression?', a:'Mild = 2 typical + 2 other; Moderate = 2 typical + 3–4 other; Severe = 3 typical + 4 other symptoms.'},
+    {topic:'depression', tag:'DEP', q:'First-line antidepressant in pregnancy and lactation?', a:'Sertraline.'},
+    {topic:'depression', tag:'DEP', q:'Best antidepressant choice in the elderly, and why?', a:'Mirtazapine — also helps sleep and appetite; Bupropion is an option if there is hyponatraemia risk with SSRIs.'},
+    {topic:'depression', tag:'DEP', q:'Best antidepressant choice post-MI?', a:'Sertraline.'},
+    {topic:'depression', tag:'DEP', q:'Onset and incidence of postpartum psychosis?', a:'Onset 2–3 days postpartum; incidence 1–2 per 1000 births.'},
+    {topic:'depression', tag:'DEP', q:'Timeline for escalating antidepressant treatment if there is no response?', a:'No response after 2 weeks → increase dose for 2 weeks → still no response → switch to another drug.'},
+    {topic:'depression', tag:'DEP', q:'Name combination strategies for treatment-resistant depression.', a:'SSRI + Mirtazapine, SNRI + Mirtazapine, or SSRI + Bupropion; also augmentation with an antipsychotic or ECT.'},
+
+    {topic:'heroin', tag:'SUD', q:'Onset and duration of heroin withdrawal symptoms?', a:'Starts 4–6 hours after the last dose; lasts 5–7 days.'},
+    {topic:'heroin', tag:'SUD', q:'Is heroin withdrawal life-threatening?', a:'No — nothing is achieved by admitting solely for withdrawal; most patients are managed as outpatients.'},
+    {topic:'heroin', tag:'SUD', q:'Naltrexone starting regimen for opioid relapse prevention?', a:'Start 25mg (monitor 4 hours for precipitated withdrawal), then increase to 50mg/day; start 1–2 weeks after stopping heroin.'},
+    {topic:'heroin', tag:'SUD', q:'Why are Methadone and Buprenorphine not commonly used in Sri Lanka?', a:'High maintenance cost.'},
+    {topic:'heroin', tag:'SUD', q:'Features of heroin/opioid intoxication?', a:'Breathing difficulty (RR &lt;12), unconsciousness, pinpoint pupils, cyanosis, and cold clammy skin.'},
+    {topic:'heroin', tag:'SUD', q:'Stages of the motivational cycle (Prochaska &amp; DiClemente)?', a:'Pre-contemplation → Contemplation → Preparation → Action → Maintenance → Relapse.'},
+    {topic:'heroin', tag:'SUD', q:'Symptomatic drug used for diarrhoea in opioid withdrawal?', a:'Loperamide 4mg, then 2mg per loose stool (max 16mg/day).'},
+    {topic:'heroin', tag:'SUD', q:'How severe is cannabis withdrawal?', a:'Mild — irritability, nausea, insomnia, and anorexia.'},
+
+    {topic:'ocd', tag:'OCD', q:'ICD criteria for an obsessional thought (vs. normal worry)?', a:'Recognised as one’s own; senseless/unpleasant; unsuccessfully resisted; and not pleasurable in itself.'},
+    {topic:'ocd', tag:'OCD', q:'First-line OCD drug treatment, and time to improvement?', a:'SSRI e.g. Sertraline 50mg mane (max 200mg) — takes 10–12 weeks to show improvement.'},
+    {topic:'ocd', tag:'OCD', q:'Psychological treatment of choice for OCD?', a:'Exposure and Response Prevention (ERP), a form of behavioural therapy.'},
+    {topic:'ocd', tag:'OCD', q:'How does agoraphobia differ from social anxiety?', a:'Agoraphobia = fear of situations where escape is difficult or help unavailable (crowds, public places, travel); social anxiety = fear specific to social/scrutiny situations.'},
+    {topic:'ocd', tag:'OCD', q:'Key feature distinguishing panic disorder from GAD?', a:'Panic disorder = recurrent unexpected discrete attacks with no specific trigger; GAD = pervasive, persistent worry on most days for ≥6 months, not attack-based.'},
+    {topic:'ocd', tag:'OCD', q:'Cognitive distortions characteristic of OCD?', a:'Thought-action fusion, inflated responsibility, perfectionism, and intolerance of uncertainty.'},
+    {topic:'ocd', tag:'OCD', q:'2nd and 3rd line drug options for OCD if SSRI fails?', a:'2nd line: Fluoxetine 20mg (max 60–80mg); 3rd line: Clomipramine (TCA) 25mg mane (max 250mg).'},
+    {topic:'ocd', tag:'OCD', q:'Purpose of the deep-breathing technique in panic disorder?', a:'To give the patient a sense of control during an attack (e.g. a 2–3 second breath-hold technique).'},
+
+    {topic:'alcohol', tag:'OH', q:'How do you calculate alcohol units?', a:'Units = % alcohol × volume (mL) ÷ 1000.'},
+    {topic:'alcohol', tag:'OH', q:'What is the fixed-dose Chlordiazepoxide regimen based on?', a:'The patient’s daily alcohol unit intake (e.g. 30 units/day → Chlordiazepoxide 30mg qds + PRN 30mg).'},
+    {topic:'alcohol', tag:'OH', q:'Thiamine dose: mild–moderate withdrawal vs severe/Wernicke’s?', a:'Mild–moderate: oral 300mg/day. Severe/Wernicke’s/DT: IV/IM 500mg/day for 1–5 days, then oral until nutrition improves.'},
+    {topic:'alcohol', tag:'OH', q:'Features and typical onset window of delirium tremens?', a:'Confusion, vivid hallucinations, marked tremors, autonomic hyperactivity, agitation, insomnia — onset 72–96 hours after stopping alcohol.'},
+    {topic:'alcohol', tag:'OH', q:'Classic triad of Wernicke’s encephalopathy?', a:'Ophthalmoplegia/nystagmus, ataxia, and confusion.'},
+    {topic:'alcohol', tag:'OH', q:'Mechanism of Disulfiram, and consequence if alcohol is taken?', a:'Inhibits aldehyde dehydrogenase → acetaldehyde accumulates → disulfiram reaction (flushing, headache, nausea, tachycardia, hypotension) if alcohol is consumed.'},
+    {topic:'alcohol', tag:'OH', q:'What monitoring is required before/during Naltrexone therapy?', a:'LFTs — contraindicated in acute liver failure; course typically lasts around 6 months.'},
+    {topic:'alcohol', tag:'OH', q:'Describe the 3 stages of alcohol withdrawal severity.', a:'Stage I (~8h): headache, GI upset, tremor, insomnia. Stage II (12–24h): ↑PR/BP, rapid breathing, convulsion risk. Stage III (24–92h): hallucinations, seizures, delirium tremens.'},
+
+    {topic:'bpad', tag:'BPAD', q:'Minimum duration of a manic episode for ICD-10 diagnosis?', a:'At least 1 week, or any duration if hospitalisation is required.'},
+    {topic:'bpad', tag:'BPAD', q:'How does hypomania differ from mania?', a:'Hypomania is a lesser degree of mood elevation without psychotic symptoms and without severe disruption to daily function; mania is more severe, may include psychosis, and significantly disrupts function.'},
+    {topic:'bpad', tag:'BPAD', q:'First-line acute drug options for mania?', a:'Risperidone 2mg nocte (max 16mg), Olanzapine 5–10mg nocte (max 20mg), Haloperidol 3mg tds (max 30mg), or Quetiapine 50mg bd (max 800mg), plus a mood stabilizer (Lithium or Sodium Valproate).'},
+    {topic:'bpad', tag:'BPAD', q:'Target lithium level for acute mania vs prophylaxis?', a:'Acute mania: 0.8–1.0 mmol/L. Prophylaxis: 0.6–0.75 mmol/L.'},
+    {topic:'bpad', tag:'BPAD', q:'At what lithium levels do seizures occur, and when is haemodialysis needed?', a:'&gt;2 mmol/L → seizures; &gt;3 mmol/L → haemodialysis.'},
+    {topic:'bpad', tag:'BPAD', q:'Duration of mood stabilizer continuation after 1st vs 2nd manic episode?', a:'1st episode: 2 years after remission; 2nd episode: 5 years; multiple episodes: may be lifelong.'},
+    {topic:'bpad', tag:'BPAD', q:'Is lithium contraindicated in pregnancy?', a:'Not absolutely — it can cause Ebstein’s anomaly; management (taper vs continue with monitoring) depends on risk stratification, with informed consent.'},
+    {topic:'bpad', tag:'BPAD', q:'1st-line combination for bipolar depression not responding to a mood stabilizer alone?', a:'Fluoxetine 20–40mg + Olanzapine 5–10mg (NICE 1st line).'}
+  ];
+
+  let deck = FLASHCARDS.slice();
+  let idx = 0;
+  let flipped = false;
+
+  const cardEl = document.getElementById('fcCard');
+  const frontTag = document.getElementById('fcFrontTag');
+  const frontText = document.getElementById('fcFrontText');
+  const backTag = document.getElementById('fcBackTag');
+  const backText = document.getElementById('fcBackText');
+  const progressEl = document.getElementById('fcProgress');
+  const topicSelect = document.getElementById('fcTopicSelect');
+  const flashPanel = document.getElementById('panel-flashcards');
+  const searchBoxEl = document.getElementById('searchBox');
+
+  function render(){
+    if(deck.length === 0){
+      frontTag.textContent = ''; backTag.textContent = '';
+      frontText.textContent = 'No cards in this topic.'; backText.textContent = '';
+      progressEl.textContent = '';
+      return;
+    }
+    const c = deck[idx];
+    frontTag.textContent = c.tag; backTag.textContent = c.tag;
+    frontText.innerHTML = c.q; backText.innerHTML = c.a;
+    progressEl.textContent = 'Card ' + (idx + 1) + ' of ' + deck.length;
+    flipped = false;
+    cardEl.classList.remove('flipped');
+  }
+
+  function shuffleDeck(arr){
+    for(let i = arr.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function flip(){ flipped = !flipped; cardEl.classList.toggle('flipped', flipped); }
+  function next(){ idx = (idx + 1) % deck.length; render(); }
+  function prev(){ idx = (idx - 1 + deck.length) % deck.length; render(); }
+
+  cardEl.addEventListener('click', flip);
+  document.getElementById('fcFlipBtn').addEventListener('click', flip);
+  document.getElementById('fcNextBtn').addEventListener('click', next);
+  document.getElementById('fcPrevBtn').addEventListener('click', prev);
+  document.getElementById('fcShuffleBtn').addEventListener('click', function(){
+    shuffleDeck(deck); idx = 0; render();
+  });
+  topicSelect.addEventListener('change', function(){
+    const v = this.value;
+    deck = v === 'all' ? FLASHCARDS.slice() : FLASHCARDS.filter(c => c.topic === v);
+    idx = 0; render();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!flashPanel.classList.contains('active')) return;
+    if(document.activeElement === searchBoxEl || document.activeElement === topicSelect) return;
+    if(e.key === 'ArrowRight'){ next(); }
+    else if(e.key === 'ArrowLeft'){ prev(); }
+    else if(e.key === ' '){ e.preventDefault(); flip(); }
+  });
+
+  render();
 })();
 
 </script>
