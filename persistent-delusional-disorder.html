@@ -47,6 +47,10 @@
   .drugbox{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin-bottom:14px; }
   .drugbox h4{ margin:0 0 6px; font-size:14.5px; color:var(--amber); font-family:"Helvetica Neue",Arial,sans-serif; }
   .drugbox ul{ margin:0 0 0 18px; font-size:14px; }
+  .viva-item{ background:#fff; border:1px solid var(--line); border-left:5px solid var(--amber); border-radius:6px; padding:16px 22px; margin-bottom:16px; }
+  .viva-item .q{ font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; color:var(--navy); font-size:14.5px; margin:0 0 8px; display:flex; align-items:flex-start; gap:9px; }
+  .viva-item .q .qmark{ background:var(--amber); color:#fff; width:22px;height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11.5px; flex-shrink:0; font-family:"Helvetica Neue",Arial,sans-serif; }
+  .viva-item .a{ margin:0; font-size:15px; padding-left:31px; }
   .footer-note{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; color:#8a97a0; text-align:center; margin-top:30px; }
   .risk-high{ color:#a4342a; font-weight:700; }
   .risk-mod{ color:#a17417; font-weight:700; }
@@ -73,6 +77,7 @@
   <button class="tab-btn" data-tab="summary">Summary &amp; Problem List</button>
   <button class="tab-btn" data-tab="management">Management</button>
   <button class="tab-btn" data-tab="drugs">Drug Side Effects</button>
+  <button class="tab-btn" data-tab="viva">Viva Questions</button>
 </nav>
 
 <main>
@@ -339,6 +344,55 @@
       <h3>Antipsychotic response in delusional disorder</h3>
       <p>The Shorter Oxford Textbook notes that response to antipsychotics in persistent delusional disorder is more variable than in schizophrenia &mdash; some patients show good symptomatic response, but many retain some encapsulated delusional content even with adherence. This makes the psychosocial components (rapport, gentle insight-building, family work, risk monitoring) just as central to management as medication, which is reflected in the emphasis on non-pharmacological strategies throughout this case.</p>
       <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Persistent Delusional Disorders &mdash; Treatment and Prognosis.</p>
+    </div>
+  </section>
+
+  <!-- VIVA QUESTIONS -->
+  <section class="panel" id="viva">
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>What is your diagnosis?</div>
+      <p class="a"><strong>A:</strong> Persistent delusional disorder, combining delusional jealousy (Othello syndrome) with persecutory delusions — he firmly believes his wife is unfaithful and being blackmailed, and that the same group has implanted a microphone in his tongue and cameras in his home to monitor him, all woven into one internally coherent delusional system persisting since 2014.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>How do you differentiate this from schizophrenia?</div>
+      <p class="a"><strong>A:</strong> He has no hallucinations, no first-rank symptoms, no formal thought disorder, and no negative symptoms — his personality and day-to-day functioning (continuing his farming work, coherent goal-directed behaviour) are well preserved outside the delusional system, which is the hallmark distinguishing persistent delusional disorder from schizophrenia.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is delusional jealousy considered a particularly high-risk delusional theme?</div>
+      <p class="a"><strong>A:</strong> Delusional jealousy (Othello syndrome) has a strong recognised association with violence towards the partner believed to be unfaithful. This is not theoretical here — he has a documented history of violence against his wife, and a separate past history of stabbing a villager, which is why risk to the wife is graded high despite his low suicidal risk.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>How would you approach discussing his delusions with him during the interview?</div>
+      <p class="a"><strong>A:</strong> Avoid direct confrontation, which tends to entrench delusions further, but also avoid colluding with or reinforcing the content. The recommended approach is to validate his distress and how real the experience feels to him, build rapport and trust, and only gently work towards reality-testing once engagement is established.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is risk to his children graded high?</div>
+      <p class="a"><strong>A:</strong> His younger son lives alone with him, and there is no other adult to care for the child if the patient is admitted. He has also sold major household assets (a motorbike and a tractor) and now has gambling-related debts he is pressuring his elder son to help pay, indicating both a supervision gap and a financial neglect risk.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Is the low mood and excessive worry he had after the 2013 stabbing incident part of the same illness?</div>
+      <p class="a"><strong>A:</strong> No — that presentation (excessive worry, low mood for a few months after a specific traumatic/stressful event, treated and resolved over 6 months) is better understood as a reactive, adjustment-type response to the stabbing incident, distinct from the persistent delusional disorder that began later, in 2014, with the onset of suspicion about his wife. Separating the two is important for an accurate longitudinal history.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>His tongue lump, headaches, and limb tingling are physical complaints — how do you approach them?</div>
+      <p class="a"><strong>A:</strong> These should first be assessed on their own physical merits, and here his blood investigations have already come back normal. Once organic pathology is reasonably excluded, they are best understood as delusional elaborations (the tongue lump as an implanted microphone, the headache as toxic gas) rather than separate somatic diagnoses — but this conclusion should follow, not precede, appropriate physical assessment.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>What safety planning is essential before you would consider discharge?</div>
+      <p class="a"><strong>A:</strong> A clear risk management plan for his wife (who has already left home because of his violence), addressing his access to weapons at home (he owns knives and machetes), and arranging supervision or care for his younger son — none of which can simply be inferred from symptom improvement on the ward alone.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is his mood described as "euthymic with anxiety" rather than depressed, and why does that matter diagnostically?</div>
+      <p class="a"><strong>A:</strong> He denies pervasive sadness, anhedonia, or biological depressive features — his distress is anxiety tied directly to the perceived threat from the delusional content, not a primary mood disturbance. This supports persistent delusional disorder over depression with psychotic features, where a prominent depressive syndrome would be expected to precede or accompany the delusions.</p>
     </div>
   </section>
 

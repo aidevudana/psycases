@@ -50,6 +50,10 @@
   .drugbox{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin-bottom:14px; }
   .drugbox h4{ margin:0 0 6px; font-size:14.5px; color:var(--amber); font-family:"Helvetica Neue",Arial,sans-serif; }
   .drugbox ul{ margin:0 0 0 18px; font-size:14px; }
+  .viva-item{ background:#fff; border:1px solid var(--line); border-left:5px solid var(--amber); border-radius:6px; padding:16px 22px; margin-bottom:16px; }
+  .viva-item .q{ font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; color:var(--navy); font-size:14.5px; margin:0 0 8px; display:flex; align-items:flex-start; gap:9px; }
+  .viva-item .q .qmark{ background:var(--amber); color:#fff; width:22px;height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11.5px; flex-shrink:0; font-family:"Helvetica Neue",Arial,sans-serif; }
+  .viva-item .a{ margin:0; font-size:15px; padding-left:31px; }
   .footer-note{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; color:#8a97a0; text-align:center; margin-top:30px; }
   .risk-high{ color:#a4342a; font-weight:700; }
   .risk-mod{ color:#a17417; font-weight:700; }
@@ -75,6 +79,7 @@
   <button class="tab-btn" data-tab="pe">Physical Exam &amp; Summary</button>
   <button class="tab-btn" data-tab="management">Management</button>
   <button class="tab-btn" data-tab="drugs">Drug Side Effects</button>
+  <button class="tab-btn" data-tab="viva">Viva Questions</button>
 </nav>
 
 <main>
@@ -356,6 +361,60 @@
       <h3>Choosing a relapse-prevention agent</h3>
       <p>The Shorter Oxford Textbook notes Acamprosate and Naltrexone as first-line anti-craving agents with the best evidence base, Disulfiram as an aversive agent requiring high motivation and careful cardiac/psychiatric screening given its strict abstinence requirement and interaction risks, and Topiramate as an option with emerging evidence, particularly where the licensed options are unsuitable or ineffective. Renal and hepatic function, cardiac history, and current mental state should all be checked before starting any of these agents.</p>
       <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Pharmacological Relapse Prevention in Alcohol Dependence.</p>
+    </div>
+  </section>
+
+  <!-- VIVA QUESTIONS -->
+  <section class="panel" id="viva">
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Which ICD dependence criteria are demonstrated in this history?</div>
+      <p class="a"><strong>A:</strong> Strong desire/craving to drink, difficulty controlling consumption ("once he started drinking he could not stop"), a physiological withdrawal state (tremor, poor sleep, vomiting on abstinence), tolerance (needing more to achieve the same effect), progressive neglect of alternatives, and continued use despite clear harm (gastritis, family conflict) — enough to satisfy the dependence syndrome well beyond the minimum threshold.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is his withdrawal classified as "uncomplicated"?</div>
+      <p class="a"><strong>A:</strong> He has tremor, nausea, poor appetite and sleep disturbance, but no seizures, no delirium tremens, and no alcoholic hallucinosis — either now or in his past history. Complicated withdrawal specifically refers to those additional features, none of which are present here.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why must thiamine be given before (or with) glucose in an at-risk patient?</div>
+      <p class="a"><strong>A:</strong> Glucose metabolism consumes thiamine as a cofactor. In a thiamine-deficient patient, giving glucose first can precipitate or worsen Wernicke's encephalopathy — so thiamine should always be given before or alongside any glucose-containing fluid in alcohol-dependent patients at nutritional risk.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>What is the CIWA-Ar scale used for?</div>
+      <p class="a"><strong>A:</strong> It grades the severity of alcohol withdrawal symptoms and guides whether pharmacological treatment is needed at all, and if so, whether a fixed tapering-dose or a titrating-dose benzodiazepine regime is appropriate — low scores may not need drug treatment, while higher scores warrant more intensive dosing.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is he described as being in the "contemplation" stage, and how does that change your management?</div>
+      <p class="a"><strong>A:</strong> He is aware his drinking is a problem and is willing to take medication, but has not yet committed to concrete action — this is the contemplation stage of Prochaska and DiClemente's model. It's why motivational interviewing (exploring ambivalence, eliciting his own "change talk") is the primary psychological technique here, rather than pure relapse-prevention work suited to someone already in the action stage.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why admit him at all, given his withdrawal is uncomplicated?</div>
+      <p class="a"><strong>A:</strong> He lacks strong social support at home for a safe outpatient detox and has a documented history of relapse after previous periods of abstinence. Admission indications are not limited to medical severity of withdrawal — poor social support and relapse risk are independently sufficient reasons for inpatient detoxification.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>If he were only intermittently abstinent and might drink again, would you still choose Disulfiram?</div>
+      <p class="a"><strong>A:</strong> Disulfiram requires strict abstinence, informed consent, and high motivation, because drinking on it causes a dangerous reaction — it is a poor choice for someone likely to relapse unpredictably. Acamprosate or Naltrexone are more forgiving anti-craving options in a patient whose commitment to total abstinence is less certain.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why check liver function tests before starting Disulfiram?</div>
+      <p class="a"><strong>A:</strong> Disulfiram is contraindicated in hepatic failure and can itself cause hepatotoxicity, so baseline liver function must be confirmed adequate before starting, and monitored periodically thereafter.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>What long-term physical complications of alcohol use should be screened for at follow-up?</div>
+      <p class="a"><strong>A:</strong> Liver disease (fatty liver, hepatitis, cirrhosis), peripheral neuropathy, cardiomyopathy, pancreatitis (relevant here given his gastritis-type symptoms), and ongoing nutritional/thiamine deficiency — a useful checklist to mention even though none are yet clinically apparent in this case.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is his risk of accidents and violence graded moderate rather than low?</div>
+      <p class="a"><strong>A:</strong> There is real exposure — a past history of drink-driving, work as a mason involving heights and sharp tools, and recurrent verbal conflicts with his wife — but no actual injuries, accidents, or physical violence have occurred. This is a dynamic risk based on exposure and pattern of behaviour, rather than a completed harmful event, which is why it sits at moderate rather than low or high.</p>
     </div>
   </section>
 

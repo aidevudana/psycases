@@ -47,6 +47,10 @@
   .drugbox{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin-bottom:14px; }
   .drugbox h4{ margin:0 0 6px; font-size:14.5px; color:var(--amber); font-family:"Helvetica Neue",Arial,sans-serif; }
   .drugbox ul{ margin:0 0 0 18px; font-size:14px; }
+  .viva-item{ background:#fff; border:1px solid var(--line); border-left:5px solid var(--amber); border-radius:6px; padding:16px 22px; margin-bottom:16px; }
+  .viva-item .q{ font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; color:var(--navy); font-size:14.5px; margin:0 0 8px; display:flex; align-items:flex-start; gap:9px; }
+  .viva-item .q .qmark{ background:var(--amber); color:#fff; width:22px;height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11.5px; flex-shrink:0; font-family:"Helvetica Neue",Arial,sans-serif; }
+  .viva-item .a{ margin:0; font-size:15px; padding-left:31px; }
   .footer-note{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px; color:#8a97a0; text-align:center; margin-top:30px; }
   .risk-high{ color:#a4342a; font-weight:700; }
   .risk-mod{ color:#a17417; font-weight:700; }
@@ -73,6 +77,7 @@
   <button class="tab-btn" data-tab="summary">Summary &amp; Problem List</button>
   <button class="tab-btn" data-tab="management">Management</button>
   <button class="tab-btn" data-tab="drugs">Drug Side Effects</button>
+  <button class="tab-btn" data-tab="viva">Viva Questions</button>
 </nav>
 
 <main>
@@ -342,6 +347,60 @@
       <h3>Serotonin syndrome &mdash; recognition</h3>
       <p>The Shorter Oxford Textbook describes serotonin syndrome as a triad of neuromuscular abnormalities (tremor, clonus, hyperreflexia), autonomic instability (hyperthermia, tachycardia, sweating), and altered mental state (agitation, confusion), typically arising from combining serotonergic agents (e.g. SSRI + MAOI, or SSRI + tramadol). Given this patient's history of collecting/self-administering medications from multiple sources, clear counselling about avoiding other serotonergic drugs and over-the-counter interactions is particularly important here.</p>
       <p class="cite">Cf. Shorter Oxford Textbook of Psychiatry, chapter on Antidepressant Drug Interactions and Serotonin Syndrome.</p>
+    </div>
+  </section>
+
+  <!-- VIVA QUESTIONS -->
+  <section class="panel" id="viva">
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is this graded a severe rather than moderate depressive episode?</div>
+      <p class="a"><strong>A:</strong> All three core symptoms are present (persistent low mood, anhedonia, reduced energy) alongside multiple additional biological and cognitive features (sleep and appetite disturbance, guilt/worthlessness, hopelessness), together with repeated serious suicidal acts — the combination of pervasive core symptoms plus high-risk behaviour is what pushes this to severe, even though she has maintained her job.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why "without psychotic symptoms"?</div>
+      <p class="a"><strong>A:</strong> She denies hallucinations and does not have fixed, unshakeable delusions of guilt, poverty, or nihilism — her negative cognitions (worthlessness, being a burden) remain ordinary depressive thinking rather than delusional in intensity, and her insight is preserved throughout.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why choose an SSRI over a TCA here specifically?</div>
+      <p class="a"><strong>A:</strong> TCAs are significantly more toxic in overdose (cardiac arrhythmia, seizures), which matters greatly for a patient with seven previous suicidal attempts, several of them by self-poisoning. SSRIs are much safer in overdose, making them the appropriate first-line choice here as much for safety as for side-effect profile.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why was Clonazepam stopped on admission, and is abrupt discontinuation a concern?</div>
+      <p class="a"><strong>A:</strong> She has an established dependence on Clonazepam, having previously self-administered 20&ndash;30 tablets sourced from multiple pharmacies during suicide attempts — continuing it perpetuates that risk. In a genuinely dependent patient, abrupt cessation does carry a withdrawal risk, so this is a reasonable follow-up question to flag: a supervised, monitored taper may be safer than an abrupt stop, even though removing access quickly is also a safety priority here.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>How do you reconcile her "high" suicide risk with her currently good functioning at work and with her children?</div>
+      <p class="a"><strong>A:</strong> The textbook principle is that a pattern of repeated impulsive attempts (seven in total, five in the last three months) is one of the strongest predictors of future risk, and this static factor should be weighted more heavily than her current apparent stability. Good day-to-day functioning does not offset a well-established pattern of acting impulsively under stress.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>What is the "cognitive triad" and how does it map onto this patient?</div>
+      <p class="a"><strong>A:</strong> Beck's cognitive triad describes a negative view of the self, the world, and the future. Here: self (feelings of worthlessness and being a burden), world (ongoing family conflict with her husband's brother), and future (pessimism about her children's prospects) — this mapping is precisely what cognitive restructuring in CBT would target.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is a depressive episode of Bipolar Affective Disorder excluded here?</div>
+      <p class="a"><strong>A:</strong> She has never had a past episode of elevated mood, overtalkativeness, decreased need for sleep, or increased energy — the diagnostic requirement for bipolar depression is evidence of at least one past hypomanic or manic episode, which is explicitly absent from this history.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is serotonin syndrome a particular concern for this patient?</div>
+      <p class="a"><strong>A:</strong> She has a demonstrated pattern of sourcing medications from multiple different pharmacies without full disclosure. This raises the risk of unknowingly combining serotonergic drugs (for example, an SSRI with another serotonergic agent obtained elsewhere), so clear counselling about drug interactions is especially important in her case, not just generic advice.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>How long would you continue her antidepressant, and why?</div>
+      <p class="a"><strong>A:</strong> At least 6 months after full symptom remission, and likely longer given this is a recurrent, severe episode with a long illness history since 2016 — continuing beyond the minimum reduces the risk of early relapse, with any eventual discontinuation done gradually rather than abruptly.</p>
+    </div>
+
+    <div class="viva-item">
+      <div class="q"><span class="qmark">Q</span>Why is risk to her children graded moderate despite her currently good caregiving?</div>
+      <p class="a"><strong>A:</strong> She actively protects her children now — taking them to school herself and shielding them from marital conflict — which keeps direct risk from being high. But her demonstrated impulsivity and high suicide risk mean there is an inherent indirect risk (for example, an attempt occurring at home, or reduced capacity to care for them during a future severe relapse), which is why the risk is not simply graded low.</p>
     </div>
   </section>
 
